@@ -385,7 +385,8 @@
   .about-cta{ display:flex; gap:10px; flex-wrap:wrap; margin-top:22px; }
   .about-cta .btn-ghost{ background:var(--white); box-shadow:0 1px 2px rgba(0,0,0,0.05); }
   .about-cta .btn-ghost:hover{ background:var(--paper-deep); }
-  #view-inicio .about-cta{ display:none; }   /* dentro de la app ya tienen cuenta */
+  /* Con sesión iniciada, el Inicio muestra solo "Parejas registradas": sin portada ni "Quiénes somos" */
+  #view-inicio .home-hero, #view-inicio .about{ display:none; }
 
   .section-head{ margin: 0 0 18px; scroll-margin-top: 88px; }
   .section-head h2{ font-size: clamp(25px, 4vw, 30px); letter-spacing:-0.02em; }
