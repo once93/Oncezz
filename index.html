@@ -50,7 +50,8 @@
   h1,h2,h3{ font-family: var(--font-display); font-weight:500; color: var(--ink); letter-spacing:-0.015em; line-height:1.15; text-wrap:balance; font-optical-sizing:auto; }
   p{ text-wrap:pretty; }
   .hero-title{ font-size: clamp(32px, 6.4vw, 46px); line-height:1.06; letter-spacing:-0.025em; margin-bottom:14px; }
-  .wrap{ max-width: 960px; margin:0 auto; padding: 0 24px; }
+  .wrap{ max-width: 1120px; margin:0 auto; padding: 0 24px; }
+  .view:not(#view-inicio){ max-width: 960px; }   /* formularios y listas de las otras pestañas mantienen su ancho */
 
   header{ padding: 24px 0 18px; border-bottom: 1px solid var(--paper-deep); }
   #homeView > header{ position:sticky; top:0; z-index:20; padding:16px 0; background:rgba(242,242,247,0.82); -webkit-backdrop-filter:saturate(180%) blur(16px); backdrop-filter:saturate(180%) blur(16px); }
@@ -289,7 +290,7 @@
     .lookup-row{ flex-direction: column; }
   }
 
-  .site-footer{ max-width:960px; margin:40px auto 0; padding:24px 24px 8px; text-align:center; border-top:1px solid var(--paper-deep); }
+  .site-footer{ max-width:1120px; margin:40px auto 0; padding:24px 24px 8px; text-align:center; border-top:1px solid var(--paper-deep); }
   .site-footer-links{ display:flex; flex-wrap:wrap; justify-content:center; gap:6px 20px; margin-bottom:10px; }
   .site-footer-links a{ color:var(--ink-soft); font-size:13px; text-decoration:none; }
   .site-footer-links a:hover{ color:var(--rose-deep); text-decoration:underline; }
@@ -403,6 +404,79 @@
   .js .reveal.in{ opacity:1; transform:none; }
   @media (prefers-reduced-motion: reduce){ .js .reveal{ opacity:1; transform:none; } }
 
+  /* ---------- panel "Próximas bodas" ---------- */
+  .home-layout{ display:block; }
+  .home-main{ min-width:0; container-type:inline-size; container-name:homemain; }
+  .upcoming-aside{ display:none; }
+  @container homemain (max-width: 760px){
+    .about-grid, .about-contrast{ grid-template-columns:1fr; }
+  }
+  @media (min-width:1100px){
+    .home-layout{ display:grid; grid-template-columns:minmax(0,1fr) 304px; gap:40px; align-items:start; }
+    .upcoming-aside{ display:block; position:sticky; top:88px; align-self:start; }
+    #view-inicio .upcoming-aside{ top:24px; }
+    .up-fab, .up-drawer{ display:none !important; }
+  }
+
+  .up-root{ display:flex; flex-direction:column; gap:14px; }
+  .up-hero{ background:var(--white); border-radius:22px; padding:20px; box-shadow:var(--shadow-sm); }
+  .up-hero.swap{ animation: fadeIn .35s ease; }
+  .up-eyebrow{ font-size:12px; font-weight:600; letter-spacing:.09em; text-transform:uppercase; color:var(--rose-deep); }
+  .up-name{ font-family:var(--font-display); font-size:25px; font-weight:500; line-height:1.12; letter-spacing:-0.02em; margin-top:8px; }
+  .up-when{ font-size:13.5px; line-height:1.45; color:var(--ink-soft); margin-top:4px; }
+  .up-timer{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:16px; }
+  .up-tile{ background:var(--paper); border-radius:14px; padding:12px 2px 10px; text-align:center; min-width:0; }
+  .up-num{ display:block; font-size:27px; font-weight:700; letter-spacing:-0.02em; line-height:1; font-variant-numeric:tabular-nums; color:var(--ink); }
+  .up-num.l4{ font-size:21px; }
+  .up-lab{ display:block; font-size:11px; font-weight:600; letter-spacing:.02em; color:var(--ink-soft); margin-top:6px; }
+  .up-today{ margin-top:16px; border-radius:14px; background:rgba(0,122,255,0.1); color:var(--rose-deep); padding:18px 14px; font-size:17px; font-weight:600; text-align:center; }
+  .up-link{ appearance:none; border:none; background:none; font:inherit; font-size:13.5px; font-weight:600; color:var(--rose-deep); cursor:pointer; padding:0; margin-top:14px; display:inline-flex; align-items:center; gap:4px; }
+  .up-link:hover{ text-decoration:underline; }
+
+  .up-section-title{ font-size:12px; font-weight:600; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-soft); margin:8px 6px -4px; }
+  .up-list{ display:flex; flex-direction:column; gap:8px; }
+  .up-card{ appearance:none; border:none; font:inherit; text-align:left; width:100%; cursor:pointer; display:flex; align-items:center; gap:12px; background:var(--white); border-radius:16px; padding:12px 14px; box-shadow:var(--shadow-sm); animation: riseIn .5s var(--ease) backwards; transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
+  .up-card:nth-child(2){ animation-delay:.06s; } .up-card:nth-child(3){ animation-delay:.12s; }
+  .up-card:nth-child(4){ animation-delay:.18s; } .up-card:nth-child(5){ animation-delay:.24s; }
+  .up-card:active{ transform:scale(.985); }
+  .up-card.is-selected{ box-shadow:0 0 0 2px var(--rose-deep), var(--shadow-sm); }
+  .up-card-main{ flex:1; min-width:0; display:block; }
+  .up-card-name{ display:block; font-family:var(--font-display); font-size:17px; font-weight:500; letter-spacing:-0.01em; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .up-card-date{ display:block; font-size:13px; color:var(--ink-soft); margin-top:1px; }
+  .up-pill{ flex-shrink:0; font-size:12px; font-weight:600; color:var(--rose-deep); background:rgba(0,122,255,0.1); border-radius:980px; padding:4px 10px; font-variant-numeric:tabular-nums; transition: background-color .2s var(--ease), color .2s var(--ease); }
+  .up-card.is-selected .up-pill{ background:var(--rose-deep); color:#fff; }
+  .up-empty{ font-size:14.5px; line-height:1.55; color:var(--ink-soft); text-align:center; padding:28px 18px; border:1px dashed var(--gold-line); border-radius:18px; background:rgba(255,255,255,0.55); }
+  .up-skel{ background:var(--paper-deep); border-radius:8px; animation: pulse 1.4s ease-in-out infinite; }
+  @media (hover:hover){
+    .up-card:hover{ transform:translateY(-2px); box-shadow:var(--shadow-md); }
+    .up-card.is-selected:hover{ box-shadow:0 0 0 2px var(--rose-deep), var(--shadow-md); }
+  }
+  @keyframes flashRing{
+    0%{ box-shadow:0 0 0 0 rgba(0,122,255,0), var(--shadow-sm); }
+    25%{ box-shadow:0 0 0 4px rgba(0,122,255,0.45), var(--shadow-sm); }
+    100%{ box-shadow:0 0 0 0 rgba(0,122,255,0), var(--shadow-sm); }
+  }
+  .couple-card.flash{ animation: flashRing 1.8s ease; }
+
+  /* pestaña lateral (pantallas angostas) */
+  .up-fab{ position:fixed; right:0; top:46%; z-index:30; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; min-width:50px; padding:8px 9px 8px 12px; border:none; border-radius:16px 0 0 16px; font-family:var(--font-body); color:var(--ink); cursor:pointer; background:rgba(255,255,255,0.84); -webkit-backdrop-filter:saturate(180%) blur(16px); backdrop-filter:saturate(180%) blur(16px); box-shadow:0 2px 14px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.04); visibility:hidden; opacity:0; transform:translateX(100%); transition: transform .5s var(--ease), opacity .4s ease, visibility 0s linear .5s; }
+  .up-fab.show{ visibility:visible; opacity:1; transform:none; transition-delay:0s; }
+  .up-fab-num{ font-size:19px; font-weight:700; line-height:1; font-variant-numeric:tabular-nums; }
+  .up-fab-lab{ font-size:10.5px; font-weight:600; letter-spacing:.03em; color:var(--ink-soft); }
+
+  /* panel que se despliega desde la derecha */
+  .up-drawer{ position:fixed; inset:0; z-index:70; visibility:hidden; pointer-events:none; transition: visibility 0s linear .45s; }
+  .up-drawer.open{ visibility:visible; pointer-events:auto; transition-delay:0s; }
+  .up-backdrop{ position:absolute; inset:0; background:rgba(28,28,30,0.4); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); opacity:0; transition: opacity .35s ease; }
+  .up-drawer.open .up-backdrop{ opacity:1; }
+  .up-sheet{ position:absolute; top:0; right:0; bottom:0; width:min(380px, 90vw); display:flex; flex-direction:column; background:var(--paper); border-radius:26px 0 0 26px; box-shadow:-10px 0 40px rgba(0,0,0,0.18); transform:translateX(100%); transition: transform .45s var(--ease); padding-top:env(safe-area-inset-top); }
+  .up-drawer.open .up-sheet{ transform:none; }
+  .up-sheet-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:22px 20px 10px 22px; }
+  .up-sheet-head h2{ font-size:27px; letter-spacing:-0.02em; }
+  .up-close{ appearance:none; border:none; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:rgba(60,60,67,0.12); color:var(--ink-soft); cursor:pointer; flex-shrink:0; transition: background-color .2s var(--ease), transform .15s var(--ease); }
+  .up-close:active{ transform:scale(.92); }
+  .up-sheet-body{ flex:1; overflow-y:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch; padding:8px 16px calc(28px + env(safe-area-inset-bottom)); }
+
   @media (prefers-reduced-motion: reduce){
     html{ scroll-behavior:auto; }
     *, *::before, *::after{ animation-duration:.01ms !important; animation-delay:0s !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
@@ -422,7 +496,8 @@
     </div>
   </header>
   <main class="wrap" style="padding-top:28px;">
-    <div id="homeContent">
+    <div id="homeContent" class="home-layout">
+    <div class="home-main">
     <div class="home-hero">
       <div class="home-hero-text">
         <h1 class="hero-title">Parejas que ya están planeando su boda</h1>
@@ -504,6 +579,8 @@
       <button class="btn btn-ghost" id="home-refresh-btn">Actualizar</button>
     </div>
     <div id="home-couples-list"></div>
+    </div><!-- /home-main -->
+    <aside class="upcoming-aside" aria-label="Próximas bodas"><div class="up-root"></div></aside>
     </div><!-- /homeContent -->
   </main>
 </div>
@@ -748,6 +825,23 @@
   </div>
   <p>© 2026 Once · oncezz.com</p>
 </footer>
+
+<button class="up-fab" id="upFab" type="button" aria-label="Ver próximas bodas" aria-haspopup="dialog">
+  <span class="up-fab-num" id="upFabNum">–</span>
+  <span class="up-fab-lab" id="upFabLab">días</span>
+</button>
+<div class="up-drawer" id="upDrawer" role="dialog" aria-modal="true" aria-labelledby="upDrawerTitle">
+  <div class="up-backdrop" data-up-close></div>
+  <div class="up-sheet" id="upSheet">
+    <div class="up-sheet-head">
+      <h2 id="upDrawerTitle">Próximas bodas</h2>
+      <button class="up-close" type="button" data-up-close aria-label="Cerrar">
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="up-sheet-body"><div class="up-root"></div></div>
+  </div>
+</div>
 
 <div id="legalOverlay" style="display:none; position:fixed; inset:0; background:rgba(28,28,30,0.55); z-index:60; overflow-y:auto;">
   <div class="wrap" style="max-width:760px; padding-top:36px; padding-bottom:48px;">
@@ -1130,6 +1224,7 @@
     document.getElementById('authScreen').style.display = 'none';
     document.getElementById('appShell').classList.add('visible');
     mountHomeInApp();
+    loadUpcoming();
     document.getElementById('sessionEmail').textContent = user.email;
     document.getElementById('c-email').value = user.email;
 
@@ -1239,6 +1334,7 @@
     document.getElementById('appShell').classList.remove('visible');
     document.getElementById('homeView').style.display = 'block';
     loadPublicCouples();
+    loadUpcoming();
   }
 
   document.getElementById('goToAuthBtn').addEventListener('click', showAuth);
@@ -1298,6 +1394,7 @@
       couples.forEach(c=>{
         const card = document.createElement('div');
         card.className = 'couple-card';
+        card.dataset.coupleId = c.id;
         const fechaStr = c.fecha ? new Date(c.fecha + 'T00:00:00').toLocaleDateString('es-CL', {day:'numeric', month:'long', year:'numeric'}) : 'Sin fecha';
         const isLiked = liked.has(c.id);
         card.innerHTML = `
@@ -1344,6 +1441,238 @@
     }
   }
 
+  // ---------- panel "Próximas bodas" ----------
+  const UP_MAX = 5;
+  let upList = [];
+  let upSelectedId = null;
+  let upState = 'loading';     // loading | ready | empty | error
+  let upLoadedAt = 0;
+  let upDay = '';
+  let upSig = '';
+  let upHomeVisible = false;
+
+  function todayStr(){
+    const d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+  function weddingTime(c){ return new Date(c.fecha + 'T00:00:00').getTime(); }
+  function daysUntil(c){
+    const start = new Date(); start.setHours(0, 0, 0, 0);
+    return Math.round((weddingTime(c) - start.getTime()) / 86400000);
+  }
+  function daysLabel(n){ return n <= 0 ? 'Hoy' : (n === 1 ? 'Mañana' : n + ' días'); }
+  function cdParts(ms){
+    const t = Math.max(0, Math.floor(ms / 1000));
+    return { d: Math.floor(t / 86400), h: Math.floor((t % 86400) / 3600), m: Math.floor((t % 3600) / 60), s: t % 60 };
+  }
+  const pad2 = n => String(n).padStart(2, '0');
+  const upRoots = () => document.querySelectorAll('.up-root');
+  const upFind = id => upList.find(c => String(c.id) === String(id));
+
+  function upHeroInner(c){
+    const t = weddingTime(c) - Date.now();
+    const place = [c.comuna, c.pais].filter(Boolean).join(', ');
+    let long = new Date(c.fecha + 'T00:00:00').toLocaleDateString('es-CL', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    long = long.charAt(0).toUpperCase() + long.slice(1);
+    let timer;
+    if(t <= 0){
+      timer = '<div class="up-today">¡Hoy es el gran día!</div>';
+    }else{
+      const p = cdParts(t);
+      const tile = (key, val, label) => '<div class="up-tile"><span class="up-num' + (key === 'd' && p.d > 999 ? ' l4' : '') + '" data-cd="' + key + '">' + val + '</span><span class="up-lab">' + label + '</span></div>';
+      timer = '<div class="up-timer" role="timer" aria-live="off">' +
+        tile('d', p.d, 'Días') + tile('h', pad2(p.h), 'Horas') + tile('m', pad2(p.m), 'Min') + tile('s', pad2(p.s), 'Seg') + '</div>';
+    }
+    const isNearest = upList.length && String(upList[0].id) === String(c.id);
+    return '<p class="up-eyebrow">' + (isNearest ? 'Próxima boda' : 'Cuenta regresiva') + '</p>' +
+      '<h3 class="up-name">' + escapeHtml(c.nombre) + '</h3>' +
+      '<p class="up-when">' + escapeHtml(long) + (place ? ' · ' + escapeHtml(place) : '') + '</p>' +
+      timer +
+      '<button type="button" class="up-link" data-up-profile="' + escapeHtml(String(c.id)) + '">Ver perfil ' +
+      '<svg width="7" height="12" viewBox="0 0 7 12" fill="none" aria-hidden="true"><path d="M1 1l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>';
+  }
+
+  function upCardHtml(c){
+    const on = String(c.id) === String(upSelectedId);
+    const date = new Date(c.fecha + 'T00:00:00').toLocaleDateString('es-CL', { day: 'numeric', month: 'short', year: 'numeric' }).replace(/\./g, '');
+    return '<button type="button" class="up-card' + (on ? ' is-selected' : '') + '" data-up-id="' + escapeHtml(String(c.id)) + '" aria-pressed="' + on + '">' +
+      '<span class="up-card-main"><span class="up-card-name">' + escapeHtml(c.nombre) + '</span><span class="up-card-date">' + escapeHtml(date) + '</span></span>' +
+      '<span class="up-pill">' + daysLabel(daysUntil(c)) + '</span></button>';
+  }
+
+  function upSkeleton(){
+    const bar = (w, h, extra) => '<div class="up-skel" style="width:' + w + '; height:' + h + ';' + (extra || '') + '"></div>';
+    const tiles = [0, 1, 2, 3].map(() => '<div class="up-tile">' + bar('70%', '27px', 'margin:0 auto;') + '</div>').join('');
+    const cards = [0, 1, 2].map(() => '<div class="up-card" style="cursor:default; animation:none;">' + bar('60%', '16px') + '</div>').join('');
+    return '<div class="up-hero">' + bar('38%', '12px') + bar('72%', '26px', 'margin-top:12px;') + '<div class="up-timer">' + tiles + '</div></div><div class="up-list">' + cards + '</div>';
+  }
+
+  function updateFab(){
+    const fab = document.getElementById('upFab');
+    const ready = upState === 'ready' && upList.length > 0;
+    if(ready){
+      const n = daysUntil(upList[0]);
+      document.getElementById('upFabNum').textContent = n <= 0 ? '¡Hoy!' : String(n);
+      document.getElementById('upFabLab').textContent = n <= 0 ? 'boda' : (n === 1 ? 'día' : 'días');
+    }
+    fab.classList.toggle('show', ready && upHomeVisible);
+  }
+
+  function renderUpcoming(){
+    let html;
+    if(upState === 'loading') html = upSkeleton();
+    else if(upState === 'error') html = '<p class="up-empty">No pudimos cargar las próximas bodas. Intenta de nuevo más tarde.</p>';
+    else if(upState === 'empty') html = '<p class="up-empty">Todavía no hay bodas próximas. Cuando una pareja registre su fecha, aparecerá aquí.</p>';
+    else{
+      const sel = upFind(upSelectedId) || upList[0];
+      html = '<div class="up-hero" data-up-hero>' + upHeroInner(sel) + '</div>' +
+        '<p class="up-section-title">Próximas bodas</p>' +
+        '<div class="up-list">' + upList.map(upCardHtml).join('') + '</div>';
+    }
+    upRoots().forEach(r => { r.innerHTML = html; });
+    updateFab();
+  }
+
+  function upSelect(id){
+    const sel = upFind(id);
+    if(!sel) return;
+    upSelectedId = String(sel.id);
+    upRoots().forEach(root => {
+      root.querySelectorAll('.up-card').forEach(b => {
+        const on = b.dataset.upId === upSelectedId;
+        b.classList.toggle('is-selected', on);
+        b.setAttribute('aria-pressed', String(on));
+      });
+      const hero = root.querySelector('[data-up-hero]');
+      if(hero){
+        hero.innerHTML = upHeroInner(sel);
+        hero.classList.remove('swap'); void hero.offsetWidth; hero.classList.add('swap');
+      }
+    });
+  }
+
+  async function loadUpcoming(force){
+    if(!force && upState === 'ready' && Date.now() - upLoadedAt < 60000) return;
+    if(upState !== 'ready' && upState !== 'empty'){ upState = 'loading'; renderUpcoming(); }
+    try{
+      const today = todayStr();
+      const { data, error } = await sb.from('public_couples')
+        .select('id,nombre,fecha,comuna,pais')
+        .gte('fecha', today)
+        .order('fecha', { ascending: true })
+        .limit(UP_MAX);
+      if(error) throw error;
+      const rows = (data || [])
+        .filter(c => c && c.fecha && c.fecha >= today)
+        .sort((a, b) => (a.fecha < b.fecha ? -1 : a.fecha > b.fecha ? 1 : 0))
+        .slice(0, UP_MAX);
+      const sig = rows.map(r => r.id + '|' + r.fecha + '|' + r.nombre).join(';');
+      const changed = sig !== upSig || (rows.length ? 'ready' : 'empty') !== upState;
+      upList = rows; upDay = today; upLoadedAt = Date.now(); upSig = sig;
+      upState = rows.length ? 'ready' : 'empty';
+      if(!upFind(upSelectedId)) upSelectedId = rows.length ? String(rows[0].id) : null;
+      if(changed) renderUpcoming();
+    }catch(e){
+      if(upState !== 'ready'){ upState = 'error'; renderUpcoming(); }
+    }
+  }
+
+  function upTick(){
+    if(upState !== 'ready' || document.hidden) return;
+    if(upDay !== todayStr()){ loadUpcoming(true); upDay = todayStr(); return; }
+    const sel = upFind(upSelectedId);
+    if(!sel) return;
+    const t = weddingTime(sel) - Date.now();
+    if(t <= 0){
+      if(document.querySelector('.up-timer')) upSelect(sel.id);   // llegó el día: cambia a "¡Hoy es el gran día!"
+      return;
+    }
+    const p = cdParts(t);
+    document.querySelectorAll('[data-cd]').forEach(el => {
+      const txt = el.dataset.cd === 'd' ? String(p.d) : pad2(p[el.dataset.cd]);
+      if(el.textContent !== txt) el.textContent = txt;
+    });
+  }
+  setInterval(upTick, 1000);
+  document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) upTick(); });
+
+  // la pestaña lateral solo aparece cuando el "home" está a la vista (público o dentro de Inicio)
+  (function(){
+    const homeEl = document.getElementById('homeContent');
+    if(homeEl && 'IntersectionObserver' in window){
+      new IntersectionObserver(entries => {
+        upHomeVisible = entries[entries.length - 1].isIntersecting;
+        updateFab();
+      }).observe(homeEl);
+    }else{
+      upHomeVisible = true;
+    }
+  })();
+
+  // panel deslizable
+  const upDrawer = document.getElementById('upDrawer');
+  let upLastFocus = null;
+  function openUpDrawer(){
+    upLastFocus = document.activeElement;
+    upDrawer.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(()=>{ const c = upDrawer.querySelector('.up-close'); if(c) c.focus(); }, 60);
+  }
+  function closeUpDrawer(){
+    if(!upDrawer.classList.contains('open')) return;
+    upDrawer.classList.remove('open');
+    document.body.style.overflow = '';
+    if(upLastFocus && upLastFocus.focus) upLastFocus.focus();
+  }
+  document.getElementById('upFab').addEventListener('click', openUpDrawer);
+  upDrawer.querySelectorAll('[data-up-close]').forEach(el => el.addEventListener('click', closeUpDrawer));
+  document.addEventListener('keydown', (e)=>{
+    if(!upDrawer.classList.contains('open')) return;
+    if(e.key === 'Escape'){ closeUpDrawer(); return; }
+    if(e.key === 'Tab'){
+      const f = upDrawer.querySelectorAll('.up-sheet button');
+      if(!f.length) return;
+      const first = f[0], last = f[f.length - 1];
+      if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+    }
+  });
+  (function(){   // deslizar hacia la derecha para cerrar
+    let x0 = 0, y0 = 0;
+    const sheet = document.getElementById('upSheet');
+    sheet.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+    sheet.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+      if(dx > 70 && Math.abs(dy) < 60) closeUpDrawer();
+    }, { passive: true });
+  })();
+  window.matchMedia('(min-width:1100px)').addEventListener('change', e => { if(e.matches) closeUpDrawer(); });
+
+  // tocar una boda cambia la cuenta regresiva; "Ver perfil" lleva a su tarjeta
+  async function upGoToProfile(id){
+    closeUpDrawer();
+    const find = () => document.querySelector('.couple-card[data-couple-id="' + String(id).replace(/"/g, '') + '"]');
+    let card = find();
+    if(!card){   // la lista tenía filtros puestos: se limpian para poder encontrarla
+      document.getElementById('home-f-pais').value = '';
+      document.getElementById('home-f-comuna').value = '';
+      document.getElementById('home-f-categoria').value = '';
+      await loadPublicCouples();
+      card = find();
+    }
+    if(!card) return;
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    card.classList.remove('flash'); void card.offsetWidth; card.classList.add('flash');
+  }
+  document.addEventListener('click', (e)=>{
+    const card = e.target.closest('.up-card[data-up-id]');
+    if(card){ upSelect(card.dataset.upId); return; }
+    const link = e.target.closest('[data-up-profile]');
+    if(link) upGoToProfile(link.dataset.upProfile);
+  });
+
+  renderUpcoming();
+
   sb.auth.onAuthStateChange((_event, session)=>{
     if(session && session.user) showApp(session.user);
     else showHome();
@@ -1361,7 +1690,7 @@
       document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
       document.getElementById('view-' + btn.dataset.tab).classList.add('active');
       if(btn.dataset.tab === 'proveedor') loadCouples();
-      if(btn.dataset.tab === 'inicio') loadPublicCouples();
+      if(btn.dataset.tab === 'inicio'){ loadPublicCouples(); loadUpcoming(); }
     });
   });
 
