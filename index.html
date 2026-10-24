@@ -477,6 +477,76 @@
   .up-close:active{ transform:scale(.92); }
   .up-sheet-body{ flex:1; overflow-y:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch; padding:8px 16px calc(28px + env(safe-area-inset-bottom)); }
 
+  /* ---------- compartir en historias ---------- */
+  .profile-actions{ margin-top:16px; display:flex; gap:10px; flex-wrap:wrap; }
+  .share-open{ display:inline-flex; align-items:center; gap:8px; }
+  .share-open svg{ flex-shrink:0; }
+
+  .sh-overlay{ position:fixed; inset:0; z-index:80; visibility:hidden; pointer-events:none; transition: visibility 0s linear .5s; }
+  .sh-overlay.open{ visibility:visible; pointer-events:auto; transition-delay:0s; }
+  .sh-backdrop{ position:absolute; inset:0; background:rgba(28,28,30,0.45); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); opacity:0; transition: opacity .35s ease; }
+  .sh-overlay.open .sh-backdrop{ opacity:1; }
+  .sh-sheet{ position:absolute; left:0; right:0; bottom:0; max-height:94vh; max-height:94dvh; overflow-y:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch; background:var(--paper); border-radius:26px 26px 0 0; box-shadow:0 -10px 40px rgba(0,0,0,0.18); transform:translateY(100%); transition: transform .5s var(--ease); padding:8px 18px calc(24px + env(safe-area-inset-bottom)); }
+  .sh-overlay.open .sh-sheet{ transform:none; }
+  .sh-grabber{ width:38px; height:5px; border-radius:3px; background:rgba(60,60,67,0.3); margin:0 auto 10px; }
+  .sh-head{ display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:6px 2px 16px; }
+  .sh-head h2{ font-size:26px; letter-spacing:-0.02em; }
+  .sh-head p{ font-size:14px; color:var(--ink-soft); margin-top:4px; max-width:34em; }
+  .sh-body{ display:grid; gap:20px; }
+  .sh-preview{ display:flex; justify-content:center; }
+  .sh-frame{ position:relative; width:min(100%, 236px); aspect-ratio:9/16; border-radius:18px; overflow:hidden; background:var(--paper-deep); box-shadow:0 2px 6px rgba(0,0,0,0.08), 0 16px 40px rgba(0,0,0,0.16); }
+  .sh-frame canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; opacity:0; transition: opacity .45s ease; }
+  .sh-frame.ready canvas{ opacity:1; }
+  .sh-frame::after{ content:''; position:absolute; inset:0; background:linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.6) 50%, transparent 70%); background-size:220% 100%; animation: shShimmer 1.4s linear infinite; pointer-events:none; }
+  .sh-frame.ready::after{ display:none; }
+  @keyframes shShimmer{ from{ background-position:120% 0; } to{ background-position:-120% 0; } }
+
+  .sh-label{ font-size:12.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:12px; }
+  .sh-swatches{ display:flex; gap:14px; flex-wrap:wrap; }
+  .sh-swatch{ appearance:none; -webkit-appearance:none; border:none; padding:0; width:46px; height:46px; border-radius:50%; cursor:pointer; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12); transition: transform .2s var(--ease), box-shadow .2s var(--ease); }
+  .sh-swatch:active{ transform:scale(.93); }
+  .sh-swatch[aria-checked="true"]{ box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12), 0 0 0 3px var(--paper), 0 0 0 5px var(--rose-deep); }
+  .sh-theme-name{ font-size:14.5px; font-weight:600; color:var(--ink); margin:12px 0 18px; min-height:1.4em; }
+  .sh-group{ background:var(--white); border-radius:14px; overflow:hidden; box-shadow:var(--shadow-sm); }
+  .sh-row{ display:flex; align-items:center; justify-content:space-between; gap:14px; padding:12px 16px; font-size:15px; cursor:pointer; }
+  .sh-row + .sh-row{ border-top:1px solid var(--paper-deep); }
+  .sh-row small{ display:block; font-size:12.5px; color:var(--ink-soft); line-height:1.35; }
+  .sh-switch{ appearance:none; -webkit-appearance:none; position:relative; flex-shrink:0; width:51px; height:31px; border-radius:999px; background:rgba(120,120,128,0.32); cursor:pointer; transition: background-color .25s var(--ease); }
+  .sh-switch::after{ content:''; position:absolute; top:2px; left:2px; width:27px; height:27px; border-radius:50%; background:#fff; box-shadow:0 2px 4px rgba(0,0,0,0.25); transition: transform .25s var(--ease); }
+  .sh-switch:checked{ background:var(--sage); }
+  .sh-switch:checked::after{ transform:translateX(20px); }
+  .sh-switch:disabled{ opacity:.4; cursor:default; }
+  .sh-cta{ display:flex; flex-direction:column; gap:10px; margin:20px 0 0; }
+  .sh-cta .btn{ width:100%; padding:14px 20px; font-size:16px; display:inline-flex; align-items:center; justify-content:center; gap:8px; }
+  .sh-cta .btn:disabled{ opacity:.55; cursor:default; }
+  .sh-cta .btn-ghost{ background:var(--white); box-shadow:var(--shadow-sm); }
+  .sh-cta .btn-ghost:hover{ background:var(--paper-deep); }
+  .sh-link{ display:block; margin:8px auto 0; appearance:none; -webkit-appearance:none; border:none; background:none; font-family:var(--font-body); font-size:14.5px; font-weight:600; color:var(--rose-deep); cursor:pointer; padding:8px; }
+  .sh-help{ font-size:13px; color:var(--ink-soft); margin-top:8px; text-align:center; }
+  .sh-status{ font-size:13.5px; color:var(--ink); text-align:center; }
+  .sh-status:empty{ display:none; }
+  .sh-cta .lbl-short{ display:none; }
+  /* en el celular los botones principales quedan siempre a la vista, al pie de la hoja */
+  @media (max-width:759px){
+    .sh-sheet{ padding-bottom:0; }
+    .sh-cta{ flex-direction:row; flex-wrap:wrap; position:sticky; bottom:0; z-index:2; margin:20px -18px 0; padding:12px 18px calc(12px + env(safe-area-inset-bottom)); background:rgba(242,242,247,0.93); -webkit-backdrop-filter:saturate(180%) blur(14px); backdrop-filter:saturate(180%) blur(14px); border-top:1px solid rgba(60,60,67,0.12); }
+    .sh-help{ padding-bottom:calc(20px + env(safe-area-inset-bottom)); }
+    .sh-status{ flex:0 0 100%; }
+    .sh-cta .btn{ width:auto; padding:13px 12px; font-size:15.5px; }
+    #shareNativeBtn{ flex:2 1 0; }
+    #shareDownloadBtn{ flex:1 1 0; }
+    .sh-cta .lbl-short{ display:inline; }
+    .sh-cta .lbl-long{ display:none; }
+  }
+
+  @media (min-width:760px){
+    .sh-sheet{ left:50%; right:auto; bottom:auto; top:50%; width:min(860px, 94vw); max-height:90vh; border-radius:26px; padding:20px 30px 30px; transform:translate(-50%, calc(-50% + 28px)) scale(.97); opacity:0; transition: transform .5s var(--ease), opacity .35s ease; }
+    .sh-overlay.open .sh-sheet{ transform:translate(-50%, -50%); opacity:1; }
+    .sh-grabber{ display:none; }
+    .sh-body{ grid-template-columns:290px 1fr; gap:36px; align-items:start; }
+    .sh-frame{ width:290px; }
+  }
+
   @media (prefers-reduced-motion: reduce){
     html{ scroll-behavior:auto; }
     *, *::before, *::after{ animation-duration:.01ms !important; animation-delay:0s !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
@@ -840,6 +910,41 @@
       </button>
     </div>
     <div class="up-sheet-body"><div class="up-root"></div></div>
+  </div>
+</div>
+
+<div class="sh-overlay" id="shareOverlay" role="dialog" aria-modal="true" aria-labelledby="shareTitle">
+  <div class="sh-backdrop" data-sh-close></div>
+  <div class="sh-sheet">
+    <div class="sh-grabber" aria-hidden="true"></div>
+    <div class="sh-head">
+      <div>
+        <h2 id="shareTitle">Comparte tu cuenta regresiva</h2>
+        <p>Una historia lista para Instagram, Facebook o WhatsApp. Cada vez que la generes mostrará los días que faltan ese día.</p>
+      </div>
+      <button class="up-close" type="button" data-sh-close aria-label="Cerrar">
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="sh-body">
+      <div class="sh-preview"><div class="sh-frame" id="shareFrame"><canvas id="shareCanvas" aria-label="Vista previa de tu historia"></canvas></div></div>
+      <div class="sh-controls">
+        <div class="sh-label" id="shareStyleLabel">Estilo</div>
+        <div class="sh-swatches" id="shareSwatches" role="radiogroup" aria-labelledby="shareStyleLabel"></div>
+        <div class="sh-theme-name" id="shareThemeName"></div>
+        <div class="sh-group">
+          <label class="sh-row"><span>Mostrar mi foto<small id="sharePhotoSub"></small></span><input type="checkbox" class="sh-switch" id="sharePhoto"></label>
+          <label class="sh-row"><span>Mostrar el lugar</span><input type="checkbox" class="sh-switch" id="sharePlace"></label>
+        </div>
+        <div class="sh-cta">
+          <p class="sh-status" id="shareStatus" role="status" aria-live="polite"></p>
+          <button class="btn btn-primary" type="button" id="shareNativeBtn" disabled><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3"/><path d="M8 7l4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg><span class="lbl-long">Compartir en mis historias</span><span class="lbl-short">Compartir historia</span></button>
+          <button class="btn btn-ghost" type="button" id="shareDownloadBtn" disabled>Descargar<span class="lbl-long"> imagen</span></button>
+        </div>
+        <button class="sh-link" type="button" id="shareCopyBtn">Copiar texto con el enlace</button>
+        <p class="sh-help" id="shareHelp"></p>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1290,11 +1395,13 @@
       </div>
       ${categoriasTagsHtml(c)}
       ${ratingHtml}
-      <div style="margin-top:16px;">
+      <div class="profile-actions">
+        <button class="btn btn-primary share-open" id="shareStoryBtn" type="button"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3"/><path d="M8 7l4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg><span>Compartir en mis historias</span></button>
         <button class="btn btn-ghost" id="editCoupleBtn">Editar mis datos</button>
       </div>
     `;
     document.getElementById('editCoupleBtn').addEventListener('click', ()=> enterCoupleEditMode(c));
+    document.getElementById('shareStoryBtn').addEventListener('click', ()=> openShareSheet(c));
   }
 
   let editingCouple = null;
@@ -1672,6 +1779,674 @@
   });
 
   renderUpcoming();
+
+  /* ===================== Compartir en historias ===================== */
+// ===== Historia para redes (1080x1920) =====
+// Dibuja con canvas la imagen de la pareja con su cuenta regresiva. No toca el resto de la app.
+const OnceStory = (function(){
+  const W = 1080, H = 1920;
+
+  const FONTS = {
+    display: '"Fraunces", "Times New Roman", Times, "Liberation Serif", serif',
+    script:  '"Cormorant Garamond", "Fraunces", "Times New Roman", Times, serif',
+    body:    '"Figtree", -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif'
+  };
+
+  const THEMES = [
+    { id:'marfil', name:'Marfil y oro', dark:false,
+      bg:['#FEFAF2','#F2E6D0'], glow:'rgba(255,255,255,0.95)', ink:'#3B2E23', soft:'#7E6B57',
+      gold:['#E1C58C','#B38B4D','#8D6A36'], leaf:'rgba(150,134,92,0.78)', leafVein:'rgba(255,255,255,0.35)',
+      arch:['#EFE3CC','#DCC9A5'], chip:'rgba(255,255,255,0.55)', swatch:['#FEFAF2','#C9A56A'] },
+    { id:'rosa', name:'Rosa empolvado', dark:false,
+      bg:['#FDF1EE','#F0D3CC'], glow:'rgba(255,255,255,0.9)', ink:'#4B2E2D', soft:'#8A6663',
+      gold:['#E8B5A8','#BC7B70','#97594F'], leaf:'rgba(165,128,112,0.72)', leafVein:'rgba(255,255,255,0.35)',
+      arch:['#F4DCD5','#E6BDB3'], chip:'rgba(255,255,255,0.5)', swatch:['#FBE6E1','#C98A7E'] },
+    { id:'salvia', name:'Salvia', dark:false,
+      bg:['#F4F6EE','#D3DCC8'], glow:'rgba(255,255,255,0.9)', ink:'#2D3A2E', soft:'#5F6F60',
+      gold:['#D2BE88','#A38A52','#7C6735'], leaf:'rgba(98,126,92,0.78)', leafVein:'rgba(255,255,255,0.3)',
+      arch:['#E0E7D6','#C3CFB5'], chip:'rgba(255,255,255,0.5)', swatch:['#E3EAD9','#8CA37E'] },
+    { id:'noche', name:'Medianoche', dark:true,
+      bg:['#1E2D47','#0B1424'], glow:'rgba(120,150,200,0.22)', ink:'#F7EFDF', soft:'#C3BAA6',
+      gold:['#F4DEA6','#D6B56C','#B38E45'], leaf:'rgba(142,168,138,0.75)', leafVein:'rgba(255,255,255,0.18)',
+      arch:['#243553','#16233B'], chip:'rgba(255,255,255,0.06)', swatch:['#16233B','#D6B56C'] }
+  ];
+
+  function themeById(id){ return THEMES.find(t => t.id === id) || THEMES[0]; }
+
+  // ---------- utilidades ----------
+  function rng(seed){
+    return function(){
+      seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+      let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  const font = (weight, size, fam, style) => (style ? style + ' ' : '') + weight + ' ' + Math.round(size) + 'px ' + fam;
+
+  function trackedWidth(ctx, text, tr){
+    let w = 0; const chars = Array.from(text);
+    chars.forEach(ch => { w += ctx.measureText(ch).width; });
+    return w + tr * Math.max(0, chars.length - 1);
+  }
+  function tracked(ctx, text, x, y, tr, align){
+    const chars = Array.from(text);
+    const total = trackedWidth(ctx, text, tr);
+    let cx = align === 'center' ? x - total / 2 : (align === 'right' ? x - total : x);
+    const prev = ctx.textAlign; ctx.textAlign = 'left';
+    chars.forEach(ch => { ctx.fillText(ch, cx, y); cx += ctx.measureText(ch).width + tr; });
+    ctx.textAlign = prev;
+    return total;
+  }
+  function roundRectPath(ctx, x, y, w, h, r){
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+  function archPath(ctx, cx, top, w, h, open){
+    const r = w / 2, left = cx - r, right = cx + r, bottom = top + h;
+    ctx.beginPath();
+    ctx.moveTo(left, bottom);
+    ctx.lineTo(left, top + r);
+    ctx.arc(cx, top + r, r, Math.PI, 0, false);
+    ctx.lineTo(right, bottom);
+    if(!open) ctx.closePath();
+  }
+  function goldGradient(ctx, th, x0, y0, x1, y1){
+    const g = ctx.createLinearGradient(x0, y0, x1, y1);
+    g.addColorStop(0, th.gold[0]); g.addColorStop(0.5, th.gold[1]); g.addColorStop(1, th.gold[2]);
+    return g;
+  }
+  function drawCover(ctx, img, x, y, w, h){
+    const iw = img.naturalWidth || img.width, ih = img.naturalHeight || img.height;
+    const ir = iw / ih, r = w / h;
+    let sw, sh, sx, sy;
+    if(ir > r){ sh = ih; sw = sh * r; sx = (iw - sw) / 2; sy = 0; }
+    else { sw = iw; sh = sw / r; sx = 0; sy = (ih - sh) * 0.3; }   // un poco hacia arriba para no cortar caras
+    ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h);
+  }
+
+  // ---------- fecha ----------
+  function parseDate(fecha){ return new Date(fecha + 'T00:00:00'); }
+  function daysTo(fecha, now){
+    const start = new Date(now || Date.now()); start.setHours(0, 0, 0, 0);
+    return Math.round((parseDate(fecha).getTime() - start.getTime()) / 86400000);
+  }
+  function splitNames(nombre){
+    const s = String(nombre || '').trim().replace(/\s+/g, ' ');
+    const m = s.match(/^(.+?)\s*(?:&|\sy\s|\se\s|\s\+\s|\sY\s)\s*(.+)$/);
+    return m ? [m[1].trim(), m[2].trim()] : [s];
+  }
+  function initialsOf(names){
+    return names.map(n => (Array.from(n)[0] || '').toUpperCase());
+  }
+
+  // ---------- fondo y adornos ----------
+  function drawBackground(ctx, th){
+    const g = ctx.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, th.bg[0]); g.addColorStop(1, th.bg[1]);
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+
+    const r = ctx.createRadialGradient(W / 2, 700, 40, W / 2, 700, 900);
+    r.addColorStop(0, th.glow); r.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = r; ctx.fillRect(0, 0, W, H);
+
+    const v = ctx.createRadialGradient(W / 2, H / 2, 600, W / 2, H / 2, 1250);
+    v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, th.dark ? 'rgba(0,0,0,0.38)' : 'rgba(90,60,30,0.12)');
+    ctx.fillStyle = v; ctx.fillRect(0, 0, W, H);
+
+    // grano de papel muy sutil
+    const t = document.createElement('canvas'); t.width = t.height = 220;
+    const tc = t.getContext('2d'), id = tc.createImageData(220, 220), rnd = rng(11);
+    const base = th.dark ? [255, 255, 255] : [110, 80, 50];
+    for(let i = 0; i < id.data.length; i += 4){
+      id.data[i] = base[0]; id.data[i + 1] = base[1]; id.data[i + 2] = base[2];
+      id.data[i + 3] = rnd() < 0.5 ? 0 : Math.floor(rnd() * (th.dark ? 13 : 16));
+    }
+    tc.putImageData(id, 0, 0);
+    ctx.fillStyle = ctx.createPattern(t, 'repeat'); ctx.fillRect(0, 0, W, H);
+  }
+
+  function diamond(ctx, x, y, s){
+    ctx.beginPath(); ctx.moveTo(x, y - s); ctx.lineTo(x + s, y); ctx.lineTo(x, y + s); ctx.lineTo(x - s, y); ctx.closePath();
+  }
+
+  function drawFrame(ctx, th){
+    ctx.save();
+    ctx.lineWidth = 2.5; ctx.strokeStyle = goldGradient(ctx, th, 0, 0, W, H);
+    roundRectPath(ctx, 46, 46, W - 92, H - 92, 30); ctx.stroke();
+    ctx.lineWidth = 1.2; ctx.globalAlpha = 0.55;
+    roundRectPath(ctx, 64, 64, W - 128, H - 128, 20); ctx.stroke();
+    ctx.globalAlpha = 1;
+    // rombos que "cortan" la línea arriba y abajo
+    [46, H - 46].forEach(y => {
+      ctx.fillStyle = th.bg[y < H / 2 ? 0 : 1];
+      diamond(ctx, W / 2, y, 15); ctx.fill();
+      ctx.lineWidth = 2; ctx.strokeStyle = goldGradient(ctx, th, W / 2 - 15, y - 15, W / 2 + 15, y + 15);
+      diamond(ctx, W / 2, y, 15); ctx.stroke();
+    });
+    ctx.restore();
+  }
+
+  function leaf(ctx, x, y, ang, len, wid, th){
+    ctx.save();
+    ctx.translate(x, y); ctx.rotate(ang);
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.quadraticCurveTo(len * 0.45, -wid, len, 0);
+    ctx.quadraticCurveTo(len * 0.45, wid, 0, 0);
+    ctx.fillStyle = th.leaf; ctx.fill();
+    ctx.beginPath(); ctx.moveTo(len * 0.06, 0); ctx.lineTo(len * 0.86, 0);
+    ctx.strokeStyle = th.leafVein; ctx.lineWidth = 1.6; ctx.stroke();
+    ctx.restore();
+  }
+
+  // media corona de hojas que sube pegada al arco; side = -1 (izquierda) o 1 (derecha)
+  function drawLaurel(ctx, th, cx, top, w, h, side){
+    const r = w / 2, R = r + 62;
+    const bottom = top + h - 40;
+    const vertLen = bottom - (top + r);
+    const arcAng = Math.PI * 0.30;
+    const total = vertLen + R * arcAng;
+    const pts = [];
+    for(let s = 0; s <= total; s += 4){
+      let x, y;
+      if(s <= vertLen){ x = cx + side * R; y = bottom - s; }
+      else {
+        const a = (s - vertLen) / R;
+        const ang = side === -1 ? Math.PI + a : -a;
+        x = cx + R * Math.cos(ang); y = (top + r) + R * Math.sin(ang);
+      }
+      pts.push({ x, y, s });
+    }
+    ctx.save();
+    ctx.strokeStyle = th.leaf; ctx.lineWidth = 3; ctx.lineCap = 'round';
+    ctx.beginPath(); pts.slice(6).forEach((p, i) => i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)); ctx.stroke();
+    const rnd = rng(side === -1 ? 5 : 9);
+    for(let i = 10; i < pts.length - 4; i += 10){
+      const p = pts[i], q = pts[Math.min(pts.length - 1, i + 3)];
+      const dir = Math.atan2(q.y - p.y, q.x - p.x);
+      const prog = p.s / total;
+      const len = 70 - prog * 26 + rnd() * 8, wid = len * 0.30;
+      const spread = 0.62 + rnd() * 0.12;
+      leaf(ctx, p.x, p.y, dir - spread, len, wid, th);
+      leaf(ctx, p.x, p.y, dir + spread, len * 0.93, wid * 0.95, th);
+    }
+    const e = pts[pts.length - 1], e2 = pts[pts.length - 4];
+    leaf(ctx, e.x, e.y, Math.atan2(e.y - e2.y, e.x - e2.x), 42, 11.5, th);
+    ctx.restore();
+  }
+
+  function star(ctx, x, y, s){
+    ctx.beginPath();
+    ctx.moveTo(x, y - s); ctx.quadraticCurveTo(x, y, x + s, y); ctx.quadraticCurveTo(x, y, x, y + s);
+    ctx.quadraticCurveTo(x, y, x - s, y); ctx.quadraticCurveTo(x, y, x, y - s); ctx.closePath();
+  }
+  function drawSparkles(ctx, th){
+    const spots = [[170, 262, 15], [906, 238, 11], [112, 1262, 10], [966, 1340, 13], [212, 1800, 12], [884, 1790, 9], [940, 640, 8], [150, 560, 8]];
+    ctx.save();
+    spots.forEach(([x, y, s]) => {
+      ctx.fillStyle = goldGradient(ctx, th, x - s, y - s, x + s, y + s); ctx.globalAlpha = 0.85;
+      star(ctx, x, y, s); ctx.fill();
+    });
+    const rnd = rng(23);
+    for(let i = 0; i < 16; i++){
+      const x = 110 + rnd() * 860, y = 120 + rnd() * 1680;
+      if(x > 140 && x < 940 && y > 250 && y < 1790) continue;   // solo en los márgenes, lejos de los textos
+      ctx.globalAlpha = 0.35 + rnd() * 0.3; ctx.fillStyle = th.gold[1];
+      ctx.beginPath(); ctx.arc(x, y, 2 + rnd() * 2.2, 0, 7); ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  function drawOrnament(ctx, th, cx, y, half){
+    ctx.save();
+    ctx.lineWidth = 1.6; ctx.strokeStyle = goldGradient(ctx, th, cx - half, y, cx + half, y);
+    ctx.beginPath(); ctx.moveTo(cx - half, y); ctx.lineTo(cx - 26, y); ctx.moveTo(cx + 26, y); ctx.lineTo(cx + half, y); ctx.stroke();
+    ctx.fillStyle = goldGradient(ctx, th, cx - 12, y - 12, cx + 12, y + 12);
+    diamond(ctx, cx, y, 9); ctx.fill();
+    diamond(ctx, cx - 26, y, 3.2); ctx.fill(); diamond(ctx, cx + 26, y, 3.2); ctx.fill();
+    ctx.restore();
+  }
+
+  // ---------- bloques ----------
+  function labelColor(th){ return th.dark ? th.gold[1] : th.gold[2]; }
+  function drawEyebrow(ctx, th, text, y){
+    ctx.fillStyle = labelColor(th);
+    ctx.font = font(600, 29, FONTS.body);
+    tracked(ctx, text, W / 2, y, 11, 'center');
+  }
+
+  function drawArchPhoto(ctx, th, top, h, photo, initials, opts){
+    const cx = W / 2, w = 540;
+    // anillo exterior dorado
+    ctx.save();
+    archPath(ctx, cx, top - 22, w + 44, h + 22, true);   // mismo centro que el arco de la foto; abierto abajo
+    ctx.lineWidth = 3; ctx.strokeStyle = goldGradient(ctx, th, cx - 300, top, cx + 300, top + h); ctx.stroke();
+    // sombra suave
+    ctx.shadowColor = th.dark ? 'rgba(0,0,0,0.55)' : 'rgba(80,55,30,0.28)';
+    ctx.shadowBlur = 50; ctx.shadowOffsetY = 22;
+    archPath(ctx, cx, top, w, h); ctx.fillStyle = th.arch[1]; ctx.fill();
+    ctx.restore();
+
+    ctx.save();
+    archPath(ctx, cx, top, w, h); ctx.clip();
+    if(photo){
+      drawCover(ctx, photo, cx - w / 2, top, w, h);
+      const sh = ctx.createLinearGradient(0, top + h * 0.6, 0, top + h);
+      sh.addColorStop(0, 'rgba(0,0,0,0)'); sh.addColorStop(1, 'rgba(30,18,8,0.28)');
+      ctx.fillStyle = sh; ctx.fillRect(cx - w / 2, top, w, h);
+    } else {
+      const g = ctx.createLinearGradient(0, top, 0, top + h);
+      g.addColorStop(0, th.arch[0]); g.addColorStop(1, th.arch[1]);
+      ctx.fillStyle = g; ctx.fillRect(cx - w / 2, top, w, h);
+      // monograma
+      const [a, b] = initials;
+      const mid = top + h * 0.47;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+      ctx.fillStyle = goldGradient(ctx, th, cx - 160, mid - 100, cx + 160, mid + 100);
+      if(b){
+        ctx.font = font(500, 190, FONTS.display);
+        const wa = ctx.measureText(a).width, wb = ctx.measureText(b).width;
+        ctx.font = font(500, 120, FONTS.script, 'italic'); const wamp = ctx.measureText('&').width;
+        const gap = 22, tot = wa + wb + wamp + gap * 2;
+        let x = cx - tot / 2;
+        ctx.textAlign = 'left';
+        ctx.font = font(500, 190, FONTS.display); ctx.fillText(a, x, mid + 40); x += wa + gap;
+        ctx.font = font(500, 120, FONTS.script, 'italic'); ctx.fillText('&', x, mid + 30); x += wamp + gap;
+        ctx.font = font(500, 190, FONTS.display); ctx.fillText(b, x, mid + 40);
+      } else {
+        ctx.font = font(500, 230, FONTS.display); ctx.textAlign = 'center'; ctx.fillText(a, cx, mid + 70);
+      }
+      if(opts && opts.year){
+        ctx.restore(); ctx.save(); archPath(ctx, cx, top, w, h); ctx.clip();
+        drawOrnament(ctx, th, cx, mid + 112, 120);
+        ctx.textAlign = 'center'; ctx.fillStyle = th.ink; ctx.font = font(500, 54, FONTS.display);
+        tracked(ctx, String(opts.year), cx, mid + 190, 12, 'center');
+      }
+      // filete interior del arco
+      ctx.restore(); ctx.save();
+      archPath(ctx, cx, top + 26, w - 52, h - 26, true);
+      ctx.lineWidth = 1.5; ctx.globalAlpha = 0.7; ctx.strokeStyle = goldGradient(ctx, th, cx - 250, top, cx + 250, top + h); ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  function drawNames(ctx, th, names, y, maxW){
+    ctx.textBaseline = 'alphabetic';
+    const gap = 26;
+    function measureLine(size){
+      ctx.font = font(500, size, FONTS.display);
+      const wa = ctx.measureText(names[0]).width, wb = names[1] ? ctx.measureText(names[1]).width : 0;
+      let wamp = 0;
+      if(names[1]){ ctx.font = font(500, size * 1.1, FONTS.script, 'italic'); wamp = ctx.measureText('&').width; }
+      return { wa, wb, wamp, total: wa + wb + (names[1] ? wamp + gap * 2 : 0) };
+    }
+    // 1 sola línea si cabe con letra de al menos 74 px
+    let size = 108, m = measureLine(size);
+    while(m.total > maxW && size > 74){ size -= 2; m = measureLine(size); }
+    if(m.total <= maxW){
+      let x = W / 2 - m.total / 2;
+      ctx.textAlign = 'left';
+      ctx.fillStyle = th.ink; ctx.font = font(500, size, FONTS.display); ctx.fillText(names[0], x, y);
+      if(names[1]){
+        x += m.wa + gap;
+        ctx.fillStyle = goldGradient(ctx, th, x, y - size, x + m.wamp, y); ctx.font = font(500, size * 1.1, FONTS.script, 'italic');
+        ctx.fillText('&', x, y + size * 0.04); x += m.wamp + gap;
+        ctx.fillStyle = th.ink; ctx.font = font(500, size, FONTS.display); ctx.fillText(names[1], x, y);
+      }
+      return { used: 0, size };
+    }
+    // 2 líneas: "Nombre &" y debajo el otro nombre
+    let s2 = 100;
+    const fit = () => {
+      ctx.font = font(500, s2, FONTS.display);
+      const a = ctx.measureText(names[0]).width, b = ctx.measureText(names[1]).width;
+      ctx.font = font(500, s2 * 1.1, FONTS.script, 'italic');
+      const amp = ctx.measureText('&').width;
+      return Math.max(a + gap + amp, b);
+    };
+    while(fit() > maxW && s2 > 52) s2 -= 2;
+    ctx.textAlign = 'center';
+    ctx.font = font(500, s2, FONTS.display);
+    const a = ctx.measureText(names[0]).width;
+    ctx.font = font(500, s2 * 1.1, FONTS.script, 'italic');
+    const amp = ctx.measureText('&').width, tot = a + gap + amp;
+    ctx.textAlign = 'left';
+    ctx.fillStyle = th.ink; ctx.font = font(500, s2, FONTS.display); ctx.fillText(names[0], W / 2 - tot / 2, y);
+    ctx.fillStyle = goldGradient(ctx, th, 0, y - s2, 0, y); ctx.font = font(500, s2 * 1.1, FONTS.script, 'italic');
+    ctx.fillText('&', W / 2 - tot / 2 + a + gap, y + s2 * 0.04);
+    ctx.textAlign = 'center'; ctx.fillStyle = th.ink; ctx.font = font(500, s2, FONTS.display);
+    ctx.fillText(names[1], W / 2, y + s2 * 1.02);
+    return { used: Math.round(s2 * 1.02), size: s2 };
+  }
+
+  function drawCountdown(ctx, th, y, n){
+    // cápsula con la cuenta regresiva
+    const cw = 800, ch = 196, x = (W - cw) / 2;
+    ctx.save();
+    roundRectPath(ctx, x, y, cw, ch, ch / 2);
+    ctx.fillStyle = th.chip; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = goldGradient(ctx, th, x, y, x + cw, y + ch); ctx.stroke();
+    roundRectPath(ctx, x + 9, y + 9, cw - 18, ch - 18, (ch - 18) / 2);
+    ctx.lineWidth = 1; ctx.globalAlpha = 0.45; ctx.stroke(); ctx.globalAlpha = 1;
+    ctx.restore();
+
+    const midY = y + ch / 2;
+    ctx.textBaseline = 'alphabetic';
+    if(n >= 2){
+      const num = String(n);
+      let size = 150;
+      ctx.font = font(500, size, FONTS.display);
+      let wn = ctx.measureText(num).width;
+      const labelW = 250;
+      while(wn + labelW + 100 > cw - 90 && size > 80){ size -= 4; ctx.font = font(500, size, FONTS.display); wn = ctx.measureText(num).width; }
+      const total = wn + 44 + 2 + 44 + labelW;
+      let gx = W / 2 - total / 2;
+      ctx.textAlign = 'left';
+      ctx.fillStyle = goldGradient(ctx, th, gx, midY - size / 2, gx + wn, midY + size / 2);
+      ctx.fillText(num, gx, midY + size * 0.34);
+      gx += wn + 44;
+      ctx.fillStyle = goldGradient(ctx, th, gx, midY - 50, gx, midY + 50); ctx.fillRect(gx, midY - 52, 2, 104);
+      gx += 46;
+      ctx.fillStyle = th.ink; ctx.font = font(600, 33, FONTS.body);
+      tracked(ctx, 'DÍAS PARA', gx, midY - 8, 6, 'left');
+      tracked(ctx, 'EL GRAN DÍA', gx, midY + 40, 6, 'left');
+    } else {
+      const big = n === 1 ? '¡Mañana!' : (n === 0 ? '¡Hoy!' : '¡Nos casamos!');
+      const sub = n >= 0 ? 'ES NUESTRO GRAN DÍA' : 'GRACIAS POR SER PARTE';
+      let size = 104;
+      ctx.font = font(500, size, FONTS.display);
+      while(ctx.measureText(big).width > cw - 120 && size > 60){ size -= 4; ctx.font = font(500, size, FONTS.display); }
+      ctx.textAlign = 'center';
+      ctx.fillStyle = goldGradient(ctx, th, W / 2 - 200, midY - 60, W / 2 + 200, midY + 20);
+      ctx.fillText(big, W / 2, midY + 10);
+      ctx.fillStyle = th.ink; ctx.font = font(600, 28, FONTS.body);
+      tracked(ctx, sub, W / 2, midY + 58, 7, 'center');
+    }
+  }
+
+  function drawBrand(ctx, th, y){
+    ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'center';
+    ctx.font = font(600, 54, FONTS.display);
+    const a = ctx.measureText('Onc').width, b = ctx.measureText('e').width;
+    const x0 = W / 2 - (a + b) / 2;
+    ctx.textAlign = 'left';
+    ctx.fillStyle = th.ink; ctx.fillText('Onc', x0, y);
+    ctx.fillStyle = goldGradient(ctx, th, x0 + a, y - 40, x0 + a + b, y); ctx.fillText('e', x0 + a, y);
+    ctx.fillStyle = th.soft; ctx.font = font(500, 27, FONTS.body);
+    tracked(ctx, 'Planeamos nuestra boda en oncezz.com', W / 2, y + 48, 1.4, 'center');
+  }
+
+  // ---------- API ----------
+  function draw(canvas, opts){
+    const c = opts.couple, th = themeById(opts.theme), now = opts.now || Date.now();
+    canvas.width = W; canvas.height = H;
+    const ctx = canvas.getContext('2d');
+    ctx.textBaseline = 'alphabetic';
+
+    const names = splitNames(c.nombre);
+    const initials = initialsOf(names);
+    const n = c.fecha ? daysTo(c.fecha, now) : null;
+    const d = c.fecha ? parseDate(c.fecha) : null;
+    const weekday = d ? d.toLocaleDateString('es-CL', { weekday: 'long' }).toUpperCase() : '';
+    const dateLong = d ? d.toLocaleDateString('es-CL', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+    const place = opts.showPlace ? [c.comuna, c.pais].filter(Boolean).join(', ') : '';
+
+    drawBackground(ctx, th);
+    drawFrame(ctx, th);
+    drawSparkles(ctx, th);
+
+    // eyebrow
+    const eyebrow = n === 0 ? 'HOY NOS CASAMOS' : (n !== null && n < 0 ? 'NOS CASAMOS' : 'NOS CASAMOS');
+    drawEyebrow(ctx, th, eyebrow, 282);
+
+    // El arco se acorta si los nombres necesitan dos líneas
+    ctx.save();
+    ctx.font = font(500, 74, FONTS.display);
+    const probe = names[1] ? (function(){
+      ctx.font = font(500, 108, FONTS.display);
+      let size = 108; const gap = 26;
+      const tot = s => { ctx.font = font(500, s, FONTS.display); const a = ctx.measureText(names[0]).width + ctx.measureText(names[1]).width; ctx.font = font(500, s * 1.1, FONTS.script, 'italic'); return a + ctx.measureText('&').width + gap * 2; };
+      while(tot(size) > 880 && size > 74) size -= 2;
+      return tot(size) <= 880;
+    })() : true;
+    ctx.restore();
+    const extra = probe ? 0 : 96;
+
+    const archTop = 346, archH = 640 - extra;
+    drawLaurel(ctx, th, W / 2, archTop, 540, archH, -1);
+    drawLaurel(ctx, th, W / 2, archTop, 540, archH, 1);
+    drawArchPhoto(ctx, th, archTop, archH, opts.photo || null, initials, { year: d ? d.getFullYear() : null });
+
+    let y = archTop + archH + 146;
+    const nm = drawNames(ctx, th, names, y, 880);
+    y += nm.used;
+
+    if(d){
+      ctx.textAlign = 'center';
+      ctx.fillStyle = labelColor(th);
+      ctx.font = font(600, 26, FONTS.body);
+      tracked(ctx, weekday, W / 2, y + 72, 9, 'center');
+      ctx.fillStyle = th.ink; ctx.font = font(400, 58, FONTS.display); ctx.textAlign = 'center';
+      ctx.fillText(dateLong, W / 2, y + 136);
+      let yy = y + 136;
+      if(place){
+        let ps = 30;
+        ctx.font = font(500, ps, FONTS.body);
+        while(trackedWidth(ctx, place, 3) > 860 && ps > 20){ ps -= 1; ctx.font = font(500, ps, FONTS.body); }
+        ctx.fillStyle = th.soft;
+        tracked(ctx, place, W / 2, yy + 56, 3, 'center');
+        yy += 56;
+      }
+      if(n !== null) drawCountdown(ctx, th, yy + 56, n);
+      drawBrand(ctx, th, yy + 56 + 196 + 92);
+    } else {
+      drawBrand(ctx, th, y + 200);
+    }
+  }
+
+  return { draw, THEMES, themeById, daysTo, splitNames, W, H, FONTS };
+})();
+
+
+  const ShareStory = (function(){
+    const overlay = document.getElementById('shareOverlay');
+    const canvas = document.getElementById('shareCanvas');
+    const frame = document.getElementById('shareFrame');
+    const el = id => document.getElementById(id);
+    const swatches = el('shareSwatches'), themeName = el('shareThemeName');
+    const swPhoto = el('sharePhoto'), swPlace = el('sharePlace'), photoSub = el('sharePhotoSub');
+    const btnNative = el('shareNativeBtn'), btnDownload = el('shareDownloadBtn'), btnCopy = el('shareCopyBtn');
+    const helpEl = el('shareHelp'), statusEl = el('shareStatus');
+
+    const st = { couple:null, theme:'marfil', showPhoto:true, showPlace:true, photoUrl:null, photo:null, file:null, token:0, drawn:false, fontsP:null, statusT:0 };
+    let lastFocus = null;
+
+    const canNative = (function(){
+      try{ return !!(navigator.share && navigator.canShare && navigator.canShare({ files: [ new File(['x'], 'x.jpg', { type:'image/jpeg' }) ] })); }
+      catch(e){ return false; }
+    })();
+    if(!canNative){
+      btnNative.style.display = 'none';
+      btnDownload.classList.remove('btn-ghost'); btnDownload.classList.add('btn-primary');
+    }
+    helpEl.textContent = canNative
+      ? 'Toca "Compartir" y elige Instagram (Tu historia), Facebook o WhatsApp. En el computador, descarga la imagen y súbela desde tu celular.'
+      : 'Descarga la imagen y súbela a tus historias desde la galería de tu celular.';
+
+    // ---- preferencias (solo comodidad; si el navegador no deja guardar, no pasa nada)
+    function loadPrefs(){
+      try{
+        const t = localStorage.getItem('once_story_theme');
+        if(t && OnceStory.THEMES.some(x => x.id === t)) st.theme = t;
+        const p = localStorage.getItem('once_story_place'); if(p !== null) st.showPlace = (p === '1');
+        const f = localStorage.getItem('once_story_photo'); if(f !== null) st.showPhoto = (f === '1');
+      }catch(e){}
+    }
+    function savePref(k, v){ try{ localStorage.setItem(k, v); }catch(e){} }
+
+    // ---- estilos (círculos de color)
+    OnceStory.THEMES.forEach(t => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'sh-swatch'; b.dataset.theme = t.id;
+      b.setAttribute('role', 'radio'); b.setAttribute('aria-label', t.name);
+      b.style.background = 'linear-gradient(135deg, ' + t.swatch[0] + ' 50%, ' + t.swatch[1] + ' 50%)';
+      b.addEventListener('click', () => { if(st.theme === t.id) return; st.theme = t.id; savePref('once_story_theme', t.id); syncControls(); render(); });
+      swatches.appendChild(b);
+    });
+    function syncControls(){
+      swatches.querySelectorAll('.sh-swatch').forEach(b => b.setAttribute('aria-checked', b.dataset.theme === st.theme ? 'true' : 'false'));
+      themeName.textContent = OnceStory.themeById(st.theme).name;
+    }
+    swPhoto.addEventListener('change', () => { st.showPhoto = swPhoto.checked; savePref('once_story_photo', st.showPhoto ? '1' : '0'); render(); });
+    swPlace.addEventListener('change', () => { st.showPlace = swPlace.checked; savePref('once_story_place', st.showPlace ? '1' : '0'); render(); });
+
+    // ---- tipografías: se piden solo al abrir la hoja, para no cargar nada extra en el resto de la web
+    function loadFonts(sample){
+      if(!st.fontsP){
+        st.fontsP = new Promise(res => {
+          try{
+            const l = document.createElement('link'); l.rel = 'stylesheet';
+            l.href = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500&display=swap';
+            l.onload = () => res(); l.onerror = () => res();
+            document.head.appendChild(l);
+            setTimeout(res, 3000);
+          }catch(e){ res(); }
+        });
+      }
+      return st.fontsP.then(() => {
+        if(!document.fonts || !document.fonts.load) return;
+        const txt = (sample || '') + ' ÁÉÍÓÚÑáéíóúñ¿¡&0123456789';
+        const jobs = [
+          document.fonts.load('400 60px Fraunces', txt), document.fonts.load('500 60px Fraunces', txt), document.fonts.load('600 60px Fraunces', 'Once'),
+          document.fonts.load('500 30px Figtree', txt), document.fonts.load('600 30px Figtree', txt),
+          document.fonts.load('italic 500 60px "Cormorant Garamond"', '&')
+        ];
+        return Promise.race([ Promise.all(jobs).catch(() => {}), new Promise(r => setTimeout(r, 3500)) ]);
+      });
+    }
+
+    // ---- foto de la pareja (con permiso CORS para poder dibujarla; si falla, se usan las iniciales)
+    function loadPhoto(url){
+      return new Promise(res => {
+        const attempt = (u, retry) => {
+          const im = new Image(); im.crossOrigin = 'anonymous';
+          im.onload = () => res(im);
+          im.onerror = () => retry ? attempt(u + (u.indexOf('?') > -1 ? '&' : '?') + 'once_cors=1', false) : res(null);
+          im.src = u;
+        };
+        attempt(url, true);
+      });
+    }
+
+    function slug(t){
+      return String(t || 'pareja').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'pareja';
+    }
+    function shareText(){
+      const c = st.couple, n = c.fecha ? OnceStory.daysTo(c.fecha) : null;
+      const first = n === null ? 'Nos casamos.' : (n > 1 ? 'Faltan ' + n + ' días para nuestra boda.' : (n === 1 ? 'Mañana nos casamos.' : (n === 0 ? 'Hoy nos casamos.' : 'Gracias por ser parte de nuestra boda.')));
+      return first + ' Estamos planeando nuestro matrimonio en Once: https://www.oncezz.com';
+    }
+    function say(msg){
+      statusEl.textContent = msg;
+      clearTimeout(st.statusT);
+      st.statusT = setTimeout(() => { statusEl.textContent = ''; }, 7000);
+    }
+    function setReady(ok){
+      btnNative.disabled = !ok; btnDownload.disabled = !ok;
+      if(ok){ frame.classList.add('ready'); st.drawn = true; }
+    }
+
+    async function render(){
+      const my = ++st.token, c = st.couple;
+      setReady(false); st.file = null;
+      if(!st.drawn) frame.classList.remove('ready');
+      await loadFonts([c.nombre, c.comuna, c.pais].filter(Boolean).join(' '));
+      let photo = null;
+      if(st.showPhoto && c.foto_url){
+        if(st.photoUrl !== c.foto_url){ st.photoUrl = c.foto_url; st.photo = await loadPhoto(c.foto_url); }
+        photo = st.photo;
+        if(!photo) say('No pudimos cargar tu foto, así que la historia lleva tus iniciales.');
+      }
+      if(my !== st.token) return;
+      OnceStory.draw(canvas, { couple:c, theme:st.theme, photo:photo, showPlace:st.showPlace });
+      canvas.toBlob(blob => {
+        if(my !== st.token) return;
+        if(blob) st.file = new File([blob], 'once-historia-' + slug(c.nombre) + '.jpg', { type:'image/jpeg' });
+        setReady(!!st.file);
+        if(!st.file) say('No pudimos crear la imagen. Prueba con otra paleta o sin foto.');
+      }, 'image/jpeg', 0.92);
+    }
+
+    function download(){
+      if(!st.file) return;
+      const url = URL.createObjectURL(st.file);
+      const a = document.createElement('a'); a.href = url; a.download = st.file.name;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+      say('Imagen descargada. Súbela a tus historias desde tu galería.');
+    }
+    async function share(){
+      if(!st.file) return;
+      try{ await navigator.share({ files:[st.file], title:'Nuestra boda en Once', text: shareText() }); }
+      catch(e){
+        if(e && e.name === 'AbortError') return;
+        download(); say('No pudimos abrir el menú de compartir, así que descargamos la imagen.');
+      }
+    }
+    async function copyText(){
+      const t = shareText();
+      try{ await navigator.clipboard.writeText(t); say('Texto copiado. Pégalo en tu publicación o en el enlace de tu historia.'); }
+      catch(e){
+        const ta = document.createElement('textarea'); ta.value = t; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;top:0;opacity:0;';
+        document.body.appendChild(ta); ta.select();
+        let ok = false; try{ ok = document.execCommand('copy'); }catch(_){}
+        ta.remove();
+        say(ok ? 'Texto copiado. Pégalo en tu publicación o en el enlace de tu historia.' : 'No pudimos copiarlo solo. Cópialo a mano: ' + t);
+      }
+    }
+    btnNative.addEventListener('click', share);
+    btnDownload.addEventListener('click', download);
+    btnCopy.addEventListener('click', copyText);
+
+    function open(c){
+      st.couple = c; lastFocus = document.activeElement;
+      loadPrefs(); syncControls();
+      const hasPhoto = !!c.foto_url;
+      swPhoto.disabled = !hasPhoto; swPhoto.checked = hasPhoto && st.showPhoto;
+      photoSub.textContent = hasPhoto ? '' : 'Agrégala en "Editar mis datos"';
+      swPlace.checked = st.showPlace;
+      statusEl.textContent = '';
+      overlay.classList.add('open'); document.body.style.overflow = 'hidden';
+      setTimeout(() => { const x = overlay.querySelector('.up-close'); if(x) x.focus(); }, 80);
+      render();
+    }
+    function close(){
+      if(!overlay.classList.contains('open')) return;
+      overlay.classList.remove('open'); document.body.style.overflow = '';
+      st.token++;   // cancela cualquier dibujo pendiente
+      if(lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+    overlay.querySelectorAll('[data-sh-close]').forEach(x => x.addEventListener('click', close));
+    document.addEventListener('keydown', e => {
+      if(!overlay.classList.contains('open')) return;
+      if(e.key === 'Escape'){ close(); return; }
+      if(e.key === 'Tab'){
+        const f = Array.prototype.filter.call(overlay.querySelectorAll('.sh-sheet button, .sh-sheet input'), n => !n.disabled && n.offsetParent !== null);
+        if(!f.length) return;
+        const first = f[0], last = f[f.length - 1];
+        if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+        else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+      }
+    });
+    return { open, close };
+  })();
+  function openShareSheet(c){ ShareStory.open(c); }
 
   sb.auth.onAuthStateChange((_event, session)=>{
     if(session && session.user) showApp(session.user);
