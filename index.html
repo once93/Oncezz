@@ -547,6 +547,123 @@
     .sh-frame{ width:290px; }
   }
 
+  /* ---------- Inicio: por casarse / felizmente casadas ---------- */
+  .inicio-seg{ position:relative; display:grid; grid-template-columns:1fr 1fr; width:min(100%, 440px); margin:6px 0 24px; padding:2px; border-radius:11px; background:rgba(118,118,128,0.12); }
+  .seg-thumb{ position:absolute; top:2px; bottom:2px; left:2px; width:calc(50% - 2px); border-radius:9px; background:var(--white); box-shadow:0 1px 1px rgba(0,0,0,0.04), 0 3px 8px rgba(0,0,0,0.12); transition: transform .35s var(--ease); }
+  #view-inicio[data-seg="casadas"] .seg-thumb{ transform:translateX(100%); }
+  .inicio-seg button{ position:relative; z-index:1; appearance:none; -webkit-appearance:none; border:none; background:none; font-family:var(--font-body); font-size:14px; font-weight:600; color:var(--ink-soft); padding:8px 10px; border-radius:9px; cursor:pointer; transition: color .25s var(--ease); }
+  .inicio-seg button[aria-selected="true"]{ color:var(--ink); }
+  #view-inicio[data-seg="casadas"] #homeContent{ display:none; }
+  #view-inicio[data-seg="porcasarse"] #marriedPanel{ display:none; }
+
+  .mr-head h2{ font-size: clamp(25px, 4vw, 32px); letter-spacing:-0.02em; }
+  .mr-head p{ font-size:15px; color:var(--ink-soft); margin-top:6px; max-width:42em; }
+  .mr-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:18px; margin-top:22px; }
+  .mr-card{ appearance:none; -webkit-appearance:none; display:flex; flex-direction:column; text-align:left; font:inherit; color:inherit; border:none; padding:0; cursor:pointer; background:var(--white); border-radius:20px; overflow:hidden; box-shadow:var(--shadow-sm); animation: riseIn .55s var(--ease) backwards; animation-delay: calc(var(--i, 0) * 60ms); transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
+  .mr-card:active{ transform:scale(.985); }
+  .mr-cover{ position:relative; aspect-ratio:4/3; overflow:hidden; background:linear-gradient(135deg, #F2E8D5, #DFCDA9); }
+  .mr-cover img{ width:100%; height:100%; object-fit:cover; display:block; transition: transform .7s var(--ease); }
+  .mr-mono{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:46px; font-weight:500; letter-spacing:.04em; color:#A07C45; }
+  .mr-badge{ position:absolute; top:12px; left:12px; display:inline-flex; align-items:center; gap:5px; padding:5px 11px 5px 9px; border-radius:999px; font-size:12px; font-weight:600; color:#7A5A2A; background:rgba(255,255,255,0.86); -webkit-backdrop-filter:saturate(180%) blur(12px); backdrop-filter:saturate(180%) blur(12px); box-shadow:0 1px 6px rgba(0,0,0,0.12); }
+  .mr-badge svg{ color:#C2574B; }
+  .mr-badge-inline{ position:static; margin-bottom:8px; box-shadow:none; background:rgba(176,141,87,0.14); }
+  .mr-count{ position:absolute; right:12px; bottom:12px; padding:4px 10px; border-radius:999px; font-size:12px; font-weight:600; color:#fff; background:rgba(28,28,30,0.55); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+  .mr-body{ padding:16px 18px 18px; display:flex; flex-direction:column; gap:6px; }
+  .mr-body h3{ font-size:22px; letter-spacing:-0.015em; }
+  .mr-meta{ font-size:13.5px; color:var(--ink-soft); }
+  .mr-msg{ font-size:14px; color:var(--ink); line-height:1.5; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; margin-top:2px; }
+  .mr-credits{ display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-top:8px; }
+  .mr-credits-label{ font-size:11.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:#8E6B3A; width:100%; }
+  .mr-chip{ display:inline-flex; gap:5px; align-items:baseline; font-size:12.5px; padding:4px 10px; border-radius:999px; background:var(--paper); color:var(--ink); max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .mr-chip b{ font-weight:600; color:var(--ink-soft); font-size:11.5px; }
+  .mr-more{ color:var(--ink-soft); font-weight:600; }
+  .mr-skel{ aspect-ratio:4/3.3; border-radius:20px; background:linear-gradient(110deg, var(--paper-deep) 30%, #F4F4F8 50%, var(--paper-deep) 70%); background-size:220% 100%; animation: shShimmer 1.4s linear infinite; }
+  .mr-state{ margin-top:22px; }
+  .mr-state .btn{ margin-top:12px; }
+  @media (hover:hover){
+    .mr-card:hover{ transform:translateY(-3px); box-shadow:var(--shadow-md); }
+    .mr-card:hover .mr-cover img{ transform:scale(1.04); }
+  }
+
+  /* detalle de una boda */
+  .md-gallery{ display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; }
+  .md-thumb{ appearance:none; -webkit-appearance:none; position:relative; padding:0; border:none; aspect-ratio:1; border-radius:12px; overflow:hidden; background:var(--paper-deep); cursor:zoom-in; }
+  .md-thumb img{ width:100%; height:100%; object-fit:cover; display:block; transition: transform .5s var(--ease); }
+  .md-thumb:active img{ transform:scale(1.04); }
+  .md-empty{ font-size:14px; color:var(--ink-soft); text-align:center; padding:26px 16px; border:1px dashed var(--gold-line); border-radius:14px; background:rgba(255,255,255,0.55); }
+  .md-msg{ margin-top:18px; font-size:15.5px; line-height:1.6; color:var(--ink); white-space:pre-line; }
+  .md-block{ margin-top:20px; background:var(--white); border-radius:16px; padding:18px 20px; box-shadow:var(--shadow-sm); }
+  .md-block h3{ font-size:20px; }
+  .md-block p{ font-size:13.5px; color:var(--ink-soft); margin-top:3px; }
+  .md-credits{ list-style:none; margin-top:12px; }
+  .md-credits li{ display:flex; gap:12px; align-items:baseline; padding:10px 0; border-top:1px solid var(--paper-deep); font-size:15px; }
+  .md-credits li:first-child{ border-top:none; }
+  .md-cat{ flex:0 0 112px; font-size:11.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:#8E6B3A; }
+  @media (min-width:760px){ .md-gallery{ grid-template-columns:repeat(4, 1fr); } }
+
+  /* visor de fotos */
+  .lb-overlay{ position:fixed; inset:0; z-index:110; display:flex; align-items:center; justify-content:center; background:rgba(8,8,10,0.98); visibility:hidden; opacity:0; touch-action:pan-y; transition: opacity .3s ease, visibility 0s linear .3s; }
+  .lb-overlay.open{ visibility:visible; opacity:1; transition-delay:0s; }
+  .lb-stage{ margin:0; max-width:100%; display:flex; align-items:center; justify-content:center; padding:60px 12px; }
+  .lb-stage img{ max-width:100%; max-height:calc(100vh - 120px); max-height:calc(100dvh - 120px); object-fit:contain; border-radius:6px; user-select:none; -webkit-user-drag:none; }
+  .lb-close, .lb-nav{ position:absolute; appearance:none; -webkit-appearance:none; border:none; width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.14); color:#fff; cursor:pointer; -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); transition: background-color .2s ease, transform .15s var(--ease); }
+  .lb-close:hover, .lb-nav:hover{ background:rgba(255,255,255,0.26); }
+  .lb-close:active, .lb-nav:active{ transform:scale(.93); }
+  .lb-close{ top:calc(12px + env(safe-area-inset-top)); right:14px; }
+  .lb-nav{ top:50%; margin-top:-22px; }
+  .lb-prev{ left:14px; } .lb-next{ right:14px; }
+  .lb-nav[hidden]{ display:none; }
+  .lb-count{ position:absolute; left:0; right:0; bottom:calc(16px + env(safe-area-inset-bottom)); text-align:center; color:rgba(255,255,255,0.8); font-size:13px; font-weight:600; letter-spacing:.04em; }
+  @media (max-width:640px){ .lb-nav{ display:none; } }
+
+  /* aviso de confirmación (estilo iOS) */
+  .cf-overlay{ position:fixed; inset:0; z-index:120; display:flex; align-items:center; justify-content:center; padding:20px; visibility:hidden; pointer-events:none; transition: visibility 0s linear .25s; }
+  .cf-overlay.open{ visibility:visible; pointer-events:auto; transition-delay:0s; }
+  .cf-backdrop{ position:absolute; inset:0; background:rgba(0,0,0,0.4); opacity:0; transition: opacity .25s ease; }
+  .cf-overlay.open .cf-backdrop{ opacity:1; }
+  .cf-box{ position:relative; width:min(100%, 304px); border-radius:18px; overflow:hidden; text-align:center; background:rgba(250,250,252,0.97); -webkit-backdrop-filter:blur(24px); backdrop-filter:blur(24px); box-shadow:0 20px 60px rgba(0,0,0,0.3); transform:scale(1.08); opacity:0; transition: transform .28s var(--ease), opacity .22s ease; }
+  .cf-overlay.open .cf-box{ transform:none; opacity:1; }
+  .cf-text{ padding:20px 18px 16px; }
+  .cf-text h3{ font-family:var(--font-body); font-size:17px; font-weight:600; letter-spacing:0; }
+  .cf-text p{ font-size:13.5px; line-height:1.45; margin-top:6px; color:var(--ink); }
+  .cf-actions{ display:flex; flex-direction:column; border-top:1px solid rgba(60,60,67,0.18); }
+  .cf-actions button{ appearance:none; -webkit-appearance:none; border:none; background:none; font-family:var(--font-body); font-size:17px; padding:13px 10px; cursor:pointer; color:var(--rose-deep); }
+  .cf-actions button + button{ border-top:1px solid rgba(60,60,67,0.18); }
+  .cf-actions button:active{ background:rgba(60,60,67,0.08); }
+  #cfCancel{ font-weight:600; }
+  #cfOk.danger{ color:#FF3B30; }
+
+  /* panel de la pareja: fotos y créditos */
+  #coupleMarriedBox{ margin-top:20px; }
+  .mb-card{ border-radius:16px; padding:20px; background:linear-gradient(180deg, #FFFDF8, #F8F1E4); box-shadow: inset 0 0 0 1px rgba(176,141,87,0.3); }
+  .mb-card.mb-soon{ background:var(--paper); box-shadow:none; border:1px dashed var(--gold-line); }
+  .mb-head{ display:flex; gap:12px; align-items:flex-start; }
+  .mb-heart{ flex-shrink:0; width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:rgba(176,141,87,0.16); color:#C2574B; }
+  .mb-head h3{ font-size:21px; }
+  .mb-head p{ font-size:14px; color:var(--ink-soft); margin-top:3px; }
+  .mb-block{ margin-top:22px; }
+  .mb-label{ display:flex; justify-content:space-between; gap:10px; font-size:12.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px; }
+  .mb-card textarea{ width:100%; min-height:84px; resize:vertical; font-family:var(--font-body); font-size:15px; padding:11px 14px; border:none; border-radius:10px; background:var(--white); color:var(--ink); box-shadow: inset 0 0 0 1px rgba(0,0,0,0.07); }
+  .mb-card textarea:focus{ outline:none; box-shadow: 0 0 0 2px var(--rose-deep), 0 0 0 5px rgba(0,122,255,0.15); }
+  .mb-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:8px; }
+  .mb-count{ font-size:12.5px; color:var(--ink-soft); }
+  .mb-row .btn{ padding:9px 16px; font-size:14px; background:var(--white); box-shadow:0 1px 2px rgba(0,0,0,0.06); }
+  .mb-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(92px, 1fr)); gap:8px; }
+  .mb-thumb{ position:relative; aspect-ratio:1; border-radius:12px; overflow:hidden; background:var(--paper-deep); animation: imgIn .4s var(--ease) backwards; }
+  .mb-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .mb-del{ position:absolute; top:5px; right:5px; width:26px; height:26px; border-radius:50%; border:none; padding:0; display:flex; align-items:center; justify-content:center; background:rgba(28,28,30,0.62); color:#fff; cursor:pointer; -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); }
+  .mb-add{ appearance:none; -webkit-appearance:none; aspect-ratio:1; border-radius:12px; border:1.5px dashed rgba(176,141,87,0.65); background:rgba(255,255,255,0.65); color:#8E6B3A; font-family:var(--font-body); font-weight:600; font-size:13px; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; transition: background-color .2s var(--ease), transform .15s var(--ease); }
+  .mb-add:active{ transform:scale(.97); }
+  .mb-add:disabled{ opacity:.5; cursor:default; }
+  .mb-credits{ list-style:none; display:flex; flex-direction:column; gap:6px; }
+  .mb-credits li{ display:flex; gap:10px; align-items:baseline; font-size:14.5px; background:var(--white); border-radius:10px; padding:9px 12px; }
+  .mb-credits .cat{ flex:0 0 104px; font-size:11.5px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:#8E6B3A; }
+  .mb-hint, .mb-legal{ font-size:12.5px; color:var(--ink-soft); line-height:1.5; margin-top:8px; }
+  .mb-legal{ margin-top:18px; padding-top:14px; border-top:1px solid rgba(176,141,87,0.25); }
+  .mb-link{ appearance:none; -webkit-appearance:none; border:none; background:none; padding:6px 0 0; font-family:var(--font-body); font-size:13.5px; font-weight:600; color:#C2574B; cursor:pointer; }
+  .mb-card .status{ min-height:1.3em; }
+  @media (max-width:640px){ .mb-credits li{ flex-direction:column; gap:1px; } .md-credits li{ flex-direction:column; gap:1px; } .md-cat, .mb-credits .cat{ flex:none; } }
+
   @media (prefers-reduced-motion: reduce){
     html{ scroll-behavior:auto; }
     *, *::before, *::after{ animation-duration:.01ms !important; animation-delay:0s !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
@@ -699,7 +816,20 @@
 <main class="wrap">
 
   <!-- ============ VISTA INICIO (home dentro de la cuenta) ============ -->
-  <section class="view" id="view-inicio"></section>
+  <section class="view" id="view-inicio" data-seg="porcasarse">
+    <div class="inicio-seg" role="tablist" aria-label="Parejas">
+      <span class="seg-thumb" aria-hidden="true"></span>
+      <button type="button" role="tab" data-seg="porcasarse" aria-selected="true">Por casarse</button>
+      <button type="button" role="tab" data-seg="casadas" aria-selected="false" tabindex="-1">Felizmente casadas</button>
+    </div>
+    <div id="marriedPanel" role="tabpanel">
+      <div class="mr-head">
+        <h2>Parejas felizmente casadas</h2>
+        <p>Las parejas que ya celebraron su boda con Once, con sus fotos y los proveedores que la hicieron posible. Esta sección solo la ven quienes tienen una cuenta.</p>
+      </div>
+      <div id="marriedList" aria-live="polite"></div>
+    </div>
+  </section>
 
   <!-- ============ VISTA PAREJA ============ -->
   <section class="view active" id="view-pareja">
@@ -944,6 +1074,41 @@
         <button class="sh-link" type="button" id="shareCopyBtn">Copiar texto con el enlace</button>
         <p class="sh-help" id="shareHelp"></p>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="sh-overlay" id="mdOverlay" role="dialog" aria-modal="true" aria-labelledby="mdTitle">
+  <div class="sh-backdrop" data-md-close></div>
+  <div class="sh-sheet">
+    <div class="sh-grabber" aria-hidden="true"></div>
+    <div class="sh-head">
+      <div>
+        <span class="mr-badge mr-badge-inline"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 2.7 5 6 5c2 0 3.3 1.1 4 2.2h4C14.7 6.1 16 5 18 5c3.3 0 5.1 3.4 3.6 6.8C19.5 16.4 12 21 12 21z" transform="translate(0 -1)"/></svg> Felizmente casados</span>
+        <h2 id="mdTitle"></h2>
+        <p id="mdSub"></p>
+      </div>
+      <button class="up-close" type="button" data-md-close aria-label="Cerrar"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+    </div>
+    <div id="mdBody"></div>
+  </div>
+</div>
+
+<div class="lb-overlay" id="lbOverlay" role="dialog" aria-modal="true" aria-label="Fotos de la boda">
+  <button class="lb-close" type="button" id="lbClose" aria-label="Cerrar"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+  <button class="lb-nav lb-prev" type="button" id="lbPrev" aria-label="Foto anterior"><svg width="12" height="20" viewBox="0 0 12 20" fill="none" aria-hidden="true"><path d="M10 2L2 10l8 8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <figure class="lb-stage"><img id="lbImg" alt=""></figure>
+  <button class="lb-nav lb-next" type="button" id="lbNext" aria-label="Foto siguiente"><svg width="12" height="20" viewBox="0 0 12 20" fill="none" aria-hidden="true"><path d="M2 2l8 8-8 8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <div class="lb-count" id="lbCount"></div>
+</div>
+
+<div class="cf-overlay" id="cfOverlay" role="alertdialog" aria-modal="true" aria-labelledby="cfTitle" aria-describedby="cfBody">
+  <div class="cf-backdrop" data-cf-cancel></div>
+  <div class="cf-box">
+    <div class="cf-text"><h3 id="cfTitle"></h3><p id="cfBody"></p></div>
+    <div class="cf-actions">
+      <button type="button" id="cfCancel"></button>
+      <button type="button" id="cfOk"></button>
     </div>
   </div>
 </div>
@@ -1329,6 +1494,7 @@
     document.getElementById('authScreen').style.display = 'none';
     document.getElementById('appShell').classList.add('visible');
     mountHomeInApp();
+    resetInicioSeg();
     loadUpcoming();
     document.getElementById('sessionEmail').textContent = user.email;
     document.getElementById('c-email').value = user.email;
@@ -1399,9 +1565,11 @@
         <button class="btn btn-primary share-open" id="shareStoryBtn" type="button"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3"/><path d="M8 7l4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg><span>Compartir en mis historias</span></button>
         <button class="btn btn-ghost" id="editCoupleBtn">Editar mis datos</button>
       </div>
+      <div id="coupleMarriedBox"></div>
     `;
     document.getElementById('editCoupleBtn').addEventListener('click', ()=> enterCoupleEditMode(c));
     document.getElementById('shareStoryBtn').addEventListener('click', ()=> openShareSheet(c));
+    MarriedOwner.render(c);
   }
 
   let editingCouple = null;
@@ -1485,7 +1653,7 @@
       const comunaFilter = document.getElementById('home-f-comuna').value.trim();
       const paisFilter = document.getElementById('home-f-pais').value;
       const catFilter = document.getElementById('home-f-categoria').value;
-      let query = sb.from('public_couples').select('*').order('fecha', { ascending: true });
+      let query = sb.from('public_couples').select('*').gt('fecha', todayStr()).order('fecha', { ascending: true });
       if(comunaFilter) query = query.ilike('comuna', '%' + comunaFilter + '%');
       if(paisFilter) query = query.eq('pais', paisFilter);
       let { data: couples, error } = await query;
@@ -2448,6 +2616,429 @@ const OnceStory = (function(){
   })();
   function openShareSheet(c){ ShareStory.open(c); }
 
+  /* ===================== Felizmente casadas ===================== */
+  const isMarriedDate = f => !!f && f <= todayStr();
+  const mrFecha = f => new Date(f + 'T00:00:00').toLocaleDateString('es-CL', { day:'numeric', month:'long', year:'numeric' });
+  const mrWhen = f => f === todayStr() ? 'Se casan hoy' : 'Se casaron el ' + mrFecha(f);
+  const mrPlace = c => [c.comuna, c.pais].filter(Boolean).join(', ');
+  const mrPlural = (n, uno, varios) => n === 1 ? uno : varios;
+  const mrInitials = nombre => OnceStory.splitNames(nombre).map(n => (Array.from(n)[0] || '').toUpperCase()).join(' & ');
+  const MR_HEART = '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.6-9.2C.9 7.9 2.7 4.5 6 4.5c2 0 3.3 1.1 4 2.2h4c.7-1.1 2-2.2 4-2.2 3.3 0 5.1 3.4 3.6 6.8-2.1 4.6-9.6 9.2-9.6 9.2z"/></svg>';
+
+  // bloqueo del scroll del fondo cuando hay hojas abiertas (varias a la vez)
+  let mrLocks = 0;
+  function mrLock(on){
+    mrLocks = Math.max(0, mrLocks + (on ? 1 : -1));
+    document.body.style.overflow = mrLocks > 0 ? 'hidden' : '';
+  }
+
+  // ---- aviso de confirmación
+  const CfDialog = (function(){
+    const ov = document.getElementById('cfOverlay'), okBtn = document.getElementById('cfOk'), cancelBtn = document.getElementById('cfCancel');
+    let resolver = null, lastFocus = null;
+    function finish(v){
+      if(!ov.classList.contains('open')) return;
+      ov.classList.remove('open'); mrLock(false);
+      if(lastFocus && lastFocus.focus && document.contains(lastFocus)) lastFocus.focus();
+      const r = resolver; resolver = null; if(r) r(v);
+    }
+    function ask(o){
+      return new Promise(res => {
+        if(resolver) finish(false);
+        resolver = res; lastFocus = document.activeElement;
+        document.getElementById('cfTitle').textContent = o.title;
+        document.getElementById('cfBody').textContent = o.body;
+        okBtn.textContent = o.ok; okBtn.className = o.danger ? 'danger' : '';
+        cancelBtn.textContent = o.cancel;
+        ov.classList.add('open'); mrLock(true);
+        setTimeout(() => cancelBtn.focus(), 60);
+      });
+    }
+    okBtn.addEventListener('click', () => finish(true));
+    cancelBtn.addEventListener('click', () => finish(false));
+    ov.querySelector('[data-cf-cancel]').addEventListener('click', () => finish(false));
+    document.addEventListener('keydown', e => {
+      if(!ov.classList.contains('open')) return;
+      if(e.key === 'Escape'){ e.stopPropagation(); finish(false); return; }
+      if(e.key === 'Tab'){
+        e.preventDefault();
+        (document.activeElement === okBtn ? cancelBtn : okBtn).focus();
+      }
+    }, true);
+    return { ask };
+  })();
+
+  // ---- visor de fotos
+  const PhotoViewer = (function(){
+    const ov = document.getElementById('lbOverlay'), img = document.getElementById('lbImg'), count = document.getElementById('lbCount');
+    const prev = document.getElementById('lbPrev'), next = document.getElementById('lbNext');
+    let list = [], idx = 0, label = '', lastFocus = null;
+    function show(){
+      img.src = list[idx]; img.alt = (label ? label + ': ' : '') + 'foto ' + (idx + 1) + ' de ' + list.length;
+      count.textContent = (idx + 1) + ' / ' + list.length;
+      prev.hidden = next.hidden = list.length < 2;
+      [idx - 1, idx + 1].forEach(i => { if(list[i]){ const p = new Image(); p.src = list[i]; } });   // precarga vecinas
+    }
+    function go(d){ if(list.length < 2) return; idx = (idx + d + list.length) % list.length; show(); }
+    function open(urls, i, lab){
+      list = urls.slice(); idx = Math.max(0, Math.min(i || 0, list.length - 1)); label = lab || '';
+      lastFocus = document.activeElement; show();
+      ov.classList.add('open'); mrLock(true);
+      setTimeout(() => document.getElementById('lbClose').focus(), 60);
+    }
+    function close(){
+      if(!ov.classList.contains('open')) return;
+      ov.classList.remove('open'); mrLock(false);
+      if(lastFocus && lastFocus.focus && document.contains(lastFocus)) lastFocus.focus();
+    }
+    prev.addEventListener('click', e => { e.stopPropagation(); go(-1); });
+    next.addEventListener('click', e => { e.stopPropagation(); go(1); });
+    document.getElementById('lbClose').addEventListener('click', close);
+    ov.addEventListener('click', e => { if(e.target === ov || e.target.classList.contains('lb-stage')) close(); });
+    document.addEventListener('keydown', e => {
+      if(!ov.classList.contains('open')) return;
+      if(e.key === 'Escape'){ e.stopPropagation(); close(); }
+      else if(e.key === 'ArrowLeft'){ go(-1); }
+      else if(e.key === 'ArrowRight'){ go(1); }
+      else if(e.key === 'Tab'){
+        e.preventDefault();
+        const f = Array.prototype.filter.call(ov.querySelectorAll('button'), b => !b.hidden && b.offsetParent !== null);
+        if(!f.length) return;
+        const i = f.indexOf(document.activeElement);
+        f[(i + (e.shiftKey ? -1 : 1) + f.length) % f.length].focus();
+      }
+    }, true);
+    let x0 = 0, y0 = 0;
+    ov.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive:true });
+    ov.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+      if(Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) go(dx < 0 ? 1 : -1);
+      else if(dy > 90 && Math.abs(dx) < 60) close();
+    }, { passive:true });
+    return { open, close };
+  })();
+
+  // ---- lista y detalle de parejas casadas (solo para cuentas registradas)
+  const Married = (function(){
+    const listEl = document.getElementById('marriedList');
+    const md = document.getElementById('mdOverlay');
+    const st = { rows:[], status:'idle', at:0, token:0 };
+    let lastFocus = null;
+
+    function cardHtml(c, i){
+      const cover = (c.fotos && c.fotos[0]) || c.foto_url;
+      const n = c.fotos.length, cr = c.creditos;
+      const chips = cr.slice(0, 3).map(x => '<span class="mr-chip">' + (x.categoria ? '<b>' + escapeHtml(x.categoria) + '</b>' : '') + escapeHtml(x.proveedor) + '</span>').join('')
+        + (cr.length > 3 ? '<span class="mr-chip mr-more">+' + (cr.length - 3) + '</span>' : '');
+      const place = mrPlace(c);
+      return '<button type="button" class="mr-card" data-id="' + escapeHtml(String(c.id)) + '" style="--i:' + Math.min(i, 8) + '" aria-label="Ver la boda de ' + escapeHtml(c.nombre) + '">'
+        + '<div class="mr-cover">'
+        + (cover ? '<img src="' + escapeHtml(cover) + '" alt="" loading="lazy" decoding="async">' : '<div class="mr-mono">' + escapeHtml(mrInitials(c.nombre)) + '</div>')
+        + '<span class="mr-badge">' + MR_HEART + ' Felizmente casados</span>'
+        + (n ? '<span class="mr-count">' + n + ' ' + mrPlural(n, 'foto', 'fotos') + '</span>' : '')
+        + '</div><div class="mr-body"><h3>' + escapeHtml(c.nombre) + '</h3>'
+        + '<div class="mr-meta">' + mrWhen(c.fecha) + (place ? ' · ' + escapeHtml(place) : '') + '</div>'
+        + (c.mensaje_boda ? '<p class="mr-msg">' + escapeHtml(c.mensaje_boda) + '</p>' : '')
+        + (cr.length ? '<div class="mr-credits"><span class="mr-credits-label">Con la ayuda de</span>' + chips + '</div>' : '')
+        + '</div></button>';
+    }
+
+    function render(){
+      if(st.status === 'loading' && !st.rows.length){
+        listEl.innerHTML = '<div class="mr-grid mr-state" aria-busy="true"><div class="mr-skel"></div><div class="mr-skel"></div><div class="mr-skel"></div></div>';
+      }else if(st.status === 'error'){
+        listEl.innerHTML = '<div class="empty mr-state">No pudimos cargar esta sección. Revisa tu conexión e inténtalo de nuevo.<br><button class="btn btn-ghost" type="button" data-mr-retry>Reintentar</button></div>';
+      }else if(!st.rows.length){
+        listEl.innerHTML = '<div class="empty mr-state">Todavía no hay parejas casadas. Cuando llegue la fecha de una boda registrada en Once, aparecerá aquí con sus fotos.</div>';
+      }else{
+        listEl.innerHTML = '<div class="mr-grid">' + st.rows.map(cardHtml).join('') + '</div>';
+      }
+    }
+
+    async function load(force){
+      if(!force && st.status === 'ready' && Date.now() - st.at < 60000) return;
+      const my = ++st.token;
+      if(st.status !== 'ready') st.status = 'loading';
+      render();
+      try{
+        const { data, error } = await sb.rpc('married_gallery', { p_today: todayStr() });
+        if(error) throw error;
+        if(my !== st.token) return;
+        st.rows = (data || []).map(r => Object.assign({}, r, {
+          fotos: Array.isArray(r.fotos) ? r.fotos.filter(Boolean) : [],
+          creditos: Array.isArray(r.creditos) ? r.creditos.filter(x => x && x.proveedor) : []
+        }));
+        st.status = 'ready'; st.at = Date.now();
+      }catch(err){
+        if(my !== st.token) return;
+        st.status = st.rows.length ? 'ready' : 'error';
+      }
+      render();
+    }
+    function invalidate(){ st.at = 0; if(st.status === 'ready') st.status = 'stale'; }
+
+    listEl.addEventListener('click', e => {
+      if(e.target.closest('[data-mr-retry]')){ load(true); return; }
+      const card = e.target.closest('.mr-card');
+      if(card) openDetail(card.dataset.id);
+    });
+
+    function openDetail(id){
+      const c = st.rows.find(r => String(r.id) === String(id)); if(!c) return;
+      lastFocus = document.activeElement;
+      const place = mrPlace(c);
+      document.getElementById('mdTitle').textContent = c.nombre;
+      document.getElementById('mdSub').textContent = mrWhen(c.fecha) + (place ? ' · ' + place : '');
+      const body = document.getElementById('mdBody');
+      let html = '';
+      if(c.fotos.length){
+        html += '<div class="md-gallery">' + c.fotos.map((u, i) =>
+          '<button type="button" class="md-thumb" data-i="' + i + '" aria-label="Ver foto ' + (i + 1) + ' de ' + c.fotos.length + '"><img src="' + escapeHtml(u) + '" alt="" loading="lazy" decoding="async"></button>').join('') + '</div>';
+      }else{
+        html += '<div class="md-empty">Esta pareja todavía no ha publicado fotos de su boda.</div>';
+      }
+      if(c.mensaje_boda) html += '<p class="md-msg">' + escapeHtml(c.mensaje_boda) + '</p>';
+      if(c.creditos.length){
+        html += '<div class="md-block"><h3>Gracias a los proveedores</h3><p>Los proveedores cuyas ofertas aceptó esta pareja en Once.</p><ul class="md-credits">'
+          + c.creditos.map(x => '<li><span class="md-cat">' + escapeHtml(x.categoria || 'Servicio') + '</span><span>' + escapeHtml(x.proveedor) + '</span></li>').join('') + '</ul></div>';
+      }
+      body.innerHTML = html;
+      body.querySelectorAll('.md-thumb').forEach(b => b.addEventListener('click', () => PhotoViewer.open(c.fotos, Number(b.dataset.i), 'Boda de ' + c.nombre)));
+      md.classList.add('open'); mrLock(true);
+      md.querySelector('.sh-sheet').scrollTop = 0;
+      setTimeout(() => { const x = md.querySelector('.up-close'); if(x) x.focus(); }, 80);
+    }
+    function closeDetail(){
+      if(!md.classList.contains('open')) return;
+      md.classList.remove('open'); mrLock(false);
+      if(lastFocus && lastFocus.focus && document.contains(lastFocus)) lastFocus.focus();
+    }
+    md.querySelectorAll('[data-md-close]').forEach(x => x.addEventListener('click', closeDetail));
+    document.addEventListener('keydown', e => {
+      if(!md.classList.contains('open')) return;
+      if(document.getElementById('lbOverlay').classList.contains('open') || document.getElementById('cfOverlay').classList.contains('open')) return;
+      if(e.key === 'Escape'){ closeDetail(); return; }
+      if(e.key === 'Tab'){
+        const f = Array.prototype.filter.call(md.querySelectorAll('.sh-sheet button'), n => n.offsetParent !== null);
+        if(!f.length) return;
+        const first = f[0], last = f[f.length - 1];
+        if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+        else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+      }
+    });
+    return { load, invalidate, render };
+  })();
+
+  // ---- selector "Por casarse / Felizmente casadas" dentro de Inicio
+  (function(){
+    const view = document.getElementById('view-inicio');
+    const btns = view.querySelectorAll('.inicio-seg button');
+    function select(seg, focus){
+      view.dataset.seg = seg;
+      btns.forEach(b => {
+        const on = b.dataset.seg === seg;
+        b.setAttribute('aria-selected', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1;
+        if(on && focus) b.focus();
+      });
+      if(seg === 'casadas') Married.load();
+    }
+    btns.forEach(b => {
+      b.addEventListener('click', () => select(b.dataset.seg));
+      b.addEventListener('keydown', e => {
+        if(e.key === 'ArrowRight' || e.key === 'ArrowLeft'){ e.preventDefault(); select(b.dataset.seg === 'porcasarse' ? 'casadas' : 'porcasarse', true); }
+      });
+    });
+    window.resetInicioSeg = () => select('porcasarse');
+    window.inicioTabShown = () => { if(view.dataset.seg === 'casadas') Married.load(); };
+  })();
+
+  // ---- panel de la pareja: fotos, mensaje y créditos
+  const MarriedOwner = (function(){
+    const MAX = 12;
+    const own = { c:null, photos:[], credits:[], token:0 };
+    const $ = id => document.getElementById(id);
+
+    function statusMsg(msg, isError){
+      const el = $('mbStatus'); if(!el) return;
+      el.textContent = msg || ''; el.className = 'status' + (isError ? ' error' : '');
+    }
+    function soonHtml(c){
+      return '<div class="mb-card mb-soon"><div class="mb-head"><span class="mb-heart">' + MR_HEART + '</span><div><h3>Después de tu boda</h3>'
+        + '<p>El ' + mrFecha(c.fecha) + ' tu perfil pasará solo a «Felizmente casadas», dentro de Inicio, y podrás subir las fotos de tu boda con créditos a los proveedores cuyas ofertas aceptaste.</p></div></div></div>';
+    }
+    function unavailableHtml(){
+      return '<div class="mb-card mb-soon"><div class="mb-head"><span class="mb-heart">' + MR_HEART + '</span><div><h3>¡Felizmente casados!</h3>'
+        + '<p>Estamos activando la galería de fotos. Vuelve a entrar en unos minutos.</p></div></div></div>';
+    }
+    function fullHtml(c){
+      return '<div class="mb-card">'
+        + '<div class="mb-head"><span class="mb-heart">' + MR_HEART + '</span><div><h3>¡Felizmente casados!</h3>'
+        + '<p>Tu perfil ya está en «Felizmente casadas», dentro de Inicio, visible para quienes tienen una cuenta en Once. Sube tus fotos y cuéntanos cómo fue tu día.</p></div></div>'
+        + '<div class="mb-block"><label class="mb-label" for="mbMsg"><span>Un mensaje para tu galería (opcional)</span></label>'
+        + '<textarea id="mbMsg" maxlength="400" placeholder="Cuéntanos cómo fue tu día…">' + escapeHtml(c.mensaje_boda || '') + '</textarea>'
+        + '<div class="mb-row"><span class="mb-count" id="mbMsgCount"></span><button class="btn" type="button" id="mbSaveMsg">Guardar mensaje</button></div></div>'
+        + '<div class="mb-block"><div class="mb-label"><span>Fotos de tu boda</span><span id="mbPhotoCount"></span></div>'
+        + '<div class="mb-grid" id="mbGrid"></div>'
+        + '<input type="file" id="mbFile" accept="image/*" multiple hidden>'
+        + '<p class="mb-hint">Se publican junto a los créditos de los proveedores cuyas ofertas aceptaste.</p>'
+        + '<p class="status" id="mbStatus" role="status" aria-live="polite"></p></div>'
+        + '<div class="mb-block"><div class="mb-label"><span>Créditos a tus proveedores</span></div><div id="mbCredits"></div></div>'
+        + '<p class="mb-legal">Al subir fotos confirmas que puedes usarlas y que las personas que aparecen están de acuerdo. Solo las ven las cuentas registradas en Once.</p>'
+        + '</div>';
+    }
+
+    function renderPhotos(){
+      const grid = $('mbGrid'); if(!grid) return;
+      const n = own.photos.length;
+      $('mbPhotoCount').textContent = n + ' de ' + MAX;
+      grid.innerHTML = own.photos.map(p =>
+        '<div class="mb-thumb"><img src="' + escapeHtml(p.url) + '" alt="Foto de tu boda" loading="lazy" decoding="async">'
+        + '<button class="mb-del" type="button" data-del="' + escapeHtml(String(p.id)) + '" aria-label="Eliminar esta foto"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button></div>').join('')
+        + (n < MAX ? '<button class="mb-add" type="button" id="mbAdd"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Agregar fotos</span></button>' : '');
+    }
+    function renderCredits(){
+      const box = $('mbCredits'); if(!box) return;
+      const cr = own.credits, n = own.photos.length;
+      if(!cr.length){
+        box.innerHTML = '<p class="mb-hint" style="margin-top:0;">No aceptaste ofertas de proveedores en Once, así que tu galería se publica sin créditos.</p>';
+        return;
+      }
+      box.innerHTML = '<ul class="mb-credits">' + cr.map(x => '<li><span class="cat">' + escapeHtml(x.categoria || 'Servicio') + '</span><span>' + escapeHtml(x.proveedor) + '</span></li>').join('') + '</ul>'
+        + (n
+          ? '<p class="mb-hint">Aparecen automáticamente junto a tus fotos, como agradecimiento.</p><button class="mb-link" type="button" id="mbRemoveCredits">Quitar créditos</button>'
+          : '<p class="mb-hint">Cuando subas fotos, estos proveedores aparecerán como créditos de tu galería.</p>');
+    }
+
+    function wire(){
+      const ta = $('mbMsg'), count = $('mbMsgCount');
+      const upd = () => { count.textContent = ta.value.length + '/400'; };
+      ta.addEventListener('input', upd); upd();
+      $('mbSaveMsg').addEventListener('click', saveMsg);
+      $('mbFile').addEventListener('change', e => { const f = e.target.files; if(f && f.length) upload(Array.from(f)); e.target.value = ''; });
+      $('mbGrid').addEventListener('click', e => {
+        if(e.target.closest('#mbAdd')){ $('mbFile').click(); return; }
+        const del = e.target.closest('[data-del]'); if(del) removePhoto(del.dataset.del);
+      });
+      $('mbCredits').addEventListener('click', e => { if(e.target.closest('#mbRemoveCredits')) removeCredits(); });
+    }
+
+    async function render(c){
+      const my = ++own.token; own.c = c;
+      const box = $('coupleMarriedBox'); if(!box) return;
+      if(!isMarriedDate(c.fecha)){ box.innerHTML = soonHtml(c); return; }
+      box.innerHTML = '<div class="mb-card"><p class="loading">Cargando tu galería…</p></div>';
+      let photos = [], credits = [];
+      try{
+        const [pr, cr] = await Promise.all([
+          sb.from('couple_photos').select('id,url,path').eq('couple_id', c.id).order('creado', { ascending:true }),
+          sb.from('offers').select('proveedor_nombre,categoria').eq('couple_id', c.id).eq('estado', 'aceptada').order('creado', { ascending:true })
+        ]);
+        if(pr.error) throw pr.error;
+        photos = pr.data || [];
+        credits = ((cr && cr.data) || []).map(o => ({ proveedor:o.proveedor_nombre, categoria:o.categoria })).filter(x => x.proveedor);
+      }catch(err){
+        if(my === own.token) box.innerHTML = unavailableHtml();
+        return;
+      }
+      if(my !== own.token) return;
+      own.photos = photos; own.credits = credits;
+      box.innerHTML = fullHtml(c);
+      wire(); renderPhotos(); renderCredits();
+    }
+
+    async function saveMsg(){
+      const btn = $('mbSaveMsg'), v = $('mbMsg').value.trim().slice(0, 400);
+      btn.disabled = true; statusMsg('Guardando…');
+      const { error } = await sb.from('couples').update({ mensaje_boda: v || null }).eq('id', own.c.id);
+      btn.disabled = false;
+      if(error){ statusMsg('No pudimos guardar el mensaje. Intenta de nuevo.', true); return; }
+      own.c.mensaje_boda = v || null; statusMsg('Mensaje guardado.'); Married.invalidate();
+    }
+
+    // reduce la foto (lado mayor 1600 px, JPEG) para que suba rápido y no pese
+    async function resizeToJpeg(file, max, quality){
+      let src;
+      try{ src = await createImageBitmap(file, { imageOrientation:'from-image' }); }
+      catch(e){
+        src = await new Promise((res, rej) => {
+          const u = URL.createObjectURL(file), im = new Image();
+          im.onload = () => { URL.revokeObjectURL(u); res(im); };
+          im.onerror = () => { URL.revokeObjectURL(u); rej(new Error('imagen')); };
+          im.src = u;
+        });
+      }
+      const w = src.width || src.naturalWidth, h = src.height || src.naturalHeight;
+      const k = Math.min(1, max / Math.max(w, h));
+      const cv = document.createElement('canvas'); cv.width = Math.round(w * k); cv.height = Math.round(h * k);
+      const cx = cv.getContext('2d'); cx.fillStyle = '#fff'; cx.fillRect(0, 0, cv.width, cv.height); cx.drawImage(src, 0, 0, cv.width, cv.height);
+      if(src.close) try{ src.close(); }catch(_){}
+      return new Promise(res => cv.toBlob(res, 'image/jpeg', quality));
+    }
+
+    async function upload(files){
+      files = files.filter(f => /^image\//.test(f.type) || /\.(jpe?g|png|webp|heic|heif)$/i.test(f.name));
+      if(!files.length){ statusMsg('Elige imágenes (JPG, PNG o similares).', true); return; }
+      const room = MAX - own.photos.length;
+      if(room <= 0){ statusMsg('Ya tienes ' + MAX + ' fotos, que es el máximo. Elimina alguna para subir otra.', true); return; }
+      const take = files.slice(0, room);
+      const add = $('mbAdd'); if(add) add.disabled = true;
+      let ok = 0, fail = 0;
+      for(let i = 0; i < take.length; i++){
+        statusMsg('Subiendo foto ' + (i + 1) + ' de ' + take.length + '…');
+        try{
+          const blob = await resizeToJpeg(take[i], 1600, 0.85);
+          if(!blob) throw new Error('resize');
+          const path = 'galeria/' + currentUser.id + '/' + uid() + '.jpg';
+          const up = await sb.storage.from('once-images').upload(path, blob, { contentType:'image/jpeg', cacheControl:'31536000' });
+          if(up.error) throw up.error;
+          const url = sb.storage.from('once-images').getPublicUrl(path).data.publicUrl;
+          const ins = await sb.from('couple_photos').insert([{ couple_id: own.c.id, url, path }]).select('id,url,path').single();
+          if(ins.error || !ins.data){
+            try{ await sb.storage.from('once-images').remove([path]); }catch(_){}
+            throw (ins.error || new Error('insert'));
+          }
+          own.photos.push(ins.data); ok++; renderPhotos(); renderCredits();
+        }catch(e){ fail++; }
+      }
+      renderPhotos();
+      const extra = files.length > take.length ? ' Solo cabían ' + take.length + ' (el máximo es ' + MAX + ').' : '';
+      if(ok) Married.invalidate();
+      if(fail && !ok) statusMsg('No pudimos subir ' + (fail === 1 ? 'la foto' : 'las fotos') + '. Revisa tu conexión e inténtalo de nuevo.', true);
+      else if(fail) statusMsg('Subimos ' + ok + ' ' + mrPlural(ok, 'foto', 'fotos') + ', pero ' + fail + ' no se pudo' + (fail > 1 ? 'ieron' : '') + ' subir.' + extra, true);
+      else statusMsg(ok + ' ' + mrPlural(ok, 'foto subida', 'fotos subidas') + '.' + extra);
+    }
+
+    async function removePhoto(id){
+      const p = own.photos.find(x => String(x.id) === String(id)); if(!p) return;
+      const yes = await CfDialog.ask({ title:'¿Eliminar esta foto?', body:'Dejará de verse en la galería de tu boda.', ok:'Eliminar', cancel:'Cancelar', danger:true });
+      if(!yes) return;
+      const { error } = await sb.from('couple_photos').delete().eq('id', p.id);
+      if(error){ statusMsg('No pudimos eliminarla. Intenta de nuevo.', true); return; }
+      if(p.path){ try{ await sb.storage.from('once-images').remove([p.path]); }catch(_){} }
+      own.photos = own.photos.filter(x => x !== p);
+      renderPhotos(); renderCredits(); Married.invalidate(); statusMsg('Foto eliminada.');
+    }
+
+    // los créditos van siempre junto a las fotos: quitarlos significa quitar también las fotos
+    async function removeCredits(){
+      const n = own.photos.length; if(!n) return;
+      const yes = await CfDialog.ask({
+        title:'¿Quitar los créditos?',
+        body:'Las fotos solo se pueden publicar dando los créditos y agradecimientos a los proveedores cuyas ofertas aceptaste. Si quitas los créditos, también se eliminarán tus ' + n + ' ' + mrPlural(n, 'foto', 'fotos') + ' de la galería.',
+        ok:'Quitar créditos y fotos', cancel:'Mantener créditos', danger:true });
+      if(!yes) return;
+      const paths = own.photos.map(p => p.path).filter(Boolean);
+      const { error } = await sb.from('couple_photos').delete().eq('couple_id', own.c.id);
+      if(error){ statusMsg('No pudimos quitar los créditos. Intenta de nuevo.', true); return; }
+      if(paths.length){ try{ await sb.storage.from('once-images').remove(paths); }catch(_){} }
+      own.photos = [];
+      renderPhotos(); renderCredits(); Married.invalidate();
+      statusMsg('Listo: quitamos los créditos y tus fotos. Puedes subir fotos de nuevo cuando quieras, siempre con créditos.');
+    }
+
+    return { render };
+  })();
+
   sb.auth.onAuthStateChange((_event, session)=>{
     if(session && session.user) showApp(session.user);
     else showHome();
@@ -2465,7 +3056,7 @@ const OnceStory = (function(){
       document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
       document.getElementById('view-' + btn.dataset.tab).classList.add('active');
       if(btn.dataset.tab === 'proveedor') loadCouples();
-      if(btn.dataset.tab === 'inicio'){ loadPublicCouples(); loadUpcoming(); }
+      if(btn.dataset.tab === 'inicio'){ loadPublicCouples(); loadUpcoming(); inicioTabShown(); }
     });
   });
 
@@ -3014,7 +3605,7 @@ const OnceStory = (function(){
       const catFilter = document.getElementById('f-categoria').value;
       const fechaFilter = document.getElementById('f-fecha-desde').value;
       const presupuestoFilter = document.getElementById('f-presupuesto-min').value;
-      let query = sb.from('couples').select('*').order('fecha', { ascending: true });
+      let query = sb.from('couples').select('*').gt('fecha', todayStr()).order('fecha', { ascending: true });
       if(comunaFilter) query = query.ilike('comuna', '%' + comunaFilter + '%');
       if(paisFilter) query = query.eq('pais', paisFilter);
       if(fechaFilter) query = query.gte('fecha', fechaFilter);
