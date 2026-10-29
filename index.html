@@ -5,13 +5,13 @@
 <script>document.documentElement.classList.add('js');</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Once — Bodas y proveedores en un solo lugar</title>
-<meta name="description" content="Once conecta parejas que planean su boda con proveedores. Registra tu boda, recibe ofertas y encuentra servicios directos en Once Store.">
+<meta name="description" content="Once conecta parejas que planean su boda con proveedores. Registra tu boda, recibe ofertas y muy pronto encuentra servicios directos en Once Store.">
 <meta name="theme-color" content="#F2F2F7">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_CL">
 <meta property="og:site_name" content="Once">
 <meta property="og:title" content="Once — Bodas y proveedores en un solo lugar">
-<meta property="og:description" content="Registra tu boda, recibe ofertas de proveedores y encuentra servicios directos en Once Store.">
+<meta property="og:description" content="Registra tu boda, recibe ofertas de proveedores y muy pronto encuentra servicios directos en Once Store.">
 <meta property="og:url" content="https://www.oncezz.com/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23007AFF'/%3E%3Ccircle cx='32' cy='32' r='13' fill='none' stroke='white' stroke-width='6.5'/%3E%3C/svg%3E">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -664,6 +664,21 @@
   .mb-card .status{ min-height:1.3em; }
   @media (max-width:640px){ .mb-credits li{ flex-direction:column; gap:1px; } .md-credits li{ flex-direction:column; gap:1px; } .md-cat, .mb-credits .cat{ flex:none; } }
 
+  /* ---------- Once Store: "Próximamente" (interruptor STORE_COMING_SOON en el script) ---------- */
+  .when-live{ display:none; }
+  .store-live .when-live{ display:revert; }
+  .store-live .when-soon{ display:none !important; }
+  .soon-pill{ display:inline-block; margin-left:7px; padding:2px 8px; border-radius:999px; font-family:var(--font-body); font-size:10.5px; font-weight:700; letter-spacing:.03em; line-height:1.5; vertical-align:middle; color:var(--rose-deep); background:rgba(0,122,255,0.12); }
+  .store-soon-banner{ display:flex; gap:14px; align-items:flex-start; padding:18px 20px; margin-bottom:18px; border-radius:16px; background:linear-gradient(135deg, rgba(0,122,255,0.08), rgba(176,141,87,0.13)); box-shadow: inset 0 0 0 1px rgba(176,141,87,0.22); }
+  .store-soon-ico{ flex-shrink:0; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:var(--white); color:var(--rose-deep); box-shadow:var(--shadow-sm); }
+  .store-soon-banner h3{ font-size:20px; margin-bottom:3px; }
+  .store-soon-banner p{ font-size:14px; line-height:1.55; color:var(--ink-soft); }
+  .store-soon-row{ display:flex; align-items:center; flex-wrap:wrap; gap:8px 12px; margin-top:2px; }
+  .soon-badge{ display:inline-flex; align-items:center; gap:6px; padding:6px 13px; border-radius:999px; font-size:13px; font-weight:700; color:var(--rose-deep); background:rgba(0,122,255,0.1); }
+  .soon-badge::before{ content:''; width:6px; height:6px; border-radius:50%; background:currentColor; animation: soonPulse 2s ease-in-out infinite; }
+  .soon-note{ font-size:13px; color:var(--ink-soft); }
+  @keyframes soonPulse{ 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:.35; transform:scale(.7); } }
+
   @media (prefers-reduced-motion: reduce){
     html{ scroll-behavior:auto; }
     *, *::before, *::after{ animation-duration:.01ms !important; animation-delay:0s !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
@@ -726,8 +741,8 @@
         </article>
         <article class="about-card reveal" style="--d:180ms;">
           <span class="about-num">03</span>
-          <h3>Once Store</h3>
-          <p>Servicios que ofrecemos directamente desde Once: productos digitales, asesorías 1:1 y productos para tu boda. Disponible para las parejas con cuenta.</p>
+          <h3>Once Store<span class="soon-pill when-soon">Próximamente</span></h3>
+          <p><span class="when-soon">Estamos preparando servicios que ofreceremos directamente desde Once: productos digitales, asesorías 1:1 y productos para tu boda. Muy pronto, para las parejas con cuenta.</span><span class="when-live">Servicios que ofrecemos directamente desde Once: productos digitales, asesorías 1:1 y productos para tu boda. Disponible para las parejas con cuenta.</span></p>
         </article>
       </div>
 
@@ -801,7 +816,7 @@
     <div class="session-row">
       <div style="display:flex; align-items:center; gap:12px;">
         <div class="brand">Once</div>
-        <button class="btn btn-ghost" id="storeBtn" style="display:none; padding:6px 12px; font-size:13px;">🛍️ Once Store</button>
+        <button class="btn btn-ghost" id="storeBtn" style="display:none; padding:6px 12px; font-size:13px;">🛍️ Once Store<span class="soon-pill when-soon">Pronto</span></button>
       </div>
       <button class="logout-btn" id="logoutBtn">Cerrar sesión<span class="session-email"> (<span id="sessionEmail"></span>)</span></button>
     </div>
@@ -986,7 +1001,7 @@
         <button class="btn btn-ghost" id="closeStoreBtn" style="position:absolute; top:20px; right:20px; padding:6px 12px; background:rgba(255,255,255,0.12); border-color:rgba(255,255,255,0.35); color:var(--white);">Cerrar</button>
         <div>
           <h2 style="font-size:36px; color:var(--white); font-weight:500; letter-spacing:-0.025em;">Once Store</h2>
-          <p style="color:rgba(255,255,255,0.86); font-size:14.5px; margin-top:4px;">Servicios que ofrecemos directamente desde Once para tu boda.</p>
+          <p style="color:rgba(255,255,255,0.86); font-size:14.5px; margin-top:4px;"><span class="when-soon">Estamos preparando servicios de Once para tu boda.</span><span class="when-live">Servicios que ofrecemos directamente desde Once para tu boda.</span></p>
         </div>
       </div>
 
@@ -1006,7 +1021,7 @@
           </button>
         </div>
         <div id="store-items-list"></div>
-        <p class="legal-note">Al pagar aceptas los <a href="#terminos" data-legal="terminos">Términos del servicio</a> y la <a href="#reembolso" data-legal="reembolso">Política de reembolso</a>.</p>
+        <p class="legal-note when-live">Al pagar aceptas los <a href="#terminos" data-legal="terminos">Términos del servicio</a> y la <a href="#reembolso" data-legal="reembolso">Política de reembolso</a>.</p>
       </div>
 
     </div>
@@ -1401,6 +1416,12 @@
   });
   if(LEGAL_PAGES[location.hash.replace('#','')]) openLegal(location.hash.replace('#',''));
 
+
+  // ---------- Once Store ----------
+  // true  → el Store muestra "Próximamente" (sin precios ni compra ni solicitudes)
+  // false → el Store vuelve a mostrar los precios y los botones de pago
+  const STORE_COMING_SOON = true;
+  document.documentElement.classList.toggle('store-live', !STORE_COMING_SOON);
 
   // ---------- conexión a Supabase ----------
   // 1. Ve a tu proyecto en supabase.com → Project Settings → API
@@ -3076,11 +3097,11 @@ const OnceStory = (function(){
   // ---------- registrar pareja ----------
   // Precarga PayPal apenas el usuario muestra intención de abrir la tienda
   ['pointerenter', 'touchstart', 'focus'].forEach(evt =>
-    document.getElementById('storeBtn').addEventListener(evt, ()=>{ loadPaypalSdk().catch(()=>{}); }, { once: true, passive: true })
+    document.getElementById('storeBtn').addEventListener(evt, ()=>{ if(!STORE_COMING_SOON) loadPaypalSdk().catch(()=>{}); }, { once: true, passive: true })
   );
   document.getElementById('storeBtn').addEventListener('click', ()=>{
     document.getElementById('storeOverlay').style.display = 'block';
-    loadPaypalSdk().catch(()=>{});
+    if(!STORE_COMING_SOON) loadPaypalSdk().catch(()=>{});
     loadStoreItems();
   });
   document.getElementById('closeStoreBtn').addEventListener('click', ()=>{
@@ -3181,15 +3202,18 @@ const OnceStory = (function(){
     }).render('#' + containerId);
   }
 
+  const STORE_SOON_BANNER = '<div class="store-soon-banner"><span class="store-soon-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8L12 3z"/><path d="M18.5 15.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8.8-2z"/></svg></span><div><h3>Estamos preparando algo para ti</h3><p>Los servicios de Once Store están en camino: productos digitales, asesorías y productos para tu boda. Los precios y la compra estarán disponibles muy pronto.</p></div></div>';
+
   async function loadStoreItems(){
     const listEl = document.getElementById('store-items-list');
     listEl.innerHTML = '<p class="loading">Cargando servicios...</p>';
     try{
       const { data: items, error } = await sb.from('store_items').select('*').eq('tipo', currentStoreTipo).order('creado', { ascending: true });
       if(error) throw error;
-      listEl.innerHTML = '';
+      listEl.innerHTML = STORE_COMING_SOON ? STORE_SOON_BANNER : '';
       if(!items || items.length === 0){
-        listEl.innerHTML = '<p class="empty">Todavía no hay servicios publicados en esta categoría.</p>';
+        if(STORE_COMING_SOON) listEl.insertAdjacentHTML('beforeend', '<p class="empty">Próximamente: estamos preparando servicios de Once en esta categoría.</p>');
+        else listEl.innerHTML = '<p class="empty">Todavía no hay servicios publicados en esta categoría.</p>';
         return;
       }
       items.forEach(item=>{
@@ -3200,6 +3224,17 @@ const OnceStory = (function(){
           : item.tipo === 'asesoria'
           ? '<svg width="20" height="20" viewBox="0 0 16 16" fill="none"><path d="M1.5 3.5H14.5V11H6L2.5 13.5V11H1.5V3.5Z" stroke="#007AFF" stroke-width="1.3" stroke-linejoin="round"/></svg>'
           : '<svg width="20" height="20" viewBox="0 0 16 16" fill="none"><path d="M3 5.5H13L12.3 14H3.7L3 5.5Z" stroke="#007AFF" stroke-width="1.3" stroke-linejoin="round"/><path d="M5.5 5.5V4A2.5 2.5 0 0 1 10.5 4V5.5" stroke="#007AFF" stroke-width="1.3"/></svg>';
+        if(STORE_COMING_SOON){
+          div.innerHTML = `
+            <div class="store-item-icon">${iconSvg}</div>
+            <div style="flex:1;">
+              <h3 style="font-size:20px; margin-bottom:4px;">${escapeHtml(item.titulo)}</h3>
+              <p style="font-size:14px; color:var(--ink-soft); margin-bottom:12px; line-height:1.5;">${escapeHtml(item.descripcion)}</p>
+              <div class="store-soon-row"><span class="soon-badge">Próximamente</span><span class="soon-note">Estamos trabajando en este servicio.</span></div>
+            </div>`;
+          listEl.appendChild(div);
+          return;
+        }
         const payBlockId = `paypal-btn-${item.id}`;
         div.innerHTML = `
           <div class="store-item-icon">${iconSvg}</div>
