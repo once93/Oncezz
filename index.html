@@ -1202,7 +1202,7 @@
     <a href="#terminos" data-legal="terminos">Términos del servicio</a>
     <a href="#cancelaciones" data-legal="cancelaciones">Cancelaciones</a>
   </div>
-  <p>© 2026 Once · oncezz.com</p>
+  <p>© 2026 Once SpA · oncezz.com</p>
 </footer>
 
 <button class="up-fab" id="upFab" type="button" aria-label="Ver próximas bodas" aria-haspopup="dialog">
@@ -1398,7 +1398,9 @@
 <script>
   // ---------- páginas legales ----------
   const LEGAL_EMAIL = 'briansolisv@icloud.com';
-  const LEGAL_DATE = '14 de octubre de 2026';
+  const LEGAL_DATE = '30 de octubre de 2026';
+  const LEGAL_COMPANY = 'Once SpA';
+  const LEGAL_RUT = '78.541.398-9';
   const LEGAL_PAGES = {
     terminos: {
       title: 'Términos del servicio',
@@ -1407,6 +1409,7 @@
 <p>Estos Términos del servicio regulan el uso del sitio oncezz.com y de la plataforma Once (en adelante, «Once» o «nosotros»). Al crear una cuenta, navegar el sitio o comprar en Once Store, el usuario declara haberlos leído y aceptarlos. Si no está de acuerdo, no debe usar la plataforma.</p>
 
 <h3>1. Qué es Once</h3>
+<p>Once (oncezz.com) es operada por {{EMPRESA}}, RUT {{RUT}}.</p>
 <p>Once es una plataforma en línea donde las parejas que preparan su matrimonio registran su boda y los proveedores de servicios para bodas (fotografía, banquetería, música, lugares, decoración y otros) pueden conocer esos perfiles y enviarles ofertas. Además, Once ofrece «Once Store», un catálogo de productos digitales, asesorías y servicios que Once vende directamente.</p>
 <p>Once no es una agencia de bodas, no organiza eventos y no es parte de los acuerdos que las parejas y los proveedores celebren entre sí.</p>
 
@@ -1465,7 +1468,7 @@
 <p>Estos términos se rigen por las leyes de la República de Chile. Ante cualquier diferencia, las partes intentarán resolverla primero de buena fe escribiendo a {{EMAIL}}. Esto no afecta el derecho del consumidor de acudir a los organismos y tribunales que la ley de su país de residencia le reconozca.</p>
 
 <h3>16. Contacto</h3>
-<p>Consultas sobre estos términos: {{EMAIL}}.</p>`
+<p>{{EMPRESA}}, RUT {{RUT}}.<br>Consultas sobre estos términos: {{EMAIL}}.</p>`
     },
 
     privacidad: {
@@ -1475,7 +1478,7 @@
 <p>En Once (oncezz.com) cuidamos los datos personales de parejas, proveedores y visitantes. Esta política explica qué datos recopilamos, para qué los usamos, con quién los compartimos y cuáles son tus derechos.</p>
 
 <h3>1. Responsable y contacto</h3>
-<p>El responsable del tratamiento de los datos es Once. Para consultas o para ejercer tus derechos escribe a {{EMAIL}}.</p>
+<p>El responsable del tratamiento de los datos es {{EMPRESA}}, RUT {{RUT}} (en adelante, «Once»). Para consultas o para ejercer tus derechos escribe a {{EMAIL}}.</p>
 
 <h3>2. Datos que recopilamos</h3>
 <ul>
@@ -1646,7 +1649,7 @@
     const page = LEGAL_PAGES[key];
     if(!page) return;
     legalTitleEl.textContent = page.title;
-    legalBodyEl.innerHTML = page.html.split('{{EMAIL}}').join(LEGAL_EMAIL).split('{{FECHA}}').join(LEGAL_DATE);
+    legalBodyEl.innerHTML = page.html.split('{{EMAIL}}').join(LEGAL_EMAIL).split('{{FECHA}}').join(LEGAL_DATE).split('{{EMPRESA}}').join(LEGAL_COMPANY).split('{{RUT}}').join(LEGAL_RUT);
     legalOverlay.style.display = 'block';
     legalOverlay.scrollTop = 0;
     document.body.style.overflow = 'hidden';
