@@ -242,6 +242,39 @@
   .offer-form{ display:none; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--paper-deep); }
   .offer-form.open{ display:block; }
 
+  /* tipo de proveedor (formal / emprendedor independiente) */
+  .tp-group{ border:0; padding:0; margin:0; min-width:0; }
+  .tp-group legend{ font-size:13px; color:var(--ink-soft); margin-bottom:6px; padding:0; }
+  .tp-group legend .tp-req{ color:#FF3B30; font-weight:600; }
+  .tp-opts{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .field label.tp-opt{ position:relative; display:block; margin:0; font-size:inherit; color:inherit; cursor:pointer; }
+  .tp-opt input.tp-radio{ position:absolute; inset:0; width:100%; height:100%; margin:0; padding:0; opacity:0; cursor:pointer; }
+  .tp-box{ display:flex; flex-direction:column; gap:2px; height:100%; padding:11px 14px; border-radius:12px; background:var(--paper); box-shadow:inset 0 0 0 2px transparent; transition:box-shadow .2s var(--ease), background-color .2s var(--ease); }
+  .tp-t{ font-size:14.5px; font-weight:600; color:var(--ink); }
+  .tp-s{ font-size:12.5px; color:var(--ink-soft); line-height:1.35; }
+  .tp-opt input.tp-radio:checked + .tp-box{ background:var(--white); box-shadow:inset 0 0 0 2px var(--rose-deep); }
+  .tp-opt input.tp-radio:focus-visible + .tp-box{ box-shadow:inset 0 0 0 2px var(--rose-deep), 0 0 0 4px rgba(0,122,255,0.18); }
+  .tp-group.tp-error .tp-box{ box-shadow:inset 0 0 0 2px #FF3B30; }
+  .tp-extra{ display:none; margin-top:12px; }
+  .tp-extra.show{ display:block; }
+  .tp-hint{ font-weight:400; color:var(--ink-soft); }
+  .tp-note{ font-size:12px; color:var(--ink-soft); margin-top:8px; }
+  .tp-err{ font-size:12.5px; color:#FF3B30; margin-top:6px; }
+  .tp-err:empty{ display:none; }
+  @media (max-width:480px){ .tp-opts{ grid-template-columns:1fr; } }
+  .vt-line{ display:flex; flex-wrap:wrap; align-items:center; gap:4px 8px; margin:2px 0 6px; font-size:12.5px; }
+  .vt-badge{ display:inline-block; font-size:11.5px; font-weight:600; border-radius:20px; padding:2px 9px; }
+  .vt-formal{ color:var(--rose-deep); background:rgba(0,122,255,0.10); }
+  .vt-indep{ color:#5856D6; background:rgba(88,86,214,0.10); }
+  .vt-decl{ color:var(--ink-soft); font-size:11.5px; }
+  .vt-link{ color:var(--rose-deep); text-decoration:none; word-break:break-all; }
+  .vt-link:hover{ text-decoration:underline; }
+  .vt-social{ color:var(--ink); word-break:break-word; }
+  /* corrección: en el formulario de oferta, los campos de precio y fotos hacían la página más ancha que el celular
+     (y a 320px los cuadros se salían de la tarjeta). Los campos ahora pueden encogerse hasta el ancho disponible. */
+  .offer-form .field{ min-width:0; }
+  .offer-form .field input:not(.tp-radio), .offer-form .field select, .offer-form .field textarea{ min-width:0; max-width:100%; box-sizing:border-box; }
+
   .offer-item{
     border-left: 3px solid var(--rose-deep);
     border-radius: 0 12px 12px 0;
@@ -1426,6 +1459,7 @@
 
 <h3>4. Proveedores</h3>
 <p>El proveedor se compromete a que sus ofertas sean veraces, a contar con los derechos y autorizaciones necesarios para prestar los servicios y para usar las fotografías que adjunta, y a cumplir lo que ofrece. Una oferta puede editarse mientras esté pendiente; una vez aceptada o rechazada queda cerrada. Está prohibido enviar ofertas masivas sin relación con el perfil de la pareja o con fines de spam.</p>
+<p>Al enviar una oferta, el proveedor debe indicar si actúa como proveedor formal (con inicio de actividades) o como emprendedor independiente, y puede agregar su página web (proveedor formal) o sus redes sociales (emprendedor independiente). Esa información la declara el propio proveedor, se muestra a la pareja que recibe la oferta y Once no la verifica: la pareja debe comprobarla por su cuenta antes de contratar. Declarar un tipo de proveedor que no corresponde infringe estos términos.</p>
 
 <h3>5. Acuerdos entre parejas y proveedores</h3>
 <p>Cuando una pareja acepta una oferta se genera un acuerdo directo entre ella y el proveedor. Las condiciones, pagos, plazos, cancelaciones y garantías se pactan entre ellos, fuera de Once. Once no interviene en esos acuerdos, no garantiza la calidad, el cumplimiento ni la idoneidad de los servicios y no responde por los incumplimientos de ninguna de las partes. Recomendamos formalizar todo acuerdo por escrito (contrato o cotización firmada) y verificar referencias antes de pagar anticipos. Una vez aceptada la oferta, la pareja y el proveedor pueden coordinarse por el chat de Once. Once no revisa las conversaciones de forma rutinaria, pero puede revisar una conversación que sea reportada y suspender las cuentas que incumplan estos términos. Nunca compartas claves ni datos de tu tarjeta por el chat.</p>
@@ -1484,7 +1518,7 @@
 <ul>
 <li><strong>Cuenta:</strong> correo electrónico, contraseña (almacenada de forma cifrada por nuestro proveedor de autenticación) y rol (pareja o proveedor).</li>
 <li><strong>Perfil de pareja:</strong> nombres, fecha de la boda, comuna y país, categorías de servicio que necesitan, presupuesto estimado y foto de perfil.</li>
-<li><strong>Perfil de proveedor:</strong> datos de contacto, ofertas enviadas (descripción, precio, mensaje) y hasta 3 fotografías por oferta.</li>
+<li><strong>Perfil de proveedor:</strong> datos de contacto, el tipo de proveedor que declaras (formal o emprendedor independiente), tu página web o tus redes sociales si decides agregarlas, ofertas enviadas (descripción, precio, mensaje) y hasta 3 fotografías por oferta. La pareja que recibe tu oferta ve el tipo, la página web y las redes sociales.</li>
 <li><strong>Reseñas:</strong> calificaciones y comentarios entre parejas y proveedores.</li>
 <li><strong>Chat:</strong> los mensajes de texto que se escriben la pareja y el proveedor cuando la pareja acepta una oferta.</li>
 <li><strong>Once Store:</strong> servicio solicitado o comprado, mensaje opcional, correo, monto pagado, fecha y número de orden de PayPal.</li>
@@ -4268,9 +4302,9 @@ const OnceStory = (function(){
           const wantBtn = div.querySelector('.want-item-btn');
           const wantForm = div.querySelector('.want-item-form');
           wantBtn.addEventListener('click', ()=> wantForm.classList.toggle('open'));
-          div.querySelector('.confirm-want-btn').addEventListener('click', async ()=>{
-            const btn = div.querySelector('.confirm-want-btn');
-            const statusEl = div.querySelector('.want-status');
+          const btn = div.querySelector('.confirm-want-btn');
+          const statusEl = div.querySelector('.want-status');
+          btn.addEventListener('click', async ()=>{
             btn.disabled = true;
             statusEl.textContent = 'Enviando...';
             statusEl.className = 'status';
@@ -4412,6 +4446,7 @@ const OnceStory = (function(){
           <div class="who">${escapeHtml(o.proveedor_nombre)} — ${escapeHtml(o.categoria)}
             <span style="font-size:11px; color:${badgeColor}; border:1px solid ${badgeColor}; border-radius:20px; padding:1px 8px; margin-left:6px;">${escapeHtml(o.estado)}</span>
           </div>
+          ${vendorTypeHtml(o)}
           <div class="meta">${o.precio ? '$' + Number(o.precio).toLocaleString('en-US') + ' USD · ' : ''}${escapeHtml(o.contacto)}</div>
           <div class="msg">${escapeHtml(o.mensaje)}</div>
           ${fotosHtml(o)}
@@ -4500,6 +4535,7 @@ const OnceStory = (function(){
         div.style.borderLeftColor = 'var(--sage)';
         div.innerHTML = `
           <div class="who">${escapeHtml(o.proveedor_nombre)} — ${escapeHtml(o.categoria)}</div>
+          ${vendorTypeHtml(o)}
           <div class="meta">${o.precio ? '$' + Number(o.precio).toLocaleString('en-US') + ' USD · ' : ''}${escapeHtml(o.contacto)}</div>
           <div class="msg">${escapeHtml(o.mensaje)}</div>
           ${fotosHtml(o)}
@@ -4548,6 +4584,7 @@ const OnceStory = (function(){
             <span style="font-size:11px; color:${badgeColor}; border:1px solid ${badgeColor}; border-radius:20px; padding:1px 8px; margin-left:6px;">${escapeHtml(o.estado)}</span>
           </div>
           <div class="meta">${o.couples ? escapeHtml(o.couples.comuna) + ' · ' : ''}${o.precio ? '$' + Number(o.precio).toLocaleString('en-US') + ' USD' : ''}</div>
+          ${vendorTypeHtml(o, true)}
           <div class="msg view-msg">${escapeHtml(o.mensaje)}</div>
           ${fotosHtml(o)}
           ${o.estado === 'aceptada' ? '<div class="ch-actions">' + Chat.buttonHtml(o.id, 'Chat con la pareja') + '</div>' : ''}
@@ -4555,7 +4592,7 @@ const OnceStory = (function(){
           <div style="margin-top:10px;">
             <button class="btn btn-ghost edit-offer-btn" style="padding:8px 14px; font-size:13.5px;">Editar</button>
           </div>
-          <div class="offer-form edit-offer-form">
+          <div class="offer-form edit-offer-form">${vendorTypeFieldsHtml('e' + o.id, o)}
             <div class="field-row">
               <div class="field"><label>Tu correo o teléfono</label><input type="text" class="edit-contacto" value="${escapeHtml(o.contacto || '')}"></div>
               <div class="field"><label>Precio referencial (USD)</label><input type="number" class="edit-precio" value="${o.precio || ''}"></div>
@@ -4586,15 +4623,25 @@ const OnceStory = (function(){
         const editBtn = div.querySelector('.edit-offer-btn');
         const editForm = div.querySelector('.edit-offer-form');
         if(editBtn){
+          wireVendorType(editForm.querySelector('.tp-wrap'));
           editBtn.addEventListener('click', ()=> editForm.classList.toggle('open'));
-          div.querySelector('.save-offer-btn').addEventListener('click', async ()=>{
           const saveBtn = div.querySelector('.save-offer-btn');
           const statusEl2 = div.querySelector('.edit-offer-status');
+          saveBtn.addEventListener('click', async ()=>{
+          const tpE = editForm.querySelector('.tp-wrap');
+          const vtE = readVendorType(tpE);
+          if(!vtE.ok){
+            showVendorTypeError(tpE, vtE);
+            statusEl2.textContent = vtE.msg;
+            statusEl2.className = 'status error';
+            return;
+          }
           saveBtn.disabled = true;
           statusEl2.textContent = 'Guardando...';
           statusEl2.className = 'status';
           try{
             const updated = {
+              ...vtE.data,
               contacto: div.querySelector('.edit-contacto').value.trim(),
               precio: div.querySelector('.edit-precio').value || null,
               mensaje: div.querySelector('.edit-mensaje').value.trim()
@@ -4607,7 +4654,7 @@ const OnceStory = (function(){
             if(error) throw error;
             loadSentOffers();
           }catch(err){
-            statusEl2.textContent = 'No se pudo guardar. Intenta de nuevo.';
+            statusEl2.textContent = offerErrorMsg(err, 'guardar');
             statusEl2.className = 'status error';
             saveBtn.disabled = false;
           }
@@ -4637,6 +4684,7 @@ const OnceStory = (function(){
   async function loadCouples(){
     const listEl = document.getElementById('couples-list');
     listEl.innerHTML = '<p class="loading">Cargando perfiles...</p>';
+    if(currentUser && !vendorTypePrefP) loadVendorTypePref();
     try{
       const comunaFilter = document.getElementById('f-comuna').value.trim();
       const paisFilter = document.getElementById('f-pais').value;
@@ -4673,7 +4721,7 @@ const OnceStory = (function(){
             <div class="field-row">
               <div class="field"><label>Tu nombre / empresa</label><input type="text" class="of-nombre"></div>
               <div class="field"><label>Tu correo o teléfono</label><input type="text" class="of-contacto"></div>
-            </div>
+            </div>${vendorTypeFieldsHtml('s' + c.id, null)}
             <div class="field-row">
               <div class="field full">
                 <label>¿Para qué categoría es tu oferta?</label>
@@ -4695,12 +4743,15 @@ const OnceStory = (function(){
         `;
         const openBtn = card.querySelector('.open-offer-btn');
         const form = card.querySelector('.offer-form');
-        openBtn.addEventListener('click', ()=>{
+        const tpWrap = card.querySelector('.tp-wrap');
+        wireVendorType(tpWrap);
+        openBtn.addEventListener('click', async ()=>{
           form.classList.toggle('open');
+          if(form.classList.contains('open')) await applyVendorTypePref(tpWrap);
         });
-        card.querySelector('.send-offer-btn').addEventListener('click', async ()=>{
-          const statusEl = card.querySelector('.offer-status');
-          const sendBtn = card.querySelector('.send-offer-btn');
+        const statusEl = card.querySelector('.offer-status');
+        const sendBtn = card.querySelector('.send-offer-btn');
+        sendBtn.addEventListener('click', async ()=>{
           const offer = {
             couple_id: c.id,
             proveedor_nombre: card.querySelector('.of-nombre').value.trim(),
@@ -4711,8 +4762,11 @@ const OnceStory = (function(){
             vendor_user_id: currentUser.id,
             vendor_email: currentUser.email
           };
-          if(!offer.proveedor_nombre || !offer.mensaje){
-            statusEl.textContent = 'Completa al menos tu nombre y un mensaje.';
+          const vt = readVendorType(tpWrap);
+          const faltaBasico = !offer.proveedor_nombre || !offer.mensaje;
+          if(faltaBasico || !vt.ok){
+            if(!vt.ok) showVendorTypeError(tpWrap, vt);
+            statusEl.textContent = (faltaBasico && !vt.ok) ? 'Completa tu nombre y un mensaje, y elige el tipo de proveedor.' : (faltaBasico ? 'Completa al menos tu nombre y un mensaje.' : vt.msg);
             statusEl.className = 'status error';
             return;
           }
@@ -4722,12 +4776,13 @@ const OnceStory = (function(){
           try{
             const files = Array.from(card.querySelector('.of-fotos').files).slice(0, 3);
             const fotos = (await Promise.all(files.map(f => uploadImage(f)))).filter(Boolean);
-            const { error } = await sb.from('offers').insert([{ ...offer, fotos }]);
+            const { error } = await sb.from('offers').insert([{ ...offer, ...vt.data, fotos }]);
             if(error) throw error;
             statusEl.textContent = 'Oferta enviada.';
             statusEl.className = 'status ok';
+            vendorTypePref = vt.data; vendorTypePrefP = Promise.resolve();
           }catch(err){
-            statusEl.textContent = 'No se pudo enviar. Intenta de nuevo.';
+            statusEl.textContent = offerErrorMsg(err, 'enviar');
             statusEl.className = 'status error';
           }finally{
             sendBtn.disabled = false;
@@ -4764,8 +4819,8 @@ const OnceStory = (function(){
     picker.querySelectorAll('span').forEach(s=>{
       s.addEventListener('click', ()=>{ selected = Number(s.dataset.i); render(); });
     });
+    const statusEl = el.querySelector('.star-status');
     el.querySelector('.star-submit-btn').addEventListener('click', async ()=>{
-      const statusEl = el.querySelector('.star-status');
       if(selected === 0){
         statusEl.textContent = 'Elige de 1 a 5 estrellas.';
         statusEl.className = 'status error';
@@ -4776,6 +4831,163 @@ const OnceStory = (function(){
       statusEl.className = 'status';
       await onSubmit(selected, comentario, statusEl);
     });
+  }
+
+  // ---------- tipo de proveedor: formal / emprendedor independiente ----------
+  // Es un dato DECLARADO por el proveedor; Once no lo verifica (y así se le dice a la pareja).
+  const TIPOS_PROVEEDOR = {
+    formal: { label: 'Proveedor formal', sub: 'Con inicio de actividades en el SII' },
+    independiente: { label: 'Emprendedor independiente', sub: 'Persona natural con su propio emprendimiento' }
+  };
+  const SITIO_WEB_MAX = 300, REDES_MAX = 300;
+  let vendorTypePref = null, vendorTypePrefP = null;
+
+  // Devuelve { ok:true, value:null|'https://...' } o { ok:false }. Solo acepta http/https con dominio (algo.ext).
+  function parseWebUrl(raw){
+    let t = String(raw == null ? '' : raw).trim();
+    if(!t) return { ok:true, value:null };
+    if(/\s/.test(t) || t.length > SITIO_WEB_MAX) return { ok:false };
+    if(!/^https?:\/\//i.test(t)){
+      // cualquier otro esquema (javascript:, data:, ftp:, mailto:…) se rechaza; "dominio.cl:8080" sí vale
+      if(/^[a-z][a-z0-9+.\-]*:(?!\d)/i.test(t) || t.indexOf('//') === 0) return { ok:false };
+      t = 'https://' + t;
+    }
+    let u;
+    try{ u = new URL(t); }catch(e){ return { ok:false }; }
+    if((u.protocol !== 'http:' && u.protocol !== 'https:') || u.username || u.password) return { ok:false };
+    if(!/^[^.]+(\.[^.]+)+$/.test(u.hostname)) return { ok:false };
+    let href = u.href;
+    if(u.pathname === '/' && !u.search && !u.hash) href = href.replace(/\/$/, '');
+    if(href.length > SITIO_WEB_MAX || /["'<>\s]/.test(href)) return { ok:false };
+    return { ok:true, value:href };
+  }
+  function safeWebHref(raw){ const r = parseWebUrl(raw); return (r.ok && r.value) ? r.value : ''; }
+  function webLabel(href){
+    try{
+      const u = new URL(href);
+      const path = (u.pathname && u.pathname !== '/') ? u.pathname.replace(/\/$/, '') : '';
+      const t = u.hostname.replace(/^www\./i, '') + path;
+      return t.length > 40 ? t.slice(0, 39) + '…' : t;
+    }catch(e){ return href; }
+  }
+  function cleanSocials(v){ return String(v == null ? '' : v).replace(/[\u0000-\u001f\u007f]+/g, ' ').replace(/\s+/g, ' ').trim(); }
+
+  // Redes sociales: texto libre; solo las direcciones http(s) y las de redes conocidas se vuelven enlace.
+  const SOCIAL_HOSTS = /^(?:www\.)?(?:instagram\.com|facebook\.com|fb\.com|tiktok\.com|linkedin\.com|youtube\.com|youtu\.be|x\.com|twitter\.com|wa\.me)\/\S+$/i;
+  function socialsHtml(text){
+    return String(text || '').split(/(\s+)/).map(tok=>{
+      const m = tok.match(/^(.*?)([.,;:!)\]]*)$/);
+      const core = m ? m[1] : tok, trail = m ? m[2] : '';
+      if(core && (/^https?:\/\/\S+$/i.test(core) || SOCIAL_HOSTS.test(core))){
+        const href = safeWebHref(core);
+        if(href) return `<a class="vt-link" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer nofollow">${escapeHtml(webLabel(href))}</a>${escapeHtml(trail)}`;
+      }
+      return escapeHtml(tok);
+    }).join('');
+  }
+
+  // Insignia + web/redes que ve la pareja (own=true: lo ve el propio proveedor).
+  function vendorTypeHtml(o, own){
+    const t = o && o.tipo_proveedor;
+    if(t !== 'formal' && t !== 'independiente') return '';
+    let extra = '';
+    if(t === 'formal' && o.sitio_web){
+      const href = safeWebHref(o.sitio_web);
+      if(href) extra = `<a class="vt-link" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer nofollow">🌐 ${escapeHtml(webLabel(href))}</a>`;
+    }
+    if(t === 'independiente' && o.redes_sociales){
+      extra = `<span class="vt-social">${socialsHtml(o.redes_sociales)}</span>`;
+    }
+    return `<div class="vt-line"><span class="vt-badge ${t === 'formal' ? 'vt-formal' : 'vt-indep'}">${TIPOS_PROVEEDOR[t].label}</span>${extra}<span class="vt-decl">${own ? 'Así lo ve la pareja · lo declaras tú' : 'Declarado por el proveedor, no verificado por Once'}</span></div>`;
+  }
+
+  // Bloque del formulario (envío y edición). cur: { tipo_proveedor, sitio_web, redes_sociales } o null.
+  function vendorTypeFieldsHtml(uid, cur){
+    cur = cur || {};
+    const opt = v => `<label class="tp-opt"><input type="radio" class="tp-radio" name="tp-${escapeHtml(uid)}" value="${v}"${cur.tipo_proveedor === v ? ' checked' : ''}><span class="tp-box"><span class="tp-t">${TIPOS_PROVEEDOR[v].label}</span><span class="tp-s">${TIPOS_PROVEEDOR[v].sub}</span></span></label>`;
+    return `
+            <div class="field-row">
+              <div class="field full tp-wrap">
+                <fieldset class="tp-group">
+                  <legend>Tipo de proveedor <span class="tp-req" aria-hidden="true">*</span></legend>
+                  <div class="tp-opts">${opt('formal')}${opt('independiente')}</div>
+                </fieldset>
+                <div class="tp-extra tp-extra-formal${cur.tipo_proveedor === 'formal' ? ' show' : ''}">
+                  <div class="field"><label>Página web <span class="tp-hint">(opcional)</span></label><input type="text" class="tp-web" inputmode="url" autocapitalize="none" autocomplete="off" spellcheck="false" maxlength="${SITIO_WEB_MAX}" placeholder="www.tuempresa.cl" value="${escapeHtml(cur.tipo_proveedor === 'formal' ? (cur.sitio_web || '') : '')}"></div>
+                </div>
+                <div class="tp-extra tp-extra-indep${cur.tipo_proveedor === 'independiente' ? ' show' : ''}">
+                  <div class="field"><label>Tus redes sociales <span class="tp-hint">(opcional)</span></label><input type="text" class="tp-redes" autocomplete="off" maxlength="${REDES_MAX}" placeholder="@tuemprendimiento en Instagram, Facebook…" value="${escapeHtml(cur.tipo_proveedor === 'independiente' ? (cur.redes_sociales || '') : '')}"></div>
+                </div>
+                <p class="tp-note">Lo indicas tú y Once no lo verifica. La pareja verá este dato junto a tu oferta.</p>
+                <p class="tp-err" role="alert"></p>
+              </div>
+            </div>`;
+  }
+  function syncVendorType(wrap){
+    const sel = wrap.querySelector('.tp-radio:checked');
+    wrap.querySelector('.tp-extra-formal').classList.toggle('show', !!sel && sel.value === 'formal');
+    wrap.querySelector('.tp-extra-indep').classList.toggle('show', !!sel && sel.value === 'independiente');
+    wrap.querySelector('.tp-group').classList.remove('tp-error');
+    wrap.querySelector('.tp-err').textContent = '';
+  }
+  function wireVendorType(wrap){
+    if(!wrap) return;
+    wrap.querySelectorAll('.tp-radio').forEach(r => r.addEventListener('change', ()=> syncVendorType(wrap)));
+    wrap.querySelectorAll('.tp-web, .tp-redes').forEach(i => i.addEventListener('input', ()=>{ wrap.querySelector('.tp-err').textContent = ''; }));
+  }
+  // -> { ok:true, data:{ tipo_proveedor, sitio_web, redes_sociales } } | { ok:false, field, msg }
+  function readVendorType(wrap){
+    const sel = wrap && wrap.querySelector('.tp-radio:checked');
+    if(!sel) return { ok:false, field:'tipo', msg:'Elige si eres proveedor formal o emprendedor independiente.' };
+    if(sel.value === 'formal'){
+      const r = parseWebUrl(wrap.querySelector('.tp-web').value);
+      if(!r.ok) return { ok:false, field:'web', msg:'Escribe una dirección web válida, por ejemplo www.tuempresa.cl, o deja el cuadro en blanco.' };
+      return { ok:true, data:{ tipo_proveedor:'formal', sitio_web:r.value, redes_sociales:null } };
+    }
+    if(sel.value === 'independiente'){
+      const t = cleanSocials(wrap.querySelector('.tp-redes').value);
+      if(t.length > REDES_MAX) return { ok:false, field:'redes', msg:'Tus redes sociales son demasiado largas (máximo ' + REDES_MAX + ' caracteres).' };
+      return { ok:true, data:{ tipo_proveedor:'independiente', sitio_web:null, redes_sociales:t || null } };
+    }
+    return { ok:false, field:'tipo', msg:'Elige si eres proveedor formal o emprendedor independiente.' };
+  }
+  function showVendorTypeError(wrap, vt){
+    if(!wrap || !vt) return;
+    if(vt.field === 'tipo') wrap.querySelector('.tp-group').classList.add('tp-error');
+    wrap.querySelector('.tp-err').textContent = vt.msg;
+    const f = vt.field === 'web' ? wrap.querySelector('.tp-web') : (vt.field === 'redes' ? wrap.querySelector('.tp-redes') : wrap.querySelector('.tp-radio'));
+    try{ wrap.scrollIntoView({ block:'center', behavior:'smooth' }); }catch(_e){}
+    try{ if(f) f.focus({ preventScroll:true }); }catch(_e){}
+  }
+  // Recuerda lo que el proveedor declaró la última vez, para no repetirlo en cada oferta.
+  function loadVendorTypePref(){
+    vendorTypePrefP = (async ()=>{
+      try{
+        const { data, error } = await sb.from('offers').select('tipo_proveedor, sitio_web, redes_sociales').eq('vendor_user_id', currentUser.id).not('tipo_proveedor', 'is', null).order('creado', { ascending:false }).limit(1);
+        if(!error && data && data[0] && TIPOS_PROVEEDOR[data[0].tipo_proveedor]) vendorTypePref = data[0];
+      }catch(_e){}
+    })();
+    return vendorTypePrefP;
+  }
+  async function applyVendorTypePref(wrap){
+    if(!wrap || wrap.querySelector('.tp-radio:checked')) return;
+    try{ if(vendorTypePrefP) await vendorTypePrefP; }catch(_e){}
+    const p = vendorTypePref;
+    if(!p || !TIPOS_PROVEEDOR[p.tipo_proveedor] || wrap.querySelector('.tp-radio:checked')) return;
+    const r = wrap.querySelector('.tp-radio[value="' + p.tipo_proveedor + '"]');
+    if(!r) return;
+    r.checked = true;
+    const w = wrap.querySelector('.tp-web'), so = wrap.querySelector('.tp-redes');
+    if(w && !w.value && p.tipo_proveedor === 'formal' && p.sitio_web) w.value = p.sitio_web;
+    if(so && !so.value && p.tipo_proveedor === 'independiente' && p.redes_sociales) so.value = p.redes_sociales;
+    syncVendorType(wrap);
+  }
+  // Mensaje para el proveedor según el error de la base de datos.
+  function offerErrorMsg(err, verbo){
+    const code = err && err.code, m = String((err && err.message) || '');
+    if(code === '23514') return 'No se pudo ' + verbo + ': revisa que tu página web o tus redes sociales tengan un formato válido.';
+    if(code === 'PGRST204' || /tipo_proveedor|sitio_web|redes_sociales/.test(m)) return 'Estamos actualizando Once. Intenta de nuevo en unos minutos.';
+    return 'No se pudo ' + verbo + '. Intenta de nuevo.';
   }
 
   function fotosHtml(o){
