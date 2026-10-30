@@ -724,6 +724,119 @@
   .da-done h3{ font-family:var(--font-body); font-size:19px; font-weight:700; letter-spacing:0; }
   .da-done p{ font-size:14px; line-height:1.5; margin:8px 0 18px; }
 
+  /* ---------- Chat pareja <-> proveedor ---------- */
+  .session-right{ display:flex; align-items:center; gap:14px; }
+  .inbox-btn{ position:relative; appearance:none; -webkit-appearance:none; border:none; width:38px; height:38px; border-radius:50%; display:none; align-items:center; justify-content:center; background:var(--white); color:var(--rose-deep); box-shadow:var(--shadow-sm); cursor:pointer; flex-shrink:0; transition: transform .2s var(--ease); -webkit-tap-highlight-color:transparent; }
+  .inbox-btn.on{ display:inline-flex; }
+  .inbox-btn:active{ transform:scale(.93); }
+  .ch-badge{ display:inline-flex; align-items:center; justify-content:center; min-width:18px; height:18px; padding:0 5px; border-radius:999px; background:#FF3B30; color:#fff; font-family:var(--font-body); font-size:11px; font-weight:700; line-height:1; font-variant-numeric:tabular-nums; }
+  .ch-badge[hidden]{ display:none; }
+  .inbox-btn .ch-badge{ position:absolute; top:-4px; right:-5px; box-shadow:0 0 0 2px var(--paper); }
+  .ch-actions{ margin-top:10px; }
+  .ch-open{ display:inline-flex; align-items:center; gap:8px; padding:9px 16px; font-size:14px; }
+  .ch-open svg{ flex-shrink:0; }
+
+  .ch-overlay{ position:fixed; inset:0; z-index:90; visibility:hidden; pointer-events:none; transition: visibility 0s linear .45s; }
+  .ch-overlay.open{ visibility:visible; pointer-events:auto; transition-delay:0s; }
+  .ch-backdrop{ position:absolute; inset:0; background:rgba(28,28,30,0.45); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); opacity:0; transition: opacity .35s ease; }
+  .ch-overlay.open .ch-backdrop{ opacity:1; }
+  .ch-sheet{ position:absolute; left:0; right:0; top:var(--vv-top, 0px); height:var(--vv-h, 100%); display:flex; flex-direction:column; overflow:hidden; background:var(--paper); transform:translateY(100%); transition: transform .45s var(--ease); }
+  .ch-overlay.open .ch-sheet{ transform:none; }
+  .ch-head{ flex-shrink:0; display:flex; align-items:center; gap:10px; padding:calc(10px + env(safe-area-inset-top)) 10px 10px; background:rgba(242,242,247,0.9); -webkit-backdrop-filter:saturate(180%) blur(16px); backdrop-filter:saturate(180%) blur(16px); border-bottom:1px solid rgba(60,60,67,0.16); }
+  .ch-icon-btn{ appearance:none; -webkit-appearance:none; border:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:none; color:var(--rose-deep); cursor:pointer; flex-shrink:0; -webkit-tap-highlight-color:transparent; }
+  .ch-icon-btn:active{ background:rgba(60,60,67,0.1); }
+  .ch-icon-btn.muted{ color:var(--ink-soft); }
+  .ch-back .ic-x{ display:none; }
+  .ch-avatar{ width:38px; height:38px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg, #64B0FF, #007AFF); color:#fff; font-family:var(--font-body); font-size:16px; font-weight:700; }
+  .ch-title{ flex:1; min-width:0; line-height:1.25; }
+  .ch-title strong{ display:block; font-size:16px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .ch-title span{ display:block; font-size:12.5px; color:var(--ink-soft); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .ch-body{ position:relative; flex:1; min-height:0; display:flex; flex-direction:column; }
+  .ch-list{ flex:1; min-height:0; overflow-y:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch; padding:14px 14px 10px; display:flex; flex-direction:column; }
+  .ch-note{ align-self:center; max-width:30em; text-align:center; font-size:12.5px; line-height:1.45; color:var(--ink-soft); background:rgba(118,118,128,0.1); border-radius:12px; padding:9px 13px; margin:0 0 10px; }
+  .ch-more{ align-self:center; appearance:none; -webkit-appearance:none; border:none; background:none; font-family:var(--font-body); font-size:13.5px; font-weight:600; color:var(--rose-deep); padding:8px 12px; margin-bottom:4px; cursor:pointer; }
+  .ch-day{ align-self:center; font-size:11.5px; font-weight:600; color:var(--ink-soft); margin:14px 0 8px; }
+  .ch-msg{ display:flex; flex-direction:column; max-width:80%; margin-top:2px; }
+  .ch-msg.gap{ margin-top:9px; }
+  .ch-msg.mine{ align-self:flex-end; align-items:flex-end; }
+  .ch-msg.theirs{ align-self:flex-start; align-items:flex-start; }
+  .ch-bubble{ padding:8px 13px; border-radius:19px; font-size:16px; line-height:1.35; white-space:pre-wrap; overflow-wrap:anywhere; word-break:break-word; text-align:left; }
+  .ch-msg.mine .ch-bubble{ background:var(--rose-deep); color:#fff; }
+  .ch-msg.theirs .ch-bubble{ background:var(--white); color:var(--ink); box-shadow:var(--shadow-sm); }
+  .ch-msg.mine.tail .ch-bubble{ border-bottom-right-radius:6px; }
+  .ch-msg.theirs.tail .ch-bubble{ border-bottom-left-radius:6px; }
+  .ch-msg.pending .ch-bubble{ opacity:.55; }
+  .ch-msg.failed .ch-bubble{ background:#FF3B30; }
+  .ch-meta{ font-size:11px; color:var(--ink-soft); margin:3px 5px 0; }
+  .ch-fail{ display:flex; align-items:center; gap:10px; font-size:12px; color:#FF3B30; margin:4px 5px 0; }
+  .ch-fail button{ appearance:none; -webkit-appearance:none; border:none; background:none; font-family:var(--font-body); font-size:12px; font-weight:700; color:var(--rose-deep); padding:2px 0; cursor:pointer; }
+  .ch-empty{ margin:auto; max-width:19em; text-align:center; color:var(--ink-soft); font-size:14.5px; line-height:1.5; padding:24px 8px; }
+  .ch-empty strong{ display:block; font-family:var(--font-display); font-size:21px; font-weight:500; color:var(--ink); margin-bottom:6px; }
+  .ch-new{ position:absolute; left:50%; bottom:10px; transform:translateX(-50%); z-index:3; appearance:none; -webkit-appearance:none; border:none; font-family:var(--font-body); font-size:13px; font-weight:600; color:#fff; background:var(--rose-deep); padding:7px 14px; border-radius:999px; box-shadow:0 4px 14px rgba(0,0,0,0.22); cursor:pointer; }
+  .ch-new[hidden]{ display:none; }
+  .ch-count{ flex-shrink:0; text-align:right; font-size:11.5px; color:var(--ink-soft); padding:4px 18px 0; background:rgba(242,242,247,0.92); }
+  .ch-count.max{ color:#FF3B30; }
+  .ch-count[hidden]{ display:none; }
+  .ch-composer{ flex-shrink:0; display:flex; align-items:flex-end; gap:8px; padding:8px 12px calc(8px + env(safe-area-inset-bottom)); background:rgba(242,242,247,0.92); -webkit-backdrop-filter:saturate(180%) blur(16px); backdrop-filter:saturate(180%) blur(16px); border-top:1px solid rgba(60,60,67,0.16); }
+  .ch-composer[hidden]{ display:none; }
+  .ch-input{ flex:1; min-width:0; resize:none; max-height:120px; font-family:var(--font-body); font-size:16px; line-height:1.35; padding:9px 14px; border:none; border-radius:20px; background:var(--white); color:var(--ink); box-shadow: inset 0 0 0 1px rgba(60,60,67,0.2); }
+  .ch-input::placeholder{ color:rgba(60,60,67,0.45); }
+  .ch-input:focus{ outline:none; box-shadow: inset 0 0 0 1.5px var(--rose-deep); }
+  .ch-send{ appearance:none; -webkit-appearance:none; border:none; flex-shrink:0; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:var(--rose-deep); color:#fff; cursor:pointer; transition: opacity .2s ease, transform .2s var(--ease); -webkit-tap-highlight-color:transparent; }
+  .ch-send:active{ transform:scale(.92); }
+  .ch-send:disabled{ opacity:.3; cursor:default; transform:none; }
+  .ch-closed{ flex-shrink:0; text-align:center; font-size:13.5px; line-height:1.45; color:var(--ink-soft); padding:14px 20px calc(14px + env(safe-area-inset-bottom)); background:rgba(242,242,247,0.92); border-top:1px solid rgba(60,60,67,0.16); }
+  .ch-closed[hidden]{ display:none; }
+  .sr-live{ position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+  @media (min-width:760px){
+    .ch-sheet{ left:50%; right:auto; top:50%; width:min(560px, 94vw); height:min(760px, 90vh); border-radius:26px; box-shadow:0 30px 80px rgba(0,0,0,0.3); opacity:0; transform:translate(-50%, calc(-50% + 28px)) scale(.97); transition: transform .45s var(--ease), opacity .3s ease; }
+    .ch-overlay.open .ch-sheet{ transform:translate(-50%, -50%); opacity:1; }
+    .ch-head{ padding-top:12px; }
+    .ch-composer{ padding-bottom:12px; }
+    .ch-closed{ padding-bottom:14px; }
+    .ch-back .ic-chev{ display:none; } .ch-back .ic-x{ display:block; }
+    .sh-sheet.sh-narrow{ width:min(520px, 94vw); }
+  }
+  /* bandeja de mensajes */
+  .ib-list{ background:var(--white); border-radius:14px; overflow:hidden; box-shadow:var(--shadow-sm); }
+  .ib-row{ appearance:none; -webkit-appearance:none; border:none; background:none; display:flex; align-items:center; gap:12px; width:100%; text-align:left; font-family:var(--font-body); color:var(--ink); padding:12px 14px; cursor:pointer; }
+  .ib-row + .ib-row{ border-top:1px solid var(--paper-deep); }
+  .ib-row:active{ background:rgba(60,60,67,0.06); }
+  .ib-main{ flex:1; min-width:0; }
+  .ib-top{ display:flex; align-items:baseline; justify-content:space-between; gap:8px; }
+  .ib-top strong{ font-size:15.5px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .ib-top time{ font-size:12px; color:var(--ink-soft); flex-shrink:0; }
+  .ib-cat{ font-size:12.5px; color:var(--ink-soft); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .ib-last{ font-size:14px; color:var(--ink-soft); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-top:1px; }
+  .ib-row.unread .ib-last{ color:var(--ink); font-weight:600; }
+  .ib-row .ch-badge{ flex-shrink:0; }
+  .ib-empty{ text-align:center; color:var(--ink-soft); font-size:14.5px; line-height:1.5; padding:26px 12px; }
+  .ib-status{ text-align:center; font-size:14px; color:var(--ink-soft); padding:22px 12px; }
+  /* reportar */
+  .rp-box{ width:min(100%, 360px); text-align:left; max-height:calc(100vh - 40px); max-height:calc(100dvh - 40px); overflow-y:auto; overscroll-behavior:contain; }
+  .rp-body{ padding:20px 18px 6px; }
+  .rp-body h3{ font-family:var(--font-body); font-size:18px; font-weight:700; letter-spacing:0; text-align:center; }
+  .rp-lead{ font-size:13.5px; line-height:1.45; color:var(--ink-soft); text-align:center; margin:6px 0 14px; }
+  .rp-opts{ border-radius:12px; overflow:hidden; background:var(--white); box-shadow: inset 0 0 0 1px rgba(60,60,67,0.16); }
+  .rp-opt{ appearance:none; -webkit-appearance:none; border:none; background:none; display:flex; align-items:center; justify-content:space-between; gap:10px; width:100%; text-align:left; font-family:var(--font-body); font-size:15px; color:var(--ink); padding:11px 14px; cursor:pointer; }
+  .rp-opt + .rp-opt{ border-top:1px solid var(--paper-deep); }
+  .rp-opt:active{ background:rgba(60,60,67,0.06); }
+  .rp-opt .rp-tick{ opacity:0; color:var(--rose-deep); flex-shrink:0; }
+  .rp-opt[aria-checked="true"]{ font-weight:600; color:var(--rose-deep); }
+  .rp-opt[aria-checked="true"] .rp-tick{ opacity:1; }
+  .rp-detail{ display:block; width:100%; margin-top:10px; min-height:64px; resize:none; font-family:var(--font-body); font-size:16px; padding:10px 12px; border:none; border-radius:10px; background:var(--white); color:var(--ink); box-shadow: inset 0 0 0 1px rgba(60,60,67,0.16); }
+  .rp-detail:focus{ outline:none; box-shadow: inset 0 0 0 1.5px var(--rose-deep); }
+  .rp-ok{ color:#34a853; }
+  #rpOk{ font-weight:600; }
+  /* cabecera angosta: con el botón de mensajes todo debe seguir cabiendo en una fila */
+  @media (max-width:420px){ .session-right{ gap:10px; } }
+  @media (max-width:374px){ .st-once{ display:none; } }
+  @media (max-width:359px){
+    .inbox-btn{ width:34px; height:34px; }
+    .session-right{ gap:8px; }
+  }
+  @media (max-width:339px){ .st-lbl{ display:none; } }
+
   @media (prefers-reduced-motion: reduce){
     html{ scroll-behavior:auto; }
     *, *::before, *::after{ animation-duration:.01ms !important; animation-delay:0s !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
@@ -861,11 +974,14 @@
     <div class="session-row">
       <div style="display:flex; align-items:center; gap:12px;">
         <a class="brand" href="./" data-home-link aria-label="Once, ir al inicio"><span class="brand-logo" aria-hidden="true"></span></a>
-        <button class="btn btn-ghost" id="storeBtn" style="display:none; padding:6px 12px; font-size:13px;">🛍️ Once Store<span class="soon-pill when-soon">Pronto</span></button>
+        <button class="btn btn-ghost" id="storeBtn" aria-label="Once Store" style="display:none; padding:6px 12px; font-size:13px;">🛍️<span class="st-lbl"> <span class="st-once">Once </span>Store</span><span class="soon-pill when-soon">Pronto</span></button>
       </div>
-      <div class="session-actions">
-        <button class="logout-btn" id="logoutBtn">Cerrar sesión<span class="session-email"> (<span id="sessionEmail"></span>)</span></button>
-        <button class="delete-account-link" id="deleteAccountBtn" type="button">Eliminar cuenta</button>
+      <div class="session-right">
+        <button class="inbox-btn" id="inboxBtn" type="button" aria-label="Mensajes"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5z"/></svg><span class="ch-badge" id="inboxBadge" hidden>0</span></button>
+        <div class="session-actions">
+          <button class="logout-btn" id="logoutBtn">Cerrar sesión<span class="session-email"> (<span id="sessionEmail"></span>)</span></button>
+          <button class="delete-account-link" id="deleteAccountBtn" type="button">Eliminar cuenta</button>
+        </div>
       </div>
     </div>
     <div class="tabs">
@@ -1207,6 +1323,66 @@
   </div>
 </div>
 
+<div class="ch-overlay" id="chatOverlay" role="dialog" aria-modal="true" aria-labelledby="chTitle">
+  <div class="ch-backdrop" data-ch-close></div>
+  <div class="ch-sheet">
+    <div class="ch-head">
+      <button class="ch-icon-btn ch-back" id="chBack" type="button" aria-label="Volver"><svg class="ic-chev" width="14" height="22" viewBox="0 0 14 22" fill="none" aria-hidden="true"><path d="M11.5 2L3 11l8.5 9" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><svg class="ic-x" width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+      <span class="ch-avatar" id="chAvatar" aria-hidden="true"></span>
+      <div class="ch-title"><strong id="chTitle"></strong><span id="chSub"></span></div>
+      <button class="ch-icon-btn muted" id="chReport" type="button" aria-label="Reportar esta conversación" title="Reportar"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></button>
+    </div>
+    <div class="ch-body">
+      <div class="ch-list" id="chList" tabindex="-1"></div>
+      <button class="ch-new" id="chNew" type="button" hidden>Mensaje nuevo ↓</button>
+    </div>
+    <div class="ch-count" id="chCount" hidden></div>
+    <div class="ch-composer" id="chComposer">
+      <textarea class="ch-input" id="chInput" rows="1" maxlength="1000" placeholder="Escribe un mensaje" aria-label="Mensaje" autocomplete="off"></textarea>
+      <button class="ch-send" id="chSend" type="button" aria-label="Enviar mensaje" disabled><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg></button>
+    </div>
+    <div class="ch-closed" id="chClosed" hidden>Esta conversación quedó solo de lectura porque la oferta ya no está aceptada.</div>
+    <div class="sr-live" id="chLive" role="status" aria-live="polite"></div>
+  </div>
+</div>
+
+<div class="sh-overlay" id="inboxOverlay" role="dialog" aria-modal="true" aria-labelledby="inboxTitle">
+  <div class="sh-backdrop" data-ib-close></div>
+  <div class="sh-sheet sh-narrow">
+    <div class="sh-grabber" aria-hidden="true"></div>
+    <div class="sh-head">
+      <div>
+        <h2 id="inboxTitle">Mensajes</h2>
+        <p id="inboxSub"></p>
+      </div>
+      <button class="up-close" type="button" data-ib-close aria-label="Cerrar"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+    </div>
+    <div id="inboxBody"></div>
+  </div>
+</div>
+
+<div class="cf-overlay" id="rpOverlay" role="dialog" aria-modal="true" aria-labelledby="rpTitle">
+  <div class="cf-backdrop" data-rp-cancel></div>
+  <div class="cf-box rp-box">
+    <div class="rp-body">
+      <h3 id="rpTitle">Reportar esta conversación</h3>
+      <p class="rp-lead">Elige qué ocurrió. Revisaremos una copia de la conversación. La otra persona no sabrá que la reportaste.</p>
+      <div class="rp-opts" role="radiogroup" aria-label="Motivo del reporte">
+        <button type="button" class="rp-opt" role="radio" aria-checked="false" data-motivo="Acoso o lenguaje ofensivo"><span>Acoso o lenguaje ofensivo</span><svg class="rp-tick" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
+        <button type="button" class="rp-opt" role="radio" aria-checked="false" data-motivo="Spam o publicidad"><span>Spam o publicidad</span><svg class="rp-tick" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
+        <button type="button" class="rp-opt" role="radio" aria-checked="false" data-motivo="Intento de estafa o pago sospechoso"><span>Intento de estafa o pago sospechoso</span><svg class="rp-tick" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
+        <button type="button" class="rp-opt" role="radio" aria-checked="false" data-motivo="Otro motivo"><span>Otro motivo</span><svg class="rp-tick" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
+      </div>
+      <textarea class="rp-detail" id="rpDetail" maxlength="500" rows="2" placeholder="Detalles (opcional)" aria-label="Detalles del reporte"></textarea>
+      <p class="da-status" id="rpStatus" role="status" aria-live="polite"></p>
+    </div>
+    <div class="cf-actions">
+      <button type="button" id="rpCancel">Cancelar</button>
+      <button type="button" id="rpOk" disabled>Enviar reporte</button>
+    </div>
+  </div>
+</div>
+
 <div id="legalOverlay" style="display:none; position:fixed; inset:0; background:rgba(28,28,30,0.55); z-index:60; overflow-y:auto;">
   <div class="wrap" style="max-width:760px; padding-top:36px; padding-bottom:48px;">
     <div class="card">
@@ -1249,7 +1425,7 @@
 <p>El proveedor se compromete a que sus ofertas sean veraces, a contar con los derechos y autorizaciones necesarios para prestar los servicios y para usar las fotografías que adjunta, y a cumplir lo que ofrece. Una oferta puede editarse mientras esté pendiente; una vez aceptada o rechazada queda cerrada. Está prohibido enviar ofertas masivas sin relación con el perfil de la pareja o con fines de spam.</p>
 
 <h3>5. Acuerdos entre parejas y proveedores</h3>
-<p>Cuando una pareja acepta una oferta se genera un acuerdo directo entre ella y el proveedor. Las condiciones, pagos, plazos, cancelaciones y garantías se pactan entre ellos, fuera de Once. Once no interviene en esos acuerdos, no garantiza la calidad, el cumplimiento ni la idoneidad de los servicios y no responde por los incumplimientos de ninguna de las partes. Recomendamos formalizar todo acuerdo por escrito (contrato o cotización firmada) y verificar referencias antes de pagar anticipos.</p>
+<p>Cuando una pareja acepta una oferta se genera un acuerdo directo entre ella y el proveedor. Las condiciones, pagos, plazos, cancelaciones y garantías se pactan entre ellos, fuera de Once. Once no interviene en esos acuerdos, no garantiza la calidad, el cumplimiento ni la idoneidad de los servicios y no responde por los incumplimientos de ninguna de las partes. Recomendamos formalizar todo acuerdo por escrito (contrato o cotización firmada) y verificar referencias antes de pagar anticipos. Una vez aceptada la oferta, la pareja y el proveedor pueden coordinarse por el chat de Once. Once no revisa las conversaciones de forma rutinaria, pero puede revisar una conversación que sea reportada y suspender las cuentas que incumplan estos términos. Nunca compartas claves ni datos de tu tarjeta por el chat.</p>
 
 <h3>6. Reseñas y calificaciones</h3>
 <p>Cuando una oferta fue aceptada y la fecha de la boda ya pasó, la pareja y el proveedor pueden calificarse mutuamente de 1 a 5 estrellas y dejar un comentario. Las reseñas deben ser honestas, basarse en una experiencia real y ser respetuosas. Once puede moderar o eliminar reseñas falsas, ofensivas, discriminatorias, que contengan datos personales innecesarios o que infrinjan estos términos.</p>
@@ -1267,6 +1443,7 @@
 <li>Extraer datos de forma masiva (scraping) o usar bots sin nuestra autorización.</li>
 <li>Usar los datos de otros usuarios para fines distintos a los de la plataforma, incluida su venta o el envío de publicidad no solicitada.</li>
 <li>Usar la plataforma para actividades ilegales o fraudulentas.</li>
+<li>Usar el chat para acosar o insultar, enviar publicidad no solicitada (spam), intentar estafas o pedir claves o datos de pago fuera de lo acordado.</li>
 </ul>
 
 <h3>10. Propiedad intelectual</h3>
@@ -1306,6 +1483,7 @@
 <li><strong>Perfil de pareja:</strong> nombres, fecha de la boda, comuna y país, categorías de servicio que necesitan, presupuesto estimado y foto de perfil.</li>
 <li><strong>Perfil de proveedor:</strong> datos de contacto, ofertas enviadas (descripción, precio, mensaje) y hasta 3 fotografías por oferta.</li>
 <li><strong>Reseñas:</strong> calificaciones y comentarios entre parejas y proveedores.</li>
+<li><strong>Chat:</strong> los mensajes de texto que se escriben la pareja y el proveedor cuando la pareja acepta una oferta.</li>
 <li><strong>Once Store:</strong> servicio solicitado o comprado, mensaje opcional, correo, monto pagado, fecha y número de orden de PayPal.</li>
 <li><strong>«Me gusta»:</strong> un identificador anónimo guardado en tu navegador, sin vínculo con tu identidad.</li>
 <li><strong>Datos técnicos:</strong> dirección IP, tipo de navegador y registros de acceso que generan nuestros proveedores de alojamiento y seguridad.</li>
@@ -1318,13 +1496,13 @@
 <ul>
 <li>Crear y administrar tu cuenta y prestar el servicio (mostrar perfiles, enviar y gestionar ofertas, reseñas).</li>
 <li>Procesar compras y coordinar la entrega de productos y servicios de Once Store.</li>
-<li>Enviarte correos del servicio: aviso de una oferta nueva, cambio de estado de una oferta, confirmaciones de solicitudes y compras.</li>
+<li>Enviarte correos del servicio: aviso de una oferta nueva, cambio de estado de una oferta, aviso de un mensaje nuevo en el chat (sin incluir el contenido del mensaje), confirmaciones de solicitudes y compras.</li>
 <li>Mantener la seguridad, prevenir fraudes y cumplir obligaciones legales.</li>
 <li>Mejorar la plataforma. No enviamos publicidad sin tu consentimiento.</li>
 </ul>
 
 <h3>5. Qué información es visible para otros</h3>
-<p>En la página principal, cualquier visitante puede ver de cada pareja: nombre, fecha de la boda, comuna, categorías y foto. El correo electrónico no se muestra en la página pública. Los proveedores con cuenta pueden ver el resto de los datos del perfil de la pareja que sean necesarios para enviar una oferta. Las ofertas solo son visibles para quien las envía y para quien las recibe. Las reseñas se muestran asociadas al perfil correspondiente.</p>
+<p>En la página principal, cualquier visitante puede ver de cada pareja: nombre, fecha de la boda, comuna, categorías y foto. El correo electrónico no se muestra en la página pública. Los proveedores con cuenta pueden ver el resto de los datos del perfil de la pareja que sean necesarios para enviar una oferta. Las ofertas solo son visibles para quien las envía y para quien las recibe, y los mensajes del chat solo los ven las dos personas de esa conversación. Las reseñas se muestran asociadas al perfil correspondiente.</p>
 
 <h3>6. Con quién compartimos datos</h3>
 <p>No vendemos datos personales. Usamos proveedores de servicios que tratan datos por cuenta de Once:</p>
@@ -1344,7 +1522,7 @@
 <p>Usamos el almacenamiento local de tu navegador para mantener tu sesión iniciada y para recordar tus «me gusta». No usamos cookies de publicidad ni de seguimiento propias. Cuando usas PayPal, esa empresa puede usar cookies y tecnologías similares según su propia política de privacidad.</p>
 
 <h3>9. Conservación</h3>
-<p>Conservamos tus datos mientras tu cuenta esté activa. Al cerrarla, los eliminamos o anonimizamos, salvo los que debamos conservar por obligaciones legales o contables (por ejemplo, registros de pagos) o para resolver disputas. Puedes eliminar tu cuenta tú mismo en cualquier momento desde la app, con la opción «Eliminar cuenta» que está junto a «Cerrar sesión».</p>
+<p>Conservamos tus datos mientras tu cuenta esté activa. Al cerrarla, los eliminamos o anonimizamos, salvo los que debamos conservar por obligaciones legales o contables (por ejemplo, registros de pagos) o para resolver disputas. Puedes eliminar tu cuenta tú mismo en cualquier momento desde la app, con la opción «Eliminar cuenta» que está junto a «Cerrar sesión». Los mensajes del chat se eliminan junto con la oferta cuando cualquiera de las dos personas elimina su cuenta. Si reportas una conversación, conservamos una copia de sus últimos mensajes mientras revisamos el caso.</p>
 
 <h3>10. Seguridad</h3>
 <p>Aplicamos medidas razonables para proteger los datos, como conexiones cifradas y controles de acceso por usuario a nivel de base de datos. Ningún sistema es completamente infalible; si ocurre una vulneración que te afecte, te informaremos según lo exija la ley.</p>
@@ -1441,7 +1619,7 @@
 <p class="legal-meta">Última actualización: {{FECHA}}</p>
 
 <h3>1. Cancelar tu cuenta</h3>
-<p>Puedes cerrar tu cuenta en cualquier momento escribiendo a {{EMAIL}} desde el correo con el que te registraste. Al cerrarla retiramos tu perfil y tus ofertas de la plataforma y eliminamos o anonimizamos tus datos, salvo los que debamos conservar por obligaciones legales o contables. Las reseñas asociadas a acuerdos ya realizados podrán conservarse de forma anonimizada cuando sea necesario para la integridad de las calificaciones. Más detalles en la <a href="#privacidad" data-legal="privacidad">Política de privacidad</a>.</p>
+<p>Puedes eliminar tu cuenta en cualquier momento desde la app, con la opción «Eliminar cuenta» que está junto a «Cerrar sesión», o escribiendo a {{EMAIL}} desde el correo con el que te registraste. Al cerrarla retiramos tu perfil y tus ofertas de la plataforma y eliminamos o anonimizamos tus datos, salvo los que debamos conservar por obligaciones legales o contables. Las reseñas asociadas a acuerdos ya realizados podrán conservarse de forma anonimizada cuando sea necesario para la integridad de las calificaciones. Más detalles en la <a href="#privacidad" data-legal="privacidad">Política de privacidad</a>.</p>
 
 <h3>2. Ofertas de proveedores</h3>
 <p>Un proveedor puede editar una oferta mientras esté pendiente. Una vez que la pareja la acepta o la rechaza, la oferta queda cerrada y no puede modificarse.</p>
@@ -1641,6 +1819,7 @@
       checkCoupleProfile();
       storeBtn.style.display = 'inline-block';
     }
+    try{ Chat.start(user); }catch(_){}
     if(goHomeAfterReload){
       goHomeAfterReload = false;
       const homeTab = document.querySelector('.tab-btn[data-tab="inicio"]');
@@ -1731,6 +1910,7 @@
 
   function showHome(){
     currentUser = null;
+    try{ Chat.stop(); }catch(_){}
     unmountHomeFromApp();
     document.getElementById('authScreen').style.display = 'none';
     document.getElementById('appShell').classList.remove('visible');
@@ -3178,9 +3358,9 @@ const OnceStory = (function(){
 
     const LISTS = {
       pareja: ['Tu perfil de boda y su foto, también si ya apareces en «Felizmente casadas».',
-               'Las fotos de tu galería de boda, las ofertas que recibiste y tus proveedores guardados.',
+               'Las fotos de tu galería de boda, las ofertas que recibiste, tus proveedores guardados y tus conversaciones con ellos.',
                'Tus datos de acceso (correo y contraseña).'],
-      proveedor: ['Tu perfil de proveedor y las ofertas que enviaste: las parejas dejarán de verlas, incluidas las que ya aceptaron.',
+      proveedor: ['Tu perfil de proveedor, las ofertas que enviaste y tus conversaciones: las parejas dejarán de verlas, incluidas las que ya aceptaron.',
                   'Las fotos que subiste en tus ofertas.',
                   'Tus datos de acceso (correo y contraseña).'],
       otro: ['Tu perfil y todo lo que publicaste en Once: boda, ofertas y fotos.', 'Tus datos de acceso (correo y contraseña).']
@@ -3254,6 +3434,626 @@ const OnceStory = (function(){
       }
     }, true);
     return { open, close };
+  })();
+
+
+  // ---------- Chat entre la pareja y el proveedor (se abre al aceptar la oferta) ----------
+  const Chat = (function(){
+    const MAX_LEN = 1000, PAGE = 200;
+    const SAFE_NOTE = 'Conversación privada entre ustedes dos. Por tu seguridad, no compartas claves ni datos de tu tarjeta, y desconfía de pagos fuera de lo acordado. Si algo no está bien, usa el botón de reportar.';
+    const $ = id => document.getElementById(id);
+    const ov = $('chatOverlay'), listEl = $('chList'), input = $('chInput'), sendBtn = $('chSend');
+    const composer = $('chComposer'), closedEl = $('chClosed'), countEl = $('chCount'), newPill = $('chNew'), liveEl = $('chLive');
+    const inboxBtn = $('inboxBtn'), inboxBadge = $('inboxBadge'), inboxOv = $('inboxOverlay'), inboxBody = $('inboxBody');
+    const CHAT_ICON = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5z"/></svg>';
+
+    let uid = null, started = false, available = null;       // available: null = sin saber, false = falta ejecutar el SQL
+    let summary = new Map();                                    // offer_id -> { no_leidos, ultimo_texto, ultimo_en, ultimo_mio }
+    let convs = new Map();                                      // offer_id -> { id, nombre, categoria, estado, fecha }
+    let cur = null;                                             // conversación abierta
+    let channel = null, rtOk = false, inboxTimer = null, openTimer = null, openSeq = 0, tmpSeq = 0, lastFocus = null;
+    let inboxLoadSeq = 0;
+
+    const isMissing = err => !!err && (err.code === '42883' || err.code === 'PGRST202' || err.code === '42P01' || err.code === 'PGRST205' ||
+      /does not exist|could not find the (function|table)|schema cache/i.test(err.message || ''));
+    const initial = n => (Array.from(String(n || '?').trim())[0] || '?').toUpperCase();
+    const fmtTime = iso => new Date(iso).toLocaleTimeString('es-CL', { hour:'2-digit', minute:'2-digit' });
+    const dayStart = d => new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+    const dayKey = iso => { const d = new Date(iso); return d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate(); };
+    const cap = t => t.charAt(0).toUpperCase() + t.slice(1);
+    function dayLabel(iso){
+      const d = new Date(iso), n = new Date();
+      const diff = Math.round((dayStart(n) - dayStart(d)) / 86400000);
+      if(diff === 0) return 'Hoy';
+      if(diff === 1) return 'Ayer';
+      if(diff > 1 && diff < 7) return cap(d.toLocaleDateString('es-CL', { weekday:'long' }));
+      return d.toLocaleDateString('es-CL', { day:'numeric', month:'long', year: d.getFullYear() === n.getFullYear() ? undefined : 'numeric' });
+    }
+    function shortWhen(iso){
+      const d = new Date(iso), n = new Date();
+      const diff = Math.round((dayStart(n) - dayStart(d)) / 86400000);
+      if(diff === 0) return fmtTime(iso);
+      if(diff === 1) return 'Ayer';
+      return d.toLocaleDateString('es-CL', { day:'numeric', month:'short' });
+    }
+    const badgeText = n => n > 99 ? '99+' : String(n);
+
+    // ---------- botón de la lista (lo usan las pantallas de ofertas) ----------
+    function buttonHtml(offerId, label){
+      if(available === false || !offerId) return '';
+      const n = (summary.get(offerId) || {}).no_leidos || 0;
+      return '<button type="button" class="btn btn-primary ch-open" data-chat-open="' + escapeHtml(offerId) + '">' + CHAT_ICON + escapeHtml(label || 'Chat') +
+        '<span class="ch-badge" data-chat-badge="' + escapeHtml(offerId) + '"' + (n ? '' : ' hidden') + '>' + (n ? badgeText(n) : '0') + '</span></button>';
+    }
+    function paint(){
+      let total = 0;
+      summary.forEach(r => { total += r.no_leidos || 0; });
+      inboxBadge.textContent = badgeText(total);
+      inboxBadge.hidden = total === 0;
+      inboxBtn.setAttribute('aria-label', total ? 'Mensajes, ' + total + ' sin leer' : 'Mensajes');
+      document.querySelectorAll('[data-chat-badge]').forEach(el => {
+        const n = (summary.get(el.dataset.chatBadge) || {}).no_leidos || 0;
+        el.textContent = badgeText(n); el.hidden = n === 0;
+      });
+    }
+    function disable(){
+      available = false;
+      inboxBtn.classList.remove('on');
+      document.querySelectorAll('.ch-open').forEach(b => { const a = b.closest('.ch-actions'); if(a) a.remove(); else b.remove(); });
+      closeChat(true); closeInbox(true);
+    }
+
+    // ---------- resumen de no leídos ----------
+    async function refreshSummary(){
+      if(!uid || available === false) return;
+      try{
+        const { data, error } = await sb.rpc('chat_summary');
+        if(error) throw error;
+        available = true;
+        summary = new Map((data || []).map(r => [r.offer_id, r]));
+        paint();
+        if(inboxOv.classList.contains('open')) renderInbox();
+      }catch(err){
+        if(isMissing(err)) disable();      // todavía no se ejecutó el SQL del chat: la web funciona igual, sin chat
+      }
+    }
+    function bump(row){
+      const s = summary.get(row.offer_id) || { offer_id: row.offer_id, no_leidos: 0 };
+      const mine = row.sender_id === uid;
+      if(!mine && !row.leido_en) s.no_leidos = (s.no_leidos || 0) + 1;
+      s.ultimo_texto = row.body; s.ultimo_en = row.creado; s.ultimo_mio = mine;
+      summary.set(row.offer_id, s);
+      paint();
+      if(inboxOv.classList.contains('open')) renderInbox();
+    }
+
+    // ---------- tiempo real + respaldo por consulta ----------
+    function subscribe(){
+      try{
+        if(!sb.channel) return;
+        channel = sb.channel('once-chat-' + uid)
+          .on('postgres_changes', { event:'INSERT', schema:'public', table:'chat_messages' }, p => onInsert(p && p.new))
+          .on('postgres_changes', { event:'UPDATE', schema:'public', table:'chat_messages' }, p => onUpdate(p && p.new))
+          .subscribe(status => { rtOk = status === 'SUBSCRIBED'; });
+      }catch(_){ rtOk = false; }
+    }
+    function unsubscribe(){
+      try{ if(channel && sb.removeChannel) sb.removeChannel(channel); }catch(_){}
+      channel = null; rtOk = false;
+    }
+    function onInsert(row){
+      if(!row || !row.offer_id || !row.id) return;
+      if(cur && cur.id === row.offer_id){
+        if(cur.msgs.some(m => m.id === row.id)) return;
+        const incoming = row.sender_id !== uid;
+        const stick = nearBottom();
+        if(!incoming){ const k = cur.pending.findIndex(p => p.state === 'pending' && p.body === row.body); if(k >= 0) cur.pending.splice(k, 1); }
+        merge([row]);
+        render();
+        if(incoming){
+          announce('Mensaje nuevo de ' + (cur.meta ? cur.meta.nombre : ''));
+          if(stick) scrollBottom(); else showNewPill();
+          if(document.visibilityState === 'visible') markRead(); else bump(row);
+        }else if(stick) scrollBottom();
+        if(!incoming){ const s = summary.get(row.offer_id); if(s){ s.ultimo_texto = row.body; s.ultimo_en = row.creado; s.ultimo_mio = true; } }
+      }else{
+        bump(row);
+      }
+    }
+    function onUpdate(row){
+      if(!row || !cur || cur.id !== row.offer_id) return;
+      const m = cur.msgs.find(x => x.id === row.id);
+      if(m && row.leido_en && !m.leido_en){ m.leido_en = row.leido_en; render(); }
+    }
+    function scheduleOpenPoll(){
+      clearTimeout(openTimer);
+      if(!cur) return;
+      openTimer = setTimeout(async () => {
+        if(cur && document.visibilityState === 'visible'){
+          const id = cur.id;
+          try{
+            const rows = await fetchMessages(id);
+            if(cur && cur.id === id){
+              const before = sig();
+              const stick = nearBottom();
+              const hadIncoming = cur.msgs.length;
+              merge(rows);
+              if(sig() !== before){
+                render();
+                if(cur.msgs.length > hadIncoming){ if(stick) scrollBottom(); else showNewPill(); }
+                markRead();
+              }
+            }
+          }catch(_){}
+        }
+        scheduleOpenPoll();
+      }, rtOk ? 20000 : 5000);
+    }
+
+    // ---------- datos ----------
+    async function fetchMessages(offerId, before){
+      let q = sb.from('chat_messages').select('id, offer_id, sender_id, body, creado, leido_en').eq('offer_id', offerId);
+      if(before) q = q.lt('creado', before);
+      const { data, error } = await q.order('creado', { ascending:false }).limit(PAGE);
+      if(error) throw error;
+      const rows = (data || []).slice().reverse();
+      rows._full = (data || []).length >= PAGE;
+      return rows;
+    }
+    function merge(rows){
+      if(!cur) return;
+      const byId = new Map(cur.msgs.map(m => [m.id, m]));
+      rows.forEach(r => {
+        const have = byId.get(r.id);
+        if(have){ if(r.leido_en && !have.leido_en) have.leido_en = r.leido_en; }
+        else{ const m = { id:r.id, sender_id:r.sender_id, body:r.body, creado:r.creado, leido_en:r.leido_en || null }; cur.msgs.push(m); byId.set(m.id, m); }
+      });
+      cur.msgs.sort((a, b) => a.creado < b.creado ? -1 : a.creado > b.creado ? 1 : (a.id < b.id ? -1 : 1));
+    }
+    const sig = () => cur ? cur.msgs.map(m => m.id + (m.leido_en ? 'r' : '')).join(',') : '';
+
+    // datos de la conversación (nombre de la otra persona, estado de la oferta)
+    async function ensureMeta(offerId){
+      if(convs.has(offerId) && convs.get(offerId).nombre) return convs.get(offerId);
+      const { data: o, error } = await sb.from('offers').select('id, couple_id, vendor_user_id, proveedor_nombre, categoria, estado, creado').eq('id', offerId).single();
+      if(error || !o) throw error || new Error('sin oferta');
+      let meta;
+      if(o.vendor_user_id === uid){
+        let c = null;
+        try{ const r = await sb.from('couples').select('id, nombre, fecha').eq('id', o.couple_id).single(); c = r.data; }catch(_){}
+        meta = { id:o.id, nombre: (c && c.nombre) || 'Pareja', categoria:o.categoria, estado:o.estado, fecha: c && c.fecha, soyProveedor:true };
+      }else{
+        meta = { id:o.id, nombre:o.proveedor_nombre || 'Proveedor', categoria:o.categoria, estado:o.estado, fecha:null, soyProveedor:false };
+      }
+      convs.set(offerId, meta);
+      return meta;
+    }
+
+    // ---------- abrir / cerrar ----------
+    function setHeader(meta){
+      $('chTitle').textContent = meta ? meta.nombre : '';
+      $('chAvatar').textContent = meta ? initial(meta.nombre) : '';
+      const bits = [];
+      if(meta && meta.categoria) bits.push(meta.categoria);
+      if(meta && meta.soyProveedor && meta.fecha) bits.push('Boda: ' + new Date(meta.fecha + 'T00:00:00').toLocaleDateString('es-CL', { day:'numeric', month:'short', year:'numeric' }));
+      $('chSub').textContent = bits.join(' · ');
+    }
+    function setComposer(){
+      const closed = !!(cur && cur.closed);
+      composer.hidden = closed; closedEl.hidden = !closed;
+      if(closed) countEl.hidden = true;
+      syncSend();
+    }
+    async function open(offerId, opts){
+      if(!uid || !offerId || available === false) return;
+      if(cur) closeChat(true);
+      const seq = ++openSeq;
+      lastFocus = document.activeElement;
+      cur = { id:offerId, from: opts && opts.from, meta: convs.get(offerId) || null, msgs: [], pending: [], hasMore:false, closed:false };
+      closeInbox(true);
+      setHeader(cur.meta);
+      listEl.innerHTML = '<p class="ib-status">Abriendo conversación…</p>';
+      composer.hidden = false; closedEl.hidden = true; countEl.hidden = true; newPill.hidden = true;
+      input.value = ''; autosize(); syncSend();
+      $('chBack').setAttribute('aria-label', cur.from === 'inbox' ? 'Volver a mensajes' : 'Cerrar');
+      ov.classList.add('open'); mrLock(true); fitViewport();
+      try{
+        const meta = await ensureMeta(offerId);
+        if(seq !== openSeq || !cur) return;
+        cur.meta = meta; cur.closed = meta.estado !== 'aceptada';
+        setHeader(meta); setComposer();
+        const rows = await fetchMessages(offerId);
+        if(seq !== openSeq || !cur) return;
+        cur.hasMore = !!rows._full; merge(rows);
+        render(); scrollBottom();
+        markRead();
+        scheduleOpenPoll();
+        if(!cur.closed && window.matchMedia && matchMedia('(pointer:fine)').matches) setTimeout(() => input.focus(), 80);
+        else setTimeout(() => $('chBack').focus(), 80);
+      }catch(err){
+        if(seq !== openSeq) return;
+        if(isMissing(err)){ disable(); return; }
+        listEl.innerHTML = '';
+        const box = document.createElement('div'); box.className = 'ch-empty';
+        box.innerHTML = '<strong>No pudimos abrir el chat</strong>Revisa tu conexión e inténtalo de nuevo.';
+        const retry = document.createElement('button'); retry.type = 'button'; retry.className = 'ch-more'; retry.textContent = 'Reintentar';
+        retry.addEventListener('click', () => open(offerId, opts));
+        box.appendChild(retry); listEl.appendChild(box);
+        composer.hidden = true;
+      }
+    }
+    function closeChat(silent){
+      if(!ov.classList.contains('open')) return;
+      const from = cur && cur.from;
+      ov.classList.remove('open'); mrLock(false);
+      clearTimeout(openTimer); openSeq++;
+      cur = null;
+      fitViewport(true);
+      if(silent) return;
+      refreshSummary();
+      if(from === 'inbox') openInbox();
+      else if(lastFocus && lastFocus.focus && document.contains(lastFocus)) lastFocus.focus();
+    }
+
+    // ---------- pintar la conversación ----------
+    const nearBottom = () => (listEl.scrollHeight - listEl.scrollTop - listEl.clientHeight) < 90;
+    function scrollBottom(){ listEl.scrollTop = listEl.scrollHeight; newPill.hidden = true; }
+    function showNewPill(){ newPill.hidden = false; }
+    function announce(t){ liveEl.textContent = ''; setTimeout(() => { liveEl.textContent = t; }, 30); }
+    function render(){
+      if(!cur) return;
+      const keep = nearBottom(), prevTop = listEl.scrollTop;
+      const frag = document.createDocumentFragment();
+      const note = document.createElement('p'); note.className = 'ch-note'; note.textContent = SAFE_NOTE; frag.appendChild(note);
+      if(cur.hasMore){
+        const more = document.createElement('button'); more.type = 'button'; more.className = 'ch-more'; more.textContent = 'Ver mensajes anteriores';
+        more.addEventListener('click', loadOlder); frag.appendChild(more);
+      }
+      const all = cur.msgs.concat(cur.pending);
+      if(all.length === 0){
+        const e = document.createElement('div'); e.className = 'ch-empty';
+        const st = document.createElement('strong'); st.textContent = 'Empiecen la conversación';
+        e.appendChild(st);
+        e.appendChild(document.createTextNode(cur.closed ? 'Todavía no se escribieron mensajes.' : 'Escribe el primer mensaje a ' + (cur.meta ? cur.meta.nombre : 'la otra persona') + ' para coordinar los detalles.'));
+        frag.appendChild(e);
+      }
+      let lastMineIdx = -1;
+      all.forEach((m, i) => { if(m.sender_id === uid) lastMineIdx = i; });
+      let lastDay = '', prev = null;
+      all.forEach((m, i) => {
+        const day = dayKey(m.creado);
+        if(day !== lastDay){ const d = document.createElement('div'); d.className = 'ch-day'; d.textContent = dayLabel(m.creado); frag.appendChild(d); lastDay = day; prev = null; }
+        const mine = m.sender_id === uid;
+        const next = all[i + 1];
+        const t = x => new Date(x.creado).getTime();
+        const newGroup = !prev || prev.sender_id !== m.sender_id || (t(m) - t(prev)) > 300000;
+        const tail = !next || next.sender_id !== m.sender_id || (t(next) - t(m)) > 300000 || dayKey(next.creado) !== day;
+        const row = document.createElement('div');
+        row.className = 'ch-msg ' + (mine ? 'mine' : 'theirs') + (newGroup ? ' gap' : '') + (tail ? ' tail' : '') + (m.state === 'pending' ? ' pending' : '') + (m.state === 'failed' ? ' failed' : '');
+        const b = document.createElement('div'); b.className = 'ch-bubble'; b.textContent = m.body; row.appendChild(b);
+        if(m.state === 'failed'){
+          const f = document.createElement('div'); f.className = 'ch-fail';
+          const sp = document.createElement('span'); sp.textContent = m.error || 'No se pudo enviar.'; f.appendChild(sp);
+          const r = document.createElement('button'); r.type = 'button'; r.textContent = 'Reintentar'; r.addEventListener('click', () => transmit(m)); f.appendChild(r);
+          const x = document.createElement('button'); x.type = 'button'; x.textContent = 'Descartar'; x.style.color = 'var(--ink-soft)';
+          x.addEventListener('click', () => { cur.pending = cur.pending.filter(p => p !== m); render(); }); f.appendChild(x);
+          row.appendChild(f);
+        }else if(tail && m.state !== 'pending'){
+          const meta = document.createElement('div'); meta.className = 'ch-meta';
+          meta.textContent = fmtTime(m.creado) + (mine && i === lastMineIdx && m.leido_en ? ' · Visto' : '');
+          row.appendChild(meta);
+        }
+        frag.appendChild(row);
+        prev = m;
+      });
+      listEl.innerHTML = '';
+      listEl.appendChild(frag);
+      if(keep) listEl.scrollTop = listEl.scrollHeight; else listEl.scrollTop = prevTop;
+    }
+    async function loadOlder(){
+      if(!cur || !cur.msgs.length) return;
+      const id = cur.id, first = cur.msgs[0].creado;
+      try{
+        const rows = await fetchMessages(id, first);
+        if(!cur || cur.id !== id) return;
+        const prevH = listEl.scrollHeight, prevTop = listEl.scrollTop;
+        cur.hasMore = !!rows._full; merge(rows); render();
+        listEl.scrollTop = prevTop + (listEl.scrollHeight - prevH);
+      }catch(_){}
+    }
+
+    // ---------- leído ----------
+    async function markRead(){
+      if(!cur || document.visibilityState !== 'visible') return;
+      if(!cur.msgs.some(m => m.sender_id !== uid && !m.leido_en)) { const s0 = summary.get(cur.id); if(s0 && s0.no_leidos){ s0.no_leidos = 0; paint(); } return; }
+      const id = cur.id;
+      try{
+        const { error } = await sb.rpc('chat_mark_read', { p_offer_id: id });
+        if(error) throw error;
+        if(cur && cur.id === id){ const now = new Date().toISOString(); cur.msgs.forEach(m => { if(m.sender_id !== uid && !m.leido_en) m.leido_en = now; }); }
+        const s = summary.get(id); if(s){ s.no_leidos = 0; }
+        paint();
+      }catch(_){}
+    }
+
+    // ---------- enviar ----------
+    function autosize(){ input.style.height = 'auto'; input.style.height = Math.min(input.scrollHeight, 120) + 'px'; }
+    function syncSend(){
+      const len = input.value.length, has = input.value.trim().length > 0;
+      sendBtn.disabled = !has || !cur || cur.closed;
+      if(len >= 900 && cur && !cur.closed){ countEl.hidden = false; countEl.textContent = len + ' / ' + MAX_LEN; countEl.classList.toggle('max', len >= MAX_LEN); }
+      else countEl.hidden = true;
+    }
+    function friendly(err){
+      const msg = (err && err.message) || '';
+      if(/muy rápido/i.test(msg)) return 'Estás escribiendo muy rápido. Espera un momento.';
+      if(/máximo de mensajes/i.test(msg)) return 'Esta conversación alcanzó el máximo de mensajes.';
+      if(/row-level security|permission denied/i.test(msg)) return 'Esta conversación ya no admite mensajes.';
+      return 'No se pudo enviar.';
+    }
+    async function send(){
+      if(!cur || cur.closed) return;
+      const text = input.value.replace(/\r\n/g, '\n').trim();
+      if(!text || text.length > MAX_LEN) return;
+      const tmp = { id:'tmp' + (++tmpSeq), sender_id: uid, body: text, creado: new Date().toISOString(), state:'pending' };
+      cur.pending.push(tmp);
+      input.value = ''; autosize(); syncSend();
+      render(); scrollBottom();
+      if(!(window.matchMedia && matchMedia('(pointer:fine)').matches)) input.focus();
+      await transmit(tmp);
+    }
+    async function transmit(tmp){
+      if(!cur) return;
+      const id = cur.id;
+      tmp.state = 'pending'; tmp.error = ''; render();
+      try{
+        const { data, error } = await sb.from('chat_messages').insert([{ offer_id: id, body: tmp.body }]).select('id, offer_id, sender_id, body, creado, leido_en').single();
+        if(error) throw error;
+        if(cur && cur.id === id){
+          cur.pending = cur.pending.filter(p => p !== tmp);
+          merge([data]); render(); scrollBottom();
+        }
+        const s = summary.get(id) || { offer_id:id, no_leidos:0 };
+        s.ultimo_texto = tmp.body; s.ultimo_en = (data && data.creado) || new Date().toISOString(); s.ultimo_mio = true; summary.set(id, s);
+      }catch(err){
+        if(!cur || cur.id !== id) return;
+        tmp.state = 'failed'; tmp.error = friendly(err);
+        if(/ya no admite/.test(tmp.error)){ cur.closed = true; cur.pending = cur.pending.filter(p => p !== tmp); setComposer(); }
+        render();
+      }
+    }
+    input.addEventListener('input', () => { autosize(); syncSend(); });
+    input.addEventListener('keydown', e => {
+      if(e.key === 'Enter' && !e.shiftKey && !e.isComposing && window.matchMedia && matchMedia('(pointer:fine)').matches){ e.preventDefault(); send(); }
+    });
+    sendBtn.addEventListener('click', send);
+    newPill.addEventListener('click', () => { scrollBottom(); markRead(); });
+    listEl.addEventListener('scroll', () => { if(nearBottom()) newPill.hidden = true; }, { passive:true });
+    $('chBack').addEventListener('click', () => closeChat());
+    ov.querySelector('[data-ch-close]').addEventListener('click', () => closeChat());
+    $('chReport').addEventListener('click', () => { if(cur) Report.open(cur.id); });
+
+    // ---------- teclado del celular: la ventana se ajusta a lo que realmente se ve ----------
+    function fitViewport(reset){
+      const sheet = ov.querySelector('.ch-sheet'), vv = window.visualViewport;
+      if(reset || !vv || window.innerWidth >= 760){ sheet.style.removeProperty('--vv-h'); sheet.style.removeProperty('--vv-top'); return; }
+      sheet.style.setProperty('--vv-h', vv.height + 'px');
+      sheet.style.setProperty('--vv-top', vv.offsetTop + 'px');
+      if(ov.classList.contains('open')) listEl.scrollTop = listEl.scrollHeight;
+    }
+    if(window.visualViewport){
+      visualViewport.addEventListener('resize', () => { if(ov.classList.contains('open')) fitViewport(); });
+      visualViewport.addEventListener('scroll', () => { if(ov.classList.contains('open')) fitViewport(); });
+    }
+    document.addEventListener('keydown', e => {
+      if(!ov.classList.contains('open') || document.getElementById('rpOverlay').classList.contains('open') || document.getElementById('cfOverlay').classList.contains('open')) return;
+      if(e.key === 'Escape'){ e.stopPropagation(); closeChat(); return; }
+      if(e.key === 'Tab'){
+        const f = Array.prototype.filter.call(ov.querySelectorAll('button, textarea'), n => !n.disabled && !n.hidden && n.offsetParent !== null);
+        if(!f.length){ e.preventDefault(); return; }
+        const first = f[0], last = f[f.length - 1];
+        if(e.shiftKey && (document.activeElement === first || !ov.contains(document.activeElement))){ e.preventDefault(); last.focus(); }
+        else if(!e.shiftKey && (document.activeElement === last || !ov.contains(document.activeElement))){ e.preventDefault(); first.focus(); }
+      }
+    }, true);
+
+    // ---------- bandeja de mensajes ----------
+    async function loadConvs(){
+      const mine = [];
+      if(currentRole === 'proveedor'){
+        const { data, error } = await sb.from('offers').select('id, couple_id, proveedor_nombre, categoria, estado, vendor_user_id, creado').eq('vendor_user_id', uid).eq('estado', 'aceptada').order('creado', { ascending:false });
+        if(error) throw error;
+        (data || []).forEach(o => mine.push(o));
+      }else{
+        const { data: cs, error: e1 } = await sb.from('couples').select('id').eq('user_id', uid);
+        if(e1) throw e1;
+        const ids = (cs || []).map(c => c.id);
+        if(ids.length){
+          const { data, error } = await sb.from('offers').select('id, couple_id, proveedor_nombre, categoria, estado, vendor_user_id, creado').in('couple_id', ids).eq('estado', 'aceptada').order('creado', { ascending:false });
+          if(error) throw error;
+          (data || []).filter(o => o.vendor_user_id).forEach(o => mine.push(o));
+        }
+      }
+      // conversaciones con mensajes cuya oferta ya no está aceptada: siguen siendo visibles (solo lectura)
+      const have = new Set(mine.map(o => o.id));
+      const extra = [...summary.keys()].filter(id => !have.has(id));
+      if(extra.length){
+        const { data } = await sb.from('offers').select('id, couple_id, proveedor_nombre, categoria, estado, vendor_user_id, creado').in('id', extra);
+        (data || []).forEach(o => mine.push(o));
+      }
+      let nombres = new Map();
+      if(currentRole === 'proveedor' && mine.length){
+        const { data } = await sb.from('couples').select('id, nombre, fecha').in('id', [...new Set(mine.map(o => o.couple_id))]);
+        (data || []).forEach(c => nombres.set(c.id, c));
+      }
+      mine.forEach(o => {
+        const c = nombres.get(o.couple_id);
+        convs.set(o.id, currentRole === 'proveedor'
+          ? { id:o.id, nombre: (c && c.nombre) || 'Pareja', categoria:o.categoria, estado:o.estado, fecha: c && c.fecha, soyProveedor:true, creado:o.creado }
+          : { id:o.id, nombre:o.proveedor_nombre || 'Proveedor', categoria:o.categoria, estado:o.estado, fecha:null, soyProveedor:false, creado:o.creado });
+      });
+      return mine.map(o => convs.get(o.id));
+    }
+    function renderInbox(list){
+      if(list) inboxOv._list = list;
+      list = inboxOv._list || [];
+      inboxBody.innerHTML = '';
+      if(!list.length){
+        const e = document.createElement('p'); e.className = 'ib-empty';
+        e.textContent = currentRole === 'proveedor'
+          ? 'Todavía no tienes conversaciones. Cuando una pareja acepte una de tus ofertas, podrán escribirse aquí.'
+          : 'Todavía no tienes conversaciones. Cuando aceptes la oferta de un proveedor, podrán escribirse aquí.';
+        inboxBody.appendChild(e); return;
+      }
+      const sorted = list.slice().sort((a, b) => {
+        const sa = summary.get(a.id), sb2 = summary.get(b.id);
+        const ta = sa && sa.ultimo_en ? new Date(sa.ultimo_en).getTime() : 0, tb = sb2 && sb2.ultimo_en ? new Date(sb2.ultimo_en).getTime() : 0;
+        if(ta !== tb) return tb - ta;
+        return String(b.creado || '').localeCompare(String(a.creado || ''));
+      });
+      const box = document.createElement('div'); box.className = 'ib-list';
+      sorted.forEach(c => {
+        const s = summary.get(c.id), n = (s && s.no_leidos) || 0;
+        const row = document.createElement('button'); row.type = 'button'; row.className = 'ib-row' + (n ? ' unread' : '');
+        const av = document.createElement('span'); av.className = 'ch-avatar'; av.textContent = initial(c.nombre); av.setAttribute('aria-hidden', 'true');
+        const main = document.createElement('span'); main.className = 'ib-main';
+        const top = document.createElement('span'); top.className = 'ib-top';
+        const nm = document.createElement('strong'); nm.textContent = c.nombre; top.appendChild(nm);
+        if(s && s.ultimo_en){ const tm = document.createElement('time'); tm.textContent = shortWhen(s.ultimo_en); top.appendChild(tm); }
+        const cat = document.createElement('span'); cat.className = 'ib-cat'; cat.style.display = 'block'; cat.textContent = c.categoria || '';
+        const last = document.createElement('span'); last.className = 'ib-last'; last.style.display = 'block';
+        last.textContent = s && s.ultimo_texto ? (s.ultimo_mio ? 'Tú: ' : '') + s.ultimo_texto : 'Sin mensajes todavía';
+        main.appendChild(top); main.appendChild(cat); main.appendChild(last);
+        row.appendChild(av); row.appendChild(main);
+        if(n){ const b = document.createElement('span'); b.className = 'ch-badge'; b.textContent = badgeText(n); row.appendChild(b); }
+        row.setAttribute('aria-label', c.nombre + (c.categoria ? ', ' + c.categoria : '') + (n ? ', ' + n + ' sin leer' : ''));
+        row.addEventListener('click', () => open(c.id, { from:'inbox' }));
+        box.appendChild(row);
+      });
+      inboxBody.appendChild(box);
+    }
+    async function openInbox(){
+      if(!uid || available === false || inboxOv.classList.contains('open')) return;
+      lastFocus = document.activeElement;
+      $('inboxSub').textContent = currentRole === 'proveedor' ? 'Tus conversaciones con las parejas que aceptaron tus ofertas.' : 'Tus conversaciones con los proveedores que aceptaste.';
+      inboxBody.innerHTML = '<p class="ib-status">Cargando…</p>';
+      inboxOv.classList.add('open'); mrLock(true);
+      setTimeout(() => { const x = inboxOv.querySelector('.up-close'); if(x) x.focus(); }, 80);
+      const seq = ++inboxLoadSeq;
+      refreshSummary();
+      try{
+        const list = await loadConvs();
+        if(seq !== inboxLoadSeq || !inboxOv.classList.contains('open')) return;
+        renderInbox(list);
+      }catch(err){
+        if(seq !== inboxLoadSeq) return;
+        inboxBody.innerHTML = '<p class="ib-status">No pudimos cargar tus mensajes. Revisa tu conexión e inténtalo de nuevo.</p>';
+      }
+    }
+    function closeInbox(silent){
+      if(!inboxOv.classList.contains('open')) return;
+      inboxOv.classList.remove('open'); mrLock(false); inboxLoadSeq++;
+      if(!silent && lastFocus && lastFocus.focus && document.contains(lastFocus)) lastFocus.focus();
+    }
+    inboxBtn.addEventListener('click', openInbox);
+    inboxOv.querySelectorAll('[data-ib-close]').forEach(el => el.addEventListener('click', () => closeInbox()));
+    document.addEventListener('keydown', e => {
+      if(e.key === 'Escape' && inboxOv.classList.contains('open') && !ov.classList.contains('open')){ e.stopPropagation(); closeInbox(); }
+    }, true);
+    // botones "Chat" de las listas de ofertas
+    document.addEventListener('click', e => {
+      const b = e.target.closest && e.target.closest('[data-chat-open]');
+      if(b){ e.preventDefault(); open(b.dataset.chatOpen, { from:'list' }); }
+    });
+    document.addEventListener('visibilitychange', () => {
+      if(!uid || document.visibilityState !== 'visible') return;
+      refreshSummary();
+      if(cur){ markRead(); }
+    });
+
+    // ---------- ciclo de vida ----------
+    function start(user){
+      if(!user) return;
+      if(started && uid === user.id){ refreshSummary(); return; }
+      stop();
+      uid = user.id; started = true; available = null;
+      inboxBtn.classList.add('on');
+      refreshSummary();
+      subscribe();
+      inboxTimer = setInterval(() => { if(document.visibilityState === 'visible') refreshSummary(); }, 45000);
+    }
+    function stop(){
+      closeChat(true); closeInbox(true);
+      unsubscribe();
+      clearInterval(inboxTimer); clearTimeout(openTimer); inboxTimer = null; openTimer = null;
+      uid = null; started = false; available = null;
+      summary = new Map(); convs = new Map(); cur = null;
+      inboxBtn.classList.remove('on'); inboxBadge.hidden = true;
+    }
+    // después de aceptar una oferta: invitar a abrir el chat
+    async function afterAccept(offer){
+      if(!offer || !offer.vendor_user_id || available === false) return;
+      try{
+        const go = await CfDialog.ask({ title:'¡Oferta aceptada!', body:'Ya pueden escribirse por el chat de Once. También lo encuentras en esta oferta y en «Mensajes».', ok:'Abrir chat', cancel:'Ahora no' });
+        if(go) open(offer.id, { from:'list' });
+      }catch(_){}
+    }
+    return { start, stop, open, openInbox, buttonHtml, paint, afterAccept, isAvailable: () => available !== false };
+  })();
+
+  // ---------- reportar una conversación ----------
+  const Report = (function(){
+    const $ = id => document.getElementById(id);
+    const ov = $('rpOverlay'), okBtn = $('rpOk'), cancelBtn = $('rpCancel'), detail = $('rpDetail'), statusEl = $('rpStatus');
+    const opts = Array.prototype.slice.call(ov.querySelectorAll('.rp-opt'));
+    let offerId = null, motivo = '', busy = false, lastFocus = null, closeTimer = null;
+    const sync = () => { okBtn.disabled = busy || !motivo; cancelBtn.disabled = busy; detail.disabled = busy; };
+    function setStatus(msg, kind){ statusEl.textContent = msg || ''; statusEl.className = 'da-status' + (kind === 'error' ? ' error' : kind === 'ok' ? ' rp-ok' : ''); }
+    function pick(btn){ motivo = btn.dataset.motivo; opts.forEach(o => o.setAttribute('aria-checked', o === btn ? 'true' : 'false')); sync(); }
+    function open(id){
+      if(!id || ov.classList.contains('open')) return;
+      offerId = id; motivo = ''; busy = false; lastFocus = document.activeElement;
+      opts.forEach(o => o.setAttribute('aria-checked', 'false'));
+      detail.value = ''; setStatus(''); cancelBtn.textContent = 'Cancelar'; sync();
+      ov.classList.add('open'); mrLock(true);
+      setTimeout(() => opts[0].focus(), 80);
+    }
+    function close(){
+      if(busy || !ov.classList.contains('open')) return;
+      clearTimeout(closeTimer);
+      ov.classList.remove('open'); mrLock(false);
+      if(lastFocus && lastFocus.focus && document.contains(lastFocus)) lastFocus.focus();
+    }
+    async function submit(){
+      if(busy || !motivo || !offerId) return;
+      busy = true; sync(); setStatus('Enviando…');
+      try{
+        const { error } = await sb.rpc('chat_report', { p_offer_id: offerId, p_motivo: motivo, p_detalle: detail.value.trim() || null });
+        if(error) throw error;
+        setStatus('Gracias. Recibimos tu reporte y lo revisaremos.', 'ok');
+        busy = false; okBtn.disabled = true; cancelBtn.disabled = false; cancelBtn.textContent = 'Cerrar';
+        closeTimer = setTimeout(close, 1800);
+      }catch(err){
+        busy = false; sync();
+        setStatus(err && /varios reportes/i.test(err.message || '') ? 'Has enviado varios reportes seguidos. Inténtalo más tarde.' : 'No pudimos enviar el reporte. Inténtalo de nuevo.', 'error');
+      }
+    }
+    opts.forEach(o => o.addEventListener('click', () => pick(o)));
+    okBtn.addEventListener('click', submit);
+    cancelBtn.addEventListener('click', close);
+    ov.querySelector('[data-rp-cancel]').addEventListener('click', close);
+    document.addEventListener('keydown', e => {
+      if(!ov.classList.contains('open')) return;
+      if(e.key === 'Escape'){ e.stopPropagation(); close(); return; }
+      if(e.key === 'Tab'){
+        const f = Array.prototype.filter.call(ov.querySelectorAll('button, textarea'), n => !n.disabled && n.offsetParent !== null);
+        if(!f.length){ e.preventDefault(); return; }
+        const first = f[0], last = f[f.length - 1];
+        if(e.shiftKey && (document.activeElement === first || !ov.contains(document.activeElement))){ e.preventDefault(); last.focus(); }
+        else if(!e.shiftKey && (document.activeElement === last || !ov.contains(document.activeElement))){ e.preventDefault(); first.focus(); }
+      }
+    }, true);
+    return { open };
   })();
 
   sb.auth.onAuthStateChange((_event, session)=>{
@@ -3612,6 +4412,7 @@ const OnceStory = (function(){
           <div class="meta">${o.precio ? '$' + Number(o.precio).toLocaleString('en-US') + ' USD · ' : ''}${escapeHtml(o.contacto)}</div>
           <div class="msg">${escapeHtml(o.mensaje)}</div>
           ${fotosHtml(o)}
+          ${o.estado === 'aceptada' && o.vendor_user_id ? '<div class="ch-actions">' + Chat.buttonHtml(o.id, 'Chat con el proveedor') + '</div>' : ''}
           ${o.estado === 'pendiente' ? `
             <div style="margin-top:10px; display:flex; gap:8px;">
               <button class="btn btn-primary accept-btn" style="padding:8px 14px; font-size:13.5px;">Aceptar</button>
@@ -3637,6 +4438,7 @@ const OnceStory = (function(){
             const { error } = await sb.from('offers').update({ estado: nuevoEstado }).eq('id', o.id);
             if(error) throw error;
             document.getElementById('lookup-btn').click();
+            if(nuevoEstado === 'aceptada') Chat.afterAccept(o);
           }catch(err){
             btnEl.disabled = false;
           }
@@ -3698,6 +4500,7 @@ const OnceStory = (function(){
           <div class="meta">${o.precio ? '$' + Number(o.precio).toLocaleString('en-US') + ' USD · ' : ''}${escapeHtml(o.contacto)}</div>
           <div class="msg">${escapeHtml(o.mensaje)}</div>
           ${fotosHtml(o)}
+          ${o.vendor_user_id ? '<div class="ch-actions">' + Chat.buttonHtml(o.id, 'Chat con el proveedor') + '</div>' : ''}
           ${o.rating_proveedor ? `
             <div style="margin-top:10px; padding-top:10px; border-top:1px solid var(--paper-deep);">
               <div style="font-size:13px; color:var(--ink-soft); margin-bottom:2px;">Tu calificación</div>
@@ -3744,6 +4547,7 @@ const OnceStory = (function(){
           <div class="meta">${o.couples ? escapeHtml(o.couples.comuna) + ' · ' : ''}${o.precio ? '$' + Number(o.precio).toLocaleString('en-US') + ' USD' : ''}</div>
           <div class="msg view-msg">${escapeHtml(o.mensaje)}</div>
           ${fotosHtml(o)}
+          ${o.estado === 'aceptada' ? '<div class="ch-actions">' + Chat.buttonHtml(o.id, 'Chat con la pareja') + '</div>' : ''}
           ${o.estado === 'pendiente' ? `
           <div style="margin-top:10px;">
             <button class="btn btn-ghost edit-offer-btn" style="padding:8px 14px; font-size:13.5px;">Editar</button>
