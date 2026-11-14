@@ -416,11 +416,12 @@
   .about-contrast p{ font-size:15.5px; line-height:1.6; color:var(--ink-soft); }
   .about-after p{ color:var(--ink); }
 
-  .about-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .about-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
   .about-card{ background:var(--white); border-radius:16px; padding:24px; box-shadow: var(--shadow-sm); }
   .about-num{ font-family:var(--font-display); font-size:15px; font-weight:500; color:var(--rose-deep); }
   .about-card h3{ font-size:23px; margin:8px 0 8px; }
   .about-card p{ font-size:14.5px; line-height:1.62; color:var(--ink-soft); }
+  .about-card p a{ color:var(--rose-deep); text-decoration:underline; text-underline-offset:2px; }
   .about-foot{ font-size:13.5px; color:var(--ink-soft); margin-top:20px; max-width:44em; }
   .about-cta{ display:flex; gap:10px; flex-wrap:wrap; margin-top:22px; }
   .about-cta .btn-ghost{ background:var(--white); box-shadow:0 1px 2px rgba(0,0,0,0.05); }
@@ -434,8 +435,11 @@
 
   @media (max-width:760px){
     .about{ margin-bottom:44px; }
-    .about-contrast, .about-grid{ grid-template-columns:1fr; }
+    .about-contrast{ grid-template-columns:1fr; }
     .about-lead{ font-size:16px; }
+  }
+  @media (max-width:600px){
+    .about-grid{ grid-template-columns:1fr; }
   }
 
   /* aparición al hacer scroll (solo si hay JS; sin JS todo se ve igual) */
@@ -448,7 +452,10 @@
   .home-main{ min-width:0; container-type:inline-size; container-name:homemain; }
   .upcoming-aside{ display:none; }
   @container homemain (max-width: 760px){
-    .about-grid, .about-contrast{ grid-template-columns:1fr; }
+    .about-contrast{ grid-template-columns:1fr; }
+  }
+  @container homemain (max-width: 560px){
+    .about-grid{ grid-template-columns:1fr; }
   }
   @media (min-width:1100px){
     .home-layout{ display:grid; grid-template-columns:minmax(0,1fr) 304px; gap:40px; align-items:start; }
@@ -1090,8 +1097,8 @@
       <div class="about-grid">
         <article class="about-card reveal">
           <span class="about-num">01</span>
-          <h3>Para parejas</h3>
-          <p>Registra tu fecha, tu lugar y los servicios que necesitas. Recibe ofertas, acepta la que más te guste y deja a tus proveedores guardados en un solo lugar. Registrar tu boda es gratis. Y en el Mercado de bodas puedes comprar, vender, prestar o regalar productos de boda; si no te casas, crea una cuenta solo para el Mercado.</p>
+          <h3>Para prometidos</h3>
+          <p>Registra tu fecha, tu lugar y los servicios que necesitas. Recibe ofertas, acepta la que más te guste y deja a tus proveedores guardados en un solo lugar. Registrar tu boda es gratis.</p>
         </article>
         <article class="about-card reveal" style="--d:90ms;">
           <span class="about-num">02</span>
@@ -1102,6 +1109,11 @@
           <span class="about-num">03</span>
           <h3>Once Store<span class="soon-pill when-soon">Próximamente</span></h3>
           <p><span class="when-soon">Estamos preparando servicios que ofreceremos directamente desde Once: productos digitales, asesorías 1:1 y productos para tu boda. Muy pronto, para las parejas con cuenta.</span><span class="when-live">Servicios que ofrecemos directamente desde Once: productos digitales, asesorías 1:1 y productos para tu boda. Disponible para las parejas con cuenta.</span></p>
+        </article>
+        <article class="about-card reveal" style="--d:270ms;">
+          <span class="about-num">04</span>
+          <h3>Mercado de bodas</h3>
+          <p>Compra, vende, presta o regala productos de boda en buen estado: vestidos y trajes, decoración, mesa y vajilla, recuerdos y más. Lo usan los Prometidos con cuenta y también quienes crean una cuenta solo para el Mercado, aunque no se casen. Cada anuncio dura 60 días y se puede renovar. <a href="#mercado" data-legal="mercado">Ver las normas</a></p>
         </article>
       </div>
 
@@ -1156,7 +1168,7 @@
       <div class="field" id="roleField" style="display:none;">
         <label>Eres...</label>
         <select id="auth-role">
-          <option value="pareja">Pareja que se casa</option>
+          <option value="pareja">Prometidos (me caso)</option>
           <option value="proveedor">Proveedor de bodas</option>
           <option value="mercado">Solo comprar o vender</option>
         </select>
@@ -1189,7 +1201,7 @@
     </div>
     <div class="tabs">
       <button class="tab-btn" data-tab="inicio">Inicio</button>
-      <button class="tab-btn active" data-tab="pareja">Soy pareja</button>
+      <button class="tab-btn active" data-tab="pareja">Prometidos</button>
       <button class="tab-btn" data-tab="proveedor">Soy proveedor</button>
       <button class="tab-btn" data-tab="mercado" style="display:none">Mercado</button>
     </div>
@@ -1753,7 +1765,7 @@
 <ul>
 <li>Para registrarse se debe ser mayor de 18 años y tener capacidad legal para contratar.</li>
 <li>La información entregada debe ser verdadera, completa y estar actualizada.</li>
-<li>Cada cuenta tiene un tipo: pareja, proveedor o «Mercado» (para quienes no registran una boda y solo quieren ver, comprar o vender en el Mercado de bodas). El usuario es responsable de mantener la confidencialidad de su contraseña y de toda la actividad realizada desde su cuenta.</li>
+<li>Cada cuenta tiene un tipo: «Prometidos» (parejas que registran su boda), proveedor o «Mercado» (para quienes no registran una boda y solo quieren ver, comprar o vender en el Mercado de bodas). El usuario es responsable de mantener la confidencialidad de su contraseña y de toda la actividad realizada desde su cuenta.</li>
 <li>El usuario debe avisarnos de inmediato si sospecha un uso no autorizado de su cuenta.</li>
 </ul>
 
@@ -1777,7 +1789,7 @@
 <p>Las compras en Once Store se hacen directamente a Once. Los precios se expresan en dólares estadounidenses (USD) y el precio que se cobra es el que se muestra al momento de pagar. Los pagos con tarjeta de crédito o débito y con cuenta PayPal son procesados por PayPal; Once no almacena números de tarjeta. Algunos productos y servicios se cotizan de forma individual y solo se pagan una vez aceptada la cotización. Las condiciones de devolución, entrega y cancelación se detallan en la <a href="#reembolso" data-legal="reembolso">Política de reembolso</a>, la <a href="#envio" data-legal="envio">Política de envío</a> y la <a href="#cancelaciones" data-legal="cancelaciones">Política de cancelaciones</a>.</p>
 
 <h3>9. Mercado de bodas</h3>
-<p>El Mercado de bodas es un espacio para que las personas con cuenta publiquen productos relacionados con un matrimonio, en buen estado, para venderlos, prestarlos o regalarlos. Pueden verlo y usarlo las cuentas de pareja y las cuentas «Mercado»; las cuentas de proveedor y los visitantes sin cuenta no tienen acceso. Se rige además por las <a href="#mercado" data-legal="mercado">Normas del Mercado de bodas</a>. Cada anuncio disponible dura 60 días y puede renovarse; los anuncios vencidos, vendidos, prestados o donados se eliminan automáticamente, con sus fotos, 30 días después.</p>
+<p>El Mercado de bodas es un espacio para que las personas con cuenta publiquen productos relacionados con un matrimonio, en buen estado, para venderlos, prestarlos o regalarlos. Pueden verlo y usarlo las cuentas de Prometidos y las cuentas «Mercado»; las cuentas de proveedor y los visitantes sin cuenta no tienen acceso. Se rige además por las <a href="#mercado" data-legal="mercado">Normas del Mercado de bodas</a>. Cada anuncio disponible dura 60 días y puede renovarse; los anuncios vencidos, vendidos, prestados o donados se eliminan automáticamente, con sus fotos, 30 días después.</p>
 <p>Los acuerdos se hacen directamente entre quienes compran y venden: Once no cobra comisión, no recibe ni administra pagos, no envía productos y no es parte de la compraventa, el préstamo ni la donación. Once no verifica a quienes publican ni los productos, no garantiza su estado, su autenticidad ni su entrega, y no responde por los incumplimientos de ninguna de las partes. Quien publica es responsable de que su anuncio sea veraz, de tener derecho a ofrecer el producto y de cumplir lo que acuerde.</p>
 <p>Podemos ocultar o eliminar anuncios que no cumplan las normas o la ley, y suspender las cuentas que las incumplan.</p>
 
@@ -1822,7 +1834,7 @@
 
 <h3>1. Quién puede usarlo</h3>
 <ul>
-<li>Pueden ver, publicar, editar, eliminar y denunciar anuncios las cuentas de pareja y las cuentas «Mercado» (para quienes no registran una boda y solo quieren ver, comprar o vender). Las cuentas de proveedor y las personas sin cuenta no tienen acceso.</li>
+<li>Pueden ver, publicar, editar, eliminar y denunciar anuncios las cuentas de Prometidos y las cuentas «Mercado» (para quienes no registran una boda y solo quieren ver, comprar o vender). Las cuentas de proveedor y las personas sin cuenta no tienen acceso.</li>
 <li>Hay que tener una cuenta en Once y ser mayor de 18 años.</li>
 <li>El Mercado es para personas que venden, prestan o regalan sus propias cosas. No es un espacio para publicitar negocios ni servicios: los proveedores ofrecen los suyos en Once mediante ofertas.</li>
 </ul>
@@ -1868,7 +1880,7 @@
 <p>Cualquier persona con cuenta puede denunciar un anuncio que no cumpla estas normas. Cuando varias personas distintas denuncian un mismo anuncio, se oculta automáticamente mientras lo revisamos. Podemos editar, ocultar o eliminar anuncios, y suspender las cuentas que incumplan estas normas o la ley, con aviso cuando corresponda. La revisión de las denuncias es manual y puede tardar.</p>
 
 <h3>8. Privacidad</h3>
-<p>Lo que publicas (fotos, descripción, país y ciudad, tu nombre en el anuncio y los datos de contacto que escribas) lo ven las demás cuentas de pareja y de Mercado; no se muestra a visitantes sin cuenta ni a proveedores. Escribe solo los datos de contacto que quieras compartir. Usamos tu correo de la cuenta solo para avisarte antes de que un anuncio venza.</p>
+<p>Lo que publicas (fotos, descripción, país y ciudad, tu nombre en el anuncio y los datos de contacto que escribas) lo ven las demás cuentas de Prometidos y de Mercado; no se muestra a visitantes sin cuenta ni a proveedores. Escribe solo los datos de contacto que quieras compartir. Usamos tu correo de la cuenta solo para avisarte antes de que un anuncio venza.</p>
 <p>Las fotos se guardan con una dirección web que no pide cuenta, así que quien reciba el enlace directo de una foto podría verla. Por eso no subas fotos con datos personales, como direcciones o documentos. Las fotos se eliminan cuando eliminas el anuncio o tu cuenta, o cuando el anuncio se elimina automáticamente (ver el punto 6).</p>
 
 <h3>9. Contacto</h3>
@@ -1886,11 +1898,11 @@
 
 <h3>2. Datos que recopilamos</h3>
 <ul>
-<li><strong>Cuenta:</strong> correo electrónico, contraseña (almacenada de forma cifrada por nuestro proveedor de autenticación) y rol (pareja, proveedor o «Mercado»).</li>
+<li><strong>Cuenta:</strong> correo electrónico, contraseña (almacenada de forma cifrada por nuestro proveedor de autenticación) y rol (Prometidos, proveedor o «Mercado»).</li>
 <li><strong>Perfil de pareja:</strong> nombres, fecha de la boda, comuna y país, categorías de servicio que necesitan, presupuesto estimado y foto de perfil.</li>
 <li><strong>Perfil de proveedor:</strong> datos de contacto, el tipo de proveedor que declaras (formal o emprendedor independiente), tu página web o tus redes sociales si decides agregarlas, ofertas enviadas (descripción, precio, mensaje) y hasta 3 fotografías por oferta. La pareja que recibe tu oferta ve el tipo, la página web y las redes sociales.</li>
 <li><strong>Reseñas:</strong> calificaciones y comentarios entre parejas y proveedores.</li>
-<li><strong>Mercado de bodas (parejas y cuentas «Mercado»):</strong> los anuncios que publicas (título, descripción, categoría, si es nuevo o usado, precio, estado —disponible, vendido, prestado o donado—, país y ciudad, tu nombre en el anuncio, los datos de contacto que escribas y hasta 5 fotos) y las denuncias que envías sobre anuncios de otras personas.</li>
+<li><strong>Mercado de bodas (Prometidos y cuentas «Mercado»):</strong> los anuncios que publicas (título, descripción, categoría, si es nuevo o usado, precio, estado —disponible, vendido, prestado o donado—, país y ciudad, tu nombre en el anuncio, los datos de contacto que escribas y hasta 5 fotos) y las denuncias que envías sobre anuncios de otras personas.</li>
 <li><strong>Chat:</strong> los mensajes de texto que se escriben la pareja y el proveedor cuando la pareja acepta una oferta.</li>
 <li><strong>Once Store:</strong> servicio solicitado o comprado, mensaje opcional, correo, monto pagado, fecha y número de orden de PayPal.</li>
 <li><strong>«Me gusta»:</strong> un identificador anónimo guardado en tu navegador, sin vínculo con tu identidad.</li>
@@ -1911,7 +1923,7 @@
 </ul>
 
 <h3>5. Qué información es visible para otros</h3>
-<p>En la página principal, cualquier visitante puede ver de cada pareja: nombre, fecha de la boda, comuna, categorías y foto. El correo electrónico no se muestra en la página pública. Los proveedores con cuenta pueden ver el resto de los datos del perfil de la pareja que sean necesarios para enviar una oferta. Las ofertas solo son visibles para quien las envía y para quien las recibe, y los mensajes del chat solo los ven las dos personas de esa conversación. Las reseñas se muestran asociadas al perfil correspondiente. Los anuncios del Mercado de bodas, incluidos tu nombre en el anuncio y los datos de contacto que escribas, solo los ven las cuentas de pareja y las cuentas «Mercado»; no se muestran a visitantes ni a proveedores, y quien denuncia un anuncio no se revela a quien lo publicó. Las fotos de los anuncios se guardan con una dirección web que no pide cuenta, así que quien reciba el enlace directo de una foto podría verla.</p>
+<p>En la página principal, cualquier visitante puede ver de cada pareja: nombre, fecha de la boda, comuna, categorías y foto. El correo electrónico no se muestra en la página pública. Los proveedores con cuenta pueden ver el resto de los datos del perfil de la pareja que sean necesarios para enviar una oferta. Las ofertas solo son visibles para quien las envía y para quien las recibe, y los mensajes del chat solo los ven las dos personas de esa conversación. Las reseñas se muestran asociadas al perfil correspondiente. Los anuncios del Mercado de bodas, incluidos tu nombre en el anuncio y los datos de contacto que escribas, solo los ven las cuentas de Prometidos y las cuentas «Mercado»; no se muestran a visitantes ni a proveedores, y quien denuncia un anuncio no se revela a quien lo publicó. Las fotos de los anuncios se guardan con una dirección web que no pide cuenta, así que quien reciba el enlace directo de una foto podría verla.</p>
 
 <h3>6. Con quién compartimos datos</h3>
 <p>No vendemos datos personales. Usamos proveedores de servicios que tratan datos por cuenta de Once:</p>
@@ -4647,7 +4659,7 @@ const OnceStory = (function(){
       if(/Máximo 40/i.test(m)) return 'Llegaste al máximo de ' + MAX_ITEMS + ' publicaciones. Elimina alguna para publicar otra.';
       if(/Máximo 10/i.test(m)) return 'Hoy ya publicaste 10 productos, que es el máximo por día. Inténtalo mañana.';
       if(unavailableErr(e)) return 'Estamos activando el Mercado. Inténtalo de nuevo en unos minutos.';
-      if(c === '42501' || /row-level security|not authorized|Unauthorized/i.test(m)) return 'Esta cuenta no puede publicar en el Mercado. Solo pueden hacerlo las parejas y las cuentas de Mercado.';
+      if(c === '42501' || /row-level security|not authorized|Unauthorized/i.test(m)) return 'Esta cuenta no puede publicar en el Mercado. Solo pueden hacerlo los Prometidos y las cuentas de Mercado.';
       return 'No pudimos guardar tu publicación. Revisa tu conexión e inténtalo de nuevo.';
     }
 
@@ -4960,7 +4972,7 @@ const OnceStory = (function(){
         + '<div class="field"><label for="mkfCiudad">Ciudad o comuna (opcional)</label><input type="text" id="mkfCiudad" maxlength="60" placeholder="Ej: Providencia" autocomplete="off"></div></div>'
         + '<div class="field" id="mkfPaisOtroBox" hidden><label for="mkfPaisOtro">¿En qué país está?</label><input type="text" id="mkfPaisOtro" maxlength="60" autocomplete="off"></div>'
         + '<div class="field"><label for="mkfNombre">Tu nombre en el anuncio</label><input type="text" id="mkfNombre" maxlength="60" placeholder="Ej: Camila y Diego" autocomplete="off"></div>'
-        + '<div class="field"><label for="mkfContacto">Dónde pueden contactarte</label><input type="text" id="mkfContacto" maxlength="200" placeholder="Ej: WhatsApp +56 9 1234 5678 o Instagram @camilaydiego" autocomplete="off"><p class="mk-hint">Lo verán solo las parejas con cuenta en Once. No compartas contraseñas ni datos bancarios.</p></div>'
+        + '<div class="field"><label for="mkfContacto">Dónde pueden contactarte</label><input type="text" id="mkfContacto" maxlength="200" placeholder="Ej: WhatsApp +56 9 1234 5678 o Instagram @camilaydiego" autocomplete="off"><p class="mk-hint">Lo verán solo las personas con cuenta de Prometidos o de Mercado. No compartas contraseñas ni datos bancarios.</p></div>'
         + (edit ? '<div class="field"><label for="mkfEstado">Estado del producto</label><select id="mkfEstado">' + Object.keys(ESTADOS).map(k => '<option value="' + k + '">' + ESTADOS[k] + '</option>').join('') + '</select></div>'
           : '<label class="mk-check"><input type="checkbox" id="mkfNormas"><span>Confirmo que es un producto relacionado con una boda, que está en buen estado y que las fotos son mías. Entiendo que Once no participa en el pago ni en la entrega. Acepto las <a href="#mercado" data-legal="mercado">Normas del Mercado</a>.</span></label>')
         + '<div class="sh-cta"><p class="sh-status mk-fstatus" id="mkfStatus" role="status" aria-live="polite"></p>'
