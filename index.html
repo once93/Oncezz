@@ -516,6 +516,160 @@
   .up-close:active{ transform:scale(.92); }
   .up-sheet-body{ flex:1; overflow-y:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch; padding:8px 16px calc(28px + env(safe-area-inset-bottom)); }
 
+  /* ---------- Mercado de bodas ---------- */
+  .mk-top{ display:flex; align-items:flex-end; justify-content:space-between; gap:14px 24px; flex-wrap:wrap; margin-bottom:18px; }
+  .mk-top .mr-head{ flex:1 1 320px; min-width:0; }
+  .mk-top .btn{ flex-shrink:0; }
+  .mk-note{ display:flex; gap:12px; align-items:flex-start; padding:13px 16px; border-radius:14px; background:rgba(255,255,255,0.7); border:1px dashed var(--gold-line); font-size:13.5px; line-height:1.5; color:var(--ink-soft); margin-bottom:18px; }
+  .mk-note svg{ flex-shrink:0; color:var(--rose-deep); margin-top:2px; }
+  .mk-note b{ color:var(--ink); font-weight:600; }
+  .mk-note a, .mk-safe a, .mk-check a{ color:var(--rose-deep); font-weight:600; text-decoration:none; }
+  .mk-note a:hover, .mk-safe a:hover, .mk-check a:hover{ text-decoration:underline; }
+  .mk-flash{ margin:0 0 14px; padding:11px 16px; border-radius:12px; background:rgba(52,199,89,0.14); color:#1F6B35; font-size:14px; font-weight:600; }
+  .mk-flash[hidden]{ display:none; }
+
+  .mk-bar{ display:flex; gap:10px; align-items:center; }
+  .mk-search{ position:relative; flex:1; min-width:0; }
+  .mk-search svg{ position:absolute; left:14px; top:50%; transform:translateY(-50%); color:var(--ink-soft); pointer-events:none; }
+  .mk-search input{ width:100%; font-family:var(--font-body); font-size:16px; padding:12px 14px 12px 42px; border:none; border-radius:12px; background:var(--white); color:var(--ink); box-shadow:var(--shadow-sm); -webkit-appearance:none; appearance:none; }
+  .mk-search input:focus{ outline:none; box-shadow:0 0 0 2px var(--rose-deep), 0 0 0 5px rgba(0,122,255,0.15); }
+  .mk-filter-btn{ position:relative; flex-shrink:0; display:inline-flex; align-items:center; gap:7px; font-family:var(--font-body); font-size:14px; font-weight:600; padding:12px 16px; border:none; border-radius:12px; background:var(--white); color:var(--ink); box-shadow:var(--shadow-sm); cursor:pointer; }
+  .mk-filter-btn[aria-expanded="true"]{ background:var(--rose-deep); color:#fff; }
+  .mk-filter-n{ min-width:19px; height:19px; padding:0 5px; border-radius:999px; font-size:11.5px; line-height:19px; text-align:center; background:var(--rose-deep); color:#fff; }
+  .mk-filter-btn[aria-expanded="true"] .mk-filter-n{ background:#fff; color:var(--rose-deep); }
+  .mk-filter-n[hidden]{ display:none; }
+  .mk-pills{ display:flex; gap:8px; overflow-x:auto; padding:2px 2px 8px; margin:12px -2px 0; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
+  .mk-pills::-webkit-scrollbar{ display:none; }
+  .mk-pills .store-cat-pill{ flex-shrink:0; white-space:nowrap; padding:8px 15px; font-size:13.5px; }
+  .mk-adv{ display:none; background:var(--white); border-radius:16px; padding:16px; margin:4px 0 6px; box-shadow:var(--shadow-sm); }
+  .mk-adv.open{ display:block; animation: viewIn .3s var(--ease); }
+  .mk-adv-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:12px; }
+  .mk-adv .field{ min-width:0; }
+  .mk-adv .field input, .mk-adv .field select{ width:100%; min-width:0; max-width:100%; font-size:16px; }
+  .mk-adv-price{ display:grid; grid-template-columns:minmax(0,1fr) 92px; gap:8px; }
+  .mk-adv-foot{ display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-top:14px; }
+  .mk-check-line{ display:flex; align-items:center; gap:9px; font-size:14px; cursor:pointer; }
+  .mk-check-line input{ width:18px; height:18px; accent-color:var(--rose-deep); }
+  .mk-link{ appearance:none; -webkit-appearance:none; border:none; background:none; font-family:var(--font-body); font-size:13.5px; font-weight:600; color:var(--rose-deep); cursor:pointer; padding:6px 2px; }
+  .mk-link:disabled{ opacity:.5; cursor:default; }
+  .mk-link.danger{ color:#D70015; }
+  .mk-meta{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin:14px 2px 2px; font-size:13.5px; color:var(--ink-soft); min-height:30px; }
+
+  .mk-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:16px; margin-top:12px; }
+  @media (max-width:560px){ .mk-grid{ grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px; } }
+  .mk-card{ appearance:none; -webkit-appearance:none; display:flex; flex-direction:column; text-align:left; font:inherit; color:inherit; border:none; padding:0; min-width:0; cursor:pointer; background:var(--white); border-radius:18px; overflow:hidden; box-shadow:var(--shadow-sm); animation: riseIn .5s var(--ease) backwards; transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
+  .mk-card:active{ transform:scale(.985); }
+  .mk-cover{ position:relative; display:block; aspect-ratio:1/1; overflow:hidden; background:var(--paper-deep); }
+  .mk-cover img{ width:100%; height:100%; object-fit:cover; display:block; transition: transform .6s var(--ease); }
+  .mk-badge{ position:absolute; top:10px; left:10px; padding:4px 10px; border-radius:999px; font-size:11.5px; font-weight:600; color:var(--ink); background:rgba(255,255,255,0.9); -webkit-backdrop-filter:saturate(180%) blur(12px); backdrop-filter:saturate(180%) blur(12px); }
+  .mk-badge.own{ left:auto; right:10px; background:var(--rose-deep); color:#fff; }
+  .mk-cnt{ position:absolute; right:10px; bottom:10px; padding:3px 9px; border-radius:999px; font-size:11.5px; font-weight:600; color:#fff; background:rgba(28,28,30,0.55); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+  .mk-over{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(28,28,30,0.5); color:#fff; font-weight:700; font-size:14px; letter-spacing:.1em; text-transform:uppercase; }
+  .mk-body{ display:flex; flex-direction:column; gap:3px; padding:12px 14px 14px; min-width:0; }
+  .mk-price{ font-family:var(--font-display); font-size:20px; font-weight:600; letter-spacing:-.01em; color:var(--ink); }
+  .mk-price.soft{ font-family:var(--font-body); font-size:15px; font-weight:600; color:var(--ink-soft); letter-spacing:0; line-height:26px; }
+  .mk-price.free{ color:#1F7A3A; }
+  .mk-title{ font-size:14.5px; font-weight:600; line-height:1.3; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; overflow-wrap:anywhere; }
+  .mk-place{ font-size:12.5px; color:var(--ink-soft); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .mk-skel{ aspect-ratio:1/1.32; border-radius:18px; background:linear-gradient(110deg, var(--paper-deep) 30%, #F4F4F8 50%, var(--paper-deep) 70%); background-size:220% 100%; animation: shShimmer 1.4s linear infinite; }
+  .mk-state{ margin-top:16px; }
+  .mk-state .btn{ margin-top:12px; }
+  .mk-more{ display:flex; justify-content:center; margin-top:20px; }
+  .mk-more .btn{ background:var(--white); box-shadow:var(--shadow-sm); }
+  @media (hover:hover){
+    .mk-card:hover{ transform:translateY(-3px); box-shadow:var(--shadow-md); }
+    .mk-card:hover .mk-cover img{ transform:scale(1.04); }
+  }
+
+  .mk-pill{ display:inline-flex; align-items:center; gap:6px; padding:4px 11px; border-radius:999px; font-size:12.5px; font-weight:600; white-space:nowrap; }
+  .mk-pill::before{ content:''; width:7px; height:7px; border-radius:50%; background:currentColor; }
+  .mk-st-disponible{ background:rgba(52,199,89,0.16); color:#1F6B35; }
+  .mk-st-vendido{ background:rgba(60,60,67,0.12); color:#48484A; }
+  .mk-st-prestado{ background:rgba(255,149,0,0.17); color:#8A5000; }
+  .mk-st-donado{ background:rgba(175,82,222,0.15); color:#74349A; }
+
+  /* detalle del producto */
+  .mk-detail{ display:grid; gap:20px; }
+  @media (min-width:760px){ .mk-detail{ grid-template-columns:minmax(0, 1.05fr) minmax(0, 1fr); gap:30px; align-items:start; } }
+  .mk-gal-main{ appearance:none; -webkit-appearance:none; position:relative; display:block; width:100%; aspect-ratio:1/1; padding:0; border:none; border-radius:18px; overflow:hidden; background:var(--paper-deep); cursor:zoom-in; }
+  .mk-gal-main img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .mk-thumbs{ display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:8px; margin-top:8px; }
+  .mk-thumb{ appearance:none; -webkit-appearance:none; padding:0; border:none; aspect-ratio:1; border-radius:10px; overflow:hidden; background:var(--paper-deep); cursor:pointer; opacity:.68; transition: opacity .2s ease; }
+  .mk-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .mk-thumb.on{ opacity:1; box-shadow:0 0 0 2px var(--paper), 0 0 0 4px var(--rose-deep); }
+  .mk-info{ min-width:0; }
+  .mk-info h3{ font-size:26px; letter-spacing:-0.02em; margin:10px 0 6px; overflow-wrap:anywhere; }
+  .mk-info .mk-price{ font-size:28px; }
+  .mk-info .mk-price.soft{ font-size:18px; line-height:1.3; }
+  .mk-facts{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:16px 0; }
+  .mk-fact{ background:var(--white); border-radius:12px; padding:10px 12px; box-shadow:var(--shadow-sm); min-width:0; }
+  .mk-fact small{ display:block; font-size:11.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); }
+  .mk-fact span{ display:block; font-size:14.5px; font-weight:600; overflow-wrap:anywhere; }
+  .mk-desc{ white-space:pre-line; font-size:15px; line-height:1.55; overflow-wrap:anywhere; }
+  .mk-by{ font-size:13px; color:var(--ink-soft); margin-top:12px; }
+  .mk-contact{ background:var(--white); border-radius:14px; padding:14px 16px; box-shadow:var(--shadow-sm); margin-top:16px; }
+  .mk-contact .lbl{ font-size:12px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); }
+  .mk-contact-text{ font-size:15.5px; font-weight:600; margin-top:4px; overflow-wrap:anywhere; white-space:pre-line; }
+  .mk-contact-actions{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+  .mk-contact-actions .btn{ padding:9px 14px; font-size:14px; background:var(--paper); color:var(--ink); text-decoration:none; display:inline-block; }
+  .mk-safe{ font-size:12.5px; color:var(--ink-soft); margin-top:12px; line-height:1.5; }
+  .mk-owner{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:16px; }
+  .mk-owner select, .mk-row-actions select{ font-family:var(--font-body); font-size:14px; padding:8px 10px; border:none; border-radius:10px; background:var(--white); box-shadow:inset 0 0 0 1px rgba(60,60,67,0.16); color:var(--ink); max-width:100%; }
+  .mk-owner .btn{ padding:9px 14px; font-size:14px; background:var(--white); box-shadow:var(--shadow-sm); }
+  .mk-owner .btn.danger{ color:#D70015; }
+  .mk-hide-note{ display:block; margin-top:10px; font-size:12.5px; color:#8A5000; background:rgba(255,149,0,0.13); padding:7px 11px; border-radius:10px; }
+
+  /* mis publicaciones */
+  .mk-mine{ display:flex; flex-direction:column; gap:12px; margin-top:14px; }
+  .mk-row{ display:flex; gap:14px; align-items:flex-start; background:var(--white); border-radius:16px; padding:12px; box-shadow:var(--shadow-sm); animation: riseIn .45s var(--ease) backwards; }
+  .mk-row-img{ appearance:none; -webkit-appearance:none; flex:0 0 84px; width:84px; height:84px; padding:0; border:none; border-radius:12px; overflow:hidden; background:var(--paper-deep); cursor:pointer; }
+  .mk-row-img img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .mk-row-main{ flex:1; min-width:0; }
+  .mk-row-main .t{ font-weight:600; font-size:15px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .mk-row-main .p{ font-size:13.5px; color:var(--ink-soft); margin-top:1px; }
+  .mk-row-actions{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:9px; }
+  .mk-row-actions .mk-link{ padding:6px 8px; }
+  @media (max-width:480px){ .mk-row-img{ flex-basis:68px; width:68px; height:68px; } }
+
+  /* formulario de publicación */
+  .mk-form{ display:grid; gap:18px; }
+  .mk-form .field{ margin:0; min-width:0; }
+  .mk-form .field input:not([type="checkbox"]), .mk-form .field select, .mk-form .field textarea{ width:100%; min-width:0; max-width:100%; font-size:16px; }
+  .mk-form .field-row{ margin:0; }
+  .mk-form .field textarea{ min-height:110px; }
+  .mk-sec{ font-size:12.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px; display:flex; justify-content:space-between; gap:10px; }
+  .mk-hint{ font-size:12.5px; color:var(--ink-soft); margin-top:6px; line-height:1.45; }
+  .mk-seg{ display:flex; gap:8px; }
+  .mk-seg .store-cat-pill{ flex:1; justify-content:center; padding:11px 14px; }
+  .mk-seg .store-cat-pill:not(.active){ box-shadow:inset 0 0 0 1px rgba(60,60,67,0.16); }
+  .mk-price-row{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:10px; }
+  .mk-form .mb-grid{ grid-template-columns:repeat(auto-fill, minmax(72px, 1fr)); }
+  .mk-form .mb-thumb{ aspect-ratio:1; }
+  .mk-cover-btn{ position:absolute; left:5px; bottom:5px; width:26px; height:26px; padding:0; border:none; border-radius:50%; font-size:15px; line-height:26px; text-align:center; color:#fff; background:rgba(28,28,30,0.62); cursor:pointer; }
+  .mk-cover-tag{ position:absolute; left:5px; bottom:5px; padding:3px 8px; border-radius:999px; font-size:10.5px; font-weight:600; color:#fff; background:var(--rose-deep); }
+  .mk-check{ display:flex; gap:10px; align-items:flex-start; font-size:13.5px; line-height:1.45; color:var(--ink); }
+  .mk-check input{ flex-shrink:0; width:20px; height:20px; margin-top:1px; accent-color:var(--rose-deep); }
+  .mk-form [aria-invalid="true"]{ box-shadow:0 0 0 2px #FF3B30 !important; }
+  .mk-fstatus{ font-size:13.5px; text-align:center; color:var(--ink-soft); }
+  .mk-fstatus.error{ color:#D70015; }
+  .mk-price{ display:block; }
+  .mk-flash.err{ background:rgba(255,59,48,0.12); color:#B3261E; }
+  @media (max-width:759px){ #mkfSave{ flex:2 1 0; } #mkfCancel{ flex:1 1 0; } }
+  .mk-top .lbl-short{ display:none; }
+  @media (max-width:560px){
+    .mk-top{ align-items:center; margin-bottom:14px; }
+    .mk-top .mr-head{ flex:1 1 0; min-width:0; }
+    .mk-top .mr-head p{ display:none; }
+    .mk-top .lbl-long{ display:none; } .mk-top .lbl-short{ display:inline; }
+    .mk-top .btn{ padding:10px 16px; font-size:14.5px; }
+    .mk-note{ font-size:13px; padding:11px 14px; gap:10px; margin-bottom:14px; }
+  }
+  .mk-form .field input:not([type="checkbox"]), .mk-form .field select, .mk-form .field textarea{ background:var(--white); box-shadow:inset 0 0 0 1px rgba(60,60,67,0.16); }
+  .mk-form .field input:focus, .mk-form .field select:focus, .mk-form .field textarea:focus{ background:var(--white); box-shadow:0 0 0 2px var(--rose-deep), 0 0 0 5px rgba(0,122,255,0.15); }
+  .mk-form [hidden]{ display:none !important; }
+  @media (max-width:759px){ .mk-gal-main{ aspect-ratio:4/3; } }
+  @media (max-width:380px){ .tabs .tab-btn{ padding:10px 12px; font-size:14px; white-space:nowrap; } }
+
   /* ---------- compartir en historias ---------- */
   .profile-actions{ margin-top:16px; display:flex; gap:10px; flex-wrap:wrap; }
   .share-open{ display:inline-flex; align-items:center; gap:8px; }
@@ -923,7 +1077,7 @@
         <article class="about-card reveal">
           <span class="about-num">01</span>
           <h3>Para parejas</h3>
-          <p>Registra tu fecha, tu lugar y los servicios que necesitas. Recibe ofertas, acepta la que más te guste y deja a tus proveedores guardados en un solo lugar. Registrar tu boda es gratis.</p>
+          <p>Registra tu fecha, tu lugar y los servicios que necesitas. Recibe ofertas, acepta la que más te guste y deja a tus proveedores guardados en un solo lugar. Registrar tu boda es gratis. Y en el Mercado de bodas puedes vender, prestar o regalar a otras parejas lo que ya no necesites.</p>
         </article>
         <article class="about-card reveal" style="--d:90ms;">
           <span class="about-num">02</span>
@@ -1021,6 +1175,7 @@
       <button class="tab-btn" data-tab="inicio">Inicio</button>
       <button class="tab-btn active" data-tab="pareja">Soy pareja</button>
       <button class="tab-btn" data-tab="proveedor">Soy proveedor</button>
+      <button class="tab-btn" data-tab="mercado" style="display:none">Mercado</button>
     </div>
   </div>
 </header>
@@ -1144,6 +1299,84 @@
     </div>
   </section>
 
+  <!-- ============ VISTA MERCADO (solo parejas) ============ -->
+  <section class="view" id="view-mercado">
+    <div class="subtabs">
+      <button class="subtab-btn active" data-sub="explorar" data-group="mercado">Explorar</button>
+      <button class="subtab-btn" data-sub="mias" data-group="mercado">Mis publicaciones</button>
+    </div>
+    <div class="mk-top">
+      <div class="mr-head">
+        <h2>Mercado de bodas</h2>
+        <p>Parejas que venden, prestan o regalan lo que ya no necesitan de su boda. Solo lo ven y lo usan las parejas con cuenta.</p>
+      </div>
+      <button class="btn btn-primary" type="button" id="mkNewBtn"><span aria-hidden="true">+ </span><span class="lbl-long">Publicar un producto</span><span class="lbl-short">Publicar</span></button>
+    </div>
+    <div class="mk-note">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5M12 7.6v.2"/></svg>
+      <p><b>Once no cobra ni recibe pagos.</b> Solo productos de boda en buen estado. El pago y la entrega los acuerdan las parejas entre sí, sin compromiso de Once. <a href="#mercado" data-legal="mercado">Normas del Mercado</a></p>
+    </div>
+    <p class="mk-flash" id="mkFlash" role="status" hidden></p>
+
+    <div class="panel active" id="mercado-explorar">
+      <div class="mk-bar">
+        <div class="mk-search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
+          <input type="search" id="mkQ" placeholder="Buscar: vestido, centros de mesa, letrero…" maxlength="60" autocomplete="off" aria-label="Buscar en el Mercado">
+        </div>
+        <button class="mk-filter-btn" type="button" id="mkFilterBtn" aria-expanded="false" aria-controls="mkAdv">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>
+          <span>Filtros</span><span class="mk-filter-n" id="mkFilterN" hidden>0</span>
+        </button>
+      </div>
+      <div class="mk-pills" id="mkPills" role="group" aria-label="Categoría"></div>
+      <div class="mk-adv" id="mkAdv">
+        <div class="mk-adv-grid">
+          <div class="field"><label for="mkFEstado">Estado</label>
+            <select id="mkFEstado">
+              <option value="disponible">Disponibles</option>
+              <option value="">Todos</option>
+              <option value="vendido">Vendidos</option>
+              <option value="prestado">Prestados</option>
+              <option value="donado">Donados</option>
+            </select></div>
+          <div class="field"><label for="mkFCond">Nuevo o usado</label>
+            <select id="mkFCond">
+              <option value="">Todos</option>
+              <option value="nuevo">Nuevo</option>
+              <option value="usado">Usado</option>
+            </select></div>
+          <div class="field"><label for="mkFPais">País</label>
+            <select id="mkFPais"></select></div>
+          <div class="field"><label for="mkFCiudad">Ciudad o comuna</label>
+            <input type="text" id="mkFCiudad" maxlength="60" placeholder="Ej: Providencia" autocomplete="off"></div>
+          <div class="field"><label for="mkFMax">Precio hasta</label>
+            <div class="mk-adv-price">
+              <input type="text" id="mkFMax" inputmode="decimal" placeholder="Sin límite" autocomplete="off">
+              <select id="mkFMon" aria-label="Moneda"></select>
+            </div></div>
+          <div class="field"><label for="mkFOrden">Ordenar por</label>
+            <select id="mkFOrden">
+              <option value="recientes">Más recientes</option>
+              <option value="precio_asc">Precio: de menor a mayor</option>
+              <option value="precio_desc">Precio: de mayor a menor</option>
+            </select></div>
+        </div>
+        <div class="mk-adv-foot">
+          <label class="mk-check-line"><input type="checkbox" id="mkFGratis"> Solo regalos (gratis)</label>
+          <button class="mk-link" type="button" id="mkClear">Limpiar filtros</button>
+        </div>
+      </div>
+      <div class="mk-meta"><span id="mkCount" aria-live="polite"></span></div>
+      <div id="mkList"></div>
+    </div>
+
+    <div class="panel" id="mercado-mias">
+      <div class="mk-meta"><span id="mkMineCount" aria-live="polite"></span></div>
+      <div id="mkMine"></div>
+    </div>
+  </section>
+
   <!-- ============ VISTA PROVEEDOR ============ -->
   <section class="view" id="view-proveedor">
     <div class="subtabs">
@@ -1234,6 +1467,7 @@
     <a href="#privacidad" data-legal="privacidad">Política de privacidad</a>
     <a href="#terminos" data-legal="terminos">Términos del servicio</a>
     <a href="#cancelaciones" data-legal="cancelaciones">Cancelaciones</a>
+    <a href="#mercado" data-legal="mercado">Normas del Mercado</a>
   </div>
   <p>© 2026 Once SpA · oncezz.com</p>
 </footer>
@@ -1303,6 +1537,59 @@
       <button class="up-close" type="button" data-md-close aria-label="Cerrar"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
     </div>
     <div id="mdBody"></div>
+  </div>
+</div>
+
+<div class="sh-overlay" id="mkDetailOverlay" role="dialog" aria-modal="true" aria-labelledby="mkDetailTitle">
+  <div class="sh-backdrop" data-mk-close="detail"></div>
+  <div class="sh-sheet">
+    <div class="sh-grabber" aria-hidden="true"></div>
+    <div class="sh-head">
+      <div>
+        <h2 id="mkDetailTitle">Producto</h2>
+        <p id="mkDetailSub"></p>
+      </div>
+      <button class="up-close" type="button" data-mk-close="detail" aria-label="Cerrar"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+    </div>
+    <div id="mkDetailBody"></div>
+  </div>
+</div>
+
+<div class="sh-overlay" id="mkFormOverlay" role="dialog" aria-modal="true" aria-labelledby="mkFormTitle">
+  <div class="sh-backdrop" data-mk-close="form"></div>
+  <div class="sh-sheet sh-narrow">
+    <div class="sh-grabber" aria-hidden="true"></div>
+    <div class="sh-head">
+      <div>
+        <h2 id="mkFormTitle">Publicar un producto</h2>
+        <p id="mkFormSub">Sube fotos y cuéntanos del producto. Lo verán solo las parejas con cuenta en Once.</p>
+      </div>
+      <button class="up-close" type="button" data-mk-close="form" aria-label="Cerrar"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+    </div>
+    <form class="mk-form" id="mkForm" novalidate></form>
+  </div>
+</div>
+
+<div class="cf-overlay" id="mkReportOverlay" role="dialog" aria-modal="true" aria-labelledby="mkRpTitle">
+  <div class="cf-backdrop" data-mk-rp-cancel></div>
+  <div class="cf-box rp-box">
+    <div class="rp-body">
+      <h3 id="mkRpTitle">Denunciar este anuncio</h3>
+      <p class="rp-lead">Elige qué ocurre. Quien lo publicó no sabrá que lo denunciaste. Si varias parejas lo denuncian, se oculta mientras lo revisamos.</p>
+      <div class="rp-opts" role="radiogroup" aria-label="Motivo de la denuncia">
+        <button type="button" class="rp-opt" role="radio" aria-checked="false" data-motivo="no_relacionado"><span>No es un producto de boda</span><svg class="rp-tick" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
+        <button type="button" class="rp-opt" role="radio" aria-checked="false" data-motivo="mal_estado"><span>Está en mal estado o no es como se describe</span><svg class="rp-tick" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
+        <button type="button" class="rp-opt" role="radio" aria-checked="false" data-motivo="prohibido"><span>Es un producto prohibido o ilegal</span><svg class="rp-tick" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
+        <button type="button" class="rp-opt" role="radio" aria-checked="false" data-motivo="estafa"><span>Parece una estafa o pide pagos sospechosos</span><svg class="rp-tick" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
+        <button type="button" class="rp-opt" role="radio" aria-checked="false" data-motivo="otro"><span>Otro motivo</span><svg class="rp-tick" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
+      </div>
+      <textarea class="rp-detail" id="mkRpDetail" maxlength="500" rows="2" placeholder="Detalles (opcional)" aria-label="Detalles de la denuncia"></textarea>
+      <p class="da-status" id="mkRpStatus" role="status" aria-live="polite"></p>
+    </div>
+    <div class="cf-actions">
+      <button type="button" id="mkRpCancel">Cancelar</button>
+      <button type="button" id="mkRpOk" disabled>Enviar denuncia</button>
+    </div>
   </div>
 </div>
 
@@ -1416,7 +1703,7 @@
   </div>
 </div>
 
-<div id="legalOverlay" style="display:none; position:fixed; inset:0; background:rgba(28,28,30,0.55); z-index:60; overflow-y:auto;">
+<div id="legalOverlay" style="display:none; position:fixed; inset:0; background:rgba(28,28,30,0.55); z-index:130; overflow-y:auto;">
   <div class="wrap" style="max-width:760px; padding-top:36px; padding-bottom:48px;">
     <div class="card">
       <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:6px;">
@@ -1431,7 +1718,7 @@
 <script>
   // ---------- páginas legales ----------
   const LEGAL_EMAIL = 'briansolisv@icloud.com';
-  const LEGAL_DATE = '30 de octubre de 2026';
+  const LEGAL_DATE = '14 de noviembre de 2026';
   const LEGAL_COMPANY = 'Once SpA';
   const LEGAL_RUT = '78.541.398-9';
   const LEGAL_PAGES = {
@@ -1443,7 +1730,7 @@
 
 <h3>1. Qué es Once</h3>
 <p>Once (oncezz.com) es operada por {{EMPRESA}}, RUT {{RUT}}.</p>
-<p>Once es una plataforma en línea donde las parejas que preparan su matrimonio registran su boda y los proveedores de servicios para bodas (fotografía, banquetería, música, lugares, decoración y otros) pueden conocer esos perfiles y enviarles ofertas. Además, Once ofrece «Once Store», un catálogo de productos digitales, asesorías y servicios que Once vende directamente.</p>
+<p>Once es una plataforma en línea donde las parejas que preparan su matrimonio registran su boda y los proveedores de servicios para bodas (fotografía, banquetería, música, lugares, decoración y otros) pueden conocer esos perfiles y enviarles ofertas. Además, Once ofrece «Once Store», un catálogo de productos digitales, asesorías y servicios que Once vende directamente. También ofrece el «Mercado de bodas», un espacio donde las parejas con cuenta publican productos de su boda para venderlos, prestarlos o regalarlos a otras parejas.</p>
 <p>Once no es una agencia de bodas, no organiza eventos y no es parte de los acuerdos que las parejas y los proveedores celebren entre sí.</p>
 
 <h3>2. Cuentas y requisitos</h3>
@@ -1473,7 +1760,12 @@
 <h3>8. Once Store y pagos</h3>
 <p>Las compras en Once Store se hacen directamente a Once. Los precios se expresan en dólares estadounidenses (USD) y el precio que se cobra es el que se muestra al momento de pagar. Los pagos con tarjeta de crédito o débito y con cuenta PayPal son procesados por PayPal; Once no almacena números de tarjeta. Algunos productos y servicios se cotizan de forma individual y solo se pagan una vez aceptada la cotización. Las condiciones de devolución, entrega y cancelación se detallan en la <a href="#reembolso" data-legal="reembolso">Política de reembolso</a>, la <a href="#envio" data-legal="envio">Política de envío</a> y la <a href="#cancelaciones" data-legal="cancelaciones">Política de cancelaciones</a>.</p>
 
-<h3>9. Conducta prohibida</h3>
+<h3>9. Mercado de bodas</h3>
+<p>El Mercado de bodas es un espacio para que las parejas con cuenta publiquen productos relacionados con su boda, en buen estado, para venderlos, prestarlos o regalarlos a otras parejas. Solo las cuentas de pareja pueden verlo y usarlo; las cuentas de proveedor y los visitantes sin cuenta no tienen acceso. Se rige además por las <a href="#mercado" data-legal="mercado">Normas del Mercado de bodas</a>.</p>
+<p>Los acuerdos se hacen directamente entre las parejas: Once no cobra comisión, no recibe ni administra pagos, no envía productos y no es parte de la compraventa, el préstamo ni la donación. Once no verifica a quienes publican ni los productos, no garantiza su estado, su autenticidad ni su entrega, y no responde por los incumplimientos de ninguna de las partes. Quien publica es responsable de que su anuncio sea veraz, de tener derecho a ofrecer el producto y de cumplir lo que acuerde.</p>
+<p>Podemos ocultar o eliminar anuncios que no cumplan las normas o la ley, y suspender las cuentas que las incumplan.</p>
+
+<h3>10. Conducta prohibida</h3>
 <ul>
 <li>Suplantar la identidad de otra persona o entregar datos falsos.</li>
 <li>Intentar acceder sin autorización a cuentas o sistemas, o vulnerar la seguridad de la plataforma.</li>
@@ -1481,28 +1773,80 @@
 <li>Usar los datos de otros usuarios para fines distintos a los de la plataforma, incluida su venta o el envío de publicidad no solicitada.</li>
 <li>Usar la plataforma para actividades ilegales o fraudulentas.</li>
 <li>Usar el chat para acosar o insultar, enviar publicidad no solicitada (spam), intentar estafas o pedir claves o datos de pago fuera de lo acordado.</li>
+<li>Publicar en el Mercado de bodas productos que no sean de boda, que estén en mal estado, que sean falsificados, robados o ilegales, o usar el Mercado para engañar a otras parejas.</li>
 </ul>
 
-<h3>10. Propiedad intelectual</h3>
+<h3>11. Propiedad intelectual</h3>
 <p>El nombre «Once», el logotipo, el diseño, el código y los contenidos propios de la plataforma pertenecen a sus titulares y no pueden copiarse ni usarse sin autorización previa.</p>
 
-<h3>11. Disponibilidad del servicio</h3>
+<h3>12. Disponibilidad del servicio</h3>
 <p>Trabajamos para mantener la plataforma disponible, pero no garantizamos que funcione sin interrupciones ni errores. Podemos modificar, suspender o discontinuar funciones, con aviso razonable cuando sea posible.</p>
 
-<h3>12. Limitación de responsabilidad</h3>
+<h3>13. Limitación de responsabilidad</h3>
 <p>En la máxima medida permitida por la ley, Once no será responsable por daños indirectos, lucro cesante o pérdida de oportunidades derivados del uso de la plataforma, ni por los actos u omisiones de otros usuarios. Nada en estos términos limita los derechos irrenunciables que la legislación de protección al consumidor otorgue al usuario, ni la responsabilidad que no pueda excluirse legalmente.</p>
 
-<h3>13. Suspensión y término</h3>
+<h3>14. Suspensión y término</h3>
 <p>Podemos suspender o cerrar cuentas que incumplan estos términos o la ley, con aviso cuando corresponda. El usuario puede cerrar su cuenta en cualquier momento según lo indicado en la <a href="#cancelaciones" data-legal="cancelaciones">Política de cancelaciones</a>.</p>
 
-<h3>14. Cambios a estos términos</h3>
+<h3>15. Cambios a estos términos</h3>
 <p>Podemos actualizar estos términos. Publicaremos la versión vigente con su fecha de actualización y, si el cambio es importante, avisaremos por correo electrónico o dentro de la plataforma. El uso posterior de Once implica la aceptación de la versión actualizada.</p>
 
-<h3>15. Ley aplicable y controversias</h3>
+<h3>16. Ley aplicable y controversias</h3>
 <p>Estos términos se rigen por las leyes de la República de Chile. Ante cualquier diferencia, las partes intentarán resolverla primero de buena fe escribiendo a {{EMAIL}}. Esto no afecta el derecho del consumidor de acudir a los organismos y tribunales que la ley de su país de residencia le reconozca.</p>
 
-<h3>16. Contacto</h3>
+<h3>17. Contacto</h3>
 <p>{{EMPRESA}}, RUT {{RUT}}.<br>Consultas sobre estos términos: {{EMAIL}}.</p>`
+    },
+
+    mercado: {
+      title: 'Normas del Mercado de bodas',
+      html: `
+<p class="legal-meta">Última actualización: {{FECHA}}</p>
+<p>El Mercado de bodas es un espacio dentro de Once donde las parejas con cuenta pueden publicar productos de su boda para venderlos, prestarlos o regalarlos a otras parejas. Estas normas se suman a los <a href="#terminos" data-legal="terminos">Términos del servicio</a> y a la <a href="#privacidad" data-legal="privacidad">Política de privacidad</a>.</p>
+
+<h3>1. Quién puede usarlo</h3>
+<ul>
+<li>Solo las cuentas de pareja pueden ver, publicar, editar, eliminar y denunciar anuncios. Las cuentas de proveedor y las personas sin cuenta no tienen acceso.</li>
+<li>Hay que tener una cuenta en Once y ser mayor de 18 años.</li>
+</ul>
+
+<h3>2. Qué se puede publicar</h3>
+<ul>
+<li>Solo productos relacionados con un matrimonio o su celebración: vestidos y trajes, accesorios y joyas, decoración, mesa y vajilla, flores y arreglos, papelería e invitaciones, recuerdos y regalos, iluminación y sonido, mobiliario y otros artículos de boda.</li>
+<li>Los productos deben estar en buen estado y describirse con honestidad: indica si son nuevos o usados y menciona cualquier desperfecto.</li>
+<li>Las fotos deben ser del producto real y de tu propiedad. No uses fotos de internet ni de otras personas.</li>
+<li>Cada anuncio puede llevar de 1 a 5 fotos. Cada cuenta puede tener hasta 40 anuncios y publicar hasta 10 por día.</li>
+<li>El precio es opcional: puedes dejarlo a convenir, ponerle un precio o regalar el producto (precio 0).</li>
+</ul>
+
+<h3>3. Qué no se puede publicar</h3>
+<ul>
+<li>Productos que no tengan relación con una boda.</li>
+<li>Productos rotos, vencidos, peligrosos, falsificados o robados, ni artículos cuya venta o tenencia sea ilegal.</li>
+<li>Servicios, publicidad de negocios, ofertas de trabajo ni anuncios repetidos o engañosos.</li>
+<li>Anuncios con datos personales de terceros, con contenido ofensivo o con imágenes de personas sin su consentimiento.</li>
+</ul>
+
+<h3>4. Cómo se hace el trato</h3>
+<ul>
+<li>Cada anuncio muestra los datos de contacto que escribe quien lo publica. Las parejas se contactan directamente, fuera de Once.</li>
+<li>El precio, la forma de pago, la entrega, las devoluciones y cualquier otro acuerdo se pactan solo entre las parejas. Once no cobra comisión, no recibe ni administra pagos, no envía productos y no es parte de la compraventa, el préstamo ni la donación.</li>
+<li>Once no verifica a las personas que publican, los productos ni la información de los anuncios, y no garantiza su estado, su autenticidad, su entrega ni el cumplimiento del trato. Quien publica es responsable de lo que ofrece y de cumplir lo que acuerda.</li>
+<li>Recomendamos revisar el producto antes de pagar, preferir encuentros en lugares públicos o envíos con seguimiento, desconfiar de precios demasiado bajos o de quien pide pagar por adelantado sin mostrar el producto, y no compartir contraseñas ni datos bancarios.</li>
+</ul>
+
+<h3>5. Estado de un anuncio</h3>
+<p>Quien publica indica si el producto sigue <strong>disponible</strong> o si ya fue <strong>vendido</strong>, <strong>prestado</strong> o <strong>donado</strong>, y debe mantener esa información al día. Puedes editar o eliminar tus anuncios cuando quieras.</p>
+
+<h3>6. Denuncias y moderación</h3>
+<p>Cualquier pareja puede denunciar un anuncio que no cumpla estas normas. Cuando varias parejas distintas denuncian un mismo anuncio, se oculta automáticamente mientras lo revisamos. Podemos editar, ocultar o eliminar anuncios, y suspender las cuentas que incumplan estas normas o la ley, con aviso cuando corresponda. La revisión de las denuncias es manual y puede tardar.</p>
+
+<h3>7. Privacidad</h3>
+<p>Lo que publicas (fotos, descripción, país y ciudad, tu nombre en el anuncio y los datos de contacto que escribas) lo ven todas las parejas con cuenta en Once; no se muestra a visitantes sin cuenta ni a proveedores. Escribe solo los datos de contacto que quieras compartir.</p>
+<p>Las fotos se guardan con una dirección web que no pide cuenta, así que quien reciba el enlace directo de una foto podría verla. Por eso no subas fotos con datos personales, como direcciones o documentos. Las fotos se eliminan cuando eliminas el anuncio o tu cuenta.</p>
+
+<h3>8. Contacto</h3>
+<p>Para informar un problema o consultar sobre estas normas escribe a {{EMAIL}}.</p>`
     },
 
     privacidad: {
@@ -1520,6 +1864,7 @@
 <li><strong>Perfil de pareja:</strong> nombres, fecha de la boda, comuna y país, categorías de servicio que necesitan, presupuesto estimado y foto de perfil.</li>
 <li><strong>Perfil de proveedor:</strong> datos de contacto, el tipo de proveedor que declaras (formal o emprendedor independiente), tu página web o tus redes sociales si decides agregarlas, ofertas enviadas (descripción, precio, mensaje) y hasta 3 fotografías por oferta. La pareja que recibe tu oferta ve el tipo, la página web y las redes sociales.</li>
 <li><strong>Reseñas:</strong> calificaciones y comentarios entre parejas y proveedores.</li>
+<li><strong>Mercado de bodas (solo parejas):</strong> los anuncios que publicas (título, descripción, categoría, si es nuevo o usado, precio, estado —disponible, vendido, prestado o donado—, país y ciudad, tu nombre en el anuncio, los datos de contacto que escribas y hasta 5 fotos) y las denuncias que envías sobre anuncios de otras parejas.</li>
 <li><strong>Chat:</strong> los mensajes de texto que se escriben la pareja y el proveedor cuando la pareja acepta una oferta.</li>
 <li><strong>Once Store:</strong> servicio solicitado o comprado, mensaje opcional, correo, monto pagado, fecha y número de orden de PayPal.</li>
 <li><strong>«Me gusta»:</strong> un identificador anónimo guardado en tu navegador, sin vínculo con tu identidad.</li>
@@ -1532,6 +1877,7 @@
 <h3>4. Para qué usamos los datos</h3>
 <ul>
 <li>Crear y administrar tu cuenta y prestar el servicio (mostrar perfiles, enviar y gestionar ofertas, reseñas).</li>
+<li>Mostrar tus anuncios a otras parejas en el Mercado de bodas y revisar las denuncias que reciben.</li>
 <li>Procesar compras y coordinar la entrega de productos y servicios de Once Store.</li>
 <li>Enviarte correos del servicio: aviso de una oferta nueva, cambio de estado de una oferta, aviso de un mensaje nuevo en el chat (sin incluir el contenido del mensaje), confirmaciones de solicitudes y compras.</li>
 <li>Mantener la seguridad, prevenir fraudes y cumplir obligaciones legales.</li>
@@ -1539,7 +1885,7 @@
 </ul>
 
 <h3>5. Qué información es visible para otros</h3>
-<p>En la página principal, cualquier visitante puede ver de cada pareja: nombre, fecha de la boda, comuna, categorías y foto. El correo electrónico no se muestra en la página pública. Los proveedores con cuenta pueden ver el resto de los datos del perfil de la pareja que sean necesarios para enviar una oferta. Las ofertas solo son visibles para quien las envía y para quien las recibe, y los mensajes del chat solo los ven las dos personas de esa conversación. Las reseñas se muestran asociadas al perfil correspondiente.</p>
+<p>En la página principal, cualquier visitante puede ver de cada pareja: nombre, fecha de la boda, comuna, categorías y foto. El correo electrónico no se muestra en la página pública. Los proveedores con cuenta pueden ver el resto de los datos del perfil de la pareja que sean necesarios para enviar una oferta. Las ofertas solo son visibles para quien las envía y para quien las recibe, y los mensajes del chat solo los ven las dos personas de esa conversación. Las reseñas se muestran asociadas al perfil correspondiente. Los anuncios del Mercado de bodas, incluidos tu nombre en el anuncio y los datos de contacto que escribas, solo los ven las cuentas de pareja; no se muestran a visitantes ni a proveedores, y quien denuncia un anuncio no se revela a quien lo publicó. Las fotos de los anuncios se guardan con una dirección web que no pide cuenta, así que quien reciba el enlace directo de una foto podría verla.</p>
 
 <h3>6. Con quién compartimos datos</h3>
 <p>No vendemos datos personales. Usamos proveedores de servicios que tratan datos por cuenta de Once:</p>
@@ -1559,7 +1905,7 @@
 <p>Usamos el almacenamiento local de tu navegador para mantener tu sesión iniciada y para recordar tus «me gusta». No usamos cookies de publicidad ni de seguimiento propias. Cuando usas PayPal, esa empresa puede usar cookies y tecnologías similares según su propia política de privacidad.</p>
 
 <h3>9. Conservación</h3>
-<p>Conservamos tus datos mientras tu cuenta esté activa. Al cerrarla, los eliminamos o anonimizamos, salvo los que debamos conservar por obligaciones legales o contables (por ejemplo, registros de pagos) o para resolver disputas. Puedes eliminar tu cuenta tú mismo en cualquier momento desde la app, con la opción «Eliminar cuenta» que está junto a «Cerrar sesión». Los mensajes del chat se eliminan junto con la oferta cuando cualquiera de las dos personas elimina su cuenta. Si reportas una conversación, conservamos una copia de sus últimos mensajes mientras revisamos el caso.</p>
+<p>Conservamos tus datos mientras tu cuenta esté activa. Al cerrarla, los eliminamos o anonimizamos, salvo los que debamos conservar por obligaciones legales o contables (por ejemplo, registros de pagos) o para resolver disputas. Puedes eliminar tu cuenta tú mismo en cualquier momento desde la app, con la opción «Eliminar cuenta» que está junto a «Cerrar sesión». Los mensajes del chat se eliminan junto con la oferta cuando cualquiera de las dos personas elimina su cuenta. Tus anuncios del Mercado de bodas y sus fotos se eliminan cuando los borras tú o cuando eliminas tu cuenta. Si reportas una conversación, conservamos una copia de sus últimos mensajes mientras revisamos el caso.</p>
 
 <h3>10. Seguridad</h3>
 <p>Aplicamos medidas razonables para proteger los datos, como conexiones cifradas y controles de acceso por usuario a nivel de base de datos. Ningún sistema es completamente infalible; si ocurre una vulneración que te afecte, te informaremos según lo exija la ley.</p>
@@ -1691,7 +2037,7 @@
   }
   function closeLegal(){
     legalOverlay.style.display = 'none';
-    document.body.style.overflow = '';
+    document.body.style.overflow = (typeof mrLocks !== 'undefined' && mrLocks > 0) ? 'hidden' : '';
     history.replaceState(null, '', location.pathname + location.search);
   }
   document.addEventListener('click', (e)=>{
@@ -1844,14 +2190,18 @@
     const parejaTab = document.querySelector('.tab-btn[data-tab="pareja"]');
     const proveedorTab = document.querySelector('.tab-btn[data-tab="proveedor"]');
     const storeBtn = document.getElementById('storeBtn');
+    const mercadoTab = document.querySelector('.tab-btn[data-tab="mercado"]');
+    try{ Market.setUser(role === 'proveedor' ? null : user.id); }catch(_){}
     if(role === 'proveedor'){
       parejaTab.style.display = 'none';
+      mercadoTab.style.display = 'none';
       proveedorTab.style.display = 'inline-block';
       proveedorTab.click();
       storeBtn.style.display = 'none';
     }else{
       proveedorTab.style.display = 'none';
       parejaTab.style.display = 'inline-block';
+      mercadoTab.style.display = 'inline-block';
       parejaTab.click();
       checkCoupleProfile();
       storeBtn.style.display = 'inline-block';
@@ -1948,6 +2298,7 @@
   function showHome(){
     currentUser = null;
     try{ Chat.stop(); }catch(_){}
+    try{ Market.setUser(null); }catch(_){}
     unmountHomeFromApp();
     document.getElementById('authScreen').style.display = 'none';
     document.getElementById('appShell').classList.remove('visible');
@@ -3395,7 +3746,7 @@ const OnceStory = (function(){
 
     const LISTS = {
       pareja: ['Tu perfil de boda y su foto, también si ya apareces en «Felizmente casadas».',
-               'Las fotos de tu galería de boda, las ofertas que recibiste, tus proveedores guardados y tus conversaciones con ellos.',
+               'Las fotos de tu galería de boda, las ofertas que recibiste, tus proveedores guardados, tus conversaciones con ellos y tus publicaciones del Mercado de bodas con sus fotos.',
                'Tus datos de acceso (correo y contraseña).'],
       proveedor: ['Tu perfil de proveedor, las ofertas que enviaste y tus conversaciones: las parejas dejarán de verlas, incluidas las que ya aceptaron.',
                   'Las fotos que subiste en tus ofertas.',
@@ -4093,6 +4444,822 @@ const OnceStory = (function(){
     return { open };
   })();
 
+  /* ===================== Mercado de bodas ===================== */
+  // Solo las cuentas de pareja lo ven y lo usan (lo hace cumplir la base de datos, no solo la pantalla).
+  // Once no cobra ni recibe pagos: el trato y el pago los acuerdan directamente las parejas.
+  const Market = (function(){
+    const $ = id => document.getElementById(id);
+    const esc = escapeHtml;
+    const PAGE = 24, MAX_PHOTOS = 5, MAX_ITEMS = 40;
+    const CATS = [
+      ['vestidos_trajes','Vestidos y trajes'], ['accesorios','Accesorios y joyas'], ['decoracion','Decoración'],
+      ['mesa','Mesa y vajilla'], ['flores','Flores y arreglos'], ['papeleria','Papelería e invitaciones'],
+      ['recuerdos','Recuerdos y regalos'], ['iluminacion','Iluminación y sonido'], ['mobiliario','Mobiliario'], ['otros','Otros de boda']
+    ];
+    const CAT_NAME = {}; CATS.forEach(c => { CAT_NAME[c[0]] = c[1]; });
+    const ESTADOS = { disponible:'Disponible', vendido:'Vendido', prestado:'Prestado', donado:'Donado' };
+    const COND = { nuevo:'Nuevo', usado:'Usado' };
+    const COUNTRIES = ['Chile', 'El Salvador', 'Guatemala', 'Argentina', 'España'];
+    const MONEDAS = [['CLP','CLP · peso chileno'], ['USD','USD · dólar'], ['EUR','EUR · euro'], ['ARS','ARS · peso argentino'], ['GTQ','GTQ · quetzal']];
+    const MON_CODES = MONEDAS.map(m => m[0]);
+    const MON_BY_PAIS = { 'Chile':'CLP', 'El Salvador':'USD', 'Guatemala':'GTQ', 'Argentina':'ARS', 'España':'EUR' };
+    const PUB = '/object/public/once-images/';
+    const LS_NAME = 'once_mk_name';
+    const DEF = () => ({ q:'', cat:'', cond:'', estado:'disponible', pais:'', ciudad:'', max:'', mon:'CLP', orden:'recientes', gratis:false });
+
+    const st = { uid:null, token:0, mineToken:0, loading:false, loaded:false, at:0, items:[], total:null, mine:null, mineAt:0, detail:null, flashTimer:null };
+    let F = DEF();
+    let form = null;          // formulario abierto (publicar o editar)
+    let reportId = null;
+
+    // ---------- utilidades puras (con pruebas) ----------
+    function cleanTerm(s){
+      return String(s == null ? '' : s).replace(/[%_\\,()*"'`;:<>{}\[\]|^~=&?#+!@$.]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 60);
+    }
+    // "45000", "45.000", "45,5", "1.234,50" -> número; vacío -> null; algo que no es un precio -> NaN
+    function parsePrice(raw){
+      let s = String(raw == null ? '' : raw).trim().replace(/[\s$]/g, '');
+      if(!s) return null;
+      if(!/^\d[\d.,]*$/.test(s)) return NaN;
+      const hasDot = s.indexOf('.') >= 0, hasComma = s.indexOf(',') >= 0;
+      if(hasDot && hasComma){
+        const dec = s.lastIndexOf('.') > s.lastIndexOf(',') ? '.' : ',';
+        const th = dec === '.' ? ',' : '.';
+        s = s.split(th).join('');
+        if(s.split(dec).length > 2) return NaN;
+        s = s.replace(dec, '.');
+      }else if(hasDot || hasComma){
+        const sep = hasDot ? '.' : ',';
+        const parts = s.split(sep);
+        const groups = parts.slice(1).every(p => /^\d{3}$/.test(p));
+        if(parts.length > 2){
+          if(!/^\d{1,3}$/.test(parts[0]) || !groups) return NaN;
+          s = parts.join('');
+        }else if(/^[1-9]\d{0,2}$/.test(parts[0]) && groups){
+          s = parts.join('');                       // 45.000 = 45000
+        }else if(parts[1].length <= 2 && parts[1].length > 0){
+          s = parts[0] + '.' + parts[1];            // 12,5 = 12.5
+        }else return NaN;
+      }
+      const n = Number(s);
+      return isFinite(n) ? Math.round(n * 100) / 100 : NaN;
+    }
+    function fmtPrice(p, mon){
+      if(p == null || p === '') return null;
+      const n = Number(p);
+      if(!isFinite(n)) return null;
+      if(n === 0) return 'Gratis';
+      const code = MON_CODES.indexOf(mon) >= 0 ? mon : 'CLP';
+      try{ return new Intl.NumberFormat('es-CL', { style:'currency', currency:code, maximumFractionDigits: code === 'CLP' ? 0 : 2, minimumFractionDigits: 0 }).format(n); }
+      catch(_){ return code + ' ' + n; }
+    }
+    const priceHtml = (it, extra) => {
+      const t = fmtPrice(it.precio, it.moneda);
+      if(t === null) return '<span class="mk-price soft' + (extra || '') + '">Precio a convenir</span>';
+      return '<span class="mk-price' + (t === 'Gratis' ? ' free' : '') + (extra || '') + '">' + esc(t) + '</span>';
+    };
+    const dateFmt = iso => { try{ return new Date(iso).toLocaleDateString('es-CL', { day:'numeric', month:'short', year:'numeric' }); }catch(_){ return ''; } };
+    const photosOf = it => (it && Array.isArray(it.fotos) ? it.fotos : []).filter(u => typeof u === 'string' && /^https:\/\//.test(u));
+    function pathOf(url){
+      const s = String(url || ''), i = s.indexOf(PUB);
+      if(i < 0) return '';
+      const raw = s.slice(i + PUB.length).split('?')[0];
+      try{ return decodeURIComponent(raw); }catch(_){ return raw; }
+    }
+    const me = () => (currentUser && currentUser.id) || st.uid || null;
+    const isOwn = it => !!it && !!me() && it.user_id === me();
+    const lsGet = k => { try{ return localStorage.getItem(k); }catch(_){ return null; } };
+    const lsSet = (k, v) => { try{ localStorage.setItem(k, v); }catch(_){} };
+
+    // borra de nuestro almacenamiento fotos que ya no se usan (solo las de la carpeta de esta cuenta)
+    async function removePhotos(urls){
+      const mine = 'mercado/' + me() + '/';
+      const paths = (urls || []).map(pathOf).filter(p => p && p.indexOf(mine) === 0);
+      if(!paths.length) return;
+      try{ await sb.storage.from('once-images').remove(paths); }catch(_){}
+    }
+
+    // reduce la foto (lado mayor 1600 px, JPEG) para que suba rápido y no pese
+    async function resizeToJpeg(file, max, quality){
+      let src;
+      try{ src = await createImageBitmap(file, { imageOrientation:'from-image' }); }
+      catch(e){
+        src = await new Promise((res, rej) => {
+          const u = URL.createObjectURL(file), im = new Image();
+          im.onload = () => { URL.revokeObjectURL(u); res(im); };
+          im.onerror = () => { URL.revokeObjectURL(u); rej(new Error('imagen')); };
+          im.src = u;
+        });
+      }
+      const w = src.width || src.naturalWidth, h = src.height || src.naturalHeight;
+      const k = Math.min(1, max / Math.max(w, h));
+      const cv = document.createElement('canvas'); cv.width = Math.round(w * k); cv.height = Math.round(h * k);
+      const cx = cv.getContext('2d'); cx.fillStyle = '#fff'; cx.fillRect(0, 0, cv.width, cv.height); cx.drawImage(src, 0, 0, cv.width, cv.height);
+      if(src.close) try{ src.close(); }catch(_){}
+      return new Promise(res => cv.toBlob(res, 'image/jpeg', quality));
+    }
+
+    // ---------- avisos ----------
+    function flash(msg, isErr){
+      const el = $('mkFlash'); if(!el) return;
+      clearTimeout(st.flashTimer);
+      el.textContent = msg; el.className = 'mk-flash' + (isErr ? ' err' : ''); el.hidden = false;
+      st.flashTimer = setTimeout(() => { el.hidden = true; }, isErr ? 7000 : 5000);
+    }
+    const unavailableErr = e => /PGRST205|42P01|schema cache|does not exist/i.test(String((e && (e.code || '')) + ' ' + (e && e.message || '')));
+    function friendly(e){
+      const m = String((e && e.message) || ''), c = e && e.code;
+      if(/Máximo 40/i.test(m)) return 'Llegaste al máximo de ' + MAX_ITEMS + ' publicaciones. Elimina alguna para publicar otra.';
+      if(/Máximo 10/i.test(m)) return 'Hoy ya publicaste 10 productos, que es el máximo por día. Inténtalo mañana.';
+      if(unavailableErr(e)) return 'Estamos activando el Mercado. Inténtalo de nuevo en unos minutos.';
+      if(c === '42501' || /row-level security|not authorized|Unauthorized/i.test(m)) return 'Solo las cuentas de pareja pueden publicar en el Mercado.';
+      return 'No pudimos guardar tu publicación. Revisa tu conexión e inténtalo de nuevo.';
+    }
+
+    // ---------- hojas (detalle y formulario) ----------
+    const lastFocus = {};
+    function openSheet(key, ov, focusSel){
+      if(ov.classList.contains('open')) return;
+      lastFocus[key] = document.activeElement;
+      ov.classList.add('open'); mrLock(true);
+      setTimeout(() => { const x = ov.querySelector(focusSel || '.up-close'); if(x) x.focus(); }, 80);
+    }
+    function closeSheet(key, ov, silent){
+      if(!ov.classList.contains('open')) return false;
+      ov.classList.remove('open'); mrLock(false);
+      const lf = lastFocus[key]; lastFocus[key] = null;
+      if(!silent && lf && lf.focus && document.contains(lf)) lf.focus();
+      return true;
+    }
+
+    // ---------- filtros ----------
+    function readFilters(){
+      F.q = $('mkQ').value; F.estado = $('mkFEstado').value; F.cond = $('mkFCond').value; F.pais = $('mkFPais').value;
+      F.ciudad = $('mkFCiudad').value; F.max = $('mkFMax').value; F.mon = $('mkFMon').value; F.orden = $('mkFOrden').value;
+      F.gratis = $('mkFGratis').checked;
+    }
+    function syncFilterUi(){
+      $('mkQ').value = F.q; $('mkFEstado').value = F.estado; $('mkFCond').value = F.cond; $('mkFPais').value = F.pais;
+      $('mkFCiudad').value = F.ciudad; $('mkFMax').value = F.max; $('mkFMon').value = F.mon; $('mkFOrden').value = F.orden;
+      $('mkFGratis').checked = F.gratis;
+      renderPills(); paintBadge();
+    }
+    function advCount(f){
+      let n = 0;
+      if(f.estado !== 'disponible') n++;
+      if(f.cond) n++;
+      if(f.pais) n++;
+      if(cleanTerm(f.ciudad)) n++;
+      const mx = parsePrice(f.max); if(mx !== null && !isNaN(mx)) n++;
+      if(f.orden !== 'recientes') n++;
+      if(f.gratis) n++;
+      return n;
+    }
+    const anyFilter = f => !!(cleanTerm(f.q) || f.cat || advCount(f) > 0);
+    function paintBadge(){
+      const n = advCount(F), b = $('mkFilterN');
+      b.textContent = String(n); b.hidden = n === 0;
+    }
+    function renderPills(){
+      const box = $('mkPills');
+      if(!box.firstChild){
+        box.innerHTML = [['', 'Todo']].concat(CATS).map(c => '<button type="button" class="store-cat-pill" data-cat="' + esc(c[0]) + '">' + esc(c[1]) + '</button>').join('');
+      }
+      box.querySelectorAll('[data-cat]').forEach(b => { const on = b.dataset.cat === F.cat; b.classList.toggle('active', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+    }
+    function clearFilters(){
+      F = DEF(); syncFilterUi(); load(true);
+    }
+
+    function buildQuery(f, from){
+      let q = sb.from('market_items').select('*', { count:'exact' });
+      if(f.estado) q = q.eq('estado', f.estado);
+      if(f.cat) q = q.eq('categoria', f.cat);
+      if(f.cond) q = q.eq('condicion', f.cond);
+      if(f.pais === '__otro') q = q.not('pais', 'in', '(' + COUNTRIES.map(c => '"' + c + '"').join(',') + ')');
+      else if(f.pais) q = q.eq('pais', f.pais);
+      const ciudad = cleanTerm(f.ciudad); if(ciudad) q = q.ilike('ciudad', '%' + ciudad + '%');
+      cleanTerm(f.q).split(' ').filter(Boolean).slice(0, 4).forEach(w => {
+        q = q.or('titulo.ilike.%' + w + '%,descripcion.ilike.%' + w + '%');
+      });
+      if(f.gratis) q = q.eq('precio', 0);
+      const mx = parsePrice(f.max);
+      if(mx !== null && !isNaN(mx)) q = q.eq('moneda', f.mon).lte('precio', mx);
+      if(f.orden === 'precio_asc') q = q.order('precio', { ascending:true, nullsFirst:false }).order('creado', { ascending:false });
+      else if(f.orden === 'precio_desc') q = q.order('precio', { ascending:false, nullsFirst:false }).order('creado', { ascending:false });
+      else q = q.order('creado', { ascending:false });
+      return q.range(from, from + PAGE - 1);
+    }
+
+    // ---------- lista ----------
+    const skeleton = () => '<div class="mk-grid" aria-hidden="true">' + '<div class="mk-skel"></div>'.repeat(6) + '</div>';
+    let shown = 0;   // cuántas tarjetas ya estaban en pantalla (para animar solo las nuevas)
+    function cardHtml(it, i){
+      const ph = photosOf(it), own = isOwn(it);
+      return '<button type="button" class="mk-card" data-id="' + esc(it.id) + '" style="' + (i < shown ? 'animation:none' : 'animation-delay:' + (Math.min(i - shown, 11) * 35) + 'ms') + '">'
+        + '<span class="mk-cover">' + (ph[0] ? '<img src="' + esc(ph[0]) + '" alt="" loading="lazy" decoding="async">' : '')
+        + '<span class="mk-badge">' + esc(COND[it.condicion] || '') + '</span>'
+        + (own ? '<span class="mk-badge own">Tuyo</span>' : '')
+        + (it.estado !== 'disponible' ? '<span class="mk-over">' + esc(ESTADOS[it.estado] || '') + '</span>' : '')
+        + (ph.length > 1 ? '<span class="mk-cnt">' + ph.length + ' fotos</span>' : '')
+        + '</span>'
+        + '<span class="mk-body">' + priceHtml(it)
+        + '<span class="mk-title">' + esc(it.titulo) + '</span>'
+        + '<span class="mk-place">' + esc([it.ciudad, it.pais].filter(Boolean).join(', ')) + '</span></span>'
+        + '</button>';
+    }
+    function renderList(prev){
+      shown = prev || 0;
+      const box = $('mkList'), n = st.items.length, total = st.total;
+      const cnt = $('mkCount');
+      if(!n){
+        cnt.textContent = '';
+        box.innerHTML = anyFilter(F)
+          ? '<div class="empty mk-state">No encontramos productos con esos filtros.<br><button class="btn btn-ghost" type="button" data-mk-clear>Limpiar filtros</button></div>'
+          : '<div class="empty mk-state">Todavía no hay productos en el Mercado.<br>¿Tienes algo de tu boda que ya no necesitas? Sé la primera pareja en publicar.<br><button class="btn btn-primary" type="button" data-mk-new>Publicar un producto</button></div>';
+        return;
+      }
+      const t = total != null ? total : n;
+      cnt.textContent = t + (t === 1 ? ' producto' : ' productos');
+      const more = total != null ? n < total : n % PAGE === 0;
+      box.innerHTML = '<div class="mk-grid">' + st.items.map(cardHtml).join('') + '</div>'
+        + (more ? '<div class="mk-more"><button class="btn" type="button" id="mkMore">Ver más productos</button></div>' : '');
+    }
+    function renderError(err, reset){
+      const unavail = unavailableErr(err);
+      $('mkCount').textContent = '';
+      const msg = unavail ? 'Estamos activando el Mercado. Vuelve a entrar en unos minutos.' : 'No pudimos cargar el Mercado. Revisa tu conexión e inténtalo de nuevo.';
+      if(reset || !st.items.length) $('mkList').innerHTML = '<div class="empty mk-state">' + msg + '<br><button class="btn btn-ghost" type="button" data-mk-retry>Reintentar</button></div>';
+      else{ const m = $('mkMore'); if(m){ m.disabled = false; m.textContent = 'No se pudo cargar. Reintentar'; } }
+    }
+    async function load(reset){
+      const my = ++st.token;
+      if(reset){ st.items = []; st.total = null; $('mkList').innerHTML = skeleton(); $('mkCount').textContent = ''; }
+      st.loading = true;
+      let res;
+      try{ res = await buildQuery(F, reset ? 0 : st.items.length); }catch(e){ res = { error:e }; }
+      if(my !== st.token) return;
+      st.loading = false;
+      if(!res || res.error){ renderError(res && res.error, reset); return; }
+      const rows = res.data || [], before = reset ? 0 : st.items.length;
+      st.items = reset ? rows : st.items.concat(rows);
+      st.total = typeof res.count === 'number' ? res.count : null;
+      st.loaded = true; st.at = Date.now();
+      renderList(before);
+    }
+    const invalidate = () => { st.at = 0; };
+    function refreshIfStale(){ if(me() && !st.loading && Date.now() - st.at > 60000) load(true); }
+    function show(){
+      if(currentRole !== 'pareja') return;
+      if(!st.loaded || Date.now() - st.at > 60000) load(true);
+    }
+
+    // ---------- mis publicaciones ----------
+    function mineRow(it, i){
+      const ph = photosOf(it), t = fmtPrice(it.precio, it.moneda);
+      return '<div class="mk-row" data-id="' + esc(it.id) + '" style="animation-delay:' + (Math.min(i, 8) * 40) + 'ms">'
+        + '<button type="button" class="mk-row-img" data-mk-open="' + esc(it.id) + '" aria-label="Ver ' + esc(it.titulo) + '">' + (ph[0] ? '<img src="' + esc(ph[0]) + '" alt="" loading="lazy" decoding="async">' : '') + '</button>'
+        + '<div class="mk-row-main"><div class="t">' + esc(it.titulo) + '</div>'
+        + '<div class="p">' + esc((t === null ? 'Precio a convenir' : t) + ' · ' + (COND[it.condicion] || '') + ' · ' + (CAT_NAME[it.categoria] || '')) + '</div>'
+        + (it.oculto ? '<span class="mk-hide-note">Oculto por ahora: varias parejas lo denunciaron. Lo revisaremos y, si cumple las normas, volverá a mostrarse.</span>' : '')
+        + '<div class="mk-row-actions"><select data-mk-state="' + esc(it.id) + '" aria-label="Estado de ' + esc(it.titulo) + '">'
+        + Object.keys(ESTADOS).map(k => '<option value="' + k + '"' + (it.estado === k ? ' selected' : '') + '>' + ESTADOS[k] + '</option>').join('')
+        + '</select><button type="button" class="mk-link" data-mk-edit="' + esc(it.id) + '">Editar</button>'
+        + '<button type="button" class="mk-link danger" data-mk-del="' + esc(it.id) + '">Eliminar</button></div></div></div>';
+    }
+    function renderMine(){
+      const box = $('mkMine'), list = st.mine || [];
+      $('mkMineCount').textContent = list.length ? list.length + ' de ' + MAX_ITEMS + ' publicaciones' : '';
+      box.innerHTML = list.length
+        ? '<div class="mk-mine">' + list.map(mineRow).join('') + '</div>'
+        : '<div class="empty mk-state">Todavía no has publicado nada.<br>Si tienes algo de tu boda que ya no necesitas, súbelo en un minuto.<br><button class="btn btn-primary" type="button" data-mk-new>Publicar un producto</button></div>';
+    }
+    async function loadMine(force){
+      if(!me()) return;
+      if(!force && st.mine && Date.now() - st.mineAt < 30000){ renderMine(); return; }
+      const my = ++st.mineToken;
+      if(!st.mine) $('mkMine').innerHTML = '<p class="loading">Cargando tus publicaciones…</p>';
+      let res;
+      try{ res = await sb.from('market_items').select('*').eq('user_id', me()).order('creado', { ascending:false }); }catch(e){ res = { error:e }; }
+      if(my !== st.mineToken) return;
+      if(!res || res.error){
+        $('mkMine').innerHTML = '<div class="empty mk-state">' + (unavailableErr(res && res.error) ? 'Estamos activando el Mercado. Vuelve a entrar en unos minutos.' : 'No pudimos cargar tus publicaciones. Revisa tu conexión e inténtalo de nuevo.') + '<br><button class="btn btn-ghost" type="button" data-mk-retry-mine>Reintentar</button></div>';
+        return;
+      }
+      st.mine = res.data || []; st.mineAt = Date.now();
+      renderMine();
+    }
+
+    // ---------- cambios de estado, edición y borrado ----------
+    function findItem(id){
+      return st.items.find(x => x.id === id) || (st.mine || []).find(x => x.id === id) || null;
+    }
+    function patchItem(row){
+      [st.items, st.mine || []].forEach(arr => { const i = arr.findIndex(x => x.id === row.id); if(i >= 0) arr[i] = Object.assign({}, arr[i], row); });
+    }
+    async function setEstado(id, estado){
+      const { data, error } = await sb.from('market_items').update({ estado }).eq('id', id).select('*');
+      if(error || !data || !data.length) return false;
+      patchItem(data[0]); invalidate();
+      return true;
+    }
+    async function removeItem(id){
+      const it = findItem(id); if(!it) return;
+      const yes = await CfDialog.ask({ title:'¿Eliminar esta publicación?', body:'Dejará de verse en el Mercado y se borrarán sus fotos. No se puede deshacer.', ok:'Eliminar', cancel:'Cancelar', danger:true });
+      if(!yes) return;
+      const { data, error } = await sb.from('market_items').delete().eq('id', id).select('id');
+      if(error || !data || !data.length){ flash('No pudimos eliminar la publicación. Inténtalo de nuevo.', true); return; }
+      removePhotos(it.fotos);
+      st.items = st.items.filter(x => x.id !== id);
+      if(st.total != null) st.total = Math.max(0, st.total - 1);
+      if(st.mine) st.mine = st.mine.filter(x => x.id !== id);
+      closeSheet('detail', $('mkDetailOverlay'), true); st.detail = null;
+      renderList(st.items.length); if(st.mine) renderMine();
+      flash('Publicación eliminada.');
+    }
+
+    // ---------- detalle ----------
+    function factsHtml(it){
+      const place = [it.ciudad, it.pais].filter(Boolean).join(', ');
+      const f = (l, v) => '<div class="mk-fact"><small>' + l + '</small><span>' + esc(v) + '</span></div>';
+      return '<div class="mk-facts">' + f('Nuevo o usado', COND[it.condicion] || '') + f('Categoría', CAT_NAME[it.categoria] || '') + f('Dónde está', place) + f('Publicado', dateFmt(it.creado)) + '</div>';
+    }
+    function contactHtml(it){
+      const own = isOwn(it), avail = it.estado === 'disponible';
+      if(!own && !avail) return '<div class="mk-contact"><div class="lbl">Contacto</div><div class="mk-contact-text">Este producto ya está ' + esc((ESTADOS[it.estado] || '').toLowerCase()) + '.</div></div>';
+      const c = String(it.contacto || '');
+      const isMail = /^[^\s@<>"']+@[^\s@<>"']+\.[^\s@<>"']+$/.test(c);
+      return '<div class="mk-contact"><div class="lbl">Dónde contactar</div><div class="mk-contact-text" id="mkContactText">' + esc(c) + '</div>'
+        + '<div class="mk-contact-actions"><button class="btn" type="button" data-mk-copy>Copiar</button>'
+        + (isMail ? '<a class="btn" href="mailto:' + esc(encodeURI(c)) + '">Escribir un correo</a>' : '') + '</div></div>';
+    }
+    function detailHtml(it){
+      const ph = photosOf(it), d = st.detail, own = isOwn(it);
+      return '<div class="mk-detail"><div class="mk-gallery">'
+        + '<button type="button" class="mk-gal-main" id="mkGalMain" aria-label="Ver la foto en grande">' + (ph[0] ? '<img id="mkGalImg" src="' + esc(ph[d.idx] || ph[0]) + '" alt="Foto de ' + esc(it.titulo) + '">' : '') + '</button>'
+        + (ph.length > 1 ? '<div class="mk-thumbs">' + ph.map((u, i) => '<button type="button" class="mk-thumb' + (i === d.idx ? ' on' : '') + '" data-mk-thumb="' + i + '" aria-label="Foto ' + (i + 1) + ' de ' + ph.length + '"><img src="' + esc(u) + '" alt="" loading="lazy" decoding="async"></button>').join('') + '</div>' : '')
+        + '</div><div class="mk-info">'
+        + '<span class="mk-pill mk-st-' + esc(it.estado) + '">' + esc(ESTADOS[it.estado] || '') + '</span>'
+        + '<div style="margin-top:10px">' + priceHtml(it) + '</div>'
+        + factsHtml(it)
+        + '<p class="mk-desc">' + esc(it.descripcion) + '</p>'
+        + '<p class="mk-by">Publicado por <b>' + esc(it.vendedor_nombre) + '</b></p>'
+        + contactHtml(it)
+        + (own
+          ? (it.oculto ? '<span class="mk-hide-note">Oculto por ahora: varias parejas lo denunciaron. Lo revisaremos y, si cumple las normas, volverá a mostrarse.</span>' : '')
+            + '<div class="mk-owner"><select id="mkDetState" aria-label="Estado del producto">' + Object.keys(ESTADOS).map(k => '<option value="' + k + '"' + (it.estado === k ? ' selected' : '') + '>' + ESTADOS[k] + '</option>').join('') + '</select>'
+            + '<button class="btn" type="button" data-mk-edit="' + esc(it.id) + '">Editar</button><button class="btn danger" type="button" data-mk-del="' + esc(it.id) + '">Eliminar</button></div>'
+          : '<div class="mk-owner"><button class="mk-link danger" type="button" data-mk-report="' + esc(it.id) + '">Denunciar este anuncio</button></div>')
+        + '<p class="sh-status mk-fstatus" id="mkDetMsg" role="status" aria-live="polite"></p>'
+        + '<p class="mk-safe">Once solo muestra los anuncios: no cobra comisión, no recibe pagos, no envía los productos ni garantiza el trato. Acuerden el pago y la entrega directamente entre ustedes y revisen el producto antes de pagar. <a href="#mercado" data-legal="mercado">Normas del Mercado</a></p>'
+        + '</div></div>';
+    }
+    function openDetail(id){
+      const it = findItem(id); if(!it) return;
+      st.detail = { id, idx:0 };
+      paintDetail();
+      openSheet('detail', $('mkDetailOverlay'));
+    }
+    function paintDetail(){
+      const it = st.detail && findItem(st.detail.id); if(!it) return;
+      $('mkDetailTitle').textContent = it.titulo;
+      $('mkDetailSub').textContent = isOwn(it) ? 'Tu publicación' : (CAT_NAME[it.categoria] || '');
+      $('mkDetailBody').innerHTML = detailHtml(it);
+    }
+    function setDetMsg(msg, isErr){ const el = $('mkDetMsg'); if(el){ el.textContent = msg || ''; el.className = 'sh-status mk-fstatus' + (isErr ? ' error' : ''); } }
+    async function copyContact(btn){
+      const t = ($('mkContactText') || {}).textContent || '';
+      let ok = false;
+      try{ await navigator.clipboard.writeText(t); ok = true; }catch(_){
+        try{ const r = document.createRange(); r.selectNodeContents($('mkContactText')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); ok = document.execCommand('copy'); s.removeAllRanges(); }catch(__){}
+      }
+      btn.textContent = ok ? '¡Copiado!' : 'Selecciónalo y cópialo';
+      setTimeout(() => { if(btn.isConnected) btn.textContent = 'Copiar'; }, 2200);
+    }
+
+    // ---------- formulario ----------
+    const fval = id => { const el = $(id); return el ? el.value : ''; };
+    function formHtml(it){
+      const edit = !!it;
+      return '<div><div class="mk-sec"><span>Fotos</span><span id="mkfCount"></span></div><div class="mb-grid" id="mkfPhotos"></div>'
+        + '<input type="file" id="mkfFile" accept="image/*" multiple hidden>'
+        + '<p class="mk-hint">De 1 a ' + MAX_PHOTOS + ' fotos. La primera es la portada. Muestra el producto real y su estado.</p></div>'
+        + '<div class="field"><label for="mkfTitulo">Título</label><input type="text" id="mkfTitulo" maxlength="80" placeholder="Ej: Vestido de novia talla 38" autocomplete="off"></div>'
+        + '<div class="field-row"><div class="field"><label for="mkfCat">Categoría</label><select id="mkfCat"><option value="">Elige una categoría</option>'
+        + CATS.map(c => '<option value="' + c[0] + '">' + esc(c[1]) + '</option>').join('') + '</select></div>'
+        + '<div class="field"><label id="mkfCondLbl">Nuevo o usado</label><div class="mk-seg" role="radiogroup" aria-labelledby="mkfCondLbl">'
+        + '<button type="button" class="store-cat-pill" role="radio" aria-checked="false" data-cond="nuevo">Nuevo</button>'
+        + '<button type="button" class="store-cat-pill" role="radio" aria-checked="false" data-cond="usado">Usado</button></div></div></div>'
+        + '<div class="field"><label for="mkfDesc">Detalles del producto</label><textarea id="mkfDesc" maxlength="1000" placeholder="Medidas, color, marca, cuántas unidades, cuántas veces se usó y cualquier detalle que debamos saber…"></textarea><p class="mk-hint" id="mkfDescN"></p></div>'
+        + '<div><div class="mk-price-row"><div class="field"><label for="mkfPrecio">Precio (opcional)</label><input type="text" id="mkfPrecio" inputmode="decimal" placeholder="Ej: 45.000" autocomplete="off"></div>'
+        + '<div class="field"><label for="mkfMon">Moneda</label><select id="mkfMon">' + MONEDAS.map(m => '<option value="' + m[0] + '" title="' + esc(m[1]) + '">' + m[0] + '</option>').join('') + '</select></div></div>'
+        + '<p class="mk-hint">Déjalo vacío si prefieres acordar el precio por mensaje. Escribe 0 si lo regalas o lo prestas sin costo.</p></div>'
+        + '<div class="field-row"><div class="field"><label for="mkfPais">País</label><select id="mkfPais">' + COUNTRIES.map(c => '<option value="' + esc(c) + '">' + esc(c) + '</option>').join('') + '<option value="__otro">Otro país</option></select></div>'
+        + '<div class="field"><label for="mkfCiudad">Ciudad o comuna (opcional)</label><input type="text" id="mkfCiudad" maxlength="60" placeholder="Ej: Providencia" autocomplete="off"></div></div>'
+        + '<div class="field" id="mkfPaisOtroBox" hidden><label for="mkfPaisOtro">¿En qué país está?</label><input type="text" id="mkfPaisOtro" maxlength="60" autocomplete="off"></div>'
+        + '<div class="field"><label for="mkfNombre">Tu nombre en el anuncio</label><input type="text" id="mkfNombre" maxlength="60" placeholder="Ej: Camila y Diego" autocomplete="off"></div>'
+        + '<div class="field"><label for="mkfContacto">Dónde pueden contactarte</label><input type="text" id="mkfContacto" maxlength="200" placeholder="Ej: WhatsApp +56 9 1234 5678 o Instagram @camilaydiego" autocomplete="off"><p class="mk-hint">Lo verán solo las parejas con cuenta en Once. No compartas contraseñas ni datos bancarios.</p></div>'
+        + (edit ? '<div class="field"><label for="mkfEstado">Estado del producto</label><select id="mkfEstado">' + Object.keys(ESTADOS).map(k => '<option value="' + k + '">' + ESTADOS[k] + '</option>').join('') + '</select></div>'
+          : '<label class="mk-check"><input type="checkbox" id="mkfNormas"><span>Confirmo que es un producto relacionado con una boda, que está en buen estado y que las fotos son mías. Entiendo que Once no participa en el pago ni en la entrega. Acepto las <a href="#mercado" data-legal="mercado">Normas del Mercado</a>.</span></label>')
+        + '<div class="sh-cta"><p class="sh-status mk-fstatus" id="mkfStatus" role="status" aria-live="polite"></p>'
+        + '<button class="btn btn-primary" id="mkfSave" type="submit">' + (edit ? 'Guardar cambios' : 'Publicar') + '</button>'
+        + '<button class="btn btn-ghost" id="mkfCancel" type="button">Cancelar</button></div>';
+    }
+    function setFStatus(msg, isErr){ const el = $('mkfStatus'); if(el){ el.textContent = msg || ''; el.className = 'sh-status mk-fstatus' + (isErr ? ' error' : ''); } }
+    function setCond(c){
+      form.cond = c;
+      document.querySelectorAll('#mkForm [data-cond]').forEach(b => { const on = b.dataset.cond === c; b.classList.toggle('active', on); b.setAttribute('aria-checked', on ? 'true' : 'false'); });
+    }
+    function paintDescN(){ const n = fval('mkfDesc').length; $('mkfDescN').textContent = n + '/1000'; }
+    function paintPaisOtro(){ $('mkfPaisOtroBox').hidden = fval('mkfPais') !== '__otro'; }
+    function renderFormPhotos(){
+      const g = $('mkfPhotos'); if(!g || !form) return;
+      const n = form.photos.length;
+      $('mkfCount').textContent = n + ' de ' + MAX_PHOTOS;
+      g.innerHTML = form.photos.map((p, i) =>
+        '<div class="mb-thumb"><img src="' + esc(p.src) + '" alt="Foto ' + (i + 1) + '">'
+        + (i === 0 ? '<span class="mk-cover-tag">Portada</span>' : '<button type="button" class="mk-cover-btn" data-mkf-cover="' + i + '" aria-label="Usar la foto ' + (i + 1) + ' como portada" title="Usar como portada">☆</button>')
+        + '<button class="mb-del" type="button" data-mkf-del="' + i + '" aria-label="Quitar la foto ' + (i + 1) + '"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button></div>'
+      ).join('')
+        + (n < MAX_PHOTOS ? '<button class="mb-add" type="button" id="mkfAdd"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Agregar fotos</span></button>' : '');
+    }
+    function formSnapshot(){
+      return JSON.stringify([fval('mkfTitulo'), fval('mkfCat'), form && form.cond, fval('mkfDesc'), fval('mkfPrecio'), fval('mkfMon'), fval('mkfPais'), fval('mkfPaisOtro'), fval('mkfCiudad'), fval('mkfNombre'), fval('mkfContacto'), fval('mkfEstado'), $('mkfNormas') ? $('mkfNormas').checked : null, form ? form.photos.map(p => p.key) : []]);
+    }
+    function openForm(it){
+      if(!me()) return;
+      if(!it && st.mine && st.mine.length >= MAX_ITEMS){ flash('Llegaste al máximo de ' + MAX_ITEMS + ' publicaciones. Elimina alguna para publicar otra.', true); return; }
+      const fo = $('mkFormOverlay');
+      if(fo.classList.contains('open')) return;
+      closeSheet('detail', $('mkDetailOverlay'), true);
+      form = { item: it || null, mode: it ? 'edit' : 'new', cond: '', photos: [], seq: 0, busy: false, touched: {} };
+      $('mkFormTitle').textContent = it ? 'Editar publicación' : 'Publicar un producto';
+      $('mkFormSub').textContent = it ? 'Cambia lo que necesites. Los cambios se ven al guardar.' : 'Sube fotos y cuéntanos del producto. Lo verán solo las parejas con cuenta en Once.';
+      $('mkForm').innerHTML = formHtml(it);
+      if(it){
+        photosOf(it).forEach(u => form.photos.push({ key:u, url:u, src:u }));
+        $('mkfTitulo').value = it.titulo || ''; $('mkfCat').value = it.categoria || ''; setCond(it.condicion || '');
+        $('mkfDesc').value = it.descripcion || '';
+        $('mkfPrecio').value = it.precio == null ? '' : String(it.precio).replace('.', ',');
+        $('mkfMon').value = MON_CODES.indexOf(it.moneda) >= 0 ? it.moneda : 'CLP';
+        if(COUNTRIES.indexOf(it.pais) >= 0) $('mkfPais').value = it.pais; else { $('mkfPais').value = '__otro'; $('mkfPaisOtro').value = it.pais || ''; }
+        $('mkfCiudad').value = it.ciudad || ''; $('mkfNombre').value = it.vendedor_nombre || ''; $('mkfContacto').value = it.contacto || '';
+        $('mkfEstado').value = it.estado || 'disponible';
+        form.touched = { mon:true, pais:true };
+      }else{
+        $('mkfNombre').value = lsGet(LS_NAME) || '';
+        prefillFromCouple(form);
+      }
+      paintDescN(); paintPaisOtro(); renderFormPhotos();
+      form.snap = formSnapshot();
+      openSheet('form', fo);
+    }
+    // país, ciudad y nombre sugeridos desde el perfil de la boda (solo si el campo sigue vacío)
+    async function prefillFromCouple(f){
+      try{
+        const { data } = await sb.from('couples').select('nombre,comuna,pais').eq('user_id', me()).order('creado', { ascending:false }).limit(1);
+        const c = data && data[0]; if(!c || form !== f) return;
+        if(!fval('mkfNombre') && c.nombre) $('mkfNombre').value = String(c.nombre).slice(0, 60);
+        if(!fval('mkfCiudad') && c.comuna) $('mkfCiudad').value = String(c.comuna).slice(0, 60);
+        if(!f.touched.pais && COUNTRIES.indexOf(c.pais) >= 0){
+          $('mkfPais').value = c.pais;
+          if(!f.touched.mon && MON_BY_PAIS[c.pais]) $('mkfMon').value = MON_BY_PAIS[c.pais];
+        }
+        f.snap = formSnapshot();
+      }catch(_){}
+    }
+    function readValues(){
+      const sel = fval('mkfPais');
+      return {
+        titulo: fval('mkfTitulo').trim(), categoria: fval('mkfCat'), condicion: form.cond, descripcion: fval('mkfDesc').trim(),
+        precioRaw: fval('mkfPrecio'), moneda: fval('mkfMon'),
+        pais: sel === '__otro' ? fval('mkfPaisOtro').trim() : sel, ciudad: fval('mkfCiudad').trim(),
+        nombre: fval('mkfNombre').trim(), contacto: fval('mkfContacto').trim(),
+        estado: $('mkfEstado') ? fval('mkfEstado') : null, normas: $('mkfNormas') ? $('mkfNormas').checked : true
+      };
+    }
+    function validate(v){
+      const bad = (id, msg) => ({ id, msg });
+      if(form.photos.length < 1) return bad('mkfAdd', 'Agrega al menos una foto del producto.');
+      if(v.titulo.length < 3) return bad('mkfTitulo', 'Escribe un título de al menos 3 letras.');
+      if(!v.categoria) return bad('mkfCat', 'Elige una categoría.');
+      if(!v.condicion) return bad('mkfCondLbl', 'Indica si el producto es nuevo o usado.');
+      if(v.descripcion.length < 10) return bad('mkfDesc', 'Cuéntanos un poco más: los detalles necesitan al menos 10 caracteres.');
+      const p = parsePrice(v.precioRaw);
+      if(p !== null && isNaN(p)) return bad('mkfPrecio', 'Escribe el precio solo con números, por ejemplo 45000.');
+      if(p !== null && p > 999999999) return bad('mkfPrecio', 'Ese precio es demasiado alto.');
+      if(v.pais.length < 2) return bad(fval('mkfPais') === '__otro' ? 'mkfPaisOtro' : 'mkfPais', 'Indica en qué país está el producto.');
+      if(v.nombre.length < 2) return bad('mkfNombre', 'Escribe tu nombre, o el de ustedes, para el anuncio.');
+      if(v.contacto.length < 3) return bad('mkfContacto', 'Indica dónde pueden contactarte.');
+      if(!v.normas) return bad('mkfNormas', 'Para publicar, acepta las Normas del Mercado.');
+      return null;
+    }
+    function focusField(id){
+      const el = $(id); if(!el) return;
+      document.querySelectorAll('#mkForm [aria-invalid]').forEach(x => x.removeAttribute('aria-invalid'));
+      if(id !== 'mkfCondLbl' && id !== 'mkfAdd') el.setAttribute('aria-invalid', 'true');
+      const t = id === 'mkfCondLbl' ? document.querySelector('#mkForm [data-cond]') : el;
+      if(t && t.focus){ t.focus(); if(t.scrollIntoView) t.scrollIntoView({ block:'center', behavior:'smooth' }); }
+    }
+    function syncBusy(on){
+      ['mkfSave', 'mkfCancel', 'mkfAdd'].forEach(id => { const el = $(id); if(el) el.disabled = on; });
+    }
+    async function addFiles(files){
+      if(!form) return;
+      const f = form;
+      files = files.filter(x => /^image\//.test(x.type) || /\.(jpe?g|png|webp|heic|heif)$/i.test(x.name));
+      if(!files.length){ setFStatus('Elige imágenes (JPG, PNG o similares).', true); return; }
+      const room = MAX_PHOTOS - f.photos.length;
+      if(room <= 0){ setFStatus('Ya tienes ' + MAX_PHOTOS + ' fotos, que es el máximo. Quita alguna para agregar otra.', true); return; }
+      const take = files.slice(0, room);
+      f.busy = true; syncBusy(true);
+      let fail = 0;
+      for(let i = 0; i < take.length; i++){
+        setFStatus('Preparando foto ' + (i + 1) + ' de ' + take.length + '…');
+        try{
+          const blob = await resizeToJpeg(take[i], 1600, 0.85);
+          if(!blob) throw new Error('resize');
+          if(form !== f){ return; }
+          f.photos.push({ key:'n' + (++f.seq), blob, src:URL.createObjectURL(blob) });
+          renderFormPhotos();
+        }catch(e){ fail++; }
+      }
+      if(form !== f) return;
+      f.busy = false; syncBusy(false); renderFormPhotos();
+      if(fail) setFStatus(fail === take.length ? 'No pudimos leer ' + (fail === 1 ? 'la foto' : 'las fotos') + '. Prueba con otra imagen.' : 'Una de las fotos no se pudo leer y no se agregó.', true);
+      else if(files.length > take.length) setFStatus('Solo cabían ' + take.length + ' (el máximo es ' + MAX_PHOTOS + ').');
+      else setFStatus('');
+    }
+    function freeForm(){
+      if(form) form.photos.forEach(p => { if(p.blob){ try{ URL.revokeObjectURL(p.src); }catch(_){} } });
+      form = null;
+    }
+    async function requestCloseForm(){
+      const fo = $('mkFormOverlay');
+      if(!form || !fo.classList.contains('open') || form.busy) return;
+      if(formSnapshot() !== form.snap){
+        const yes = await CfDialog.ask({ title:'¿Descartar los cambios?', body: form.mode === 'new' ? 'Lo que escribiste y las fotos que agregaste no se guardarán.' : 'Los cambios que hiciste no se guardarán.', ok:'Descartar', cancel:'Seguir editando', danger:true });
+        if(!yes) return;
+      }
+      closeSheet('form', fo); freeForm();
+    }
+    async function submit(){
+      if(!form || form.busy) return;
+      const v = readValues(), err = validate(v);
+      if(err){ setFStatus(err.msg, true); focusField(err.id); return; }
+      document.querySelectorAll('#mkForm [aria-invalid]').forEach(x => x.removeAttribute('aria-invalid'));
+      const f = form; f.busy = true; syncBusy(true);
+      const oldUrls = f.mode === 'edit' ? (f.item.fotos || []).slice() : [];   // las fotos que tenía antes de guardar
+      const uploaded = [];
+      let row;
+      try{
+        const urls = [], nNew = f.photos.filter(p => p.blob).length; let k = 0;
+        for(const p of f.photos){
+          if(!p.blob){ urls.push(p.url); continue; }
+          setFStatus('Subiendo foto ' + (++k) + ' de ' + nNew + '…');
+          const path = 'mercado/' + me() + '/' + uid() + '.jpg';
+          const up = await sb.storage.from('once-images').upload(path, p.blob, { contentType:'image/jpeg', cacheControl:'31536000' });
+          if(up.error) throw up.error;
+          uploaded.push(path);
+          urls.push(sb.storage.from('once-images').getPublicUrl(path).data.publicUrl);
+        }
+        setFStatus(f.mode === 'new' ? 'Publicando…' : 'Guardando…');
+        let price = parsePrice(v.precioRaw);
+        if(price !== null) price = v.moneda === 'CLP' ? Math.round(price) : price;
+        const payload = { titulo: v.titulo, descripcion: v.descripcion, categoria: v.categoria, condicion: v.condicion, precio: price, moneda: v.moneda,
+          pais: v.pais, ciudad: v.ciudad || null, vendedor_nombre: v.nombre, contacto: v.contacto, fotos: urls };
+        if(f.mode === 'new'){
+          payload.acepto_normas = true;
+          const r = await sb.from('market_items').insert([payload]).select('*').single();
+          if(r.error || !r.data) throw (r.error || new Error('insert'));
+          row = r.data;
+        }else{
+          payload.estado = v.estado;
+          const r = await sb.from('market_items').update(payload).eq('id', f.item.id).select('*');
+          if(r.error) throw r.error;
+          if(!r.data || !r.data.length) throw new Error('sin cambios');
+          row = r.data[0];
+        }
+      }catch(e){
+        if(uploaded.length){ try{ await sb.storage.from('once-images').remove(uploaded); }catch(_){} }
+        if(form === f){ f.busy = false; syncBusy(false); setFStatus(friendly(e), true); }
+        return;
+      }
+      // guardado: desde aquí nada borra las fotos nuevas
+      if(f.mode === 'edit') removePhotos(oldUrls.filter(u => (row.fotos || []).indexOf(u) < 0));
+      lsSet(LS_NAME, v.nombre);
+      closeSheet('form', $('mkFormOverlay'), true); freeForm();
+      invalidate();
+      if(f.mode === 'new'){
+        st.mine = null;
+        flash('¡Listo! Tu producto ya está publicado en el Mercado.');
+        const tab = document.querySelector('.subtab-btn[data-group="mercado"][data-sub="mias"]');
+        if(tab) tab.click();
+      }else{
+        patchItem(row); renderList(st.items.length); if(st.mine) renderMine();
+        flash('Guardamos los cambios de tu publicación.');
+      }
+    }
+    function wireForm(){
+      const fm = $('mkForm');
+      fm.addEventListener('submit', e => { e.preventDefault(); submit(); });
+      fm.addEventListener('click', e => {
+        if(!form) return;
+        if(e.target.closest('#mkfCancel')){ requestCloseForm(); return; }
+        if(e.target.closest('#mkfAdd')){ $('mkfFile').click(); return; }
+        const cond = e.target.closest('[data-cond]'); if(cond){ setCond(cond.dataset.cond); return; }
+        const del = e.target.closest('[data-mkf-del]');
+        if(del){
+          const p = form.photos.splice(Number(del.dataset.mkfDel), 1)[0];
+          if(p && p.blob){ try{ URL.revokeObjectURL(p.src); }catch(_){} }
+          renderFormPhotos(); setFStatus(''); return;
+        }
+        const cv = e.target.closest('[data-mkf-cover]');
+        if(cv){ const i = Number(cv.dataset.mkfCover), p = form.photos.splice(i, 1)[0]; form.photos.unshift(p); renderFormPhotos(); }
+      });
+      fm.addEventListener('change', e => {
+        if(!form) return;
+        if(e.target.id === 'mkfFile'){ const fl = Array.from(e.target.files || []); e.target.value = ''; if(fl.length) addFiles(fl); return; }
+        if(e.target.id === 'mkfPais'){
+          form.touched.pais = true; paintPaisOtro();
+          if(!form.touched.mon && MON_BY_PAIS[e.target.value]) $('mkfMon').value = MON_BY_PAIS[e.target.value];
+        }
+        if(e.target.id === 'mkfMon') form.touched.mon = true;
+      });
+      fm.addEventListener('input', e => { if(form && e.target.id === 'mkfDesc') paintDescN(); });
+    }
+
+    // ---------- denuncias ----------
+    const rpOv = $('mkReportOverlay'), rpOk = $('mkRpOk'), rpCancel = $('mkRpCancel'), rpDetail = $('mkRpDetail'), rpStatus = $('mkRpStatus');
+    const rpOpts = Array.prototype.slice.call(rpOv.querySelectorAll('.rp-opt'));
+    let rpMotivo = '', rpBusy = false, rpFocus = null, rpTimer = null;
+    const rpSync = () => { rpOk.disabled = rpBusy || !rpMotivo; rpCancel.disabled = rpBusy; rpDetail.disabled = rpBusy; };
+    function rpSet(msg, kind){ rpStatus.textContent = msg || ''; rpStatus.className = 'da-status' + (kind === 'error' ? ' error' : kind === 'ok' ? ' rp-ok' : ''); }
+    function openReport(id){
+      if(!id || rpOv.classList.contains('open')) return;
+      reportId = id; rpMotivo = ''; rpBusy = false; rpFocus = document.activeElement;
+      rpOpts.forEach(o => o.setAttribute('aria-checked', 'false'));
+      rpDetail.value = ''; rpSet(''); rpCancel.textContent = 'Cancelar'; rpSync();
+      rpOv.classList.add('open'); mrLock(true);
+      setTimeout(() => rpOpts[0].focus(), 80);
+    }
+    function closeReport(){
+      if(rpBusy || !rpOv.classList.contains('open')) return;
+      clearTimeout(rpTimer);
+      rpOv.classList.remove('open'); mrLock(false);
+      if(rpFocus && rpFocus.focus && document.contains(rpFocus)) rpFocus.focus();
+    }
+    async function submitReport(){
+      if(rpBusy || !rpMotivo || !reportId) return;
+      rpBusy = true; rpSync(); rpSet('Enviando…');
+      let error = null;
+      try{ ({ error } = await sb.from('market_reports').insert([{ item_id: reportId, motivo: rpMotivo, detalle: rpDetail.value.trim() || null }])); }
+      catch(e){ error = e || new Error('red'); }
+      rpBusy = false;
+      if(!error || error.code === '23505'){
+        rpSet(error ? 'Ya habías denunciado este anuncio. Lo estamos revisando.' : 'Gracias. Recibimos tu denuncia y la revisaremos.', 'ok');
+        rpOk.disabled = true; rpCancel.disabled = false; rpCancel.textContent = 'Cerrar';
+        rpTimer = setTimeout(closeReport, 1800);
+        return;
+      }
+      rpSync();
+      rpSet(/Demasiadas denuncias/i.test(error.message || '') ? 'Has enviado varias denuncias hoy. Inténtalo mañana.' : 'No pudimos enviar la denuncia. Inténtalo de nuevo.', 'error');
+    }
+
+    // ---------- eventos ----------
+    function wire(){
+      // filtros
+      let tq = null;
+      const later = (fn, ms) => { clearTimeout(tq); tq = setTimeout(fn, ms); };
+      const apply = () => { clearTimeout(tq); readFilters(); paintBadge(); renderPills(); load(true); };
+      $('mkQ').addEventListener('input', () => later(apply, 350));
+      $('mkQ').addEventListener('search', apply);
+      $('mkQ').addEventListener('keydown', e => { if(e.key === 'Enter'){ e.preventDefault(); apply(); } });
+      ['mkFEstado', 'mkFCond', 'mkFPais', 'mkFMon', 'mkFOrden', 'mkFGratis'].forEach(id => $(id).addEventListener('change', apply));
+      ['mkFCiudad', 'mkFMax'].forEach(id => { $(id).addEventListener('input', () => later(apply, 450)); $(id).addEventListener('keydown', e => { if(e.key === 'Enter'){ e.preventDefault(); apply(); } }); });
+      $('mkClear').addEventListener('click', clearFilters);
+      $('mkFilterBtn').addEventListener('click', () => {
+        const open = !$('mkAdv').classList.contains('open');
+        $('mkAdv').classList.toggle('open', open); $('mkFilterBtn').setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      $('mkPills').addEventListener('click', e => {
+        const b = e.target.closest('[data-cat]'); if(!b) return;
+        F.cat = b.dataset.cat; readFilters(); renderPills(); load(true);
+      });
+
+      // lista y publicaciones propias
+      $('mkList').addEventListener('click', e => {
+        const card = e.target.closest('.mk-card'); if(card){ openDetail(card.dataset.id); return; }
+        if(e.target.closest('#mkMore')){ const b = $('mkMore'); b.disabled = true; b.textContent = 'Cargando…'; load(false); return; }
+        if(e.target.closest('[data-mk-new]')){ openForm(null); return; }
+        if(e.target.closest('[data-mk-clear]')){ clearFilters(); return; }
+        if(e.target.closest('[data-mk-retry]')){ load(true); }
+      });
+      $('mkMine').addEventListener('click', e => {
+        const o = e.target.closest('[data-mk-open]'); if(o){ openDetail(o.dataset.mkOpen); return; }
+        const ed = e.target.closest('[data-mk-edit]'); if(ed){ const it = findItem(ed.dataset.mkEdit); if(it) openForm(it); return; }
+        const dl = e.target.closest('[data-mk-del]'); if(dl){ removeItem(dl.dataset.mkDel); return; }
+        if(e.target.closest('[data-mk-new]')){ openForm(null); return; }
+        if(e.target.closest('[data-mk-retry-mine]')){ loadMine(true); }
+      });
+      $('mkMine').addEventListener('change', async e => {
+        const s = e.target.closest('[data-mk-state]'); if(!s) return;
+        const it = findItem(s.dataset.mkState); if(!it) return;
+        const prev = it.estado; s.disabled = true;
+        const ok = await setEstado(it.id, s.value);
+        s.disabled = false;
+        if(!ok){ s.value = prev; flash('No pudimos cambiar el estado. Inténtalo de nuevo.', true); return; }
+        flash('Estado actualizado: ' + ESTADOS[s.value].toLowerCase() + '.');
+      });
+      $('mkNewBtn').addEventListener('click', () => openForm(null));
+
+      // detalle
+      const dOv = $('mkDetailOverlay');
+      dOv.querySelectorAll('[data-mk-close]').forEach(el => el.addEventListener('click', () => { closeSheet('detail', dOv); st.detail = null; }));
+      $('mkDetailBody').addEventListener('click', async e => {
+        const d = st.detail; if(!d) return;
+        const it = findItem(d.id); if(!it) return;
+        const th = e.target.closest('[data-mk-thumb]');
+        if(th){
+          d.idx = Number(th.dataset.mkThumb); const ph = photosOf(it);
+          $('mkGalImg').src = ph[d.idx];
+          dOv.querySelectorAll('.mk-thumb').forEach((b, i) => b.classList.toggle('on', i === d.idx));
+          return;
+        }
+        if(e.target.closest('#mkGalMain')){ const ph = photosOf(it); if(ph.length) PhotoViewer.open(ph, d.idx, it.titulo); return; }
+        const cp = e.target.closest('[data-mk-copy]'); if(cp){ copyContact(cp); return; }
+        const ed = e.target.closest('[data-mk-edit]'); if(ed){ openForm(it); return; }
+        const dl = e.target.closest('[data-mk-del]'); if(dl){ removeItem(it.id); return; }
+        const rp = e.target.closest('[data-mk-report]'); if(rp){ openReport(it.id); }
+      });
+      $('mkDetailBody').addEventListener('change', async e => {
+        if(e.target.id !== 'mkDetState') return;
+        const d = st.detail, it = d && findItem(d.id); if(!it) return;
+        const prev = it.estado, sel = e.target, nv = sel.value; sel.disabled = true;
+        const ok = await setEstado(it.id, nv);
+        if(!st.detail || st.detail.id !== it.id) return;
+        if(!ok){ sel.disabled = false; sel.value = prev; setDetMsg('No pudimos cambiar el estado. Inténtalo de nuevo.', true); return; }
+        paintDetail(); setDetMsg('Estado actualizado: ' + ESTADOS[nv].toLowerCase() + '.');
+        renderList(st.items.length); if(st.mine) renderMine();
+      });
+
+      // formulario
+      const fOv = $('mkFormOverlay');
+      fOv.querySelectorAll('[data-mk-close]').forEach(el => el.addEventListener('click', requestCloseForm));
+      wireForm();
+
+      // denuncia
+      rpOpts.forEach(o => o.addEventListener('click', () => { rpMotivo = o.dataset.motivo; rpOpts.forEach(x => x.setAttribute('aria-checked', x === o ? 'true' : 'false')); rpSync(); }));
+      rpOk.addEventListener('click', submitReport);
+      rpCancel.addEventListener('click', closeReport);
+      rpOv.querySelector('[data-mk-rp-cancel]').addEventListener('click', closeReport);
+
+      // en "window" para ver el estado ANTES de que los demás avisos (visor, confirmación) cierren el suyo
+      window.addEventListener('keydown', e => {
+        if(rpOv.classList.contains('open')){
+          if(e.key === 'Escape'){ e.stopPropagation(); closeReport(); return; }
+          if(e.key === 'Tab'){
+            const fcs = Array.prototype.filter.call(rpOv.querySelectorAll('button, textarea'), n => !n.disabled && n.offsetParent !== null);
+            if(!fcs.length){ e.preventDefault(); return; }
+            const first = fcs[0], last = fcs[fcs.length - 1];
+            if(e.shiftKey && (document.activeElement === first || !rpOv.contains(document.activeElement))){ e.preventDefault(); last.focus(); }
+            else if(!e.shiftKey && (document.activeElement === last || !rpOv.contains(document.activeElement))){ e.preventDefault(); first.focus(); }
+          }
+          return;
+        }
+        if(e.key !== 'Escape') return;
+        if(['cfOverlay', 'rpOverlay', 'lbOverlay'].some(id => { const n = $(id); return n && n.classList.contains('open'); })) return;
+        const lg = $('legalOverlay'); if(lg && lg.style.display === 'block') return;
+        if(fOv.classList.contains('open')){ e.stopPropagation(); requestCloseForm(); }
+        else if(dOv.classList.contains('open')){ e.stopPropagation(); closeSheet('detail', dOv); st.detail = null; }
+      }, true);
+    }
+
+    // ---------- ciclo de vida ----------
+    function reset(){
+      st.token++; st.mineToken++; st.loading = false; st.loaded = false; st.at = 0; st.items = []; st.total = null; st.mine = null; st.mineAt = 0; st.detail = null;
+      closeSheet('detail', $('mkDetailOverlay'), true); closeSheet('form', $('mkFormOverlay'), true); freeForm();
+      if(rpOv.classList.contains('open')){ rpBusy = false; clearTimeout(rpTimer); rpOv.classList.remove('open'); mrLock(false); }
+      F = DEF(); syncFilterUi();
+      $('mkList').innerHTML = ''; $('mkMine').innerHTML = ''; $('mkCount').textContent = ''; $('mkMineCount').textContent = '';
+      $('mkFlash').hidden = true;
+      $('mkAdv').classList.remove('open'); $('mkFilterBtn').setAttribute('aria-expanded', 'false');
+    }
+    function setUser(id){
+      id = id || null;
+      if(st.uid !== id){ reset(); st.uid = id; }
+    }
+    function init(){
+      $('mkFPais').innerHTML = '<option value="">Todos los países</option>' + COUNTRIES.map(c => '<option value="' + esc(c) + '">' + esc(c) + '</option>').join('') + '<option value="__otro">Otro país</option>';
+      $('mkFMon').innerHTML = MONEDAS.map(m => '<option value="' + m[0] + '">' + m[0] + '</option>').join('');
+      syncFilterUi();
+      wire();
+    }
+    init();
+
+    return { show, setUser, reset, loadMine, refreshIfStale, _t:{ parsePrice, fmtPrice, cleanTerm, pathOf, advCount } };
+  })();
+
   sb.auth.onAuthStateChange((_event, session)=>{
     if(session && session.user) showApp(session.user);
     else showHome();
@@ -4110,6 +5277,7 @@ const OnceStory = (function(){
       document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
       document.getElementById('view-' + btn.dataset.tab).classList.add('active');
       if(btn.dataset.tab === 'proveedor') loadCouples();
+      if(btn.dataset.tab === 'mercado') Market.show();
       if(btn.dataset.tab === 'inicio'){ loadPublicCouples(); loadUpcoming(); inicioTabShown(); }
     });
   });
@@ -4122,6 +5290,8 @@ const OnceStory = (function(){
       document.querySelectorAll('#view-' + group + ' .panel').forEach(p=>p.classList.remove('active'));
       document.getElementById(group + '-' + btn.dataset.sub).classList.add('active');
       if(btn.dataset.sub === 'misproveedores') loadProviders();
+      if(btn.dataset.group === 'mercado' && btn.dataset.sub === 'mias') Market.loadMine();
+      if(btn.dataset.group === 'mercado' && btn.dataset.sub === 'explorar') Market.refreshIfStale();
       if(btn.dataset.sub === 'misenviadas') loadSentOffers();
       if(btn.dataset.sub === 'registrar' && btn.dataset.group === 'pareja') checkCoupleProfile();
     });
