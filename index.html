@@ -670,6 +670,20 @@
   @media (max-width:759px){ .mk-gal-main{ aspect-ratio:4/3; } }
   @media (max-width:380px){ .tabs .tab-btn{ padding:10px 12px; font-size:14px; white-space:nowrap; } }
 
+  /* vigencia de las publicaciones (solo la ve su dueña) */
+  .mk-vigrow{ display:flex; flex-wrap:wrap; align-items:center; gap:2px 12px; margin-top:7px; font-size:13px; line-height:1.4; }
+  .mk-vigrow:empty{ display:none; }
+  .mk-vigrow.det{ margin:12px 0 0; }
+  .mk-vigrow .btn{ padding:7px 14px; font-size:13.5px; }
+  .mk-vig{ color:var(--ink-soft); }
+  .mk-vig.warn{ color:#8A5000; font-weight:600; }
+  .mk-vig.bad{ color:#B3261E; font-weight:600; }
+  .mk-vigrow .mk-link{ padding:4px 2px; }
+
+  .role-hint{ font-size:13px; line-height:1.45; color:var(--ink-soft); margin-top:8px; }
+  .role-hint[hidden]{ display:none; }
+  #auth-role{ min-width:0; max-width:100%; box-sizing:border-box; text-overflow:ellipsis; }
+
   /* ---------- compartir en historias ---------- */
   .profile-actions{ margin-top:16px; display:flex; gap:10px; flex-wrap:wrap; }
   .share-open{ display:inline-flex; align-items:center; gap:8px; }
@@ -1077,7 +1091,7 @@
         <article class="about-card reveal">
           <span class="about-num">01</span>
           <h3>Para parejas</h3>
-          <p>Registra tu fecha, tu lugar y los servicios que necesitas. Recibe ofertas, acepta la que más te guste y deja a tus proveedores guardados en un solo lugar. Registrar tu boda es gratis. Y en el Mercado de bodas puedes vender, prestar o regalar a otras parejas lo que ya no necesites.</p>
+          <p>Registra tu fecha, tu lugar y los servicios que necesitas. Recibe ofertas, acepta la que más te guste y deja a tus proveedores guardados en un solo lugar. Registrar tu boda es gratis. Y en el Mercado de bodas puedes comprar, vender, prestar o regalar productos de boda; si no te casas, crea una cuenta solo para el Mercado.</p>
         </article>
         <article class="about-card reveal" style="--d:90ms;">
           <span class="about-num">02</span>
@@ -1144,7 +1158,9 @@
         <select id="auth-role">
           <option value="pareja">Pareja que se casa</option>
           <option value="proveedor">Proveedor de bodas</option>
+          <option value="mercado">Solo comprar o vender</option>
         </select>
+        <p class="role-hint" id="roleHint" hidden>Con esta cuenta usas solo el Mercado de bodas: ver, comprar, vender, prestar o regalar productos de boda. No incluye registrar una boda ni enviar ofertas.</p>
       </div>
       <button type="submit" class="btn btn-primary" id="auth-submit-btn" style="width:100%;">Entrar</button>
       <p class="status" id="auth-status"></p>
@@ -1299,7 +1315,7 @@
     </div>
   </section>
 
-  <!-- ============ VISTA MERCADO (solo parejas) ============ -->
+  <!-- ============ VISTA MERCADO (parejas y cuentas «Mercado») ============ -->
   <section class="view" id="view-mercado">
     <div class="subtabs">
       <button class="subtab-btn active" data-sub="explorar" data-group="mercado">Explorar</button>
@@ -1308,13 +1324,13 @@
     <div class="mk-top">
       <div class="mr-head">
         <h2>Mercado de bodas</h2>
-        <p>Parejas que venden, prestan o regalan lo que ya no necesitan de su boda. Solo lo ven y lo usan las parejas con cuenta.</p>
+        <p>Productos de boda que se venden, prestan o regalan entre personas. Solo lo ven y lo usan las cuentas de Once que usan el Mercado.</p>
       </div>
       <button class="btn btn-primary" type="button" id="mkNewBtn"><span aria-hidden="true">+ </span><span class="lbl-long">Publicar un producto</span><span class="lbl-short">Publicar</span></button>
     </div>
     <div class="mk-note">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5M12 7.6v.2"/></svg>
-      <p><b>Once no cobra ni recibe pagos.</b> Solo productos de boda en buen estado. El pago y la entrega los acuerdan las parejas entre sí, sin compromiso de Once. <a href="#mercado" data-legal="mercado">Normas del Mercado</a></p>
+      <p><b>Once no cobra ni recibe pagos.</b> Solo productos de boda en buen estado. El pago y la entrega los acuerdan entre sí quienes compran y venden, sin compromiso de Once. <a href="#mercado" data-legal="mercado">Normas del Mercado</a></p>
     </div>
     <p class="mk-flash" id="mkFlash" role="status" hidden></p>
 
@@ -1562,7 +1578,7 @@
     <div class="sh-head">
       <div>
         <h2 id="mkFormTitle">Publicar un producto</h2>
-        <p id="mkFormSub">Sube fotos y cuéntanos del producto. Lo verán solo las parejas con cuenta en Once.</p>
+        <p id="mkFormSub">Sube fotos y cuéntanos del producto. Lo verán las personas con cuenta en el Mercado. Dura 60 días y la puedes renovar.</p>
       </div>
       <button class="up-close" type="button" data-mk-close="form" aria-label="Cerrar"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
     </div>
@@ -1575,7 +1591,7 @@
   <div class="cf-box rp-box">
     <div class="rp-body">
       <h3 id="mkRpTitle">Denunciar este anuncio</h3>
-      <p class="rp-lead">Elige qué ocurre. Quien lo publicó no sabrá que lo denunciaste. Si varias parejas lo denuncian, se oculta mientras lo revisamos.</p>
+      <p class="rp-lead">Elige qué ocurre. Quien lo publicó no sabrá que lo denunciaste. Si varias personas lo denuncian, se oculta mientras lo revisamos.</p>
       <div class="rp-opts" role="radiogroup" aria-label="Motivo de la denuncia">
         <button type="button" class="rp-opt" role="radio" aria-checked="false" data-motivo="no_relacionado"><span>No es un producto de boda</span><svg class="rp-tick" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
         <button type="button" class="rp-opt" role="radio" aria-checked="false" data-motivo="mal_estado"><span>Está en mal estado o no es como se describe</span><svg class="rp-tick" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
@@ -1730,14 +1746,14 @@
 
 <h3>1. Qué es Once</h3>
 <p>Once (oncezz.com) es operada por {{EMPRESA}}, RUT {{RUT}}.</p>
-<p>Once es una plataforma en línea donde las parejas que preparan su matrimonio registran su boda y los proveedores de servicios para bodas (fotografía, banquetería, música, lugares, decoración y otros) pueden conocer esos perfiles y enviarles ofertas. Además, Once ofrece «Once Store», un catálogo de productos digitales, asesorías y servicios que Once vende directamente. También ofrece el «Mercado de bodas», un espacio donde las parejas con cuenta publican productos de su boda para venderlos, prestarlos o regalarlos a otras parejas.</p>
+<p>Once es una plataforma en línea donde las parejas que preparan su matrimonio registran su boda y los proveedores de servicios para bodas (fotografía, banquetería, música, lugares, decoración y otros) pueden conocer esos perfiles y enviarles ofertas. Además, Once ofrece «Once Store», un catálogo de productos digitales, asesorías y servicios que Once vende directamente. También ofrece el «Mercado de bodas», un espacio donde las personas con cuenta publican productos de boda para venderlos, prestarlos o regalarlos, y otras personas con cuenta pueden verlos y contactarlas.</p>
 <p>Once no es una agencia de bodas, no organiza eventos y no es parte de los acuerdos que las parejas y los proveedores celebren entre sí.</p>
 
 <h3>2. Cuentas y requisitos</h3>
 <ul>
 <li>Para registrarse se debe ser mayor de 18 años y tener capacidad legal para contratar.</li>
 <li>La información entregada debe ser verdadera, completa y estar actualizada.</li>
-<li>Cada cuenta tiene un rol: pareja o proveedor. El usuario es responsable de mantener la confidencialidad de su contraseña y de toda la actividad realizada desde su cuenta.</li>
+<li>Cada cuenta tiene un tipo: pareja, proveedor o «Mercado» (para quienes no registran una boda y solo quieren ver, comprar o vender en el Mercado de bodas). El usuario es responsable de mantener la confidencialidad de su contraseña y de toda la actividad realizada desde su cuenta.</li>
 <li>El usuario debe avisarnos de inmediato si sospecha un uso no autorizado de su cuenta.</li>
 </ul>
 
@@ -1761,8 +1777,8 @@
 <p>Las compras en Once Store se hacen directamente a Once. Los precios se expresan en dólares estadounidenses (USD) y el precio que se cobra es el que se muestra al momento de pagar. Los pagos con tarjeta de crédito o débito y con cuenta PayPal son procesados por PayPal; Once no almacena números de tarjeta. Algunos productos y servicios se cotizan de forma individual y solo se pagan una vez aceptada la cotización. Las condiciones de devolución, entrega y cancelación se detallan en la <a href="#reembolso" data-legal="reembolso">Política de reembolso</a>, la <a href="#envio" data-legal="envio">Política de envío</a> y la <a href="#cancelaciones" data-legal="cancelaciones">Política de cancelaciones</a>.</p>
 
 <h3>9. Mercado de bodas</h3>
-<p>El Mercado de bodas es un espacio para que las parejas con cuenta publiquen productos relacionados con su boda, en buen estado, para venderlos, prestarlos o regalarlos a otras parejas. Solo las cuentas de pareja pueden verlo y usarlo; las cuentas de proveedor y los visitantes sin cuenta no tienen acceso. Se rige además por las <a href="#mercado" data-legal="mercado">Normas del Mercado de bodas</a>.</p>
-<p>Los acuerdos se hacen directamente entre las parejas: Once no cobra comisión, no recibe ni administra pagos, no envía productos y no es parte de la compraventa, el préstamo ni la donación. Once no verifica a quienes publican ni los productos, no garantiza su estado, su autenticidad ni su entrega, y no responde por los incumplimientos de ninguna de las partes. Quien publica es responsable de que su anuncio sea veraz, de tener derecho a ofrecer el producto y de cumplir lo que acuerde.</p>
+<p>El Mercado de bodas es un espacio para que las personas con cuenta publiquen productos relacionados con un matrimonio, en buen estado, para venderlos, prestarlos o regalarlos. Pueden verlo y usarlo las cuentas de pareja y las cuentas «Mercado»; las cuentas de proveedor y los visitantes sin cuenta no tienen acceso. Se rige además por las <a href="#mercado" data-legal="mercado">Normas del Mercado de bodas</a>. Cada anuncio disponible dura 60 días y puede renovarse; los anuncios vencidos, vendidos, prestados o donados se eliminan automáticamente, con sus fotos, 30 días después.</p>
+<p>Los acuerdos se hacen directamente entre quienes compran y venden: Once no cobra comisión, no recibe ni administra pagos, no envía productos y no es parte de la compraventa, el préstamo ni la donación. Once no verifica a quienes publican ni los productos, no garantiza su estado, su autenticidad ni su entrega, y no responde por los incumplimientos de ninguna de las partes. Quien publica es responsable de que su anuncio sea veraz, de tener derecho a ofrecer el producto y de cumplir lo que acuerde.</p>
 <p>Podemos ocultar o eliminar anuncios que no cumplan las normas o la ley, y suspender las cuentas que las incumplan.</p>
 
 <h3>10. Conducta prohibida</h3>
@@ -1773,7 +1789,7 @@
 <li>Usar los datos de otros usuarios para fines distintos a los de la plataforma, incluida su venta o el envío de publicidad no solicitada.</li>
 <li>Usar la plataforma para actividades ilegales o fraudulentas.</li>
 <li>Usar el chat para acosar o insultar, enviar publicidad no solicitada (spam), intentar estafas o pedir claves o datos de pago fuera de lo acordado.</li>
-<li>Publicar en el Mercado de bodas productos que no sean de boda, que estén en mal estado, que sean falsificados, robados o ilegales, o usar el Mercado para engañar a otras parejas.</li>
+<li>Publicar en el Mercado de bodas productos que no sean de boda, que estén en mal estado, que sean falsificados, robados o ilegales, o usar el Mercado para engañar a otras personas.</li>
 </ul>
 
 <h3>11. Propiedad intelectual</h3>
@@ -1802,12 +1818,13 @@
       title: 'Normas del Mercado de bodas',
       html: `
 <p class="legal-meta">Última actualización: {{FECHA}}</p>
-<p>El Mercado de bodas es un espacio dentro de Once donde las parejas con cuenta pueden publicar productos de su boda para venderlos, prestarlos o regalarlos a otras parejas. Estas normas se suman a los <a href="#terminos" data-legal="terminos">Términos del servicio</a> y a la <a href="#privacidad" data-legal="privacidad">Política de privacidad</a>.</p>
+<p>El Mercado de bodas es un espacio dentro de Once donde las personas con cuenta pueden publicar productos relacionados con un matrimonio para venderlos, prestarlos o regalarlos. Estas normas se suman a los <a href="#terminos" data-legal="terminos">Términos del servicio</a> y a la <a href="#privacidad" data-legal="privacidad">Política de privacidad</a>.</p>
 
 <h3>1. Quién puede usarlo</h3>
 <ul>
-<li>Solo las cuentas de pareja pueden ver, publicar, editar, eliminar y denunciar anuncios. Las cuentas de proveedor y las personas sin cuenta no tienen acceso.</li>
+<li>Pueden ver, publicar, editar, eliminar y denunciar anuncios las cuentas de pareja y las cuentas «Mercado» (para quienes no registran una boda y solo quieren ver, comprar o vender). Las cuentas de proveedor y las personas sin cuenta no tienen acceso.</li>
 <li>Hay que tener una cuenta en Once y ser mayor de 18 años.</li>
+<li>El Mercado es para personas que venden, prestan o regalan sus propias cosas. No es un espacio para publicitar negocios ni servicios: los proveedores ofrecen los suyos en Once mediante ofertas.</li>
 </ul>
 
 <h3>2. Qué se puede publicar</h3>
@@ -1829,8 +1846,8 @@
 
 <h3>4. Cómo se hace el trato</h3>
 <ul>
-<li>Cada anuncio muestra los datos de contacto que escribe quien lo publica. Las parejas se contactan directamente, fuera de Once.</li>
-<li>El precio, la forma de pago, la entrega, las devoluciones y cualquier otro acuerdo se pactan solo entre las parejas. Once no cobra comisión, no recibe ni administra pagos, no envía productos y no es parte de la compraventa, el préstamo ni la donación.</li>
+<li>Cada anuncio muestra los datos de contacto que escribe quien lo publica. Quienes compran y venden se contactan directamente, fuera de Once.</li>
+<li>El precio, la forma de pago, la entrega, las devoluciones y cualquier otro acuerdo se pactan solo entre quienes compran y venden. Once no cobra comisión, no recibe ni administra pagos, no envía productos y no es parte de la compraventa, el préstamo ni la donación.</li>
 <li>Once no verifica a las personas que publican, los productos ni la información de los anuncios, y no garantiza su estado, su autenticidad, su entrega ni el cumplimiento del trato. Quien publica es responsable de lo que ofrece y de cumplir lo que acuerda.</li>
 <li>Recomendamos revisar el producto antes de pagar, preferir encuentros en lugares públicos o envíos con seguimiento, desconfiar de precios demasiado bajos o de quien pide pagar por adelantado sin mostrar el producto, y no compartir contraseñas ni datos bancarios.</li>
 </ul>
@@ -1838,14 +1855,23 @@
 <h3>5. Estado de un anuncio</h3>
 <p>Quien publica indica si el producto sigue <strong>disponible</strong> o si ya fue <strong>vendido</strong>, <strong>prestado</strong> o <strong>donado</strong>, y debe mantener esa información al día. Puedes editar o eliminar tus anuncios cuando quieras.</p>
 
-<h3>6. Denuncias y moderación</h3>
-<p>Cualquier pareja puede denunciar un anuncio que no cumpla estas normas. Cuando varias parejas distintas denuncian un mismo anuncio, se oculta automáticamente mientras lo revisamos. Podemos editar, ocultar o eliminar anuncios, y suspender las cuentas que incumplan estas normas o la ley, con aviso cuando corresponda. La revisión de las denuncias es manual y puede tardar.</p>
+<h3>6. Vigencia y eliminación automática</h3>
+<ul>
+<li>Cada anuncio disponible está visible durante 60 días. Pasado ese plazo deja de mostrarse a las demás personas, pero quien lo publicó lo sigue viendo en «Mis publicaciones».</li>
+<li>7 días antes de que venza te avisamos por correo electrónico, una sola vez. Mientras siga disponible puedes renovarlo con el botón «Renovar» y vuelve a durar 60 días.</li>
+<li>Si no se renueva, el anuncio se elimina automáticamente, junto con sus fotos, 30 días después de vencer.</li>
+<li>Cuando marcas un anuncio como vendido, prestado o donado, se elimina automáticamente, junto con sus fotos, 30 días después. Si lo vuelves a marcar como disponible, vuelve a durar 60 días.</li>
+<li>La eliminación automática se ejecuta una vez al día, por lo que puede ocurrir algunas horas después del plazo indicado.</li>
+</ul>
 
-<h3>7. Privacidad</h3>
-<p>Lo que publicas (fotos, descripción, país y ciudad, tu nombre en el anuncio y los datos de contacto que escribas) lo ven todas las parejas con cuenta en Once; no se muestra a visitantes sin cuenta ni a proveedores. Escribe solo los datos de contacto que quieras compartir.</p>
-<p>Las fotos se guardan con una dirección web que no pide cuenta, así que quien reciba el enlace directo de una foto podría verla. Por eso no subas fotos con datos personales, como direcciones o documentos. Las fotos se eliminan cuando eliminas el anuncio o tu cuenta.</p>
+<h3>7. Denuncias y moderación</h3>
+<p>Cualquier persona con cuenta puede denunciar un anuncio que no cumpla estas normas. Cuando varias personas distintas denuncian un mismo anuncio, se oculta automáticamente mientras lo revisamos. Podemos editar, ocultar o eliminar anuncios, y suspender las cuentas que incumplan estas normas o la ley, con aviso cuando corresponda. La revisión de las denuncias es manual y puede tardar.</p>
 
-<h3>8. Contacto</h3>
+<h3>8. Privacidad</h3>
+<p>Lo que publicas (fotos, descripción, país y ciudad, tu nombre en el anuncio y los datos de contacto que escribas) lo ven las demás cuentas de pareja y de Mercado; no se muestra a visitantes sin cuenta ni a proveedores. Escribe solo los datos de contacto que quieras compartir. Usamos tu correo de la cuenta solo para avisarte antes de que un anuncio venza.</p>
+<p>Las fotos se guardan con una dirección web que no pide cuenta, así que quien reciba el enlace directo de una foto podría verla. Por eso no subas fotos con datos personales, como direcciones o documentos. Las fotos se eliminan cuando eliminas el anuncio o tu cuenta, o cuando el anuncio se elimina automáticamente (ver el punto 6).</p>
+
+<h3>9. Contacto</h3>
 <p>Para informar un problema o consultar sobre estas normas escribe a {{EMAIL}}.</p>`
     },
 
@@ -1860,11 +1886,11 @@
 
 <h3>2. Datos que recopilamos</h3>
 <ul>
-<li><strong>Cuenta:</strong> correo electrónico, contraseña (almacenada de forma cifrada por nuestro proveedor de autenticación) y rol (pareja o proveedor).</li>
+<li><strong>Cuenta:</strong> correo electrónico, contraseña (almacenada de forma cifrada por nuestro proveedor de autenticación) y rol (pareja, proveedor o «Mercado»).</li>
 <li><strong>Perfil de pareja:</strong> nombres, fecha de la boda, comuna y país, categorías de servicio que necesitan, presupuesto estimado y foto de perfil.</li>
 <li><strong>Perfil de proveedor:</strong> datos de contacto, el tipo de proveedor que declaras (formal o emprendedor independiente), tu página web o tus redes sociales si decides agregarlas, ofertas enviadas (descripción, precio, mensaje) y hasta 3 fotografías por oferta. La pareja que recibe tu oferta ve el tipo, la página web y las redes sociales.</li>
 <li><strong>Reseñas:</strong> calificaciones y comentarios entre parejas y proveedores.</li>
-<li><strong>Mercado de bodas (solo parejas):</strong> los anuncios que publicas (título, descripción, categoría, si es nuevo o usado, precio, estado —disponible, vendido, prestado o donado—, país y ciudad, tu nombre en el anuncio, los datos de contacto que escribas y hasta 5 fotos) y las denuncias que envías sobre anuncios de otras parejas.</li>
+<li><strong>Mercado de bodas (parejas y cuentas «Mercado»):</strong> los anuncios que publicas (título, descripción, categoría, si es nuevo o usado, precio, estado —disponible, vendido, prestado o donado—, país y ciudad, tu nombre en el anuncio, los datos de contacto que escribas y hasta 5 fotos) y las denuncias que envías sobre anuncios de otras personas.</li>
 <li><strong>Chat:</strong> los mensajes de texto que se escriben la pareja y el proveedor cuando la pareja acepta una oferta.</li>
 <li><strong>Once Store:</strong> servicio solicitado o comprado, mensaje opcional, correo, monto pagado, fecha y número de orden de PayPal.</li>
 <li><strong>«Me gusta»:</strong> un identificador anónimo guardado en tu navegador, sin vínculo con tu identidad.</li>
@@ -1877,7 +1903,7 @@
 <h3>4. Para qué usamos los datos</h3>
 <ul>
 <li>Crear y administrar tu cuenta y prestar el servicio (mostrar perfiles, enviar y gestionar ofertas, reseñas).</li>
-<li>Mostrar tus anuncios a otras parejas en el Mercado de bodas y revisar las denuncias que reciben.</li>
+<li>Mostrar tus anuncios a otras personas con cuenta en el Mercado de bodas, revisar las denuncias que reciben y avisarte por correo antes de que un anuncio venza.</li>
 <li>Procesar compras y coordinar la entrega de productos y servicios de Once Store.</li>
 <li>Enviarte correos del servicio: aviso de una oferta nueva, cambio de estado de una oferta, aviso de un mensaje nuevo en el chat (sin incluir el contenido del mensaje), confirmaciones de solicitudes y compras.</li>
 <li>Mantener la seguridad, prevenir fraudes y cumplir obligaciones legales.</li>
@@ -1885,7 +1911,7 @@
 </ul>
 
 <h3>5. Qué información es visible para otros</h3>
-<p>En la página principal, cualquier visitante puede ver de cada pareja: nombre, fecha de la boda, comuna, categorías y foto. El correo electrónico no se muestra en la página pública. Los proveedores con cuenta pueden ver el resto de los datos del perfil de la pareja que sean necesarios para enviar una oferta. Las ofertas solo son visibles para quien las envía y para quien las recibe, y los mensajes del chat solo los ven las dos personas de esa conversación. Las reseñas se muestran asociadas al perfil correspondiente. Los anuncios del Mercado de bodas, incluidos tu nombre en el anuncio y los datos de contacto que escribas, solo los ven las cuentas de pareja; no se muestran a visitantes ni a proveedores, y quien denuncia un anuncio no se revela a quien lo publicó. Las fotos de los anuncios se guardan con una dirección web que no pide cuenta, así que quien reciba el enlace directo de una foto podría verla.</p>
+<p>En la página principal, cualquier visitante puede ver de cada pareja: nombre, fecha de la boda, comuna, categorías y foto. El correo electrónico no se muestra en la página pública. Los proveedores con cuenta pueden ver el resto de los datos del perfil de la pareja que sean necesarios para enviar una oferta. Las ofertas solo son visibles para quien las envía y para quien las recibe, y los mensajes del chat solo los ven las dos personas de esa conversación. Las reseñas se muestran asociadas al perfil correspondiente. Los anuncios del Mercado de bodas, incluidos tu nombre en el anuncio y los datos de contacto que escribas, solo los ven las cuentas de pareja y las cuentas «Mercado»; no se muestran a visitantes ni a proveedores, y quien denuncia un anuncio no se revela a quien lo publicó. Las fotos de los anuncios se guardan con una dirección web que no pide cuenta, así que quien reciba el enlace directo de una foto podría verla.</p>
 
 <h3>6. Con quién compartimos datos</h3>
 <p>No vendemos datos personales. Usamos proveedores de servicios que tratan datos por cuenta de Once:</p>
@@ -1905,7 +1931,7 @@
 <p>Usamos el almacenamiento local de tu navegador para mantener tu sesión iniciada y para recordar tus «me gusta». No usamos cookies de publicidad ni de seguimiento propias. Cuando usas PayPal, esa empresa puede usar cookies y tecnologías similares según su propia política de privacidad.</p>
 
 <h3>9. Conservación</h3>
-<p>Conservamos tus datos mientras tu cuenta esté activa. Al cerrarla, los eliminamos o anonimizamos, salvo los que debamos conservar por obligaciones legales o contables (por ejemplo, registros de pagos) o para resolver disputas. Puedes eliminar tu cuenta tú mismo en cualquier momento desde la app, con la opción «Eliminar cuenta» que está junto a «Cerrar sesión». Los mensajes del chat se eliminan junto con la oferta cuando cualquiera de las dos personas elimina su cuenta. Tus anuncios del Mercado de bodas y sus fotos se eliminan cuando los borras tú o cuando eliminas tu cuenta. Si reportas una conversación, conservamos una copia de sus últimos mensajes mientras revisamos el caso.</p>
+<p>Conservamos tus datos mientras tu cuenta esté activa. Al cerrarla, los eliminamos o anonimizamos, salvo los que debamos conservar por obligaciones legales o contables (por ejemplo, registros de pagos) o para resolver disputas. Puedes eliminar tu cuenta tú mismo en cualquier momento desde la app, con la opción «Eliminar cuenta» que está junto a «Cerrar sesión». Los mensajes del chat se eliminan junto con la oferta cuando cualquiera de las dos personas elimina su cuenta. Tus anuncios del Mercado de bodas y sus fotos se eliminan cuando los borras tú, cuando eliminas tu cuenta o automáticamente cuando vencen, según las Normas del Mercado de bodas. Si reportas una conversación, conservamos una copia de sus últimos mensajes mientras revisamos el caso.</p>
 
 <h3>10. Seguridad</h3>
 <p>Aplicamos medidas razonables para proteger los datos, como conexiones cifradas y controles de acceso por usuario a nivel de base de datos. Ningún sistema es completamente infalible; si ocurre una vulneración que te afecte, te informaremos según lo exija la ley.</p>
@@ -2148,6 +2174,10 @@
     }
   });
 
+  document.getElementById('auth-role').addEventListener('change', (e)=>{
+    document.getElementById('roleHint').hidden = e.target.value !== 'mercado';
+  });
+
   document.getElementById('logoutBtn').addEventListener('click', async ()=>{
     await sb.auth.signOut();
   });
@@ -2191,12 +2221,24 @@
     const proveedorTab = document.querySelector('.tab-btn[data-tab="proveedor"]');
     const storeBtn = document.getElementById('storeBtn');
     const mercadoTab = document.querySelector('.tab-btn[data-tab="mercado"]');
-    try{ Market.setUser(role === 'proveedor' ? null : user.id); }catch(_){}
+    const inicioTab = document.querySelector('.tab-btn[data-tab="inicio"]');
+    const tabsBar = document.querySelector('.tabs');
+    const soloMercado = role === 'mercado';
+    try{ Market.setUser((role === 'pareja' || role === 'mercado') ? user.id : null); }catch(_){}
+    // cuenta «solo Mercado»: sin barra de pestañas, sin boda, sin proveedores y sin mensajes
+    tabsBar.style.display = soloMercado ? 'none' : '';
+    inicioTab.style.display = soloMercado ? 'none' : '';
     if(role === 'proveedor'){
       parejaTab.style.display = 'none';
       mercadoTab.style.display = 'none';
       proveedorTab.style.display = 'inline-block';
       proveedorTab.click();
+      storeBtn.style.display = 'none';
+    }else if(soloMercado){
+      parejaTab.style.display = 'none';
+      proveedorTab.style.display = 'none';
+      mercadoTab.style.display = 'inline-block';
+      mercadoTab.click();
       storeBtn.style.display = 'none';
     }else{
       proveedorTab.style.display = 'none';
@@ -2206,11 +2248,11 @@
       checkCoupleProfile();
       storeBtn.style.display = 'inline-block';
     }
-    try{ Chat.start(user); }catch(_){}
+    if(!soloMercado){ try{ Chat.start(user); }catch(_){} }
     if(goHomeAfterReload){
       goHomeAfterReload = false;
       const homeTab = document.querySelector('.tab-btn[data-tab="inicio"]');
-      if(homeTab) homeTab.click();
+      if(homeTab && !soloMercado) homeTab.click();
       window.scrollTo(0, 0);
     }
   }
@@ -4445,8 +4487,9 @@ const OnceStory = (function(){
   })();
 
   /* ===================== Mercado de bodas ===================== */
-  // Solo las cuentas de pareja lo ven y lo usan (lo hace cumplir la base de datos, no solo la pantalla).
-  // Once no cobra ni recibe pagos: el trato y el pago los acuerdan directamente las parejas.
+  // Lo ven y lo usan las cuentas de pareja y las cuentas «Mercado» (lo hace cumplir la base de datos, no solo la pantalla).
+  // Once no cobra ni recibe pagos: el trato y el pago los acuerdan directamente quienes compran y venden.
+  // Cada publicación disponible dura 60 días y se puede renovar; lo vencido se borra solo (lo hace una función diaria en el servidor).
   const Market = (function(){
     const $ = id => document.getElementById(id);
     const esc = escapeHtml;
@@ -4465,9 +4508,10 @@ const OnceStory = (function(){
     const MON_BY_PAIS = { 'Chile':'CLP', 'El Salvador':'USD', 'Guatemala':'GTQ', 'Argentina':'ARS', 'España':'EUR' };
     const PUB = '/object/public/once-images/';
     const LS_NAME = 'once_mk_name';
+    const DAY = 864e5, VIG_DAYS = 60, GRACE_DAYS = 30, WARN_DAYS = 7, RENEW_FROM = 14;
     const DEF = () => ({ q:'', cat:'', cond:'', estado:'disponible', pais:'', ciudad:'', max:'', mon:'CLP', orden:'recientes', gratis:false });
 
-    const st = { uid:null, token:0, mineToken:0, loading:false, loaded:false, at:0, items:[], total:null, mine:null, mineAt:0, detail:null, flashTimer:null };
+    const st = { noVig:false, renewing:false, uid:null, token:0, mineToken:0, loading:false, loaded:false, at:0, items:[], total:null, mine:null, mineAt:0, detail:null, flashTimer:null };
     let F = DEF();
     let form = null;          // formulario abierto (publicar o editar)
     let reportId = null;
@@ -4528,6 +4572,37 @@ const OnceStory = (function(){
     }
     const me = () => (currentUser && currentUser.id) || st.uid || null;
     const isOwn = it => !!it && !!me() && it.user_id === me();
+    const canUse = () => currentRole === 'pareja' || currentRole === 'mercado';
+    // cuánta vida le queda a una publicación (se muestra solo a su dueña)
+    function vigInfo(it, now){
+      if(!it) return null;
+      now = now == null ? Date.now() : now;
+      if(it.estado !== 'disponible'){
+        const since = Date.parse(it.estado_cambiado || it.actualizado || it.creado);
+        if(isNaN(since)) return null;
+        return { kind:'cerrada', days: Math.max(0, Math.ceil((since + GRACE_DAYS * DAY - now) / DAY)) };
+      }
+      const exp = Date.parse(it.expira_en);
+      if(isNaN(exp)) return null;            // si el SQL nuevo aún no se ejecutó, no se muestra nada
+      if(exp > now) return { kind:'activa', days: Math.max(1, Math.ceil((exp - now) / DAY)) };
+      return { kind:'vencida', days: Math.max(0, Math.ceil((exp + GRACE_DAYS * DAY - now) / DAY)) };
+    }
+    const dias = n => n === 0 ? 'hoy' : n === 1 ? 'en 1 día' : 'en ' + n + ' días';
+    function vigText(it){
+      const v = vigInfo(it); if(!v) return null;
+      if(v.kind === 'activa') return { cls: v.days <= WARN_DAYS ? 'warn' : '', t: v.days <= WARN_DAYS ? (v.days === 1 ? 'Vence mañana' : 'Vence en ' + v.days + ' días') : 'Visible ' + v.days + ' días más' };
+      if(v.kind === 'vencida') return { cls:'bad', t:'Venció: ya no se ve en el Mercado. Si no la renuevas, se eliminará ' + dias(v.days) + '.' };
+      return { cls:'', t:'Se eliminará, con sus fotos, ' + dias(v.days) + '.' };
+    }
+    const canRenew = it => {
+      if(!it || it.estado !== 'disponible' || it.oculto) return false;
+      const v = vigInfo(it); return !!v && (v.kind === 'vencida' || (v.kind === 'activa' && v.days <= RENEW_FROM));
+    };
+    function vigHtml(it, renewCls){
+      const t = vigText(it); if(!t) return '';
+      return '<span class="mk-vig ' + t.cls + '">' + esc(t.t) + '</span>'
+        + (canRenew(it) ? '<button type="button" class="' + (renewCls || 'mk-link') + '" data-mk-renew="' + esc(it.id) + '">Renovar 60 días</button>' : '');
+    }
     const lsGet = k => { try{ return localStorage.getItem(k); }catch(_){ return null; } };
     const lsSet = (k, v) => { try{ localStorage.setItem(k, v); }catch(_){} };
 
@@ -4572,7 +4647,7 @@ const OnceStory = (function(){
       if(/Máximo 40/i.test(m)) return 'Llegaste al máximo de ' + MAX_ITEMS + ' publicaciones. Elimina alguna para publicar otra.';
       if(/Máximo 10/i.test(m)) return 'Hoy ya publicaste 10 productos, que es el máximo por día. Inténtalo mañana.';
       if(unavailableErr(e)) return 'Estamos activando el Mercado. Inténtalo de nuevo en unos minutos.';
-      if(c === '42501' || /row-level security|not authorized|Unauthorized/i.test(m)) return 'Solo las cuentas de pareja pueden publicar en el Mercado.';
+      if(c === '42501' || /row-level security|not authorized|Unauthorized/i.test(m)) return 'Esta cuenta no puede publicar en el Mercado. Solo pueden hacerlo las parejas y las cuentas de Mercado.';
       return 'No pudimos guardar tu publicación. Revisa tu conexión e inténtalo de nuevo.';
     }
 
@@ -4642,6 +4717,7 @@ const OnceStory = (function(){
       cleanTerm(f.q).split(' ').filter(Boolean).slice(0, 4).forEach(w => {
         q = q.or('titulo.ilike.%' + w + '%,descripcion.ilike.%' + w + '%');
       });
+      if(!st.noVig) q = q.or('estado.neq.disponible,expira_en.gt.' + new Date().toISOString());
       if(f.gratis) q = q.eq('precio', 0);
       const mx = parsePrice(f.max);
       if(mx !== null && !isNaN(mx)) q = q.eq('moneda', f.mon).lte('precio', mx);
@@ -4676,7 +4752,7 @@ const OnceStory = (function(){
         cnt.textContent = '';
         box.innerHTML = anyFilter(F)
           ? '<div class="empty mk-state">No encontramos productos con esos filtros.<br><button class="btn btn-ghost" type="button" data-mk-clear>Limpiar filtros</button></div>'
-          : '<div class="empty mk-state">Todavía no hay productos en el Mercado.<br>¿Tienes algo de tu boda que ya no necesitas? Sé la primera pareja en publicar.<br><button class="btn btn-primary" type="button" data-mk-new>Publicar un producto</button></div>';
+          : '<div class="empty mk-state">Todavía no hay productos en el Mercado.<br>¿Tienes algo de boda que ya no necesitas? Sé la primera persona en publicar.<br><button class="btn btn-primary" type="button" data-mk-new>Publicar un producto</button></div>';
         return;
       }
       const t = total != null ? total : n;
@@ -4700,6 +4776,7 @@ const OnceStory = (function(){
       try{ res = await buildQuery(F, reset ? 0 : st.items.length); }catch(e){ res = { error:e }; }
       if(my !== st.token) return;
       st.loading = false;
+      if(res && res.error && !st.noVig && /expira_en/i.test(String(res.error.message || '') + ' ' + String(res.error.details || ''))){ st.noVig = true; st.loading = false; return load(reset); }   // aún sin el SQL nuevo: se muestra sin vigencia
       if(!res || res.error){ renderError(res && res.error, reset); return; }
       const rows = res.data || [], before = reset ? 0 : st.items.length;
       st.items = reset ? rows : st.items.concat(rows);
@@ -4710,7 +4787,7 @@ const OnceStory = (function(){
     const invalidate = () => { st.at = 0; };
     function refreshIfStale(){ if(me() && !st.loading && Date.now() - st.at > 60000) load(true); }
     function show(){
-      if(currentRole !== 'pareja') return;
+      if(!canUse()) return;
       if(!st.loaded || Date.now() - st.at > 60000) load(true);
     }
 
@@ -4721,7 +4798,8 @@ const OnceStory = (function(){
         + '<button type="button" class="mk-row-img" data-mk-open="' + esc(it.id) + '" aria-label="Ver ' + esc(it.titulo) + '">' + (ph[0] ? '<img src="' + esc(ph[0]) + '" alt="" loading="lazy" decoding="async">' : '') + '</button>'
         + '<div class="mk-row-main"><div class="t">' + esc(it.titulo) + '</div>'
         + '<div class="p">' + esc((t === null ? 'Precio a convenir' : t) + ' · ' + (COND[it.condicion] || '') + ' · ' + (CAT_NAME[it.categoria] || '')) + '</div>'
-        + (it.oculto ? '<span class="mk-hide-note">Oculto por ahora: varias parejas lo denunciaron. Lo revisaremos y, si cumple las normas, volverá a mostrarse.</span>' : '')
+        + (it.oculto ? '<span class="mk-hide-note">Oculto por ahora: varias personas lo denunciaron. Lo revisaremos y, si cumple las normas, volverá a mostrarse.</span>' : '')
+        + '<div class="mk-vigrow" data-vig="' + esc(it.id) + '">' + vigHtml(it) + '</div>'
         + '<div class="mk-row-actions"><select data-mk-state="' + esc(it.id) + '" aria-label="Estado de ' + esc(it.titulo) + '">'
         + Object.keys(ESTADOS).map(k => '<option value="' + k + '"' + (it.estado === k ? ' selected' : '') + '>' + ESTADOS[k] + '</option>').join('')
         + '</select><button type="button" class="mk-link" data-mk-edit="' + esc(it.id) + '">Editar</button>'
@@ -4732,7 +4810,7 @@ const OnceStory = (function(){
       $('mkMineCount').textContent = list.length ? list.length + ' de ' + MAX_ITEMS + ' publicaciones' : '';
       box.innerHTML = list.length
         ? '<div class="mk-mine">' + list.map(mineRow).join('') + '</div>'
-        : '<div class="empty mk-state">Todavía no has publicado nada.<br>Si tienes algo de tu boda que ya no necesitas, súbelo en un minuto.<br><button class="btn btn-primary" type="button" data-mk-new>Publicar un producto</button></div>';
+        : '<div class="empty mk-state">Todavía no has publicado nada.<br>Si tienes algo de boda que ya no usas, súbelo en un minuto.<br><button class="btn btn-primary" type="button" data-mk-new>Publicar un producto</button></div>';
     }
     async function loadMine(force){
       if(!me()) return;
@@ -4762,6 +4840,29 @@ const OnceStory = (function(){
       if(error || !data || !data.length) return false;
       patchItem(data[0]); invalidate();
       return true;
+    }
+    const estadoMsg = nv => 'Estado actualizado: ' + ESTADOS[nv].toLowerCase() + '. ' + (nv === 'disponible' ? 'Vuelve a durar ' + VIG_DAYS + ' días.' : 'Se eliminará, con sus fotos, en ' + GRACE_DAYS + ' días.');
+    function paintVig(id){
+      const box = document.querySelector('#mkMine [data-vig="' + id + '"]'), it = findItem(id);
+      if(box && it) box.innerHTML = vigHtml(it);
+    }
+    async function renewItem(id, btn){
+      const it = findItem(id); if(!it || st.renewing) return;
+      st.renewing = true; if(btn) btn.disabled = true;
+      let res; try{ res = await sb.rpc('market_renovar', { p_id: id }); }catch(e){ res = { error:e }; }
+      st.renewing = false;
+      const inDetail = !!(st.detail && st.detail.id === id);
+      if(!res || res.error){
+        if(btn) btn.disabled = false;
+        const m = unavailableErr(res && res.error) ? 'Estamos activando la renovación. Inténtalo de nuevo en unos minutos.' : 'No pudimos renovar la publicación. Revisa que siga disponible y tu conexión, e inténtalo de nuevo.';
+        if(inDetail) setDetMsg(m, true); else flash(m, true);
+        return;
+      }
+      const exp = typeof res.data === 'string' && !isNaN(Date.parse(res.data)) ? res.data : new Date(Date.now() + VIG_DAYS * DAY).toISOString();
+      patchItem({ id, expira_en: exp, aviso_vence_en: null }); invalidate();
+      const ok = 'Listo: tu publicación seguirá visible ' + VIG_DAYS + ' días más.';
+      if(st.mine) renderMine();
+      if(inDetail){ paintDetail(); setDetMsg(ok); } else flash(ok);
     }
     async function removeItem(id){
       const it = findItem(id); if(!it) return;
@@ -4806,7 +4907,8 @@ const OnceStory = (function(){
         + '<p class="mk-by">Publicado por <b>' + esc(it.vendedor_nombre) + '</b></p>'
         + contactHtml(it)
         + (own
-          ? (it.oculto ? '<span class="mk-hide-note">Oculto por ahora: varias parejas lo denunciaron. Lo revisaremos y, si cumple las normas, volverá a mostrarse.</span>' : '')
+          ? (it.oculto ? '<span class="mk-hide-note">Oculto por ahora: varias personas lo denunciaron. Lo revisaremos y, si cumple las normas, volverá a mostrarse.</span>' : '')
+            + (vigText(it) ? '<div class="mk-vigrow det">' + vigHtml(it, 'btn') + '</div>' : '')
             + '<div class="mk-owner"><select id="mkDetState" aria-label="Estado del producto">' + Object.keys(ESTADOS).map(k => '<option value="' + k + '"' + (it.estado === k ? ' selected' : '') + '>' + ESTADOS[k] + '</option>').join('') + '</select>'
             + '<button class="btn" type="button" data-mk-edit="' + esc(it.id) + '">Editar</button><button class="btn danger" type="button" data-mk-del="' + esc(it.id) + '">Eliminar</button></div>'
           : '<div class="mk-owner"><button class="mk-link danger" type="button" data-mk-report="' + esc(it.id) + '">Denunciar este anuncio</button></div>')
@@ -4894,7 +4996,7 @@ const OnceStory = (function(){
       closeSheet('detail', $('mkDetailOverlay'), true);
       form = { item: it || null, mode: it ? 'edit' : 'new', cond: '', photos: [], seq: 0, busy: false, touched: {} };
       $('mkFormTitle').textContent = it ? 'Editar publicación' : 'Publicar un producto';
-      $('mkFormSub').textContent = it ? 'Cambia lo que necesites. Los cambios se ven al guardar.' : 'Sube fotos y cuéntanos del producto. Lo verán solo las parejas con cuenta en Once.';
+      $('mkFormSub').textContent = it ? 'Cambia lo que necesites. Los cambios se ven al guardar.' : 'Sube fotos y cuéntanos del producto. Lo verán las personas con cuenta en el Mercado. Dura 60 días y la puedes renovar.';
       $('mkForm').innerHTML = formHtml(it);
       if(it){
         photosOf(it).forEach(u => form.photos.push({ key:u, url:u, src:u }));
@@ -5052,7 +5154,7 @@ const OnceStory = (function(){
       invalidate();
       if(f.mode === 'new'){
         st.mine = null;
-        flash('¡Listo! Tu producto ya está publicado en el Mercado.');
+        flash('¡Listo! Tu producto ya está publicado. Estará visible 60 días y te avisaremos por correo antes de que venza.');
         const tab = document.querySelector('.subtab-btn[data-group="mercado"][data-sub="mias"]');
         if(tab) tab.click();
       }else{
@@ -5159,6 +5261,7 @@ const OnceStory = (function(){
         const o = e.target.closest('[data-mk-open]'); if(o){ openDetail(o.dataset.mkOpen); return; }
         const ed = e.target.closest('[data-mk-edit]'); if(ed){ const it = findItem(ed.dataset.mkEdit); if(it) openForm(it); return; }
         const dl = e.target.closest('[data-mk-del]'); if(dl){ removeItem(dl.dataset.mkDel); return; }
+        const rn = e.target.closest('[data-mk-renew]'); if(rn){ renewItem(rn.dataset.mkRenew, rn); return; }
         if(e.target.closest('[data-mk-new]')){ openForm(null); return; }
         if(e.target.closest('[data-mk-retry-mine]')){ loadMine(true); }
       });
@@ -5169,7 +5272,8 @@ const OnceStory = (function(){
         const ok = await setEstado(it.id, s.value);
         s.disabled = false;
         if(!ok){ s.value = prev; flash('No pudimos cambiar el estado. Inténtalo de nuevo.', true); return; }
-        flash('Estado actualizado: ' + ESTADOS[s.value].toLowerCase() + '.');
+        paintVig(it.id);
+        flash(estadoMsg(s.value));
       });
       $('mkNewBtn').addEventListener('click', () => openForm(null));
 
@@ -5190,6 +5294,7 @@ const OnceStory = (function(){
         const cp = e.target.closest('[data-mk-copy]'); if(cp){ copyContact(cp); return; }
         const ed = e.target.closest('[data-mk-edit]'); if(ed){ openForm(it); return; }
         const dl = e.target.closest('[data-mk-del]'); if(dl){ removeItem(it.id); return; }
+        const rn = e.target.closest('[data-mk-renew]'); if(rn){ renewItem(it.id, rn); return; }
         const rp = e.target.closest('[data-mk-report]'); if(rp){ openReport(it.id); }
       });
       $('mkDetailBody').addEventListener('change', async e => {
@@ -5199,7 +5304,7 @@ const OnceStory = (function(){
         const ok = await setEstado(it.id, nv);
         if(!st.detail || st.detail.id !== it.id) return;
         if(!ok){ sel.disabled = false; sel.value = prev; setDetMsg('No pudimos cambiar el estado. Inténtalo de nuevo.', true); return; }
-        paintDetail(); setDetMsg('Estado actualizado: ' + ESTADOS[nv].toLowerCase() + '.');
+        paintDetail(); setDetMsg(estadoMsg(nv));
         renderList(st.items.length); if(st.mine) renderMine();
       });
 
@@ -5257,7 +5362,7 @@ const OnceStory = (function(){
     }
     init();
 
-    return { show, setUser, reset, loadMine, refreshIfStale, _t:{ parsePrice, fmtPrice, cleanTerm, pathOf, advCount } };
+    return { show, setUser, reset, loadMine, refreshIfStale, _t:{ parsePrice, fmtPrice, cleanTerm, pathOf, advCount, vigInfo, vigText, canRenew } };
   })();
 
   sb.auth.onAuthStateChange((_event, session)=>{
