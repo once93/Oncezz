@@ -7,6 +7,13 @@
 <title>Once — Bodas y proveedores en un solo lugar</title>
 <meta name="description" content="Once conecta parejas que planean su boda con proveedores. Registra tu boda, recibe ofertas y muy pronto encuentra servicios directos en Once Store.">
 <meta name="theme-color" content="#F2F2F7">
+<link rel="manifest" href="/manifest.json">
+<script>
+  // App instalada: activa la pantalla «Sin conexión» (archivo sw.js). No guarda nada ni cambia cómo carga la página.
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', function(){ navigator.serviceWorker.register('/sw.js').catch(function(){}); });
+  }
+</script>
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_CL">
 <meta property="og:site_name" content="Once">
@@ -1746,7 +1753,7 @@
 <script>
   // ---------- páginas legales ----------
   const LEGAL_EMAIL = 'briansolisv@icloud.com';
-  const LEGAL_DATE = '14 de noviembre de 2026';
+  const LEGAL_DATE = '15 de noviembre de 2026';
   const LEGAL_COMPANY = 'Once SpA';
   const LEGAL_RUT = '78.541.398-9';
   const LEGAL_PAGES = {
@@ -1943,7 +1950,7 @@
 <p>Usamos el almacenamiento local de tu navegador para mantener tu sesión iniciada y para recordar tus «me gusta». No usamos cookies de publicidad ni de seguimiento propias. Cuando usas PayPal, esa empresa puede usar cookies y tecnologías similares según su propia política de privacidad.</p>
 
 <h3>9. Conservación</h3>
-<p>Conservamos tus datos mientras tu cuenta esté activa. Al cerrarla, los eliminamos o anonimizamos, salvo los que debamos conservar por obligaciones legales o contables (por ejemplo, registros de pagos) o para resolver disputas. Puedes eliminar tu cuenta tú mismo en cualquier momento desde la app, con la opción «Eliminar cuenta» que está junto a «Cerrar sesión». Los mensajes del chat se eliminan junto con la oferta cuando cualquiera de las dos personas elimina su cuenta. Tus anuncios del Mercado de bodas y sus fotos se eliminan cuando los borras tú, cuando eliminas tu cuenta o automáticamente cuando vencen, según las Normas del Mercado de bodas. Si reportas una conversación, conservamos una copia de sus últimos mensajes mientras revisamos el caso.</p>
+<p>Conservamos tus datos mientras tu cuenta esté activa. Al cerrarla, los eliminamos o anonimizamos, salvo los que debamos conservar por obligaciones legales o contables (por ejemplo, registros de pagos) o para resolver disputas. Puedes eliminar tu cuenta tú mismo en cualquier momento desde la app, con la opción «Eliminar cuenta» que está junto a «Cerrar sesión». Los pasos están en <a href="#eliminar-cuenta" data-legal="eliminar-cuenta">Cómo eliminar tu cuenta</a>. Los mensajes del chat se eliminan junto con la oferta cuando cualquiera de las dos personas elimina su cuenta. Tus anuncios del Mercado de bodas y sus fotos se eliminan cuando los borras tú, cuando eliminas tu cuenta o automáticamente cuando vencen, según las Normas del Mercado de bodas. Si reportas una conversación, conservamos una copia de sus últimos mensajes mientras revisamos el caso.</p>
 
 <h3>10. Seguridad</h3>
 <p>Aplicamos medidas razonables para proteger los datos, como conexiones cifradas y controles de acceso por usuario a nivel de base de datos. Ningún sistema es completamente infalible; si ocurre una vulneración que te afecte, te informaremos según lo exija la ley.</p>
@@ -1956,6 +1963,35 @@
 
 <h3>13. Cambios a esta política</h3>
 <p>Podemos actualizar esta política. Publicaremos la versión vigente con su fecha y, si el cambio es relevante, te avisaremos por correo o dentro de la plataforma.</p>`
+    },
+
+    'eliminar-cuenta': {
+      title: 'Cómo eliminar tu cuenta de Once',
+      html: `
+<p class="legal-meta">Última actualización: {{FECHA}}</p>
+<p>Puedes eliminar tu cuenta de Once y los datos asociados cuando quieras. Esto vale para el sitio oncezz.com y para la app Once, de {{EMPRESA}}.</p>
+
+<h3>1. Elimínala tú mismo</h3>
+<ol>
+<li>Inicia sesión en Once con tu correo y tu contraseña.</li>
+<li>Toca «Eliminar cuenta», arriba, junto a «Cerrar sesión».</li>
+<li>Escribe la palabra ELIMINAR y confirma.</li>
+</ol>
+<p>La cuenta se elimina en ese momento y no se puede recuperar.</p>
+
+<h3>2. Si no puedes iniciar sesión</h3>
+<p>Escribe a {{EMAIL}} desde el correo con el que te registraste, con el asunto «Eliminar mi cuenta». La eliminaremos y te avisaremos por ese mismo correo, dentro de los plazos que establezca la ley aplicable.</p>
+
+<h3>3. Qué se elimina</h3>
+<ul>
+<li>Tu perfil (de boda o de proveedor) y sus fotos, incluidas las de la galería de «Felizmente casadas».</li>
+<li>Las ofertas que enviaste o recibiste, tus proveedores guardados y las conversaciones del chat.</li>
+<li>Tus anuncios del Mercado de bodas y sus fotos.</li>
+<li>Tus datos de acceso (correo y contraseña).</li>
+</ul>
+
+<h3>4. Qué se conserva</h3>
+<p>Solo lo que debamos conservar por obligaciones legales o contables (por ejemplo, registros de pagos de Once Store) o para resolver disputas. Las reseñas de acuerdos ya realizados podrán conservarse de forma anonimizada cuando sea necesario para la integridad de las calificaciones. Más detalles en la <a href="#privacidad" data-legal="privacidad">Política de privacidad</a>.</p>`
     },
 
     reembolso: {
