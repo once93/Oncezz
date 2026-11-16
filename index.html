@@ -699,6 +699,17 @@
   #auth-role{ min-width:0; max-width:100%; box-sizing:border-box; text-overflow:ellipsis; }
 
 
+
+  /* ---------- reportar contenido (perfiles, ofertas, fotos de bodas) ---------- */
+  /* los enlaces solo se ven con sesión iniciada y con el SQL de reportes ya ejecutado (clase flag-on en <body>) */
+  .fl-link{ display:none; appearance:none; -webkit-appearance:none; background:none; border:none; padding:4px 0; font-family:inherit; font-size:12.5px; color:var(--ink-soft); text-decoration:underline; text-underline-offset:2px; cursor:pointer; border-radius:4px; white-space:nowrap; }
+  body.flag-on .fl-link{ display:inline-block; }
+  .fl-link:hover{ color:var(--ink); }
+  .ugc-actions{ display:flex; flex-wrap:wrap; align-items:baseline; gap:0 18px; }
+  .ugc-actions > .fl-link{ margin-top:10px; }
+  .md-report{ text-align:center; }
+  .md-report .fl-link{ margin-top:18px; }
+
   /* ---------- bloquear personas ---------- */
   .blocks-link{ appearance:none; -webkit-appearance:none; background:none; border:none; padding:0; font-family:inherit; font-size:12px; color:var(--ink-soft); cursor:pointer; white-space:nowrap; border-radius:4px; text-decoration:underline; text-underline-offset:2px; }
   .blocks-link[hidden]{ display:none; }
@@ -803,7 +814,7 @@
 
   .mr-head h2{ font-size: clamp(25px, 4vw, 32px); letter-spacing:-0.02em; }
   .mr-head p{ font-size:15px; color:var(--ink-soft); margin-top:6px; max-width:42em; }
-  .mr-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:18px; margin-top:22px; }
+  .mr-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap:18px; margin-top:22px; }
   .mr-card{ appearance:none; -webkit-appearance:none; display:flex; flex-direction:column; text-align:left; font:inherit; color:inherit; border:none; padding:0; cursor:pointer; background:var(--white); border-radius:20px; overflow:hidden; box-shadow:var(--shadow-sm); animation: riseIn .55s var(--ease) backwards; animation-delay: calc(var(--i, 0) * 60ms); transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
   .mr-card:active{ transform:scale(.985); }
   .mr-cover{ position:relative; aspect-ratio:4/3; overflow:hidden; background:linear-gradient(135deg, #F2E8D5, #DFCDA9); }
@@ -1835,7 +1846,7 @@
 <p>Cuando una oferta fue aceptada y la fecha de la boda ya pasó, la pareja y el proveedor pueden calificarse mutuamente de 1 a 5 estrellas y dejar un comentario. Las reseñas deben ser honestas, basarse en una experiencia real y ser respetuosas. Once puede moderar o eliminar reseñas falsas, ofensivas, discriminatorias, que contengan datos personales innecesarios o que infrinjan estos términos.</p>
 
 <h3>7. Contenido que publica el usuario</h3>
-<p>El usuario conserva la propiedad de los textos y fotografías que sube, pero otorga a Once una licencia no exclusiva, gratuita y limitada para almacenarlos y mostrarlos dentro de la plataforma con el fin de prestar el servicio. El usuario declara que tiene derecho a publicar ese contenido y que las personas que aparezcan en las imágenes han dado su consentimiento cuando corresponda. No se permite contenido ilegal, engañoso, sexualmente explícito, violento o que vulnere derechos de terceros.</p>
+<p>El usuario conserva la propiedad de los textos y fotografías que sube, pero otorga a Once una licencia no exclusiva, gratuita y limitada para almacenarlos y mostrarlos dentro de la plataforma con el fin de prestar el servicio. El usuario declara que tiene derecho a publicar ese contenido y que las personas que aparezcan en las imágenes han dado su consentimiento cuando corresponda. No se permite contenido ilegal, engañoso, sexualmente explícito, violento o que vulnere derechos de terceros. Si ves un perfil, una oferta, fotos de una boda, una conversación o un anuncio que incumpla estos términos, puedes avisarnos con la opción «Reportar» que aparece junto a ese contenido. Revisamos los reportes y podemos retirar el contenido o suspender la cuenta responsable.</p>
 
 <h3>8. Once Store y pagos</h3>
 <p>Las compras en Once Store se hacen directamente a Once. Los precios se expresan en dólares estadounidenses (USD) y el precio que se cobra es el que se muestra al momento de pagar. Los pagos con tarjeta de crédito o débito y con cuenta PayPal son procesados por PayPal; Once no almacena números de tarjeta. Algunos productos y servicios se cotizan de forma individual y solo se pagan una vez aceptada la cotización. Las condiciones de devolución, entrega y cancelación se detallan en la <a href="#reembolso" data-legal="reembolso">Política de reembolso</a>, la <a href="#envio" data-legal="envio">Política de envío</a> y la <a href="#cancelaciones" data-legal="cancelaciones">Política de cancelaciones</a>.</p>
@@ -1955,6 +1966,7 @@
 <li><strong>Perfil de proveedor:</strong> datos de contacto, el tipo de proveedor que declaras (formal o emprendedor independiente), tu página web o tus redes sociales si decides agregarlas, ofertas enviadas (descripción, precio, mensaje) y hasta 3 fotografías por oferta. La pareja que recibe tu oferta ve el tipo, la página web y las redes sociales.</li>
 <li><strong>Reseñas:</strong> calificaciones y comentarios entre parejas y proveedores.</li>
 <li><strong>Bloqueos:</strong> las personas que bloqueas y el nombre con que las viste. Solo tú ves tu lista; a la otra persona no le avisamos, aunque notará que ya no puede escribirte.</li>
+<li><strong>Reportes:</strong> cuando reportas un perfil, una oferta, fotos de una boda, una conversación o un anuncio, guardamos qué reportaste, el motivo, tus comentarios y una copia de ese contenido, para poder revisarlo. La persona reportada no sabe quién la reportó. Los conservamos el tiempo necesario para revisar el caso y prevenir abusos.</li>
 <li><strong>Mercado de bodas (Prometidos y cuentas «Mercado»):</strong> los anuncios que publicas (título, descripción, categoría, si es nuevo o usado, precio, estado —disponible, vendido, prestado o donado—, país y ciudad, tu nombre en el anuncio, los datos de contacto que escribas y hasta 5 fotos) y las denuncias que envías sobre anuncios de otras personas.</li>
 <li><strong>Chat:</strong> los mensajes de texto que se escriben la pareja y el proveedor cuando la pareja acepta una oferta.</li>
 <li><strong>Once Store:</strong> servicio solicitado o comprado, mensaje opcional, correo, monto pagado, fecha y número de orden de PayPal.</li>
@@ -2329,6 +2341,7 @@
     const soloMercado = role === 'mercado';
     try{ Market.setUser((role === 'pareja' || role === 'mercado') ? user.id : null); }catch(_){}
     try{ Blocks.setUser(user.id); }catch(_){}
+    try{ Flag.setUser(user.id, role); }catch(_){}
     // cuenta «solo Mercado»: sin barra de pestañas, sin boda, sin proveedores y sin mensajes
     tabsBar.style.display = soloMercado ? 'none' : '';
     inicioTab.style.display = soloMercado ? 'none' : '';
@@ -2446,6 +2459,7 @@
     try{ Chat.stop(); }catch(_){}
     try{ Market.setUser(null); }catch(_){}
     try{ Blocks.setUser(null); }catch(_){}
+    try{ Flag.setUser(null); }catch(_){}
     unmountHomeFromApp();
     document.getElementById('authScreen').style.display = 'none';
     document.getElementById('appShell').classList.remove('visible');
@@ -2518,10 +2532,11 @@
           <h3>${escapeHtml(c.nombre)}</h3>
           <div class="couple-meta"><span>📅 ${fechaStr}</span><span>📍 ${escapeHtml(c.comuna)}${c.pais ? ', ' + escapeHtml(c.pais) : ''}</span></div>
           ${categoriasTagsHtml(c)}
-          <div style="margin-top:12px;">
+          <div style="margin-top:12px; display:flex; align-items:center; justify-content:space-between; gap:8px 12px; flex-wrap:wrap;">
             <button class="btn like-btn" style="padding:9px 16px; font-size:14px; border:1px solid var(--rose-deep); background:${isLiked ? 'var(--rose-deep)' : 'transparent'}; color:${isLiked ? 'var(--white)' : 'var(--rose-deep)'};">
               ${isLiked ? '❤️' : '🤍'} Me gusta <span class="like-count">${c.likes_count || 0}</span>
             </button>
+            ${Flag.link('perfil', c.id, 'Reportar')}
           </div>
         `;
         const likeBtn = card.querySelector('.like-btn');
@@ -3643,6 +3658,7 @@ const OnceStory = (function(){
         html += '<div class="md-block"><h3>Gracias a los proveedores</h3><p>Los proveedores cuyas ofertas aceptó esta pareja en Once.</p><ul class="md-credits">'
           + c.creditos.map(x => '<li><span class="md-cat">' + escapeHtml(x.categoria || 'Servicio') + '</span><span>' + escapeHtml(x.proveedor) + '</span></li>').join('') + '</ul></div>';
       }
+      html += '<div class="md-report">' + Flag.link('galeria', c.id, 'Reportar estas fotos o el mensaje') + '</div>';
       body.innerHTML = html;
       body.querySelectorAll('.md-thumb').forEach(b => b.addEventListener('click', () => PhotoViewer.open(c.fotos, Number(b.dataset.i), 'Boda de ' + c.nombre)));
       md.classList.add('open'); mrLock(true);
@@ -4772,13 +4788,25 @@ const OnceStory = (function(){
     const $ = id => document.getElementById(id);
     const ov = $('rpOverlay'), okBtn = $('rpOk'), cancelBtn = $('rpCancel'), detail = $('rpDetail'), statusEl = $('rpStatus');
     const opts = Array.prototype.slice.call(ov.querySelectorAll('.rp-opt'));
-    let offerId = null, motivo = '', busy = false, lastFocus = null, closeTimer = null;
+    const titleEl = $('rpTitle'), leadEl = ov.querySelector('.rp-lead');
+    const CONT = ['Contenido ofensivo o inapropiado', 'Spam o publicidad', 'Engaño, estafa o datos falsos', 'Otro motivo'];
+    const MODES = {
+      chat:    { title:'Reportar esta conversación', lead:'Elige qué ocurrió. Revisaremos una copia de la conversación. La otra persona no sabrá que la reportaste.',
+                 opts:['Acoso o lenguaje ofensivo', 'Spam o publicidad', 'Intento de estafa o pago sospechoso', 'Otro motivo'] },
+      perfil:  { title:'Reportar este perfil', lead:'Elige qué ocurrió. Revisaremos el perfil y su foto. La pareja no sabrá que la reportaste.', opts:CONT },
+      oferta:  { title:'Reportar esta oferta', lead:'Elige qué ocurrió. Revisaremos la oferta y sus fotos. El proveedor no sabrá que lo reportaste.', opts:CONT },
+      galeria: { title:'Reportar estas fotos', lead:'Elige qué ocurrió. Revisaremos las fotos y el mensaje de esta boda. La pareja no sabrá que la reportaste.', opts:CONT }
+    };
+    let target = null, motivo = '', busy = false, lastFocus = null, closeTimer = null;
     const sync = () => { okBtn.disabled = busy || !motivo; cancelBtn.disabled = busy; detail.disabled = busy; };
     function setStatus(msg, kind){ statusEl.textContent = msg || ''; statusEl.className = 'da-status' + (kind === 'error' ? ' error' : kind === 'ok' ? ' rp-ok' : ''); }
     function pick(btn){ motivo = btn.dataset.motivo; opts.forEach(o => o.setAttribute('aria-checked', o === btn ? 'true' : 'false')); sync(); }
-    function open(id){
-      if(!id || ov.classList.contains('open')) return;
-      offerId = id; motivo = ''; busy = false; lastFocus = document.activeElement;
+    function start(kind, id){
+      const mode = MODES[kind];
+      if(!mode || !id || ov.classList.contains('open')) return;
+      target = { kind, id }; motivo = ''; busy = false; lastFocus = document.activeElement;
+      titleEl.textContent = mode.title; leadEl.textContent = mode.lead;
+      opts.forEach((o, i) => { o.dataset.motivo = mode.opts[i]; o.querySelector('span').textContent = mode.opts[i]; });
       opts.forEach(o => o.setAttribute('aria-checked', 'false'));
       detail.value = ''; setStatus(''); cancelBtn.textContent = 'Cancelar'; sync();
       ov.classList.add('open'); mrLock(true);
@@ -4791,17 +4819,24 @@ const OnceStory = (function(){
       if(lastFocus && lastFocus.focus && document.contains(lastFocus)) lastFocus.focus();
     }
     async function submit(){
-      if(busy || !motivo || !offerId) return;
+      if(busy || !motivo || !target) return;
       busy = true; sync(); setStatus('Enviando…');
       try{
-        const { error } = await sb.rpc('chat_report', { p_offer_id: offerId, p_motivo: motivo, p_detalle: detail.value.trim() || null });
+        const det = detail.value.trim() || null;
+        const { error } = target.kind === 'chat'
+          ? await sb.rpc('chat_report', { p_offer_id: target.id, p_motivo: motivo, p_detalle: det })
+          : await sb.rpc('report_content', { p_tipo: target.kind, p_ref: target.id, p_motivo: motivo, p_detalle: det });
         if(error) throw error;
         setStatus('Gracias. Recibimos tu reporte y lo revisaremos.', 'ok');
         busy = false; okBtn.disabled = true; cancelBtn.disabled = false; cancelBtn.textContent = 'Cerrar';
         closeTimer = setTimeout(close, 1800);
       }catch(err){
         busy = false; sync();
-        setStatus(err && /varios reportes/i.test(err.message || '') ? 'Has enviado varios reportes seguidos. Inténtalo más tarde.' : 'No pudimos enviar el reporte. Inténtalo de nuevo.', 'error');
+        const m = (err && err.message) || '';
+        setStatus(/varios reportes/i.test(m) ? 'Has enviado varios reportes seguidos. Inténtalo más tarde.'
+          : /Ya reportaste/i.test(m) ? 'Ya habías reportado esto. Lo estamos revisando.'
+          : /propio contenido/i.test(m) ? 'No puedes reportar tu propio contenido.'
+          : 'No pudimos enviar el reporte. Inténtalo de nuevo.', 'error');
       }
     }
     opts.forEach(o => o.addEventListener('click', () => pick(o)));
@@ -4819,7 +4854,50 @@ const OnceStory = (function(){
         else if(!e.shiftKey && (document.activeElement === last || !ov.contains(document.activeElement))){ e.preventDefault(); first.focus(); }
       }
     }, true);
-    return { open };
+    const open = id => start('chat', id);
+    const openContent = (tipo, id) => start(tipo, id);
+    return { open, openContent };
+  })();
+
+  /* ===================== Reportar contenido ===================== */
+  // Enlaces «Reportar» en perfiles de parejas, ofertas recibidas y fotos de bodas. Usan el mismo diálogo que el chat.
+  // Los reportes quedan en la tabla content_reports (schema-add-reportes.sql). Si ese SQL aún no se ejecutó, los enlaces no aparecen.
+  const Flag = (function(){
+    let uid = null, on = false, own = null, seq = 0;
+    // quita el enlace del perfil propio (nadie se reporta a sí mismo)
+    function hideOwn(){
+      if(!own) return;
+      document.querySelectorAll('.fl-link[data-flag="perfil"], .fl-link[data-flag="galeria"]').forEach(b => { if(b.dataset.flagId === own) b.remove(); });
+    }
+    async function setUser(id, role){
+      const my = ++seq;
+      uid = id || null; on = false; own = null;
+      document.body.classList.remove('flag-on');
+      if(!uid) return;
+      try{
+        const { error } = await sb.from('content_reports').select('id').limit(1);
+        if(my !== seq) return;
+        if(error) throw error;
+        on = true; document.body.classList.add('flag-on');
+      }catch(_){ return; }       // sin la tabla (o sin conexión): no se ofrece reportar
+      if(role !== 'pareja') return;
+      try{
+        const { data } = await sb.from('couples').select('id').eq('user_id', uid).limit(1);
+        if(my === seq && data && data[0]){ own = String(data[0].id); hideOwn(); }
+      }catch(_){}
+    }
+    function link(tipo, id, label){
+      if(id == null || id === '') return '';
+      if((tipo === 'perfil' || tipo === 'galeria') && own && String(id) === own) return '';
+      return '<button type="button" class="fl-link" data-flag="' + escapeHtml(tipo) + '" data-flag-id="' + escapeHtml(String(id)) + '">' + escapeHtml(label) + '</button>';
+    }
+    document.addEventListener('click', e => {
+      const t = e.target.closest && e.target.closest('.fl-link[data-flag]');
+      if(!t) return;
+      e.preventDefault();
+      if(on) Report.openContent(t.dataset.flag, t.dataset.flagId);
+    });
+    return { setUser, link, isOn: () => on };
   })();
 
   /* ===================== Mercado de bodas ===================== */
@@ -6096,7 +6174,7 @@ const OnceStory = (function(){
               <div id="rate-vendor-${o.id}"></div>
             </div>
           ` : '')}
-          ${Blocks.rowHtml(o.id, o.vendor_user_id, o.proveedor_nombre)}
+          <div class="ugc-actions">${Flag.link('oferta', o.id, 'Reportar esta oferta')}${Blocks.rowHtml(o.id, o.vendor_user_id, o.proveedor_nombre)}</div>
         `;
         const setEstado = async (nuevoEstado, btnEl)=>{
           btnEl.disabled = true;
@@ -6342,8 +6420,9 @@ const OnceStory = (function(){
           <h3>${escapeHtml(c.nombre)}</h3>
           <div class="couple-meta"><span>📅 ${fechaStr}</span><span>📍 ${escapeHtml(c.comuna)}${c.pais ? ', ' + escapeHtml(c.pais) : ''}</span>${c.presupuesto ? '<span>💰 $' + Number(c.presupuesto).toLocaleString('en-US') + ' USD</span>' : ''}</div>
           ${categoriasTagsHtml(c)}
-          <div>
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:8px 12px; flex-wrap:wrap;">
             <button class="btn btn-ghost open-offer-btn">Enviar oferta</button>
+            ${Flag.link('perfil', c.id, 'Reportar')}
           </div>
           <div class="offer-form">
             <div class="field-row">
