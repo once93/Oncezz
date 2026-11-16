@@ -698,6 +698,30 @@
   .role-hint[hidden]{ display:none; }
   #auth-role{ min-width:0; max-width:100%; box-sizing:border-box; text-overflow:ellipsis; }
 
+
+  /* ---------- bloquear personas ---------- */
+  .blocks-link{ appearance:none; -webkit-appearance:none; background:none; border:none; padding:0; font-family:inherit; font-size:12px; color:var(--ink-soft); cursor:pointer; white-space:nowrap; border-radius:4px; text-decoration:underline; text-underline-offset:2px; }
+  .blocks-link[hidden]{ display:none; }
+  .blocks-link:hover{ color:var(--ink); }
+  .bl-row{ margin-top:10px; font-size:12.5px; line-height:1.4; color:var(--ink-soft); }
+  .bl-row:empty{ display:none; }
+  .bl-link{ appearance:none; -webkit-appearance:none; background:none; border:none; padding:4px 0; font-family:inherit; font-size:12.5px; color:var(--ink-soft); text-decoration:underline; text-underline-offset:2px; cursor:pointer; border-radius:4px; }
+  .bl-link:hover{ color:var(--ink); }
+  .bl-item{ display:flex; align-items:center; gap:12px; padding:12px 14px; }
+  .bl-item + .bl-item{ border-top:1px solid var(--paper-deep); }
+  .bl-main{ flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; }
+  .bl-main strong{ font-size:15px; font-weight:600; color:var(--ink); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .bl-main span{ font-size:12.5px; color:var(--ink-soft); }
+  .bl-undo{ appearance:none; -webkit-appearance:none; border:none; background:var(--paper); color:var(--rose-deep); font-family:inherit; font-size:13.5px; font-weight:600; padding:8px 12px; border-radius:10px; cursor:pointer; flex-shrink:0; }
+  .bl-undo:disabled{ opacity:.5; cursor:default; }
+  .bl-status{ text-align:center; font-size:13.5px; color:var(--ink-soft); padding:12px 12px 0; min-height:1.4em; }
+  .ch-icon-btn[hidden]{ display:none; }
+  .ch-blocked button{ appearance:none; -webkit-appearance:none; border:none; background:none; font-family:inherit; font-size:13.5px; font-weight:600; color:var(--rose-deep); cursor:pointer; padding:4px 6px; margin-left:2px; border-radius:6px; }
+  /* ---------- registro: aceptar los términos ---------- */
+  .auth-terms{ display:flex; align-items:flex-start; gap:10px; margin:2px 0 14px; font-size:13.5px; line-height:1.45; color:var(--ink-soft); cursor:pointer; text-align:left; }
+  .auth-terms input{ width:18px; height:18px; margin:1px 0 0; flex-shrink:0; accent-color:var(--rose-deep); }
+  .auth-terms a{ color:var(--rose-deep); text-decoration:underline; text-underline-offset:2px; }
+
   /* ---------- compartir en historias ---------- */
   .profile-actions{ margin-top:16px; display:flex; gap:10px; flex-wrap:wrap; }
   .share-open{ display:inline-flex; align-items:center; gap:8px; }
@@ -1181,6 +1205,7 @@
         </select>
         <p class="role-hint" id="roleHint" hidden>Con esta cuenta usas solo el Mercado de bodas: ver, comprar, vender, prestar o regalar productos de boda. No incluye registrar una boda ni enviar ofertas.</p>
       </div>
+      <label class="auth-terms" id="termsField" style="display:none;"><input type="checkbox" id="auth-terms"><span>Acepto los <a href="#terminos" data-legal="terminos">Términos del servicio</a> y la <a href="#privacidad" data-legal="privacidad">Política de privacidad</a> de Once.</span></label>
       <button type="submit" class="btn btn-primary" id="auth-submit-btn" style="width:100%;">Entrar</button>
       <p class="status" id="auth-status"></p>
     </form>
@@ -1203,6 +1228,7 @@
         <div class="session-actions">
           <button class="logout-btn" id="logoutBtn">Cerrar sesión<span class="session-email"> (<span id="sessionEmail"></span>)</span></button>
           <button class="delete-account-link" id="deleteAccountBtn" type="button">Eliminar cuenta</button>
+          <button class="blocks-link" id="blocksBtn" type="button" hidden>Bloqueados</button>
         </div>
       </div>
     </div>
@@ -1685,6 +1711,7 @@
       <button class="ch-icon-btn ch-back" id="chBack" type="button" aria-label="Volver"><svg class="ic-chev" width="14" height="22" viewBox="0 0 14 22" fill="none" aria-hidden="true"><path d="M11.5 2L3 11l8.5 9" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><svg class="ic-x" width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
       <span class="ch-avatar" id="chAvatar" aria-hidden="true"></span>
       <div class="ch-title"><strong id="chTitle"></strong><span id="chSub"></span></div>
+      <button class="ch-icon-btn muted" id="chBlock" type="button" aria-label="Bloquear a esta persona" title="Bloquear" hidden><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M5.7 5.7l12.6 12.6"/></svg></button>
       <button class="ch-icon-btn muted" id="chReport" type="button" aria-label="Reportar esta conversación" title="Reportar"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></button>
     </div>
     <div class="ch-body">
@@ -1697,7 +1724,24 @@
       <button class="ch-send" id="chSend" type="button" aria-label="Enviar mensaje" disabled><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg></button>
     </div>
     <div class="ch-closed" id="chClosed" hidden>Esta conversación quedó solo de lectura porque la oferta ya no está aceptada.</div>
+    <div class="ch-closed ch-blocked" id="chBlocked" hidden></div>
     <div class="sr-live" id="chLive" role="status" aria-live="polite"></div>
+  </div>
+</div>
+
+<div class="sh-overlay" id="blOverlay" role="dialog" aria-modal="true" aria-labelledby="blTitle">
+  <div class="sh-backdrop" data-bl-close></div>
+  <div class="sh-sheet sh-narrow">
+    <div class="sh-grabber" aria-hidden="true"></div>
+    <div class="sh-head">
+      <div>
+        <h2 id="blTitle">Personas bloqueadas</h2>
+        <p>No pueden escribirte ni enviarte ofertas, y no ven tus anuncios del Mercado ni tú los suyos.</p>
+      </div>
+      <button class="up-close" type="button" data-bl-close aria-label="Cerrar"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+    </div>
+    <div id="blBody"></div>
+    <p class="bl-status" id="blStatus" role="status" aria-live="polite"></p>
   </div>
 </div>
 
@@ -1753,7 +1797,7 @@
 <script>
   // ---------- páginas legales ----------
   const LEGAL_EMAIL = 'briansolisv@icloud.com';
-  const LEGAL_DATE = '15 de noviembre de 2026';
+  const LEGAL_DATE = '16 de noviembre de 2026';
   const LEGAL_COMPANY = 'Once SpA';
   const LEGAL_RUT = '78.541.398-9';
   const LEGAL_PAGES = {
@@ -1772,6 +1816,7 @@
 <ul>
 <li>Para registrarse se debe ser mayor de 18 años y tener capacidad legal para contratar.</li>
 <li>La información entregada debe ser verdadera, completa y estar actualizada.</li>
+<li>Al crear una cuenta declaras que leíste y aceptas estos términos y la <a href="#privacidad" data-legal="privacidad">Política de privacidad</a>.</li>
 <li>Cada cuenta tiene un tipo: «Prometidos» (parejas que registran su boda), proveedor o «Mercado» (para quienes no registran una boda y solo quieren ver, comprar o vender en el Mercado de bodas). El usuario es responsable de mantener la confidencialidad de su contraseña y de toda la actividad realizada desde su cuenta.</li>
 <li>El usuario debe avisarnos de inmediato si sospecha un uso no autorizado de su cuenta.</li>
 </ul>
@@ -1784,7 +1829,7 @@
 <p>Al enviar una oferta, el proveedor debe indicar si actúa como proveedor formal (con inicio de actividades) o como emprendedor independiente, y puede agregar su página web (proveedor formal) o sus redes sociales (emprendedor independiente). Esa información la declara el propio proveedor, se muestra a la pareja que recibe la oferta y Once no la verifica: la pareja debe comprobarla por su cuenta antes de contratar. Declarar un tipo de proveedor que no corresponde infringe estos términos.</p>
 
 <h3>5. Acuerdos entre parejas y proveedores</h3>
-<p>Cuando una pareja acepta una oferta se genera un acuerdo directo entre ella y el proveedor. Las condiciones, pagos, plazos, cancelaciones y garantías se pactan entre ellos, fuera de Once. Once no interviene en esos acuerdos, no garantiza la calidad, el cumplimiento ni la idoneidad de los servicios y no responde por los incumplimientos de ninguna de las partes. Recomendamos formalizar todo acuerdo por escrito (contrato o cotización firmada) y verificar referencias antes de pagar anticipos. Una vez aceptada la oferta, la pareja y el proveedor pueden coordinarse por el chat de Once. Once no revisa las conversaciones de forma rutinaria, pero puede revisar una conversación que sea reportada y suspender las cuentas que incumplan estos términos. Nunca compartas claves ni datos de tu tarjeta por el chat.</p>
+<p>Cuando una pareja acepta una oferta se genera un acuerdo directo entre ella y el proveedor. Las condiciones, pagos, plazos, cancelaciones y garantías se pactan entre ellos, fuera de Once. Once no interviene en esos acuerdos, no garantiza la calidad, el cumplimiento ni la idoneidad de los servicios y no responde por los incumplimientos de ninguna de las partes. Recomendamos formalizar todo acuerdo por escrito (contrato o cotización firmada) y verificar referencias antes de pagar anticipos. Una vez aceptada la oferta, la pareja y el proveedor pueden coordinarse por el chat de Once. Once no revisa las conversaciones de forma rutinaria, pero puede revisar una conversación que sea reportada y suspender las cuentas que incumplan estos términos. Puedes bloquear a otra persona desde el chat, desde una oferta que recibiste o desde un anuncio del Mercado: no podrán escribirse por el chat ni enviarse ofertas, y dejarán de ver los anuncios del otro. Puedes desbloquearla cuando quieras. Nunca compartas claves ni datos de tu tarjeta por el chat.</p>
 
 <h3>6. Reseñas y calificaciones</h3>
 <p>Cuando una oferta fue aceptada y la fecha de la boda ya pasó, la pareja y el proveedor pueden calificarse mutuamente de 1 a 5 estrellas y dejar un comentario. Las reseñas deben ser honestas, basarse en una experiencia real y ser respetuosas. Once puede moderar o eliminar reseñas falsas, ofensivas, discriminatorias, que contengan datos personales innecesarios o que infrinjan estos términos.</p>
@@ -1884,7 +1929,7 @@
 </ul>
 
 <h3>7. Denuncias y moderación</h3>
-<p>Cualquier persona con cuenta puede denunciar un anuncio que no cumpla estas normas. Cuando varias personas distintas denuncian un mismo anuncio, se oculta automáticamente mientras lo revisamos. Podemos editar, ocultar o eliminar anuncios, y suspender las cuentas que incumplan estas normas o la ley, con aviso cuando corresponda. La revisión de las denuncias es manual y puede tardar.</p>
+<p>Cualquier persona con cuenta puede denunciar un anuncio que no cumpla estas normas. Cuando varias personas distintas denuncian un mismo anuncio, se oculta automáticamente mientras lo revisamos. Podemos editar, ocultar o eliminar anuncios, y suspender las cuentas que incumplan estas normas o la ley, con aviso cuando corresponda. La revisión de las denuncias es manual y puede tardar. También puedes bloquear a quien publicó un anuncio: dejarás de ver sus anuncios y esa persona dejará de ver los tuyos.</p>
 
 <h3>8. Privacidad</h3>
 <p>Lo que publicas (fotos, descripción, país y ciudad, tu nombre en el anuncio y los datos de contacto que escribas) lo ven las demás cuentas de Prometidos y de Mercado; no se muestra a visitantes sin cuenta ni a proveedores. Escribe solo los datos de contacto que quieras compartir. Usamos tu correo de la cuenta solo para avisarte antes de que un anuncio venza.</p>
@@ -1905,10 +1950,11 @@
 
 <h3>2. Datos que recopilamos</h3>
 <ul>
-<li><strong>Cuenta:</strong> correo electrónico, contraseña (almacenada de forma cifrada por nuestro proveedor de autenticación) y rol (Prometidos, proveedor o «Mercado»).</li>
+<li><strong>Cuenta:</strong> correo electrónico, contraseña (almacenada de forma cifrada por nuestro proveedor de autenticación), rol (Prometidos, proveedor o «Mercado») y la fecha en que aceptaste los Términos del servicio.</li>
 <li><strong>Perfil de pareja:</strong> nombres, fecha de la boda, comuna y país, categorías de servicio que necesitan, presupuesto estimado y foto de perfil.</li>
 <li><strong>Perfil de proveedor:</strong> datos de contacto, el tipo de proveedor que declaras (formal o emprendedor independiente), tu página web o tus redes sociales si decides agregarlas, ofertas enviadas (descripción, precio, mensaje) y hasta 3 fotografías por oferta. La pareja que recibe tu oferta ve el tipo, la página web y las redes sociales.</li>
 <li><strong>Reseñas:</strong> calificaciones y comentarios entre parejas y proveedores.</li>
+<li><strong>Bloqueos:</strong> las personas que bloqueas y el nombre con que las viste. Solo tú ves tu lista; a la otra persona no le avisamos, aunque notará que ya no puede escribirte.</li>
 <li><strong>Mercado de bodas (Prometidos y cuentas «Mercado»):</strong> los anuncios que publicas (título, descripción, categoría, si es nuevo o usado, precio, estado —disponible, vendido, prestado o donado—, país y ciudad, tu nombre en el anuncio, los datos de contacto que escribas y hasta 5 fotos) y las denuncias que envías sobre anuncios de otras personas.</li>
 <li><strong>Chat:</strong> los mensajes de texto que se escriben la pareja y el proveedor cuando la pareja acepta una oferta.</li>
 <li><strong>Once Store:</strong> servicio solicitado o comprado, mensaje opcional, correo, monto pagado, fecha y número de orden de PayPal.</li>
@@ -1987,6 +2033,7 @@
 <li>Tu perfil (de boda o de proveedor) y sus fotos, incluidas las de la galería de «Felizmente casadas».</li>
 <li>Las ofertas que enviaste o recibiste, tus proveedores guardados y las conversaciones del chat.</li>
 <li>Tus anuncios del Mercado de bodas y sus fotos.</li>
+<li>Tu lista de personas bloqueadas.</li>
 <li>Tus datos de acceso (correo y contraseña).</li>
 </ul>
 
@@ -2184,16 +2231,19 @@
   let currentUser = null;
   let currentRole = null;
 
-  document.getElementById('toSignup').addEventListener('click', ()=>{
-    isSignup = !isSignup;
+  function setAuthMode(signup){
+    isSignup = !!signup;
     document.getElementById('authTitle').textContent = isSignup ? 'Crea tu cuenta' : 'Inicia sesión';
     document.getElementById('auth-submit-btn').textContent = isSignup ? 'Crear cuenta' : 'Entrar';
     document.getElementById('roleField').style.display = isSignup ? 'block' : 'none';
+    document.getElementById('termsField').style.display = isSignup ? 'flex' : 'none';
+    const st = document.getElementById('auth-status'); st.textContent = ''; st.className = 'status';
     document.getElementById('authSwitch').innerHTML = isSignup
-      ? '¿Ya tienes cuenta? <a id="toSignup2">Inicia sesión</a>'
-      : '¿Primera vez aquí? <a id="toSignup2">Crea una cuenta</a>';
-    document.getElementById('toSignup2').addEventListener('click', ()=> document.getElementById('toSignup').click());
-  });
+      ? '¿Ya tienes cuenta? <a id="toSignup">Inicia sesión</a>'
+      : '¿Primera vez aquí? <a id="toSignup">Crea una cuenta</a>';
+    document.getElementById('toSignup').addEventListener('click', ()=> setAuthMode(!isSignup));
+  }
+  document.getElementById('toSignup').addEventListener('click', ()=> setAuthMode(!isSignup));
 
   document.getElementById('authForm').addEventListener('submit', async (e)=>{
     e.preventDefault();
@@ -2201,13 +2251,18 @@
     const password = document.getElementById('auth-password').value;
     const statusEl = document.getElementById('auth-status');
     const btn = document.getElementById('auth-submit-btn');
+    if(isSignup && !document.getElementById('auth-terms').checked){
+      statusEl.textContent = 'Para crear tu cuenta, marca la casilla de que aceptas los Términos y la Política de privacidad.';
+      statusEl.className = 'status error';
+      return;
+    }
     btn.disabled = true;
     statusEl.textContent = 'Un momento...';
     statusEl.className = 'status';
     try{
       const role = document.getElementById('auth-role').value;
       const { error } = isSignup
-        ? await sb.auth.signUp({ email, password, options: { data: { role } } })
+        ? await sb.auth.signUp({ email, password, options: { data: { role, acepto_terminos: new Date().toISOString() } } })
         : await sb.auth.signInWithPassword({ email, password });
       if(error) throw error;
       if(isSignup){
@@ -2273,6 +2328,7 @@
     const tabsBar = document.querySelector('.tabs');
     const soloMercado = role === 'mercado';
     try{ Market.setUser((role === 'pareja' || role === 'mercado') ? user.id : null); }catch(_){}
+    try{ Blocks.setUser(user.id); }catch(_){}
     // cuenta «solo Mercado»: sin barra de pestañas, sin boda, sin proveedores y sin mensajes
     tabsBar.style.display = soloMercado ? 'none' : '';
     inicioTab.style.display = soloMercado ? 'none' : '';
@@ -2389,6 +2445,7 @@
     currentUser = null;
     try{ Chat.stop(); }catch(_){}
     try{ Market.setUser(null); }catch(_){}
+    try{ Blocks.setUser(null); }catch(_){}
     unmountHomeFromApp();
     document.getElementById('authScreen').style.display = 'none';
     document.getElementById('appShell').classList.remove('visible');
@@ -2397,12 +2454,11 @@
     loadUpcoming();
   }
 
-  document.getElementById('goToAuthBtn').addEventListener('click', showAuth);
+  document.getElementById('goToAuthBtn').addEventListener('click', ()=>{ showAuth(); setAuthMode(false); });
   // "Crear mi cuenta" abre el acceso directamente en modo registro
   document.querySelectorAll('[data-open-auth]').forEach(btn => btn.addEventListener('click', ()=>{
     showAuth();
-    const toSignup = document.getElementById('toSignup');
-    if(toSignup) toSignup.click();
+    setAuthMode(true);
   }));
   document.querySelectorAll('[data-scroll-to]').forEach(btn => btn.addEventListener('click', ()=>{
     const target = document.getElementById(btn.dataset.scrollTo);
@@ -3916,12 +3972,203 @@ const OnceStory = (function(){
 
 
   // ---------- Chat entre la pareja y el proveedor (se abre al aceptar la oferta) ----------
+  /* ===================== Bloquear personas ===================== */
+  // Con un bloqueo: no pueden escribirse por el chat, el proveedor no puede enviar ofertas nuevas a esa pareja
+  // y ninguno de los dos ve los anuncios del otro en el Mercado. Lo hace cumplir la base de datos (schema-add-bloqueos.sql).
+  // Si ese SQL todavía no se ejecutó, la web funciona igual que antes, sin esta opción.
+  const Blocks = (function(){
+    const $ = id => document.getElementById(id);
+    const ov = $('blOverlay'), bodyEl = $('blBody'), btn = $('blocksBtn'), statusEl = $('blStatus');
+    const QUE_PASA = 'No podrán escribirse por el chat ni enviarse ofertas, y dejarán de ver los anuncios del otro en el Mercado. No le avisaremos. Puedes desbloquear cuando quieras en «Bloqueados», arriba.';
+    let uid = null, available = null;        // available: null = sin saber, false = falta ejecutar el SQL
+    let list = [], ids = new Set(), loadSeq = 0, busy = false, lastFocus = null;
+
+    const isMissing = err => !!err && (err.code === '42883' || err.code === 'PGRST202' || err.code === '42P01' || err.code === 'PGRST205' || err.code === '42501' ||
+      /does not exist|could not find the (function|table)|schema cache|permission denied/i.test(err.message || ''));
+    const isAvailable = () => available === true;
+    const has = id => !!id && ids.has(id);
+    function friendly(err){
+      const m = (err && err.message) || '';
+      if(/máximo de personas/i.test(m)) return 'Llegaste al máximo de personas bloqueadas. Desbloquea a alguien en «Bloqueados» para poder bloquear a otra persona.';
+      if(/No se puede bloquear/i.test(m)) return 'No se puede bloquear a esta persona.';
+      return 'Revisa tu conexión e inténtalo de nuevo.';
+    }
+    // avisa a las otras pantallas (Mercado) de que la lista cambió por una acción de la persona
+    const notify = () => { try{ document.dispatchEvent(new CustomEvent('once:blocks')); }catch(_){} };
+
+    async function load(){
+      if(!uid || available === false) return;
+      const seq = ++loadSeq, who = uid;
+      try{
+        const { data, error } = await sb.from('user_blocks').select('blocked_id, etiqueta, creado').order('creado', { ascending:false });
+        if(error) throw error;
+        if(seq !== loadSeq || who !== uid) return;
+        available = true; list = data || []; ids = new Set(list.map(r => r.blocked_id));
+      }catch(err){
+        if(seq !== loadSeq || who !== uid) return;
+        if(isMissing(err)){ available = false; list = []; ids = new Set(); }
+        // otro error (sin conexión, por ejemplo): se conserva lo que había y se reintenta más tarde
+      }
+      paint();
+    }
+
+    // ---------- fila «Bloquear / Desbloquear» dentro de una oferta recibida ----------
+    function rowInner(offerId, userId){
+      if(available !== true || !offerId || !userId || userId === uid) return '';
+      return has(userId)
+        ? '<span>Bloqueaste a este proveedor.</span> <button type="button" class="bl-link" data-bl-unblock-offer="' + escapeHtml(offerId) + '">Desbloquear</button>'
+        : '<button type="button" class="bl-link" data-bl-block-offer="' + escapeHtml(offerId) + '">Bloquear a este proveedor</button>';
+    }
+    function rowHtml(offerId, userId, nombre){
+      if(!offerId || !userId) return '';
+      return '<div class="bl-row" data-bl-offer="' + escapeHtml(offerId) + '" data-bl-user="' + escapeHtml(userId) + '" data-bl-name="' + escapeHtml(nombre || '') + '">' + rowInner(offerId, userId) + '</div>';
+    }
+    function paint(){
+      document.querySelectorAll('.bl-row').forEach(el => { el.innerHTML = rowInner(el.dataset.blOffer, el.dataset.blUser); });
+      const n = list.length;
+      btn.hidden = !(available === true && n > 0);
+      btn.textContent = 'Bloqueados (' + n + ')';
+      if(ov.classList.contains('open')) renderList();
+    }
+
+    // ---------- acciones ----------
+    // estado del bloqueo en una conversación: { mine: bloqueé yo, other: me bloquearon }
+    async function stateOffer(offerId){
+      if(!uid || available !== true || !offerId) return { mine:false, other:false };
+      try{
+        const { data, error } = await sb.rpc('block_state_offer', { p_offer_id: offerId });
+        if(error) throw error;
+        const r = Array.isArray(data) ? data[0] : data;
+        return { mine: !!(r && r.por_mi), other: !!(r && r.por_otro) };
+      }catch(_){ return { mine:false, other:false }; }
+    }
+    // ejecuta la acción; si falla ofrece reintentar. Devuelve true si se completó.
+    async function run(fn, failTitle){
+      if(busy) return false;
+      busy = true;
+      try{
+        for(;;){
+          try{
+            const { error } = await fn();
+            if(error) throw error;
+            await load(); notify();
+            return true;
+          }catch(err){
+            const again = await CfDialog.ask({ title: failTitle, body: friendly(err), ok:'Reintentar', cancel:'Cerrar' });
+            if(!again) return false;
+          }
+        }
+      }finally{ busy = false; }
+    }
+    const ask = nombre => CfDialog.ask({ title:'¿Bloquear a ' + (String(nombre || '').trim() || 'esta persona') + '?', body: QUE_PASA, ok:'Bloquear', cancel:'Cancelar', danger:true });
+    async function blockOffer(offerId, nombre){
+      if(busy || available !== true || !offerId) return false;
+      if(!(await ask(nombre))) return false;
+      return run(() => sb.rpc('block_set_offer', { p_offer_id: offerId, p_block: true }), 'No se pudo bloquear');
+    }
+    async function unblockOffer(offerId){
+      if(busy || available !== true || !offerId) return false;
+      return run(() => sb.rpc('block_set_offer', { p_offer_id: offerId, p_block: false }), 'No se pudo desbloquear');
+    }
+    async function blockMarket(itemId, nombre){
+      if(busy || available !== true || !itemId) return false;
+      if(!(await ask(nombre))) return false;
+      return run(() => sb.rpc('block_set_market', { p_item_id: itemId }), 'No se pudo bloquear');
+    }
+    async function unblock(userId){
+      if(busy || available !== true || !userId) return false;
+      return run(() => sb.from('user_blocks').delete().eq('blocked_id', userId), 'No se pudo desbloquear');
+    }
+
+    // ---------- lista «Personas bloqueadas» ----------
+    function renderList(){
+      bodyEl.innerHTML = '';
+      if(!list.length){
+        const e = document.createElement('p'); e.className = 'ib-empty'; e.textContent = 'No tienes personas bloqueadas.';
+        bodyEl.appendChild(e); return;
+      }
+      const box = document.createElement('div'); box.className = 'ib-list';
+      list.forEach(r => {
+        const nombre = String(r.etiqueta || '').trim() || 'Persona bloqueada';
+        const row = document.createElement('div'); row.className = 'bl-item';
+        const main = document.createElement('span'); main.className = 'bl-main';
+        const nm = document.createElement('strong'); nm.textContent = nombre;
+        const dt = document.createElement('span');
+        const d = new Date(r.creado);
+        dt.textContent = isNaN(d) ? '' : 'Desde el ' + d.toLocaleDateString('es-CL', { day:'numeric', month:'long', year:'numeric' });
+        main.appendChild(nm); main.appendChild(dt);
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'bl-undo'; b.textContent = 'Desbloquear';
+        b.dataset.blUnblock = r.blocked_id; b.setAttribute('aria-label', 'Desbloquear a ' + nombre);
+        row.appendChild(main); row.appendChild(b); box.appendChild(row);
+      });
+      bodyEl.appendChild(box);
+    }
+    function openList(){
+      if(!uid || available !== true || ov.classList.contains('open')) return;
+      lastFocus = document.activeElement;
+      statusEl.textContent = '';
+      renderList();
+      ov.classList.add('open'); mrLock(true);
+      setTimeout(() => { const x = ov.querySelector('.up-close'); if(x) x.focus(); }, 80);
+      load();
+    }
+    function closeList(silent){
+      if(!ov.classList.contains('open')) return;
+      ov.classList.remove('open'); mrLock(false);
+      if(!silent && lastFocus && lastFocus.focus && document.contains(lastFocus) && !lastFocus.hidden) lastFocus.focus();
+    }
+    btn.addEventListener('click', openList);
+    ov.querySelectorAll('[data-bl-close]').forEach(el => el.addEventListener('click', () => closeList()));
+    document.addEventListener('keydown', e => {
+      if(!ov.classList.contains('open') || document.getElementById('cfOverlay').classList.contains('open')) return;
+      if(e.key === 'Escape'){ e.stopPropagation(); closeList(); return; }
+      if(e.key === 'Tab'){
+        const f = Array.prototype.filter.call(ov.querySelectorAll('button'), n => !n.disabled && n.offsetParent !== null);
+        if(!f.length){ e.preventDefault(); return; }
+        const first = f[0], last = f[f.length - 1];
+        if(e.shiftKey && (document.activeElement === first || !ov.contains(document.activeElement))){ e.preventDefault(); last.focus(); }
+        else if(!e.shiftKey && (document.activeElement === last || !ov.contains(document.activeElement))){ e.preventDefault(); first.focus(); }
+      }
+    }, true);
+    // botones de las ofertas y de la lista
+    document.addEventListener('click', async e => {
+      const t = e.target.closest && e.target.closest('[data-bl-block-offer], [data-bl-unblock-offer], [data-bl-unblock]');
+      if(!t) return;
+      e.preventDefault();
+      if(t.dataset.blBlockOffer){
+        const row = t.closest('.bl-row');
+        await blockOffer(t.dataset.blBlockOffer, row && row.dataset.blName);
+      }else if(t.dataset.blUnblockOffer){
+        await unblockOffer(t.dataset.blUnblockOffer);
+      }else if(t.dataset.blUnblock){
+        const nombre = t.getAttribute('aria-label') || '';
+        t.disabled = true;
+        const ok = await unblock(t.dataset.blUnblock);
+        if(ok && ov.classList.contains('open')){
+          statusEl.textContent = nombre.replace(/^Desbloquear a /, 'Desbloqueaste a ') + '.';
+          const x = ov.querySelector('.bl-undo') || ov.querySelector('.up-close'); if(x) x.focus();
+        }else if(t.isConnected){ t.disabled = false; }
+      }
+    });
+    document.addEventListener('visibilitychange', () => { if(uid && available === null && document.visibilityState === 'visible') load(); });
+
+    function setUser(id){
+      id = id || null;
+      if(uid === id){ if(id && available === null) load(); return; }
+      loadSeq++; uid = id; available = null; list = []; ids = new Set(); busy = false;
+      closeList(true); paint();
+      if(id) load();
+    }
+    return { setUser, load, has, isAvailable, stateOffer, blockOffer, unblockOffer, blockMarket, unblock, rowHtml, openList };
+  })();
+
   const Chat = (function(){
     const MAX_LEN = 1000, PAGE = 200;
     const SAFE_NOTE = 'Conversación privada entre ustedes dos. Por tu seguridad, no compartas claves ni datos de tu tarjeta, y desconfía de pagos fuera de lo acordado. Si algo no está bien, usa el botón de reportar.';
     const $ = id => document.getElementById(id);
     const ov = $('chatOverlay'), listEl = $('chList'), input = $('chInput'), sendBtn = $('chSend');
     const composer = $('chComposer'), closedEl = $('chClosed'), countEl = $('chCount'), newPill = $('chNew'), liveEl = $('chLive');
+    const blockedEl = $('chBlocked'), blockBtn = $('chBlock');
     const inboxBtn = $('inboxBtn'), inboxBadge = $('inboxBadge'), inboxOv = $('inboxOverlay'), inboxBody = $('inboxBody');
     const CHAT_ICON = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5z"/></svg>';
 
@@ -4116,29 +4363,67 @@ const OnceStory = (function(){
       if(meta && meta.soyProveedor && meta.fecha) bits.push('Boda: ' + new Date(meta.fecha + 'T00:00:00').toLocaleDateString('es-CL', { day:'numeric', month:'short', year:'numeric' }));
       $('chSub').textContent = bits.join(' · ');
     }
+    // no se puede escribir si la oferta ya no está aceptada o si hay un bloqueo (mío o de la otra persona)
+    const cantWrite = () => !cur || cur.closed || cur.blk.mine || cur.blk.other;
     function setComposer(){
-      const closed = !!(cur && cur.closed);
-      composer.hidden = closed; closedEl.hidden = !closed;
-      if(closed) countEl.hidden = true;
+      const closed = !!(cur && cur.closed), mine = !!(cur && cur.blk.mine), other = !!(cur && cur.blk.other);
+      const showBlocked = mine || (other && !closed);
+      composer.hidden = closed || mine || other;
+      closedEl.hidden = !closed || showBlocked;
+      blockedEl.hidden = !showBlocked;
+      blockedEl.textContent = '';
+      if(mine){
+        blockedEl.textContent = 'Bloqueaste a ' + ((cur.meta && cur.meta.nombre) || 'esta persona') + '. No pueden escribirse por aquí.';
+        const b = document.createElement('button'); b.type = 'button'; b.id = 'chUnblock'; b.textContent = 'Desbloquear';
+        b.addEventListener('click', unblockCur); blockedEl.appendChild(b);
+      }else if(showBlocked){
+        blockedEl.textContent = 'Esta conversación no admite mensajes nuevos.';
+      }
+      blockBtn.hidden = !(cur && cur.meta && !mine && Blocks.isAvailable());
+      if(composer.hidden) countEl.hidden = true;
       syncSend();
+    }
+    async function blockCur(){
+      if(!cur || !cur.meta) return;
+      const id = cur.id, nombre = cur.meta.nombre;
+      const ok = await Blocks.blockOffer(id, nombre);
+      if(!ok || !cur || cur.id !== id) return;
+      cur.blk.mine = true; cur.pending = [];
+      setComposer(); render();
+      announce('Bloqueaste a ' + nombre);
+      setTimeout(() => { const u = $('chUnblock') || $('chBack'); if(u && ov.classList.contains('open')) u.focus(); }, 0);
+    }
+    async function unblockCur(){
+      if(!cur) return;
+      const id = cur.id, nombre = cur.meta ? cur.meta.nombre : '';
+      const ok = await Blocks.unblockOffer(id);
+      const blk = await Blocks.stateOffer(id);
+      if(!cur || cur.id !== id) return;
+      cur.blk = ok ? { mine:false, other: blk.other } : blk;
+      setComposer();
+      if(ok){
+        announce('Desbloqueaste a ' + nombre);
+        setTimeout(() => { if(!cur || !ov.classList.contains('open')) return; if(!cantWrite() && window.matchMedia && matchMedia('(pointer:fine)').matches) input.focus(); else $('chBack').focus(); }, 0);
+      }
     }
     async function open(offerId, opts){
       if(!uid || !offerId || available === false) return;
       if(cur) closeChat(true);
       const seq = ++openSeq;
       lastFocus = document.activeElement;
-      cur = { id:offerId, from: opts && opts.from, meta: convs.get(offerId) || null, msgs: [], pending: [], hasMore:false, closed:false };
+      cur = { id:offerId, from: opts && opts.from, meta: convs.get(offerId) || null, msgs: [], pending: [], hasMore:false, closed:false, blk:{ mine:false, other:false } };
       closeInbox(true);
       setHeader(cur.meta);
       listEl.innerHTML = '<p class="ib-status">Abriendo conversación…</p>';
       composer.hidden = false; closedEl.hidden = true; countEl.hidden = true; newPill.hidden = true;
+      blockedEl.hidden = true; blockBtn.hidden = true;
       input.value = ''; autosize(); syncSend();
       $('chBack').setAttribute('aria-label', cur.from === 'inbox' ? 'Volver a mensajes' : 'Cerrar');
       ov.classList.add('open'); mrLock(true); fitViewport();
       try{
-        const meta = await ensureMeta(offerId);
+        const [meta, blk] = await Promise.all([ensureMeta(offerId), Blocks.stateOffer(offerId)]);
         if(seq !== openSeq || !cur) return;
-        cur.meta = meta; cur.closed = meta.estado !== 'aceptada';
+        cur.meta = meta; cur.closed = meta.estado !== 'aceptada'; cur.blk = blk;
         setHeader(meta); setComposer();
         const rows = await fetchMessages(offerId);
         if(seq !== openSeq || !cur) return;
@@ -4146,7 +4431,7 @@ const OnceStory = (function(){
         render(); scrollBottom();
         markRead();
         scheduleOpenPoll();
-        if(!cur.closed && window.matchMedia && matchMedia('(pointer:fine)').matches) setTimeout(() => input.focus(), 80);
+        if(!cantWrite() && window.matchMedia && matchMedia('(pointer:fine)').matches) setTimeout(() => input.focus(), 80);
         else setTimeout(() => $('chBack').focus(), 80);
       }catch(err){
         if(seq !== openSeq) return;
@@ -4182,7 +4467,7 @@ const OnceStory = (function(){
       if(!cur) return;
       const keep = nearBottom(), prevTop = listEl.scrollTop;
       const frag = document.createDocumentFragment();
-      const note = document.createElement('p'); note.className = 'ch-note'; note.textContent = SAFE_NOTE; frag.appendChild(note);
+      const note = document.createElement('p'); note.className = 'ch-note'; note.textContent = Blocks.isAvailable() ? SAFE_NOTE.replace('usa el botón de reportar', 'puedes bloquear o reportar con los botones de arriba') : SAFE_NOTE; frag.appendChild(note);
       if(cur.hasMore){
         const more = document.createElement('button'); more.type = 'button'; more.className = 'ch-more'; more.textContent = 'Ver mensajes anteriores';
         more.addEventListener('click', loadOlder); frag.appendChild(more);
@@ -4258,19 +4543,20 @@ const OnceStory = (function(){
     function autosize(){ input.style.height = 'auto'; input.style.height = Math.min(input.scrollHeight, 120) + 'px'; }
     function syncSend(){
       const len = input.value.length, has = input.value.trim().length > 0;
-      sendBtn.disabled = !has || !cur || cur.closed;
-      if(len >= 900 && cur && !cur.closed){ countEl.hidden = false; countEl.textContent = len + ' / ' + MAX_LEN; countEl.classList.toggle('max', len >= MAX_LEN); }
+      sendBtn.disabled = !has || cantWrite();
+      if(len >= 900 && !cantWrite()){ countEl.hidden = false; countEl.textContent = len + ' / ' + MAX_LEN; countEl.classList.toggle('max', len >= MAX_LEN); }
       else countEl.hidden = true;
     }
     function friendly(err){
       const msg = (err && err.message) || '';
+      if(/BLOQUEO/.test(msg)) return 'Esta conversación no admite mensajes nuevos.';
       if(/muy rápido/i.test(msg)) return 'Estás escribiendo muy rápido. Espera un momento.';
       if(/máximo de mensajes/i.test(msg)) return 'Esta conversación alcanzó el máximo de mensajes.';
       if(/row-level security|permission denied/i.test(msg)) return 'Esta conversación ya no admite mensajes.';
       return 'No se pudo enviar.';
     }
     async function send(){
-      if(!cur || cur.closed) return;
+      if(cantWrite()) return;
       const text = input.value.replace(/\r\n/g, '\n').trim();
       if(!text || text.length > MAX_LEN) return;
       const tmp = { id:'tmp' + (++tmpSeq), sender_id: uid, body: text, creado: new Date().toISOString(), state:'pending' };
@@ -4296,7 +4582,8 @@ const OnceStory = (function(){
       }catch(err){
         if(!cur || cur.id !== id) return;
         tmp.state = 'failed'; tmp.error = friendly(err);
-        if(/ya no admite/.test(tmp.error)){ cur.closed = true; cur.pending = cur.pending.filter(p => p !== tmp); setComposer(); }
+        if(/BLOQUEO/.test((err && err.message) || '')){ cur.blk.other = true; cur.pending = cur.pending.filter(p => p !== tmp); setComposer(); announce('Esta conversación no admite mensajes nuevos.'); }
+        else if(/ya no admite/.test(tmp.error)){ cur.closed = true; cur.pending = cur.pending.filter(p => p !== tmp); setComposer(); }
         render();
       }
     }
@@ -4310,6 +4597,7 @@ const OnceStory = (function(){
     $('chBack').addEventListener('click', () => closeChat());
     ov.querySelector('[data-ch-close]').addEventListener('click', () => closeChat());
     $('chReport').addEventListener('click', () => { if(cur) Report.open(cur.id); });
+    blockBtn.addEventListener('click', blockCur);
 
     // ---------- teclado del celular: la ventana se ajusta a lo que realmente se ve ----------
     function fitViewport(reset){
@@ -4959,7 +5247,8 @@ const OnceStory = (function(){
             + (vigText(it) ? '<div class="mk-vigrow det">' + vigHtml(it, 'btn') + '</div>' : '')
             + '<div class="mk-owner"><select id="mkDetState" aria-label="Estado del producto">' + Object.keys(ESTADOS).map(k => '<option value="' + k + '"' + (it.estado === k ? ' selected' : '') + '>' + ESTADOS[k] + '</option>').join('') + '</select>'
             + '<button class="btn" type="button" data-mk-edit="' + esc(it.id) + '">Editar</button><button class="btn danger" type="button" data-mk-del="' + esc(it.id) + '">Eliminar</button></div>'
-          : '<div class="mk-owner"><button class="mk-link danger" type="button" data-mk-report="' + esc(it.id) + '">Denunciar este anuncio</button></div>')
+          : '<div class="mk-owner"><button class="mk-link danger" type="button" data-mk-report="' + esc(it.id) + '">Denunciar este anuncio</button>'
+            + (Blocks.isAvailable() ? '<button class="mk-link" type="button" data-mk-block="' + esc(it.id) + '">Bloquear a quien publica</button>' : '') + '</div>')
         + '<p class="sh-status mk-fstatus" id="mkDetMsg" role="status" aria-live="polite"></p>'
         + '<p class="mk-safe">Once solo muestra los anuncios: no cobra comisión, no recibe pagos, no envía los productos ni garantiza el trato. Acuerden el pago y la entrega directamente entre ustedes y revisen el producto antes de pagar. <a href="#mercado" data-legal="mercado">Normas del Mercado</a></p>'
         + '</div></div>';
@@ -4976,6 +5265,20 @@ const OnceStory = (function(){
       $('mkDetailSub').textContent = isOwn(it) ? 'Tu publicación' : (CAT_NAME[it.categoria] || '');
       $('mkDetailBody').innerHTML = detailHtml(it);
     }
+    // bloquear a quien publicó: sus anuncios dejan de verse (la lista se recarga con el aviso 'once:blocks')
+    async function blockSeller(it){
+      const nombre = it.vendedor_nombre;
+      const ok = await Blocks.blockMarket(it.id, nombre);
+      if(!ok) return;
+      closeSheet('detail', $('mkDetailOverlay')); st.detail = null;
+      flash('Bloqueaste a ' + nombre + '. Ya no verás sus anuncios.');
+    }
+    document.addEventListener('once:blocks', () => {
+      if(!me()) return;
+      st.at = 0;
+      const v = document.getElementById('view-mercado');
+      if(v && v.classList.contains('active')) load(true);
+    });
     function setDetMsg(msg, isErr){ const el = $('mkDetMsg'); if(el){ el.textContent = msg || ''; el.className = 'sh-status mk-fstatus' + (isErr ? ' error' : ''); } }
     async function copyContact(btn){
       const t = ($('mkContactText') || {}).textContent || '';
@@ -5343,6 +5646,7 @@ const OnceStory = (function(){
         const ed = e.target.closest('[data-mk-edit]'); if(ed){ openForm(it); return; }
         const dl = e.target.closest('[data-mk-del]'); if(dl){ removeItem(it.id); return; }
         const rn = e.target.closest('[data-mk-renew]'); if(rn){ renewItem(it.id, rn); return; }
+        const bk = e.target.closest('[data-mk-block]'); if(bk){ blockSeller(it); return; }
         const rp = e.target.closest('[data-mk-report]'); if(rp){ openReport(it.id); }
       });
       $('mkDetailBody').addEventListener('change', async e => {
@@ -5792,6 +6096,7 @@ const OnceStory = (function(){
               <div id="rate-vendor-${o.id}"></div>
             </div>
           ` : '')}
+          ${Blocks.rowHtml(o.id, o.vendor_user_id, o.proveedor_nombre)}
         `;
         const setEstado = async (nuevoEstado, btnEl)=>{
           btnEl.disabled = true;
@@ -6308,6 +6613,7 @@ const OnceStory = (function(){
   // Mensaje para el proveedor según el error de la base de datos.
   function offerErrorMsg(err, verbo){
     const code = err && err.code, m = String((err && err.message) || '');
+    if(/BLOQUEO/.test(m)) return 'No puedes enviar ofertas a esta pareja.';
     if(code === '23514') return 'No se pudo ' + verbo + ': revisa que tu página web o tus redes sociales tengan un formato válido.';
     if(code === 'PGRST204' || /tipo_proveedor|sitio_web|redes_sociales/.test(m)) return 'Estamos actualizando Once. Intenta de nuevo en unos minutos.';
     return 'No se pudo ' + verbo + '. Intenta de nuevo.';
